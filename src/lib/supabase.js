@@ -1,7 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim();
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
+
+// Normalize URL: handle dashboard URLs if user pasted dashboard link instead of API URL
+function normalizeSupabaseUrl(url) {
+  if (!url) return '';
+  if (url.includes('supabase.com/dashboard/project/')) {
+    const projectRef = url.split('supabase.com/dashboard/project/')[1]?.split('/')[0]?.split('?')[0];
+    if (projectRef) {
+      return `https://${projectRef}.supabase.co`;
+    }
+  }
+  return url.replace(/\/+$/, '');
+}
+
+export const supabaseUrl = normalizeSupabaseUrl(rawUrl);
+export const supabaseAnonKey = rawKey;
 
 // Check if valid credentials are provided
 export const isSupabaseConfigured = Boolean(

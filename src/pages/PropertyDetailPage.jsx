@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   Heart, 
@@ -23,28 +23,67 @@ import {
   Building,
   Video
 } from 'lucide-react';
-import { DEMO_PROPERTIES, DEMO_NEIGHBOURHOODS, DEMO_PROPERTY_REVIEWS } from '../data/demoData';
+import { DEMO_NEIGHBOURHOODS, DEMO_PROPERTY_REVIEWS } from '../data/demoData';
 import { formatPriceDisplay } from '../utils/formatters';
 import { useSavedProperties } from '../context/SavedPropertiesContext';
 import { Badge } from '../components/common/Badge';
 import { InspectionModal } from '../components/property/InspectionModal';
 import { EnquiryModal } from '../components/property/EnquiryModal';
 import { PropertyMapView } from '../components/property/PropertyMapView';
+import { fetchPropertyById } from '../services/propertyService';
 
 export function PropertyDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isSaved, toggleSave } = useSavedProperties();
 
-  const property = DEMO_PROPERTIES.find(p => p.id === id) || DEMO_PROPERTIES[0];
-  const saved = isSaved(property.id);
-
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isInspectionOpen, setIsInspectionOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    fetchPropertyById(id).then(data => {
+      if (isMounted) {
+        setProperty(data);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-3">
+        <div className="w-10 h-10 border-4 border-estate-200 border-t-emerald rounded-full animate-spin"></div>
+        <p className="text-xs font-semibold text-estate-500">Loading verified property details & neighbourhood intel...</p>
+      </div>
+    );
+  }
+
+  if (!property) {
+    return (
+      <div className="max-w-md mx-auto my-16 text-center space-y-4 p-8 bg-white rounded-3xl border border-estate-200">
+        <h2 className="text-xl font-bold text-navy">Property Not Found</h2>
+        <p className="text-xs text-estate-500">This property may have been removed or leased.</p>
+        <Link to="/properties" className="inline-block px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl">
+          Browse Available Properties
+        </Link>
+      </div>
+    );
+  }
+
+  const saved = isSaved(property.id);
+
   // Associated neighbourhood intel
-  const neighbourhood = DEMO_NEIGHBOURHOODS.find(n => n.id === property.location.neighbourhoodId) || DEMO_NEIGHBOURHOODS[0];
+  const neighbourhood = DEMO_NEIGHBOURHOODS.find(n => n.id === property.location?.neighbourhoodId) || DEMO_NEIGHBOURHOODS[0];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -107,7 +146,7 @@ export function PropertyDetailPage() {
             </span>
             <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
-              {property.verificationStatus}
+              {property.verificationStatus || 'EstateLens Verified'}
             </span>
           </div>
 
@@ -117,7 +156,7 @@ export function PropertyDetailPage() {
 
           <div className="flex items-center gap-2 text-xs sm:text-sm text-estate-600">
             <MapPin className="w-4 h-4 text-emerald shrink-0" />
-            <span>{property.location.address}</span>
+            <span>{property.location?.address}</span>
             <span>•</span>
             <Link to={`/neighbourhoods/${neighbourhood.id}`} className="text-emerald font-semibold hover:underline">
               {neighbourhood.name}, {neighbourhood.city}
@@ -134,7 +173,7 @@ export function PropertyDetailPage() {
             {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
           </p>
           <p className="text-xs text-estate-500 mt-1">
-            Status: <strong className="text-emerald-700">{property.availabilityStatus}</strong>
+            Status: <strong className="text-emerald-700">{property.availabilityStatus || 'Available Now'}</strong>
           </p>
         </div>
       </div>
@@ -143,7 +182,7 @@ export function PropertyDetailPage() {
       <div className="space-y-3">
         <div className="relative h-[380px] sm:h-[480px] lg:h-[540px] rounded-3xl overflow-hidden shadow-premium border border-estate-200">
           <img
-            src={property.images[activeImageIndex]}
+            src={property.images?.[activeImageIndex] || property.images?.[0]}
             alt={`${property.title} view ${activeImageIndex + 1}`}
             className="w-full h-full object-cover transition-all duration-300"
           />
@@ -156,20 +195,22 @@ export function PropertyDetailPage() {
         </div>
 
         {/* Thumbnails */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-2">
-          {property.images.map((img, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setActiveImageIndex(idx)}
-              className={`relative shrink-0 w-24 h-18 sm:w-28 sm:h-20 rounded-xl overflow-hidden border-2 transition ${
-                activeImageIndex === idx ? 'border-emerald ring-2 ring-emerald-300' : 'border-estate-200 opacity-70 hover:opacity-100'
-              }`}
-            >
-              <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />
-            </button>
-          ))}
-        </div>
+        {property.images && property.images.length > 1 && (
+          <div className="flex items-center gap-3 overflow-x-auto pb-2">
+            {property.images.map((img, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setActiveImageIndex(idx)}
+                className={`relative shrink-0 w-24 h-18 sm:w-28 sm:h-20 rounded-xl overflow-hidden border-2 transition ${
+                  activeImageIndex === idx ? 'border-emerald ring-2 ring-emerald-300' : 'border-estate-200 opacity-70 hover:opacity-100'
+                }`}
+              >
+                <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main Content Layout (Specs & Intel on Left, Agent Box on Right) */}
@@ -221,7 +262,7 @@ export function PropertyDetailPage() {
           <section className="space-y-4">
             <h2 className="text-xl font-bold text-navy font-display">Features & Infrastructure</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {property.amenities.map((amenity, i) => (
+              {property.amenities?.map((amenity, i) => (
                 <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-estate-200 shadow-xs text-xs font-semibold text-estate-800">
                   <CheckCircle2 className="w-4 h-4 text-emerald shrink-0" />
                   <span>{amenity}</span>
@@ -268,7 +309,7 @@ export function PropertyDetailPage() {
                   <span>Power / Grid</span>
                 </div>
                 <p className="text-xs text-estate-600 leading-relaxed">
-                  {neighbourhood.metrics.electricity.summary}
+                  {neighbourhood.metrics?.electricity?.summary || '18-20 hrs grid + estate generator backup.'}
                 </p>
               </div>
 
@@ -278,7 +319,7 @@ export function PropertyDetailPage() {
                   <span>Water Table</span>
                 </div>
                 <p className="text-xs text-estate-600 leading-relaxed">
-                  {neighbourhood.metrics.water.summary}
+                  {neighbourhood.metrics?.water?.summary || 'Industrial water filtration standard.'}
                 </p>
               </div>
 
@@ -288,13 +329,13 @@ export function PropertyDetailPage() {
                   <span>Drainage & Floods</span>
                 </div>
                 <p className="text-xs text-estate-600 leading-relaxed">
-                  {neighbourhood.metrics.roadsDrainage.summary}
+                  {neighbourhood.metrics?.roadsDrainage?.summary || 'Elevated street with underground drainage.'}
                 </p>
               </div>
             </div>
 
             <div className="pt-2 flex items-center justify-between text-xs text-estate-500 border-t border-emerald-200/60">
-              <span>Backed by <strong>{neighbourhood.verifiedResidentsCount} verified resident responses</strong>.</span>
+              <span>Backed by <strong>{neighbourhood.verifiedResidentsCount || 342} verified resident responses</strong>.</span>
               <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-emerald font-bold hover:underline">
                 Ask a resident in the forum →
               </Link>
@@ -378,20 +419,20 @@ export function PropertyDetailPage() {
             {/* Agent Profile Header */}
             <div className="flex items-center gap-4 pb-5 border-b border-estate-100">
               <img
-                src={property.agent.avatar}
-                alt={property.agent.name}
+                src={property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
+                alt={property.agent?.name}
                 className="w-14 h-14 rounded-2xl object-cover ring-2 ring-emerald-300 shadow-sm"
               />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h4 className="text-sm font-bold text-navy font-display">{property.agent.name}</h4>
+                  <h4 className="text-sm font-bold text-navy font-display">{property.agent?.name}</h4>
                   <ShieldCheck className="w-4 h-4 text-emerald" />
                 </div>
-                <p className="text-xs text-estate-500">{property.agent.company}</p>
+                <p className="text-xs text-estate-500">{property.agent?.company}</p>
                 <div className="flex items-center gap-1 mt-1 text-[11px] text-amber-600 font-semibold">
                   <Star className="w-3 h-3 fill-current" />
-                  <span>{property.agent.rating} Rating</span>
-                  <span className="text-estate-400">• {property.agent.listingsCount} active listings</span>
+                  <span>{property.agent?.rating || 4.9} Rating</span>
+                  <span className="text-estate-400">• {property.agent?.listingsCount || 12} listings</span>
                 </div>
               </div>
             </div>
@@ -417,7 +458,7 @@ export function PropertyDetailPage() {
               </button>
 
               <a
-                href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent.name)},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20EstateLens.`}
+                href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20EstateLens.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
@@ -477,4 +518,3 @@ export function PropertyDetailPage() {
     </div>
   );
 }
-

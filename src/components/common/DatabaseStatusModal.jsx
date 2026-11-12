@@ -119,3 +119,4 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
     </Modal>
   );
 }
+

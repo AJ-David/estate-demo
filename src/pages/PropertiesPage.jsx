@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { DEMO_PROPERTIES } from '../data/demoData';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { PropertyFilters } from '../components/property/PropertyFilters';
 import { PropertyMapView } from '../components/property/PropertyMapView';
-import { Building2, SearchX } from 'lucide-react';
+import { Building2, SearchX, Sparkles } from 'lucide-react';
+import { fetchProperties } from '../services/propertyService';
 
 export function PropertiesPage() {
   const [searchParams] = useSearchParams();
@@ -22,57 +22,23 @@ export function PropertiesPage() {
 
   const [viewMode, setViewMode] = useState('grid'); // 'grid', 'list', 'map'
   const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredProperties = useMemo(() => {
-    return DEMO_PROPERTIES.filter(property => {
-      // Search
-      if (filters.search) {
-        const query = filters.search.toLowerCase();
-        const matchesTitle = property.title.toLowerCase().includes(query);
-        const matchesLoc = property.location.neighbourhoodName.toLowerCase().includes(query) ||
-                           property.location.city.toLowerCase().includes(query);
-        const matchesCat = property.category.toLowerCase().includes(query);
-        if (!matchesTitle && !matchesLoc && !matchesCat) return false;
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    fetchProperties(filters).then(data => {
+      if (isMounted) {
+        setProperties(data);
+        setLoading(false);
       }
-
-      // Transaction Type
-      if (filters.transactionType !== 'all' && property.transactionType !== filters.transactionType) {
-        return false;
-      }
-
-      // Category
-      if (filters.category !== 'All Types' && property.category !== filters.category) {
-        return false;
-      }
-
-      // Bedrooms
-      if (filters.bedrooms !== 'all') {
-        const beds = parseInt(filters.bedrooms, 10);
-        if (property.bedrooms < beds) return false;
-      }
-
-      // Price Range
-      if (filters.minPrice && property.price < parseFloat(filters.minPrice)) return false;
-      if (filters.maxPrice && property.price > parseFloat(filters.maxPrice)) return false;
-
-      // Amenities
-      if (filters.amenities && filters.amenities.length > 0) {
-        const hasAllAmenities = filters.amenities.every(a => 
-          property.amenities.some(item => item.toLowerCase().includes(a.toLowerCase()))
-        );
-        if (!hasAllAmenities) return false;
-      }
-
-      return true;
-    }).sort((a, b) => {
-      if (filters.sortBy === 'price_asc') return a.price - b.price;
-      if (filters.sortBy === 'price_desc') return b.price - a.price;
-      if (filters.sortBy === 'neighbourhood_score') {
-        return (b.neighbourhoodSnapshot?.score || 0) - (a.neighbourhoodSnapshot?.score || 0);
-      }
-      // 'newest' default
-      return new Date(b.listingDate) - new Date(a.listingDate);
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, [filters]);
 
   const handleResetFilters = () => {
@@ -104,19 +70,24 @@ export function PropertiesPage() {
       <PropertyFilters
         filters={filters}
         setFilters={setFilters}
-        totalResults={filteredProperties.length}
+        totalResults={properties.length}
         viewMode={viewMode}
         setViewMode={setViewMode}
         onReset={handleResetFilters}
       />
 
       {/* Content depending on View Mode */}
-      {viewMode === 'map' ? (
+      {loading ? (
+        <div className="py-20 text-center space-y-3">
+          <div className="w-10 h-10 border-4 border-estate-200 border-t-emerald rounded-full animate-spin mx-auto"></div>
+          <p className="text-xs font-semibold text-estate-500">Scanning verified properties & neighbourhood intel...</p>
+        </div>
+      ) : viewMode === 'map' ? (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Map */}
           <div className="lg:col-span-7 sticky top-24">
             <PropertyMapView
-              properties={filteredProperties}
+              properties={properties}
               selectedPropertyId={selectedPropertyId}
               onSelectProperty={setSelectedPropertyId}
             />
@@ -125,16 +96,16 @@ export function PropertiesPage() {
           {/* Properties column next to map */}
           <div className="lg:col-span-5 space-y-4 max-h-[650px] overflow-y-auto pr-2">
             <p className="text-xs font-bold text-estate-500 uppercase tracking-wider sticky top-0 bg-sand-warm py-1 z-10">
-              Matching Homes ({filteredProperties.length})
+              Matching Homes ({properties.length})
             </p>
-            {filteredProperties.length === 0 ? (
+            {properties.length === 0 ? (
               <div className="text-center py-12 bg-white rounded-2xl border border-estate-200 p-6">
                 <SearchX className="w-10 h-10 text-estate-400 mx-auto mb-2" />
                 <p className="text-sm font-bold text-navy">No properties found</p>
                 <p className="text-xs text-estate-500 mt-1">Try broadening your search or resetting filters.</p>
               </div>
             ) : (
-              filteredProperties.map(property => (
+              properties.map(property => (
                 <div
                   key={property.id}
                   onClick={() => setSelectedPropertyId(property.id)}
@@ -150,7 +121,7 @@ export function PropertiesPage() {
         </div>
       ) : (
         <>
-          {filteredProperties.length === 0 ? (
+          {properties.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 max-w-lg mx-auto shadow-subtle">
               <SearchX className="w-12 h-12 text-estate-400 mx-auto mb-3" />
               <h3 className="text-lg font-bold text-navy font-display">No matching properties found</h3>
@@ -171,7 +142,7 @@ export function PropertiesPage() {
                 ? 'space-y-4'
                 : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
             }>
-              {filteredProperties.map(property => (
+              {properties.map(property => (
                 <PropertyCard
                   key={property.id}
                   property={property}
@@ -186,4 +157,3 @@ export function PropertiesPage() {
     </div>
   );
 }
-

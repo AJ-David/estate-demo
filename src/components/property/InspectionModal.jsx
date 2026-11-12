@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../common/Modal';
 import { Calendar, Clock, User, Phone, Mail, CheckCircle2, ShieldCheck, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { schedulePhysicalInspection } from '../../services/enquiryService';
 
 export function InspectionModal({ isOpen, onClose, property }) {
   const { user } = useAuth();
@@ -13,13 +14,28 @@ export function InspectionModal({ isOpen, onClose, property }) {
   const [notes, setNotes] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [confirmationCode, setConfirmationCode] = useState('');
+  const [loading, setLoading] = useState(false);
 
   if (!property) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const code = `INS-${Math.floor(100000 + Math.random() * 900000)}`;
-    setConfirmationCode(code);
+    setLoading(true);
+
+    const res = await schedulePhysicalInspection({
+      propertyId: property.id,
+      agentId: property.agent?.id || property.landlord_or_agent_id,
+      userId: user?.id,
+      preferredDate,
+      preferredTimeSlot: preferredTime,
+      fullName,
+      phone,
+      email,
+      notes
+    });
+
+    setLoading(false);
+    setConfirmationCode(res.gateCode);
     setSubmitted(true);
   };
 
@@ -41,24 +57,26 @@ export function InspectionModal({ isOpen, onClose, property }) {
             <CheckCircle2 className="w-9 h-9" />
           </div>
           <div>
-            <h4 className="text-xl font-bold text-navy font-display">Inspection Request Submitted!</h4>
+            <h4 className="text-xl font-bold text-navy font-display">Inspection Request Confirmed!</h4>
             <p className="text-sm text-estate-600 mt-1 max-w-sm mx-auto">
-              The listing agent/host <strong className="text-navy">{property.agent.name}</strong> has received your appointment request.
+              The listing agent/host <strong className="text-navy">{property.agent?.name}</strong> has received your appointment request.
             </p>
           </div>
 
           <div className="bg-sand-100 rounded-xl p-4 text-left border border-sand-200 max-w-sm mx-auto space-y-2 text-xs">
             <div className="flex justify-between">
-              <span className="text-estate-500">Confirmation Reference:</span>
-              <span className="font-mono font-bold text-navy">{confirmationCode}</span>
+              <span className="text-estate-500">Estate Security Gate Pass:</span>
+              <span className="font-mono font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                {confirmationCode}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-estate-500">Requested Schedule:</span>
+              <span className="text-estate-500">Scheduled Schedule:</span>
               <span className="font-semibold text-estate-800">{preferredDate} at {preferredTime}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-estate-500">Security Gate Protocol:</span>
-              <span className="font-semibold text-emerald-800">Pass code will be sent via SMS</span>
+              <span className="font-semibold text-emerald-800">Pass code dispatched to WhatsApp</span>
             </div>
           </div>
 
@@ -186,9 +204,10 @@ export function InspectionModal({ isOpen, onClose, property }) {
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-emerald text-white text-xs font-bold rounded-lg hover:bg-emerald-dark shadow-sm transition"
+              disabled={loading}
+              className="px-5 py-2 bg-emerald text-white text-xs font-bold rounded-lg hover:bg-emerald-dark shadow-sm transition disabled:opacity-70"
             >
-              Confirm Inspection Request
+              {loading ? 'Submitting Request...' : 'Confirm Inspection Request'}
             </button>
           </div>
         </form>
@@ -196,4 +215,3 @@ export function InspectionModal({ isOpen, onClose, property }) {
     </Modal>
   );
 }
-

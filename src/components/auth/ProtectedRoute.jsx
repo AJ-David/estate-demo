@@ -80,3 +80,4 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
 
   return children;
 }
+

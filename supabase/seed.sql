@@ -162,3 +162,4 @@ ON CONFLICT (id) DO UPDATE SET
     livability_score = EXCLUDED.livability_score,
     metrics = EXCLUDED.metrics,
     nearby_facilities = EXCLUDED.nearby_facilities;
+

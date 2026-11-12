@@ -527,3 +527,4 @@ CREATE POLICY "Users can submit moderation reports"
 
 CREATE POLICY "Users can view reports they submitted"
     ON public.moderation_reports FOR SELECT USING (auth.uid() = reporter_id);
+
