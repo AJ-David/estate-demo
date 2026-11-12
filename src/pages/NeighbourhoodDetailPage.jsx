@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { fetchNeighbourhoodById, getNeighbourhoodIntelligenceSummary, NEIGHBOURHOOD_FACILITIES } from '../services/neighbourhoodService';
 import { fetchProperties } from '../services/propertyService';
+import { fetchCommunityPosts } from '../services/communityService';
 import { DEMO_COMMUNITY_POSTS } from '../data/demoData';
 import { NeighbourhoodMetricsBar } from '../components/neighbourhood/NeighbourhoodMetricsBar';
 import { PropertyCard } from '../components/property/PropertyCard';
@@ -54,20 +55,18 @@ export function NeighbourhoodDetailPage() {
 
     async function loadNeighbourhoodData() {
       try {
-        const [nHood, summary, props] = await Promise.all([
+        const [nHood, summary, props, postsList] = await Promise.all([
           fetchNeighbourhoodById(id),
           getNeighbourhoodIntelligenceSummary(id),
-          fetchProperties()
+          fetchProperties(),
+          fetchCommunityPosts({ neighbourhoodId: id })
         ]);
 
         if (isMounted) {
           setNeighbourhood(nHood);
           setIntelligenceSummary(summary);
           setAllProperties(props);
-
-          // Filter demo posts for this neighbourhood
-          const filteredPosts = DEMO_COMMUNITY_POSTS.filter(p => p.neighbourhoodId === id);
-          setCommunityPosts(filteredPosts.length > 0 ? filteredPosts : DEMO_COMMUNITY_POSTS.slice(0, 3));
+          setCommunityPosts(postsList.length > 0 ? postsList : DEMO_COMMUNITY_POSTS.slice(0, 3));
         }
       } catch (err) {
         console.error('Failed to load neighbourhood detail:', err);

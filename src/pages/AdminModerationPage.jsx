@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   ShieldAlert, 
@@ -9,73 +9,58 @@ import {
   Eye, 
   UserX, 
   Users, 
-  FileText 
+  FileText,
+  Loader2,
+  Trash2,
+  Edit3
 } from 'lucide-react';
+import { fetchModerationReports, resolveModerationReport } from '../services/communityService';
 
 export function AdminModerationPage() {
-  const [reports, setReports] = useState([
-    {
-      id: 'rep-101',
-      targetType: 'Community Post',
-      title: 'Allegation naming specific landlord on Admiralty Way',
-      reportedBy: 'Anonymous Resident',
-      reason: 'Defamation / Naming Private Individuals',
-      snippet: 'Landlord at House 14 (Mr. Okafor) refuses to repair sewage leak...',
-      time: '45 mins ago',
-      severity: 'High',
-      status: 'Pending Review'
-    },
-    {
-      id: 'rep-102',
-      targetType: 'Community Post',
-      title: 'Unverified alarmist claim about street entrance barrier',
-      reportedBy: 'Kemi M.',
-      reason: 'Unsubstantiated / Alarmist Security Report',
-      snippet: 'Someone claimed the estate gates were breached without police report...',
-      time: '2 hours ago',
-      severity: 'Medium',
-      status: 'Pending Review'
-    },
-    {
-      id: 'rep-103',
-      targetType: 'Property Listing',
-      title: 'Suspicious inspection fee request before physical tour',
-      reportedBy: 'Tunde A.',
-      reason: 'Advance Fee Violation Policy',
-      snippet: 'Lister requested ₦10,000 inspection processing fee before visit...',
-      time: '5 hours ago',
-      severity: 'Critical',
-      status: 'Pending Review'
-    }
-  ]);
-
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState('');
 
-  const handleAction = (reportId, action) => {
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    fetchModerationReports().then(data => {
+      if (isMounted) {
+        setReports(data);
+        setLoading(false);
+      }
+    });
+
+    return () => { isMounted = false; };
+  }, []);
+
+  const handleAction = async (reportId, action) => {
+    await resolveModerationReport(reportId, action);
     setReports(prev => prev.filter(r => r.id !== reportId));
-    setNotification(`Action completed: ${action} for report #${reportId}`);
-    setTimeout(() => setNotification(''), 4000);
+    setNotification(`Moderation action executed: ${action} for report #${reportId}`);
+    setTimeout(() => setNotification(''), 4500);
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy text-white rounded-3xl shadow-xl border border-navy-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy text-white rounded-3xl shadow-xl border border-estate-800">
         <div>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-emerald-light" />
+            <ShieldCheck className="w-6 h-6 text-emerald" />
             <h1 className="text-xl sm:text-2xl font-black font-display text-white">
               Trust, Safety & Moderation Console
             </h1>
           </div>
           <p className="text-xs text-estate-300 mt-1">
-            Audit reported community claims, filter unverified security allegations, and enforce anti-defamation policies.
+            Audit reported community claims, filter unverified security allegations, and enforce anti-defamation & privacy policies.
           </p>
         </div>
 
         <div className="flex items-center gap-3 text-xs">
-          <span className="bg-navy-surface px-3 py-1.5 rounded-xl border border-navy-border font-semibold text-emerald-light">
-            Pending Reports: {reports.length}
+          <span className="bg-estate-900 px-3.5 py-2 rounded-xl border border-estate-700 font-bold text-emerald">
+            Pending Queue: {reports.length} Items
           </span>
         </div>
       </div>
@@ -89,7 +74,7 @@ export function AdminModerationPage() {
 
       {/* Safety Policy Checklist */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-white rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-1">
+        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
           <span className="font-bold text-navy flex items-center gap-1.5">
             <ShieldAlert className="w-4 h-4 text-rose-500" />
             Anti-Doxxing & Privacy Rule
@@ -99,7 +84,7 @@ export function AdminModerationPage() {
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-1">
+        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
           <span className="font-bold text-navy flex items-center gap-1.5">
             <AlertTriangle className="w-4 h-4 text-amber-500" />
             Security Allegation Labeling
@@ -109,7 +94,7 @@ export function AdminModerationPage() {
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-1">
+        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
           <span className="font-bold text-navy flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-emerald" />
             Zero Advance Inspection Fees
@@ -122,70 +107,86 @@ export function AdminModerationPage() {
 
       {/* Reports Queue */}
       <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle overflow-hidden">
-        <div className="p-6 border-b border-estate-100 flex items-center justify-between">
-          <h3 className="text-base font-bold text-navy font-display">Active Moderation Queue</h3>
-          <span className="text-xs text-estate-400 font-medium">Standard SLA: Under 4 Hours</span>
+        <div className="p-5 border-b border-estate-100 flex items-center justify-between">
+          <h2 className="text-base font-bold text-navy font-display">
+            Pending Moderation Queue ({reports.length})
+          </h2>
+          <span className="text-xs text-estate-400">Response SLA: &lt; 4 Hours</span>
         </div>
 
-        {reports.length === 0 ? (
-          <div className="p-12 text-center text-xs text-estate-500">
-            <CheckCircle2 className="w-10 h-10 text-emerald mx-auto mb-2" />
-            <p className="font-bold text-navy text-sm">Moderation Queue is Clean!</p>
-            <p className="mt-1">All reported content has been audited in compliance with platform guidelines.</p>
+        {loading ? (
+          <div className="py-20 text-center space-y-3">
+            <Loader2 className="w-8 h-8 text-emerald animate-spin mx-auto" />
+            <p className="text-xs text-estate-500 font-semibold">Loading flagged reports queue...</p>
+          </div>
+        ) : reports.length === 0 ? (
+          <div className="py-16 text-center space-y-2">
+            <CheckCircle2 className="w-12 h-12 text-emerald mx-auto" />
+            <p className="text-sm font-bold text-navy">Moderation Queue is Clean</p>
+            <p className="text-xs text-estate-400">All community reports have been audited and acted upon.</p>
           </div>
         ) : (
           <div className="divide-y divide-estate-100">
-            {reports.map(rep => (
-              <div key={rep.id} className="p-6 space-y-3 hover:bg-sand-50/50 transition">
+            {reports.map(report => (
+              <div key={report.id} className="p-5 sm:p-6 hover:bg-sand-50/50 transition space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                      rep.severity === 'Critical' ? 'bg-rose-100 text-rose-800' :
-                      rep.severity === 'High' ? 'bg-amber-100 text-amber-800' :
-                      'bg-blue-100 text-blue-800'
+                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                      report.severity === 'Critical'
+                        ? 'bg-rose-100 text-rose-800 border border-rose-200'
+                        : report.severity === 'High'
+                        ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                        : 'bg-estate-100 text-estate-700'
                     }`}>
-                      {rep.severity} Severity
+                      {report.severity} Priority
                     </span>
-                    <span className="text-xs font-bold text-estate-500">• {rep.targetType}</span>
-                    <span className="text-xs text-estate-400">• {rep.time}</span>
+                    <span className="text-xs text-estate-400">• {report.targetType}</span>
+                    <span className="text-xs text-estate-400">• {report.time}</span>
                   </div>
+
                   <span className="text-xs text-estate-500">
-                    Reason: <strong className="text-rose-700">{rep.reason}</strong>
+                    Reported by: <strong className="text-navy">{report.reportedBy}</strong>
                   </span>
                 </div>
 
-                <h4 className="text-sm font-bold text-navy font-display">{rep.title}</h4>
-                <p className="text-xs text-estate-700 bg-sand-50 p-3 rounded-xl border border-sand-200 font-mono">
-                  "{rep.snippet}"
-                </p>
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-navy font-display">{report.title}</h3>
+                  <p className="text-xs text-estate-500 mt-0.5">
+                    Violation Category: <strong className="text-estate-800">{report.reason}</strong>
+                  </p>
+                </div>
+
+                <div className="p-3 bg-estate-50 rounded-2xl border border-estate-200 text-xs text-estate-700 italic">
+                  "{report.snippet}"
+                </div>
 
                 {/* Moderation Actions */}
                 <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-                  <span className="text-estate-400 text-[11px]">
-                    Flagged by: {rep.reportedBy}
-                  </span>
-
+                  <span className="text-estate-400 text-[11px]">Report ID: {report.id}</span>
+                  
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
-                      onClick={() => handleAction(rep.id, 'Approved Content (Valid & Safe)')}
-                      className="px-3 py-1.5 border border-estate-200 rounded-lg text-estate-700 hover:bg-estate-100 font-semibold"
+                      onClick={() => handleAction(report.id, 'Dismiss')}
+                      className="px-3.5 py-2 bg-estate-100 hover:bg-estate-200 text-estate-700 font-bold rounded-xl transition"
                     >
-                      Dismiss (Keep Post)
+                      Dismiss (No Violation)
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleAction(rep.id, 'Redacted & Cautionary Label Attached')}
-                      className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold"
+                      onClick={() => handleAction(report.id, 'Redact')}
+                      className="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold rounded-xl transition flex items-center gap-1.5"
                     >
-                      Redact Personal Names
+                      <Edit3 className="w-3.5 h-3.5" />
+                      <span>Redact Personal Details</span>
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleAction(rep.id, 'Takedown & Warning Issued')}
-                      className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-bold"
+                      onClick={() => handleAction(report.id, 'Takedown')}
+                      className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs"
                     >
-                      Takedown Content
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Take Down Post</span>
                     </button>
                   </div>
                 </div>
@@ -194,8 +195,6 @@ export function AdminModerationPage() {
           </div>
         )}
       </div>
-
     </div>
   );
 }
-

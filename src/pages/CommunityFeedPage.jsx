@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { 
   MessageSquareText, 
@@ -12,17 +12,24 @@ import {
   Clock, 
   ThumbsUp,
   AlertTriangle,
-  Info
+  Info,
+  Loader2,
+  BookmarkCheck,
+  BookmarkPlus
 } from 'lucide-react';
-import { DEMO_COMMUNITY_POSTS, DEMO_NEIGHBOURHOODS, COMMUNITY_CATEGORIES } from '../data/demoData';
+import { DEMO_NEIGHBOURHOODS, COMMUNITY_CATEGORIES } from '../data/demoData';
 import { PostCard } from '../components/community/PostCard';
 import { CreatePostModal } from '../components/community/CreatePostModal';
 import { ReportModal } from '../components/community/ReportModal';
+import { fetchCommunityPosts } from '../services/communityService';
+import { useAuth } from '../context/AuthContext';
 
 export function CommunityFeedPage() {
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [posts, setPosts] = useState(DEMO_COMMUNITY_POSTS);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'ALL');
   const [selectedNeighbourhood, setSelectedNeighbourhood] = useState(searchParams.get('neighbourhood') || 'ALL');
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,37 +37,42 @@ export function CommunityFeedPage() {
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [reportTarget, setReportTarget] = useState(null);
+  const [followedNeighbourhoods, setFollowedNeighbourhoods] = useState(() => {
+    return JSON.parse(localStorage.getItem('estatelens_followed_neighbourhoods') || '["lekki-phase-1", "yaba"]');
+  });
 
-  const filteredPosts = useMemo(() => {
-    return posts.filter(post => {
-      // Category filter
-      if (selectedCategory !== 'ALL' && post.category !== selectedCategory) {
-        return false;
+  // Load community posts
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    fetchCommunityPosts({
+      neighbourhoodId: selectedNeighbourhood,
+      category: selectedCategory,
+      search: searchQuery,
+      sortBy
+    }).then(data => {
+      if (isMounted) {
+        setPosts(data);
+        setLoading(false);
       }
-      // Neighbourhood filter
-      if (selectedNeighbourhood !== 'ALL' && post.neighbourhoodId !== selectedNeighbourhood) {
-        return false;
-      }
-      // Search
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        const matchesTitle = post.title.toLowerCase().includes(query);
-        const matchesContent = post.content.toLowerCase().includes(query);
-        const matchesNeighbourhood = post.neighbourhoodName.toLowerCase().includes(query);
-        const matchesTag = post.tags?.some(t => t.toLowerCase().includes(query));
-        if (!matchesTitle && !matchesContent && !matchesNeighbourhood && !matchesTag) return false;
-      }
-      return true;
-    }).sort((a, b) => {
-      if (sortBy === 'helpful') return (b.upvotes || 0) - (a.upvotes || 0);
-      if (sortBy === 'trending') return (b.commentsCount || 0) - (a.commentsCount || 0);
-      // 'newest' default
-      return b.id.localeCompare(a.id);
     });
-  }, [posts, selectedCategory, selectedNeighbourhood, searchQuery, sortBy]);
+
+    return () => { isMounted = false; };
+  }, [selectedNeighbourhood, selectedCategory, searchQuery, sortBy]);
 
   const handlePostCreated = (newPost) => {
     setPosts(prev => [newPost, ...prev]);
+  };
+
+  const toggleFollowNeighbourhood = (nHoodId) => {
+    setFollowedNeighbourhoods(prev => {
+      const updated = prev.includes(nHoodId)
+        ? prev.filter(id => id !== nHoodId)
+        : [...prev, nHoodId];
+      localStorage.setItem('estatelens_followed_neighbourhoods', JSON.stringify(updated));
+      return updated;
+    });
   };
 
   return (
@@ -77,22 +89,48 @@ export function CommunityFeedPage() {
             Neighbourhood Community Discussions
           </h1>
           <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
-            Unfiltered, ground-truth discussions about living conditions, power reliability, drainage, security, and landlord responsiveness across Nigerian neighbourhoods.
+            Unfiltered, ground-truth discussions about living conditions, power reliability, drainage, security vigilance, and landlord realities across Nigerian urban estates.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsCreateModalOpen(true)}
-          className="px-5 py-3 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 shrink-0"
-        >
-          <PlusCircle className="w-4 h-4" />
-          <span>Start a Discussion</span>
-        </button>
+        <div className="flex items-center gap-3 shrink-0">
+          {selectedNeighbourhood !== 'ALL' && (
+            <button
+              type="button"
+              onClick={() => toggleFollowNeighbourhood(selectedNeighbourhood)}
+              className={`px-4 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 border ${
+                followedNeighbourhoods.includes(selectedNeighbourhood)
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  : 'bg-white text-navy border-estate-200 hover:bg-estate-50'
+              }`}
+            >
+              {followedNeighbourhoods.includes(selectedNeighbourhood) ? (
+                <>
+                  <BookmarkCheck className="w-4 h-4 text-emerald" />
+                  <span>Following District</span>
+                </>
+              ) : (
+                <>
+                  <BookmarkPlus className="w-4 h-4" />
+                  <span>Follow District Updates</span>
+                </>
+              )}
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setIsCreateModalOpen(true)}
+            className="px-5 py-3 bg-emerald hover:bg-emerald-dark text-white rounded-2xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span>Start a Discussion</span>
+          </button>
+        </div>
       </div>
 
       {/* Safety Policy & Anti-Defamation Banner */}
-      <div className="bg-sand-100 rounded-2xl p-4 sm:p-5 border border-sand-200 flex flex-col sm:flex-row items-start gap-3.5 text-xs text-estate-700">
+      <div className="bg-sand-100 rounded-3xl p-4 sm:p-5 border border-sand-200 flex flex-col sm:flex-row items-start gap-3.5 text-xs text-estate-700">
         <ShieldCheck className="w-5 h-5 text-emerald shrink-0 mt-0.5" />
         <div className="space-y-1">
           <span className="font-bold text-navy text-sm block">
@@ -123,7 +161,7 @@ export function CommunityFeedPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-2xl border border-estate-200 p-4 shadow-subtle flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="bg-white rounded-3xl border border-estate-200 p-4 shadow-subtle flex flex-col md:flex-row gap-4 items-center justify-between">
         
         {/* Neighbourhood Dropdown */}
         <div className="flex items-center gap-2 w-full md:w-auto">
@@ -132,7 +170,7 @@ export function CommunityFeedPage() {
           <select
             value={selectedNeighbourhood}
             onChange={(e) => setSelectedNeighbourhood(e.target.value)}
-            className="py-1.5 px-3 rounded-lg border border-estate-200 text-xs font-semibold text-estate-800 bg-sand-50/60 focus:ring-1 focus:ring-emerald outline-none"
+            className="py-1.5 px-3 rounded-xl border border-estate-200 text-xs font-semibold text-estate-800 bg-sand-50/60 focus:ring-1 focus:ring-emerald outline-none"
           >
             <option value="ALL">All Neighbourhoods</option>
             {DEMO_NEIGHBOURHOODS.map(n => (
@@ -156,11 +194,11 @@ export function CommunityFeedPage() {
         {/* Sort */}
         <div className="flex items-center gap-2 w-full md:w-auto justify-end">
           <span className="text-xs text-estate-500 font-semibold">Sort:</span>
-          <div className="flex items-center p-1 bg-estate-100 rounded-lg">
+          <div className="flex items-center p-1 bg-estate-100 rounded-xl">
             <button
               type="button"
               onClick={() => setSortBy('newest')}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
+              className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
                 sortBy === 'newest' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
               }`}
             >
@@ -169,7 +207,7 @@ export function CommunityFeedPage() {
             <button
               type="button"
               onClick={() => setSortBy('helpful')}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
+              className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
                 sortBy === 'helpful' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
               }`}
             >
@@ -178,7 +216,7 @@ export function CommunityFeedPage() {
             <button
               type="button"
               onClick={() => setSortBy('trending')}
-              className={`px-3 py-1 text-xs font-semibold rounded-md transition ${
+              className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
                 sortBy === 'trending' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
               }`}
             >
@@ -194,7 +232,12 @@ export function CommunityFeedPage() {
         
         {/* Posts Feed */}
         <div className="lg:col-span-8 space-y-4">
-          {filteredPosts.length === 0 ? (
+          {loading ? (
+            <div className="py-20 text-center space-y-3">
+              <Loader2 className="w-10 h-10 text-emerald animate-spin mx-auto" />
+              <p className="text-xs font-semibold text-estate-500">Retrieving neighbourhood community forum discussions...</p>
+            </div>
+          ) : posts.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 shadow-subtle">
               <MessageSquareText className="w-12 h-12 text-estate-400 mx-auto mb-3" />
               <h3 className="text-lg font-bold text-navy font-display">No discussions found</h3>
@@ -210,7 +253,7 @@ export function CommunityFeedPage() {
               </button>
             </div>
           ) : (
-            filteredPosts.map(post => (
+            posts.map(post => (
               <PostCard
                 key={post.id}
                 post={post}
@@ -233,7 +276,7 @@ export function CommunityFeedPage() {
               <button
                 type="button"
                 onClick={() => setSearchQuery('Drainage')}
-                className="w-full text-left p-2.5 rounded-xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
               >
                 <p className="font-bold text-estate-900">#Drainage & Flood Clearance</p>
                 <p className="text-[11px] text-estate-500">Lekki Admiralty & Surulere updates</p>
@@ -241,39 +284,44 @@ export function CommunityFeedPage() {
               <button
                 type="button"
                 onClick={() => setSearchQuery('Inverter')}
-                className="w-full text-left p-2.5 rounded-xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
               >
                 <p className="font-bold text-estate-900">#Solar Inverter Setup Costs</p>
                 <p className="text-[11px] text-estate-500">Managing 24/7 power in Yaba</p>
               </button>
               <button
                 type="button"
-                onClick={() => setSearchQuery('Gate')}
-                className="w-full text-left p-2.5 rounded-xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                onClick={() => setSearchQuery('Security')}
+                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
               >
-                <p className="font-bold text-estate-900">#Estate Gate Passes & Night Curfew</p>
-                <p className="text-[11px] text-estate-500">Protocols for visitors and couriers</p>
+                <p className="font-bold text-estate-900">#Estate Gate Night Pass Protocols</p>
+                <p className="text-[11px] text-estate-500">Admiralty & Ikeja GRA vigilance</p>
+              </button>
+              <button
+                type="button"
+                onClick={() => setSearchQuery('Service Charge')}
+                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+              >
+                <p className="font-bold text-estate-900">#Service Charge Transparency</p>
+                <p className="text-[11px] text-estate-500">Diesel contribution audits</p>
               </button>
             </div>
           </div>
 
-          {/* Become a Verified Resident */}
-          <div className="bg-sand-50 rounded-3xl p-6 border border-sand-200 space-y-3">
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Resident Verification</span>
-            </div>
-            <h4 className="text-base font-bold text-navy font-display">
-              Live in any of these areas?
-            </h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
-              Verify your residency via estate association dues or utility proof to earn the <strong>Verified Resident Badge</strong> on your contributions.
+          {/* Resident Verification Info Card */}
+          <div className="bg-emerald-50 rounded-3xl p-6 border border-emerald-200 shadow-subtle space-y-3 text-xs">
+            <span className="font-bold text-emerald-900 text-sm flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-emerald" />
+              Verified Resident Badge
+            </span>
+            <p className="text-estate-700 leading-relaxed text-[11px]">
+              Residents who verify their residential connection with utility receipts or landlord agreements earn a green badge on their posts. This builds genuine trust across the community.
             </p>
             <Link
-              to="/auth?tab=register"
-              className="inline-block text-xs font-bold text-emerald hover:underline pt-1"
+              to="/profile"
+              className="text-xs font-bold text-emerald-800 hover:underline block pt-1"
             >
-              Apply for Resident Badge →
+              Learn about resident verification →
             </Link>
           </div>
 
@@ -298,4 +346,3 @@ export function CommunityFeedPage() {
     </div>
   );
 }
-
