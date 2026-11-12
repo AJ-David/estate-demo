@@ -353,10 +353,11 @@ export function PropertyDetailPage() {
               </div>
             </div>
 
-            <div className="h-80 rounded-2xl overflow-hidden border border-estate-200">
+            <div className="rounded-3xl overflow-hidden border border-estate-200">
               <PropertyMapView
                 properties={[property]}
                 selectedPropertyId={property.id}
+                height="380px"
               />
             </div>
 
