@@ -120,3 +120,4 @@ estate/
 - Execute SQL migrations for `profiles`, `user_roles`, `properties`, `property_images`, `neighbourhoods`, `community_posts`, `community_comments`, and `inspections`.
 - Enable Supabase Row Level Security (RLS) policies.
 - Wire Supabase Auth for real email/password sign-in and email confirmation.
+

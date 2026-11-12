@@ -33,3 +33,4 @@ export function getObfuscatedCoordinates(coords) {
   // Keep coordinates accurate enough for neighbourhood map view without exposing pinpoint gate numbers
   return coords;
 }
+

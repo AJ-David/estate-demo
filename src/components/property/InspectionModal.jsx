@@ -196,3 +196,4 @@ export function InspectionModal({ isOpen, onClose, property }) {
     </Modal>
   );
 }
+

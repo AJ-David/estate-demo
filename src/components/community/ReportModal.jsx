@@ -104,3 +104,4 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
     </Modal>
   );
 }
+

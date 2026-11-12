@@ -106,3 +106,4 @@ export function NeighbourhoodMetricsBar({ metrics, showSummaries = true }) {
     </div>
   );
 }
+

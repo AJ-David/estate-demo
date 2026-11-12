@@ -219,3 +219,4 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
     </Modal>
   );
 }
+

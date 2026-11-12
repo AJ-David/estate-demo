@@ -234,3 +234,4 @@ export function PostCard({ post, onReport }) {
     </article>
   );
 }
+

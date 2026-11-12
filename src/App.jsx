@@ -5,6 +5,7 @@ import { SavedPropertiesProvider } from './context/SavedPropertiesContext';
 
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
 
 import { HomePage } from './pages/HomePage';
 import { PropertiesPage } from './pages/PropertiesPage';
@@ -13,6 +14,7 @@ import { NeighbourhoodsPage } from './pages/NeighbourhoodsPage';
 import { NeighbourhoodDetailPage } from './pages/NeighbourhoodDetailPage';
 import { CommunityFeedPage } from './pages/CommunityFeedPage';
 import { AuthPage } from './pages/AuthPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { BuyerDashboardPage } from './pages/BuyerDashboardPage';
 import { LandlordAgentDashboardPage } from './pages/LandlordAgentDashboardPage';
 import { AdminModerationPage } from './pages/AdminModerationPage';
@@ -38,6 +40,7 @@ export function App() {
             {/* Main Application Routes */}
             <main className="flex-1">
               <Routes>
+                {/* Public Discovery Routes */}
                 <Route path="/" element={<HomePage />} />
                 <Route path="/properties" element={<PropertiesPage />} />
                 <Route path="/properties/:id" element={<PropertyDetailPage />} />
@@ -45,10 +48,54 @@ export function App() {
                 <Route path="/neighbourhoods/:id" element={<NeighbourhoodDetailPage />} />
                 <Route path="/community" element={<CommunityFeedPage />} />
                 <Route path="/auth" element={<AuthPage />} />
-                <Route path="/dashboard/buyer" element={<BuyerDashboardPage />} />
-                <Route path="/dashboard/saved" element={<BuyerDashboardPage />} />
-                <Route path="/dashboard/landlord" element={<LandlordAgentDashboardPage />} />
-                <Route path="/dashboard/moderation" element={<AdminModerationPage />} />
+
+                {/* Protected User & Portal Routes */}
+                <Route 
+                  path="/profile" 
+                  element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                <Route 
+                  path="/dashboard/buyer" 
+                  element={
+                    <ProtectedRoute allowedRoles={['buyer_tenant']}>
+                      <BuyerDashboardPage />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                <Route 
+                  path="/dashboard/saved" 
+                  element={
+                    <ProtectedRoute allowedRoles={['buyer_tenant']}>
+                      <BuyerDashboardPage />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                <Route 
+                  path="/dashboard/landlord" 
+                  element={
+                    <ProtectedRoute allowedRoles={['landlord_owner', 'agent']}>
+                      <LandlordAgentDashboardPage />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                <Route 
+                  path="/dashboard/moderation" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin', 'agent', 'landlord_owner', 'buyer_tenant']}>
+                      <AdminModerationPage />
+                    </ProtectedRoute>
+                  } 
+                />
+
+                {/* Fallback */}
                 <Route path="*" element={<HomePage />} />
               </Routes>
             </main>

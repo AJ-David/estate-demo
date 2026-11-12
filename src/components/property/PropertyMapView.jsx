@@ -180,3 +180,4 @@ export function PropertyMapView({ properties, selectedPropertyId, onSelectProper
     </div>
   );
 }
+

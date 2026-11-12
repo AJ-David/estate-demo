@@ -787,3 +787,4 @@ export const COMMUNITY_CATEGORIES = [
   { id: 'PROPERTY AND LANDLORD EXPERIENCES', label: 'Landlord & Property Realities', icon: 'Home' },
   { id: 'GENERAL DISCUSSIONS', label: 'General & Q&A', icon: 'Compass' }
 ];
+
