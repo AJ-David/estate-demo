@@ -30,26 +30,40 @@ import { Badge } from '../components/common/Badge';
 import { InspectionModal } from '../components/property/InspectionModal';
 import { EnquiryModal } from '../components/property/EnquiryModal';
 import { PropertyMapView } from '../components/property/PropertyMapView';
+import { PropertyReviewModal } from '../components/property/PropertyReviewModal';
+import { ConversationChatDrawer } from '../components/communication/ConversationChatDrawer';
 import { fetchPropertyById } from '../services/propertyService';
+import { fetchPropertyReviews } from '../services/reviewService';
+import { startPropertyConversation } from '../services/messageService';
+import { useAuth } from '../context/AuthContext';
 
 export function PropertyDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { isSaved, toggleSave } = useSavedProperties();
 
   const [property, setProperty] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isInspectionOpen, setIsInspectionOpen] = useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [activeConversation, setActiveConversation] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
 
-    fetchPropertyById(id).then(data => {
+    Promise.all([
+      fetchPropertyById(id),
+      fetchPropertyReviews(id)
+    ]).then(([propData, reviewsData]) => {
       if (isMounted) {
-        setProperty(data);
+        setProperty(propData);
+        setReviews(reviewsData);
         setLoading(false);
       }
     });
@@ -58,6 +72,25 @@ export function PropertyDetailPage() {
       isMounted = false;
     };
   }, [id]);
+
+  const handleOpenChat = async () => {
+    if (!property) return;
+    const res = await startPropertyConversation({
+      propertyId: property.id,
+      propertyTitle: property.title,
+      agentName: property.agent?.name,
+      agentAvatar: property.agent?.avatar,
+      agentPhone: property.agent?.phone,
+      user
+    });
+
+    if (res.success) {
+      const stored = JSON.parse(localStorage.getItem('estatelens_conversations') || '[]');
+      const targetConv = stored.find(c => c.id === res.conversationId);
+      setActiveConversation(targetConv);
+      setIsChatOpen(true);
+    }
+  };
 
   if (loading) {
     return (
@@ -379,34 +412,78 @@ export function PropertyDetailPage() {
 
           {/* Property Reviews & Experience */}
           <section className="space-y-4 pt-6 border-t border-estate-200">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="text-xl font-bold text-navy font-display">Verified Tenant Reviews</h2>
                 <p className="text-xs text-estate-500">
                   Real assessments from former occupants and certified pre-lease inspectors.
                 </p>
               </div>
+
+              <button
+                type="button"
+                onClick={() => setIsReviewOpen(true)}
+                className="px-4 py-2 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 self-start sm:self-auto"
+              >
+                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                <span>Write a Verified Review</span>
+              </button>
             </div>
 
             <div className="space-y-3">
-              {DEMO_PROPERTY_REVIEWS.map(rev => (
-                <div key={rev.id} className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-estate-900 text-sm">{rev.author}</span>
-                      <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        {rev.userRole}
-                      </span>
-                    </div>
-                    <span className="text-estate-400">{rev.date}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-amber-500 font-bold">
-                    <Star className="w-3.5 h-3.5 fill-current" />
-                    <span>{rev.rating} / 5.0</span>
-                  </div>
-                  <p className="text-estate-700 leading-relaxed">{rev.comment}</p>
+              {reviews.length === 0 ? (
+                <div className="p-8 text-center bg-sand-50 rounded-2xl border border-sand-200 text-xs text-estate-500">
+                  No reviews recorded yet for this property. Be the first verified occupant to evaluate it!
                 </div>
-              ))}
+              ) : (
+                reviews.map(rev => (
+                  <div key={rev.id} className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <img
+                          src={rev.reviewerAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
+                          alt={rev.reviewerName}
+                          className="w-8 h-8 rounded-full object-cover ring-1 ring-estate-200"
+                        />
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-estate-900 text-sm">{rev.reviewerName}</span>
+                            {rev.isVerifiedExperience && (
+                              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                                <ShieldCheck className="w-3 h-3 text-emerald" />
+                                Verified Tenant
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-estate-400 text-[11px]">{rev.createdAt}</span>
+                    </div>
+
+                    {/* Criteria ratings bar */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-2 px-3 bg-sand-50/70 rounded-xl border border-sand-200 text-[11px]">
+                      <div>
+                        <span className="text-estate-400 block text-[10px]">Condition</span>
+                        <span className="font-bold text-navy">{rev.conditionRating || 4.5} ★</span>
+                      </div>
+                      <div>
+                        <span className="text-estate-400 block text-[10px]">Listing Accuracy</span>
+                        <span className="font-bold text-navy">{rev.accuracyRating || 4.8} ★</span>
+                      </div>
+                      <div>
+                        <span className="text-estate-400 block text-[10px]">Maintenance</span>
+                        <span className="font-bold text-navy">{rev.maintenanceRating || 4.3} ★</span>
+                      </div>
+                      <div>
+                        <span className="text-estate-400 block text-[10px]">Value Ratio</span>
+                        <span className="font-bold text-navy">{rev.valueRating || 4.5} ★</span>
+                      </div>
+                    </div>
+
+                    <p className="text-estate-700 leading-relaxed">{rev.comment}</p>
+                  </div>
+                ))
+              )}
             </div>
           </section>
 
@@ -451,11 +528,19 @@ export function PropertyDetailPage() {
 
               <button
                 type="button"
-                onClick={() => setIsEnquiryOpen(true)}
-                className="w-full py-3 px-4 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2"
+                onClick={handleOpenChat}
+                className="w-full py-3 px-4 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-sm"
               >
-                <MessageSquare className="w-4 h-4" />
-                <span>Send Enquiry / Ask Questions</span>
+                <MessageSquare className="w-4 h-4 text-emerald" />
+                <span>Chat Directly with Agent</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsEnquiryOpen(true)}
+                className="w-full py-2.5 px-4 bg-sand-50 hover:bg-sand-100 border border-sand-200 text-estate-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+              >
+                <span>Submit Formal Written Enquiry</span>
               </button>
 
               <a
@@ -503,7 +588,7 @@ export function PropertyDetailPage() {
 
       </div>
 
-      {/* Modals */}
+      {/* Modals & Chat Drawer */}
       <InspectionModal
         isOpen={isInspectionOpen}
         onClose={() => setIsInspectionOpen(false)}
@@ -514,6 +599,23 @@ export function PropertyDetailPage() {
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         property={property}
+      />
+
+      <PropertyReviewModal
+        isOpen={isReviewOpen}
+        onClose={() => setIsReviewOpen(false)}
+        property={property}
+        onReviewSubmitted={(newRev) => setReviews(prev => [newRev, ...prev])}
+      />
+
+      <ConversationChatDrawer
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        conversation={activeConversation}
+        onInspectionClick={() => {
+          setIsChatOpen(false);
+          setIsInspectionOpen(true);
+        }}
       />
 
     </div>

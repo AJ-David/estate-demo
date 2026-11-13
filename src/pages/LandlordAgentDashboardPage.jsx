@@ -20,7 +20,13 @@ import {
   Upload,
   Image as ImageIcon,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  ArrowRightLeft,
+  Copy,
+  Check,
+  Phone,
+  Mail,
+  UserCheck
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -29,7 +35,10 @@ import {
   YAxis, 
   Tooltip, 
   ResponsiveContainer, 
-  CartesianGrid 
+  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell
 } from 'recharts';
 import { useAuth } from '../context/AuthContext';
 import { DEMO_NEIGHBOURHOODS, PROPERTY_TYPES } from '../data/demoData';
@@ -42,13 +51,22 @@ import {
   seedPropertiesToSupabase 
 } from '../services/propertyService';
 import { uploadMultiplePropertyImages } from '../services/storageService';
+import { getUserInspections } from '../services/enquiryService';
+import { fetchConversations } from '../services/messageService';
+import { ConversationChatDrawer } from '../components/communication/ConversationChatDrawer';
 
 export function LandlordAgentDashboardPage() {
   const { user, isConfigured } = useAuth();
 
+  const [activeTab, setActiveTab] = useState('portfolio'); // 'portfolio', 'inspections', 'conversations', 'analytics'
   const [myListings, setMyListings] = useState([]);
+  const [inspections, setInspections] = useState([]);
+  const [conversations, setConversations] = useState([]);
+  const [activeConversation, setActiveConversation] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState('');
+  const [copiedGateCode, setCopiedGateCode] = useState(null);
 
   // Modals state
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -73,17 +91,50 @@ export function LandlordAgentDashboardPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSeeding, setIsSeeding] = useState(false);
 
-  // Load properties
-  const loadListings = async () => {
+  // Load properties, inspections, and conversations
+  const loadDashboardData = async () => {
     setLoading(true);
-    const properties = await fetchProperties();
-    setMyListings(properties);
-    setLoading(false);
+    try {
+      const [properties, inspList, convList] = await Promise.all([
+        fetchProperties(),
+        getUserInspections(user?.id),
+        fetchConversations(user?.id)
+      ]);
+      setMyListings(properties);
+      setInspections(inspList);
+      setConversations(convList);
+    } catch (err) {
+      console.error('Failed to load dashboard data:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    loadListings();
-  }, []);
+    loadDashboardData();
+  }, [user?.id]);
+
+  const handleApproveInspection = (inspId) => {
+    const code = `INS-${Math.floor(100000 + Math.random() * 900000)}`;
+    setInspections(prev => prev.map(insp => {
+      if (insp.id === inspId) {
+        return {
+          ...insp,
+          status: 'Inspection Confirmed',
+          gateCode: insp.gateCode || code
+        };
+      }
+      return insp;
+    }));
+    setNotification('Inspection approved and Security Gate Pass dispatched to prospective tenant!');
+    setTimeout(() => setNotification(''), 4500);
+  };
+
+  const copyCode = (code) => {
+    navigator.clipboard.writeText(code);
+    setCopiedGateCode(code);
+    setTimeout(() => setCopiedGateCode(null), 2500);
+  };
 
   // Performance data for Recharts
   const performanceData = [
@@ -215,6 +266,14 @@ export function LandlordAgentDashboardPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          <Link
+            to="/dashboard/buyer"
+            className="px-3.5 py-2.5 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+          >
+            <ArrowRightLeft className="w-3.5 h-3.5 text-emerald" />
+            <span>Switch to Tenant / Buyer View</span>
+          </Link>
+
           {isConfigured && (
             <button
               type="button"
@@ -261,145 +320,330 @@ export function LandlordAgentDashboardPage() {
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
-          <span className="text-xs text-estate-500">Pending Enquiries</span>
-          <p className="text-2xl font-black text-navy font-display">30</p>
-          <p className="text-[11px] text-amber-600 font-semibold">Avg reply time: 24 mins</p>
+          <span className="text-xs text-estate-500">Client Conversations</span>
+          <p className="text-2xl font-black text-navy font-display">{conversations.length}</p>
+          <p className="text-[11px] text-amber-600 font-semibold">Live two-way messaging</p>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
           <span className="text-xs text-estate-500">Scheduled Inspections</span>
-          <p className="text-2xl font-black text-navy font-display">10</p>
-          <p className="text-[11px] text-emerald-700 font-semibold">Gate passes generated</p>
+          <p className="text-2xl font-black text-navy font-display">{inspections.length}</p>
+          <p className="text-[11px] text-emerald-700 font-semibold">Gate passes managed</p>
         </div>
       </div>
 
-      {/* Analytics Chart with Recharts */}
-      <div className="bg-white p-6 rounded-3xl border border-estate-200 shadow-subtle space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-base font-bold text-navy font-display">
-              Listing Impressions & Enquiry Dynamics
-            </h3>
-            <p className="text-xs text-estate-500">Daily breakdown of unique user views across your portfolio.</p>
-          </div>
-          <span className="text-xs text-estate-500 font-semibold">Last 7 Days</span>
-        </div>
-
-        <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={performanceData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
-              <XAxis dataKey="day" stroke="#64748B" fontSize={12} tickLine={false} />
-              <YAxis stroke="#64748B" fontSize={12} tickLine={false} />
-              <Tooltip
-                contentStyle={{ backgroundColor: '#0E1A2B', borderRadius: '12px', border: 'none', color: '#fff', fontSize: '12px' }}
-                itemStyle={{ color: '#34D399' }}
-              />
-              <Bar dataKey="views" name="Listing Views" fill="#0E1A2B" radius={[6, 6, 0, 0]} />
-              <Bar dataKey="enquiries" name="Enquiries" fill="#059669" radius={[6, 6, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+      {/* Main Suite Tabs */}
+      <div className="flex items-center gap-2 border-b border-estate-200 pb-2 overflow-x-auto">
+        {[
+          { id: 'portfolio', label: 'Property Portfolio', count: myListings.length, icon: Building2 },
+          { id: 'inspections', label: 'Tours & Security Gate Passes', count: inspections.length, icon: Calendar },
+          { id: 'conversations', label: 'Client Inquiries & Chat', count: conversations.length, icon: MessageSquare },
+          { id: 'analytics', label: 'Performance Analytics', count: null, icon: TrendingUp }
+        ].map(tab => {
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 whitespace-nowrap ${
+                activeTab === tab.id
+                  ? 'bg-navy text-white shadow-xs'
+                  : 'text-estate-600 hover:text-navy hover:bg-estate-100'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              <span>{tab.label}</span>
+              {tab.count !== null && (
+                <span className={`px-2 py-0.5 rounded-full text-[10px] ${
+                  activeTab === tab.id ? 'bg-emerald text-white' : 'bg-estate-200 text-estate-700'
+                }`}>
+                  {tab.count}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Property Portfolio Table / Cards */}
-      <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle overflow-hidden">
-        <div className="p-6 border-b border-estate-100 flex items-center justify-between">
-          <div>
-            <h3 className="text-base font-bold text-navy font-display">Your Property Listings ({myListings.length})</h3>
-            <p className="text-xs text-estate-500">Manage pricing, status, and inspection availability.</p>
+      {/* TAB 1: PORTFOLIO LISTINGS */}
+      {activeTab === 'portfolio' && (
+        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle overflow-hidden">
+          <div className="p-6 border-b border-estate-100 flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-bold text-navy font-display">Your Property Listings ({myListings.length})</h3>
+              <p className="text-xs text-estate-500">Manage pricing, status, and inspection availability.</p>
+            </div>
           </div>
-        </div>
 
-        {loading ? (
-          <div className="p-12 text-center text-xs text-estate-500">
-            <div className="w-8 h-8 border-4 border-estate-200 border-t-emerald rounded-full animate-spin mx-auto mb-2"></div>
-            <span>Loading your property portfolio...</span>
-          </div>
-        ) : myListings.length === 0 ? (
-          <div className="p-12 text-center text-xs text-estate-500">
-            <Building2 className="w-10 h-10 text-estate-300 mx-auto mb-2" />
-            <p className="font-bold text-navy text-sm">No properties in your portfolio yet</p>
-            <p className="mt-1">Click "Create New Listing" to publish your first property.</p>
-          </div>
-        ) : (
-          <div className="divide-y divide-estate-100">
-            {myListings.map(listing => (
-              <div key={listing.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-sand-50/50 transition">
-                
-                <div className="flex items-center gap-4">
-                  <img
-                    src={listing.images?.[0] || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'}
-                    alt={listing.title}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0"
-                  />
-                  <div className="space-y-0.5">
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                        listing.availabilityStatus === 'Available Now'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-estate-200 text-estate-700'
-                      }`}>
-                        {listing.availabilityStatus || 'Active'}
-                      </span>
-                      <span className="text-xs text-estate-500">{listing.category}</span>
-                      <span className="text-xs text-emerald font-semibold uppercase">{listing.transactionType}</span>
+          {loading ? (
+            <div className="p-12 text-center text-xs text-estate-500">
+              <div className="w-8 h-8 border-4 border-estate-200 border-t-emerald rounded-full animate-spin mx-auto mb-2"></div>
+              <span>Loading your property portfolio...</span>
+            </div>
+          ) : myListings.length === 0 ? (
+            <div className="p-12 text-center text-xs text-estate-500">
+              <Building2 className="w-10 h-10 text-estate-300 mx-auto mb-2" />
+              <p className="font-bold text-navy text-sm">No properties in your portfolio yet</p>
+              <p className="mt-1">Click "Create New Listing" to publish your first property.</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-estate-100">
+              {myListings.map(listing => (
+                <div key={listing.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-sand-50/50 transition">
+                  
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={listing.images?.[0] || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'}
+                      alt={listing.title}
+                      className="w-16 h-16 rounded-xl object-cover shrink-0"
+                    />
+                    <div className="space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                          listing.availabilityStatus === 'Available Now'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-estate-200 text-estate-700'
+                        }`}>
+                          {listing.availabilityStatus || 'Active'}
+                        </span>
+                        <span className="text-xs text-estate-500">{listing.category}</span>
+                        <span className="text-xs text-emerald font-semibold uppercase">{listing.transactionType}</span>
+                      </div>
+                      <h4 className="text-sm font-bold text-navy font-display line-clamp-1">
+                        <Link to={`/properties/${listing.id}`} className="hover:text-emerald">
+                          {listing.title}
+                        </Link>
+                      </h4>
+                      <p className="text-xs text-estate-500">
+                        {listing.location?.neighbourhoodName || 'Lagos'} • <strong className="text-navy">₦{Number(listing.price).toLocaleString()} / {listing.pricePeriod}</strong>
+                      </p>
                     </div>
-                    <h4 className="text-sm font-bold text-navy font-display line-clamp-1">
-                      <Link to={`/properties/${listing.id}`} className="hover:text-emerald">
-                        {listing.title}
-                      </Link>
-                    </h4>
-                    <p className="text-xs text-estate-500">
-                      {listing.location?.neighbourhoodName || 'Lagos'} • <strong className="text-navy">₦{Number(listing.price).toLocaleString()} / {listing.pricePeriod}</strong>
-                    </p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2 justify-between md:justify-end text-xs">
+                    <Link
+                      to={`/properties/${listing.id}`}
+                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      title="View Property Page"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => toggleListingStatus(listing.id)}
+                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      title={listing.availabilityStatus === 'Available Now' ? 'Pause Listing' : 'Activate Listing'}
+                    >
+                      {listing.availabilityStatus === 'Available Now' ? (
+                        <PauseCircle className="w-4 h-4 text-amber-600" />
+                      ) : (
+                        <PlayCircle className="w-4 h-4 text-emerald" />
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditingProperty(listing)}
+                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      title="Edit Listing"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteListing(listing.id)}
+                      className="p-2 border border-rose-200 text-rose-600 rounded-lg hover:bg-rose-50 transition"
+                      title="Delete Listing"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* TAB 2: TOURS & SECURITY GATE PASSES */}
+      {activeTab === 'inspections' && (
+        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle p-6 space-y-6">
+          <div className="border-b border-estate-100 pb-3 flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-bold text-navy font-display">Scheduled Physical Inspections</h3>
+              <p className="text-xs text-estate-500">Approve tour windows and dispatch security gate pass codes to verified visitors.</p>
+            </div>
+            <span className="text-xs text-estate-500 font-semibold">{inspections.length} Bookings</span>
+          </div>
+
+          <div className="space-y-4">
+            {inspections.length === 0 ? (
+              <p className="text-xs text-estate-400 italic py-8 text-center">No inspection requests pending.</p>
+            ) : (
+              inspections.map(insp => (
+                <div key={insp.id} className="p-5 rounded-2xl bg-sand-50/70 border border-sand-200 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-sand-200 pb-3">
+                    <div>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        insp.status === 'Inspection Confirmed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {insp.status || 'Pending Approval'}
+                      </span>
+                      <h4 className="text-sm font-bold text-navy font-display mt-1">{insp.propertyTitle}</h4>
+                    </div>
+
+                    <div className="text-left sm:text-right text-xs">
+                      <span className="text-estate-400 text-[11px] block">Requested Time</span>
+                      <strong className="text-navy">{insp.inspectionDate}</strong>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <div>
+                      <span className="text-estate-500 block text-[11px]">Prospective Tenant / Buyer:</span>
+                      <span className="font-bold text-navy">{insp.fullName || 'Registered User'}</span> ({insp.phone || 'Contact via Portal'})
+                    </div>
+
+                    {insp.gateCode ? (
+                      <div className="flex items-center gap-2 p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <ShieldCheck className="w-4 h-4 text-emerald shrink-0" />
+                        <span className="font-mono font-black text-navy">{insp.gateCode}</span>
+                        <button
+                          type="button"
+                          onClick={() => copyCode(insp.gateCode)}
+                          className="px-2 py-1 bg-white rounded-lg border border-emerald-200 text-[10px] font-bold text-emerald-800 hover:bg-emerald-100 transition"
+                        >
+                          {copiedGateCode === insp.gateCode ? 'Copied' : 'Copy Code'}
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleApproveInspection(insp.id)}
+                        className="px-4 py-2 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-xs"
+                      >
+                        <UserCheck className="w-3.5 h-3.5" />
+                        <span>Approve & Dispatch Gate Pass</span>
+                      </button>
+                    )}
                   </div>
                 </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
 
-                {/* Actions */}
-                <div className="flex items-center gap-2 justify-between md:justify-end text-xs">
-                  <Link
-                    to={`/properties/${listing.id}`}
-                    className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
-                    title="View Property Page"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => toggleListingStatus(listing.id)}
-                    className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
-                    title={listing.availabilityStatus === 'Available Now' ? 'Pause Listing' : 'Activate Listing'}
-                  >
-                    {listing.availabilityStatus === 'Available Now' ? (
-                      <PauseCircle className="w-4 h-4 text-amber-600" />
-                    ) : (
-                      <PlayCircle className="w-4 h-4 text-emerald" />
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditingProperty(listing)}
-                    className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
-                    title="Edit Listing"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteListing(listing.id)}
-                    className="p-2 border border-rose-200 text-rose-600 rounded-lg hover:bg-rose-50 transition"
-                    title="Delete Listing"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+      {/* TAB 3: CLIENT CONVERSATIONS */}
+      {activeTab === 'conversations' && (
+        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle p-6 space-y-4">
+          <div className="border-b border-estate-100 pb-3 flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-bold text-navy font-display">Client Enquiries & Conversations</h3>
+              <p className="text-xs text-estate-500">Live two-way portal messages from prospective tenants and buyers.</p>
+            </div>
+            <span className="text-xs text-estate-500 font-semibold">{conversations.length} Active Threads</span>
+          </div>
+
+          <div className="space-y-3">
+            {conversations.map(conv => (
+              <div 
+                key={conv.id}
+                className="p-4 bg-sand-50/70 rounded-2xl border border-sand-200 hover:border-emerald-300 transition space-y-2 text-xs"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src={conv.counterpart?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
+                      alt={conv.counterpart?.name}
+                      className="w-9 h-9 rounded-xl object-cover ring-1 ring-emerald-200"
+                    />
+                    <div>
+                      <span className="font-bold text-navy block text-sm">{conv.counterpart?.name}</span>
+                      <span className="text-estate-400 text-[11px]">{conv.propertyTitle}</span>
+                    </div>
+                  </div>
+                  <span className="text-estate-400 text-[10px]">{conv.lastMessageTime}</span>
                 </div>
 
+                <p className="text-estate-700 bg-white p-3 rounded-xl border border-estate-200 leading-relaxed italic">
+                  "{conv.lastMessage}"
+                </p>
+
+                <div className="flex justify-end pt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveConversation(conv);
+                      setIsChatOpen(true);
+                    }}
+                    className="px-4 py-2 bg-navy hover:bg-estate-900 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald" />
+                    <span>Open Live Message Thread</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* TAB 4: RECHARTS PERFORMANCE ANALYTICS */}
+      {activeTab === 'analytics' && (
+        <div className="space-y-6">
+          <div className="bg-white p-6 rounded-3xl border border-estate-200 shadow-subtle space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-navy font-display">
+                  Listing Impressions & Enquiry Dynamics
+                </h3>
+                <p className="text-xs text-estate-500">Daily breakdown of unique user views across your portfolio.</p>
+              </div>
+              <span className="text-xs text-estate-500 font-semibold">Last 7 Days</span>
+            </div>
+
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={performanceData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
+                  <XAxis dataKey="day" stroke="#64748B" fontSize={12} tickLine={false} />
+                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#0E1A2B', borderRadius: '12px', border: 'none', color: '#fff', fontSize: '12px' }}
+                    itemStyle={{ color: '#34D399' }}
+                  />
+                  <Bar dataKey="views" name="Listing Views" fill="#0E1A2B" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="enquiries" name="Enquiries" fill="#059669" radius={[6, 6, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Conversion Funnel */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
+              <span className="text-estate-500 block">Inquiry to Inspection Conversion</span>
+              <p className="text-2xl font-black text-navy font-display">33.3%</p>
+              <p className="text-emerald-700 font-semibold">Exceeds Lagos benchmark (22%)</p>
+            </div>
+
+            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
+              <span className="text-estate-500 block">Tour to Tenancy Deal Rate</span>
+              <p className="text-2xl font-black text-navy font-display">45.0%</p>
+              <p className="text-emerald-700 font-semibold">High interest in verified duplexes</p>
+            </div>
+
+            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
+              <span className="text-estate-500 block">Average Days on Market</span>
+              <p className="text-2xl font-black text-navy font-display">14 Days</p>
+              <p className="text-emerald-700 font-semibold">2.4x faster than unverified platforms</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CREATE NEW LISTING MODAL WITH MULTI-IMAGE UPLOAD */}
       <Modal
@@ -623,6 +867,13 @@ export function LandlordAgentDashboardPage() {
         onUpdated={(updated) => {
           setMyListings(prev => prev.map(p => p.id === updated.id ? updated : p));
         }}
+      />
+
+      {/* TWO-WAY LIVE CHAT DRAWER */}
+      <ConversationChatDrawer
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        conversation={activeConversation}
       />
 
     </div>

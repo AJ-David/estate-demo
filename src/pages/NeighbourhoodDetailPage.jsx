@@ -28,6 +28,7 @@ import {
 import { fetchNeighbourhoodById, getNeighbourhoodIntelligenceSummary, NEIGHBOURHOOD_FACILITIES } from '../services/neighbourhoodService';
 import { fetchProperties } from '../services/propertyService';
 import { fetchCommunityPosts } from '../services/communityService';
+import { fetchNeighbourhoodReviews } from '../services/reviewService';
 import { DEMO_COMMUNITY_POSTS } from '../data/demoData';
 import { NeighbourhoodMetricsBar } from '../components/neighbourhood/NeighbourhoodMetricsBar';
 import { PropertyCard } from '../components/property/PropertyCard';
@@ -35,6 +36,7 @@ import { PropertyMapView } from '../components/property/PropertyMapView';
 import { PostCard } from '../components/community/PostCard';
 import { CreatePostModal } from '../components/community/CreatePostModal';
 import { ReportModal } from '../components/community/ReportModal';
+import { NeighbourhoodReviewModal } from '../components/neighbourhood/NeighbourhoodReviewModal';
 
 export function NeighbourhoodDetailPage() {
   const { id } = useParams();
@@ -42,11 +44,13 @@ export function NeighbourhoodDetailPage() {
   const [intelligenceSummary, setIntelligenceSummary] = useState(null);
   const [allProperties, setAllProperties] = useState([]);
   const [communityPosts, setCommunityPosts] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'map', 'properties', 'community'
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [reportItem, setReportItem] = useState(null);
 
   useEffect(() => {
@@ -55,11 +59,12 @@ export function NeighbourhoodDetailPage() {
 
     async function loadNeighbourhoodData() {
       try {
-        const [nHood, summary, props, postsList] = await Promise.all([
+        const [nHood, summary, props, postsList, reviewsList] = await Promise.all([
           fetchNeighbourhoodById(id),
           getNeighbourhoodIntelligenceSummary(id),
           fetchProperties(),
-          fetchCommunityPosts({ neighbourhoodId: id })
+          fetchCommunityPosts({ neighbourhoodId: id }),
+          fetchNeighbourhoodReviews(id)
         ]);
 
         if (isMounted) {
@@ -67,6 +72,7 @@ export function NeighbourhoodDetailPage() {
           setIntelligenceSummary(summary);
           setAllProperties(props);
           setCommunityPosts(postsList.length > 0 ? postsList : DEMO_COMMUNITY_POSTS.slice(0, 3));
+          setReviews(reviewsList || []);
         }
       } catch (err) {
         console.error('Failed to load neighbourhood detail:', err);
@@ -396,6 +402,73 @@ export function NeighbourhoodDetailPage() {
                 </div>
               </div>
 
+              {/* Resident Reviews & Ground-Truth Ratings */}
+              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-estate-200 shadow-subtle space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-estate-100 pb-3">
+                  <div>
+                    <h3 className="text-base font-bold text-navy font-display">
+                      Verified Resident Living Evaluations ({reviews.length})
+                    </h3>
+                    <p className="text-xs text-estate-500">
+                      Multi-criteria evaluations submitted by vetted residents.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsReviewModalOpen(true)}
+                    className="px-4 py-2 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 self-start sm:self-auto shadow-xs"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-emerald" />
+                    <span>Evaluate This Neighbourhood</span>
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  {reviews.length === 0 ? (
+                    <p className="text-xs text-estate-500 italic py-4">No evaluations yet. Be the first resident to evaluate living conditions here!</p>
+                  ) : (
+                    reviews.map(rev => (
+                      <div key={rev.id} className="p-4 bg-sand-50/70 rounded-2xl border border-sand-200 text-xs space-y-2.5">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-navy">{rev.reviewerName}</span>
+                            {rev.isVerifiedResident && (
+                              <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                <ShieldCheck className="w-3 h-3 text-emerald" />
+                                Verified Resident
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-estate-400 text-[11px]">{rev.createdAt}</span>
+                        </div>
+
+                        {/* Criteria scores */}
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-2.5 bg-white rounded-xl border border-estate-200 text-[11px]">
+                          <div>
+                            <span className="text-estate-400 block text-[10px]">Safety</span>
+                            <span className="font-bold text-navy">{rev.safetyRating} / 10</span>
+                          </div>
+                          <div>
+                            <span className="text-estate-400 block text-[10px]">Power & Grid</span>
+                            <span className="font-bold text-navy">{rev.infrastructureRating} / 10</span>
+                          </div>
+                          <div>
+                            <span className="text-estate-400 block text-[10px]">Transit Links</span>
+                            <span className="font-bold text-navy">{rev.accessibilityRating} / 10</span>
+                          </div>
+                          <div>
+                            <span className="text-estate-400 block text-[10px]">Drainage</span>
+                            <span className="font-bold text-navy">{rev.cleanlinessRating} / 10</span>
+                          </div>
+                        </div>
+
+                        <p className="text-estate-700 leading-relaxed">{rev.comment}</p>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
             </div>
 
             {/* Right Column (4 cols): Property Types & Community Snippet */}
@@ -630,6 +703,13 @@ export function NeighbourhoodDetailPage() {
         isOpen={!!reportItem}
         onClose={() => setReportItem(null)}
         targetItem={reportItem}
+      />
+
+      <NeighbourhoodReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        neighbourhood={neighbourhood}
+        onReviewSubmitted={(newRev) => setReviews(prev => [newRev, ...prev])}
       />
 
     </div>
