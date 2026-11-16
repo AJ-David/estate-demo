@@ -44,34 +44,38 @@ export function HomePage() {
     <div className="space-y-20 pb-20">
       
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden bg-gradient-to-b from-white via-sand-50/80 to-sand-warm border-b border-estate-200/60">
+      <section className="relative pt-16 pb-28 lg:pt-24 lg:pb-36 overflow-hidden bg-gradient-to-b from-navy via-navy-deep to-sand-warm border-b border-navy-border text-white">
+        {/* Subtle Sovereign Gold Aura Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold via-transparent to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="max-w-3xl mx-auto text-center space-y-6">
             
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold shadow-xs animate-fadeIn">
-              <Sparkles className="w-4 h-4 text-emerald" />
-              <span>Property Discovery Meets Neighbourhood Truth</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy-card/90 border border-gold/40 text-gold-light text-xs font-bold shadow-gold animate-fadeIn">
+              <Sparkles className="w-4 h-4 text-gold" />
+              <span>Verified Properties & Sovereign Neighbourhood Intelligence</span>
             </div>
 
             {/* Suggested Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-navy tracking-tight font-display leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-display leading-[1.1]">
               Find Your Next Home. <br className="hidden sm:inline" />
-              <span className="text-emerald">Know Your Next Neighbourhood.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold">
+                Know Your Next Neighbourhood.
+              </span>
             </h1>
 
             {/* Supporting Text */}
-            <p className="text-base sm:text-lg text-estate-600 max-w-2xl mx-auto leading-relaxed">
-              Discover properties, explore neighbourhoods and hear real experiences before making your next property decision.
+            <p className="text-base sm:text-lg text-estate-300 max-w-2xl mx-auto leading-relaxed">
+              Discover verified properties, explore real living conditions, and hear vetted resident experiences before signing your lease.
             </p>
 
             {/* PROMINENT PROPERTY SEARCH BAR */}
             <div className="pt-4 max-w-3xl mx-auto">
-              <div className="bg-white p-3 sm:p-4 rounded-3xl shadow-premium border border-estate-200/90 text-left">
+              <div className="bg-navy-card/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl shadow-2xl border border-navy-border text-left">
                 
                 {/* Transaction Tabs */}
-                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-estate-100">
+                <div className="flex items-center gap-2 mb-4 pb-3 border-b border-navy-border/80">
                   {[
                     { label: 'Rent a Home', value: 'rent' },
                     { label: 'Buy Property', value: 'sale' },
@@ -83,8 +87,8 @@ export function HomePage() {
                       onClick={() => setTransactionType(tab.value)}
                       className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition ${
                         transactionType === tab.value
-                          ? 'bg-navy text-white shadow-xs'
-                          : 'text-estate-600 hover:text-navy hover:bg-estate-50'
+                          ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep shadow-gold'
+                          : 'text-estate-300 hover:text-gold hover:bg-navy-surface'
                       }`}
                     >
                       {tab.label}
@@ -97,33 +101,33 @@ export function HomePage() {
                   
                   {/* Location Input */}
                   <div className="md:col-span-5 relative">
-                    <label className="block text-[11px] uppercase tracking-wider font-bold text-estate-400 mb-1">
+                    <label className="block text-[11px] uppercase tracking-wider font-bold text-gold-light mb-1">
                       Location / Neighbourhood
                     </label>
                     <div className="relative">
-                      <MapPin className="w-4 h-4 text-emerald absolute left-3 top-1/2 -translate-y-1/2" />
+                      <MapPin className="w-4 h-4 text-gold absolute left-3 top-1/2 -translate-y-1/2" />
                       <input
                         type="text"
                         placeholder="Lekki, Yaba, Ikeja, Maitama..."
                         value={searchLocation}
                         onChange={(e) => setSearchLocation(e.target.value)}
-                        className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-estate-200 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-emerald outline-none bg-sand-50/50"
+                        className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-navy-border text-xs sm:text-sm font-medium focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy-deep text-white placeholder:text-estate-500"
                       />
                     </div>
                   </div>
 
                   {/* Property Type Dropdown */}
                   <div className="md:col-span-4">
-                    <label className="block text-[11px] uppercase tracking-wider font-bold text-estate-400 mb-1">
+                    <label className="block text-[11px] uppercase tracking-wider font-bold text-gold-light mb-1">
                       Property Category
                     </label>
                     <select
                       value={propertyType}
                       onChange={(e) => setPropertyType(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-estate-200 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-emerald outline-none bg-white text-estate-800"
+                      className="w-full px-3 py-2.5 rounded-xl border border-navy-border text-xs sm:text-sm font-medium focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy-deep text-white"
                     >
                       {PROPERTY_TYPES.map(cat => (
-                        <option key={cat} value={cat}>{cat}</option>
+                        <option key={cat} value={cat} className="bg-navy-card text-white">{cat}</option>
                       ))}
                     </select>
                   </div>
@@ -132,9 +136,9 @@ export function HomePage() {
                   <div className="md:col-span-3 pt-2 md:pt-4">
                     <button
                       type="submit"
-                      className="w-full py-3 px-5 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group"
+                      className="w-full py-3 px-5 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold hover:shadow-gold-lg transition-all duration-200 flex items-center justify-center gap-2 group"
                     >
-                      <Search className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      <Search className="w-4 h-4 text-navy-deep group-hover:scale-110 transition-transform" />
                       <span>Search Intel</span>
                     </button>
                   </div>
@@ -142,7 +146,7 @@ export function HomePage() {
                 </form>
 
                 {/* Quick Neighbourhood Pills */}
-                <div className="mt-3 pt-3 border-t border-estate-100 flex flex-wrap items-center gap-2 text-xs text-estate-500">
+                <div className="mt-3 pt-3 border-t border-navy-border/80 flex flex-wrap items-center gap-2 text-xs text-estate-400">
                   <span className="font-semibold text-estate-400">Popular:</span>
                   {['Lekki Phase 1', 'Yaba', 'Ikeja GRA', 'Maitama Abuja', 'Surulere'].map(loc => (
                     <button
@@ -151,7 +155,7 @@ export function HomePage() {
                       onClick={() => {
                         setSearchLocation(loc);
                       }}
-                      className="text-estate-700 hover:text-emerald font-medium underline underline-offset-2"
+                      className="text-estate-300 hover:text-gold font-medium underline underline-offset-2 transition"
                     >
                       {loc}
                     </button>
@@ -258,11 +262,11 @@ export function HomePage() {
             </div>
 
             {/* Step 2 */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-emerald-300 shadow-premium relative ring-1 ring-emerald-500/20">
-              <div className="absolute -top-3 right-6 bg-emerald text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-xs">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gold/50 shadow-gold relative ring-1 ring-gold/20">
+              <div className="absolute -top-3 right-6 bg-gradient-to-r from-gold to-gold-dark text-navy-deep text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-xs">
                 Signature Feature
               </div>
-              <span className="w-10 h-10 rounded-xl bg-emerald text-white font-bold flex items-center justify-center font-display mb-5 shadow-xs">
+              <span className="w-10 h-10 rounded-xl bg-gold text-navy-deep font-black flex items-center justify-center font-display mb-5 shadow-xs">
                 02
               </span>
               <h3 className="text-lg font-bold text-navy font-display mb-2">
@@ -297,8 +301,8 @@ export function HomePage() {
             
             {/* Left text */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald/20 border border-emerald/40 text-emerald-light text-xs font-semibold">
-                <MessageSquareText className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/15 border border-gold/40 text-gold-light text-xs font-bold shadow-xs">
+                <MessageSquareText className="w-3.5 h-3.5 text-gold" />
                 <span>The Community Pulse</span>
               </div>
 
@@ -315,13 +319,13 @@ export function HomePage() {
               <div className="pt-2 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/community"
-                  className="px-5 py-2.5 bg-emerald hover:bg-emerald-dark text-white text-xs sm:text-sm font-bold rounded-xl shadow-md transition text-center"
+                  className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep text-xs sm:text-sm font-black rounded-xl shadow-gold hover:shadow-gold-lg transition text-center"
                 >
                   Join Community Discussions
                 </Link>
                 <Link
                   to="/neighbourhoods"
-                  className="px-5 py-2.5 bg-navy-surface hover:bg-navy-surface/80 border border-navy-border text-white text-xs sm:text-sm font-semibold rounded-xl transition text-center"
+                  className="px-5 py-2.5 bg-navy-surface hover:bg-navy-surface/80 border border-navy-border text-estate-200 hover:text-gold text-xs sm:text-sm font-semibold rounded-xl transition text-center"
                 >
                   Browse Locations
                 </Link>
@@ -331,16 +335,16 @@ export function HomePage() {
             {/* Right Feed Snippet */}
             <div className="lg:col-span-7 space-y-4">
               {recentCommunityPosts.map(post => (
-                <div key={post.id} className="bg-white text-estate-900 rounded-2xl p-5 shadow-lg border border-estate-100">
+                <div key={post.id} className="bg-navy-card/90 text-white rounded-2xl p-5 shadow-xl border border-navy-border">
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-bold text-navy flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
+                    <span className="font-bold text-gold flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                       {post.author.name} ({post.author.badge})
                     </span>
                     <span className="text-estate-400 text-[11px]">{post.createdAt}</span>
                   </div>
-                  <h4 className="text-sm font-bold text-navy font-display mb-1">{post.title}</h4>
-                  <p className="text-xs text-estate-600 line-clamp-2 leading-relaxed">{post.content}</p>
+                  <h4 className="text-sm font-bold text-white font-display mb-1">{post.title}</h4>
+                  <p className="text-xs text-estate-300 line-clamp-2 leading-relaxed">{post.content}</p>
                 </div>
               ))}
             </div>

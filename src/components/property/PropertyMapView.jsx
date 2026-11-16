@@ -43,14 +43,14 @@ const createPriceIcon = (price, isSelected = false) => {
     className: 'custom-leaflet-marker',
     html: `
       <div style="
-        background-color: ${isSelected ? '#059669' : '#0E1A2B'};
-        color: white;
-        padding: 5px 10px;
+        background-color: ${isSelected ? '#C5A059' : '#0A0C10'};
+        color: ${isSelected ? '#050608' : '#FFFFFF'};
+        padding: 5px 11px;
         border-radius: 9999px;
-        font-weight: 800;
+        font-weight: 900;
         font-size: 11px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-        border: 2px solid ${isSelected ? '#ffffff' : '#e2e8f0'};
+        box-shadow: 0 4px 16px rgba(0,0,0,0.5), ${isSelected ? '0 0 12px rgba(197, 160, 89, 0.6)' : 'none'};
+        border: 2px solid ${isSelected ? '#FFFFFF' : '#C5A059'};
         white-space: nowrap;
         transform: translate(-50%, -50%) ${isSelected ? 'scale(1.15)' : 'scale(1)'};
         display: flex;
@@ -59,7 +59,7 @@ const createPriceIcon = (price, isSelected = false) => {
         cursor: pointer;
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       ">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:${isSelected ? '#6ee7b7' : '#10b981'};"></span>
+        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:${isSelected ? '#050608' : '#DFC37F'};"></span>
         <span>${formatted}</span>
       </div>
     `,
@@ -262,10 +262,11 @@ export function PropertyMapView({
                 center={coords}
                 radius={260}
                 pathOptions={{
-                  color: isSelected ? '#059669' : '#3B82F6',
-                  fillColor: isSelected ? '#10B981' : '#60A5FA',
-                  fillOpacity: isSelected ? 0.22 : 0.10,
-                  weight: isSelected ? 2 : 1
+                  color: isSelected ? '#C5A059' : '#C5A059',
+                  fillColor: isSelected ? '#DFC37F' : '#0A0C10',
+                  fillOpacity: isSelected ? 0.25 : 0.08,
+                  weight: isSelected ? 2 : 1,
+                  dashArray: isSelected ? 'none' : '4, 4'
                 }}
               />
 
@@ -322,9 +323,9 @@ export function PropertyMapView({
       <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         
         {/* Quick jump pills */}
-        <div className="flex items-center gap-1.5 p-1.5 bg-white/95 backdrop-blur-md rounded-2xl border border-estate-200 shadow-md overflow-x-auto max-w-full pointer-events-auto">
-          <div className="flex items-center gap-1 px-2 text-xs font-bold text-navy border-r border-estate-200 mr-1">
-            <Compass className="w-3.5 h-3.5 text-emerald" />
+        <div className="flex items-center gap-1.5 p-1.5 bg-navy-card/95 backdrop-blur-md rounded-2xl border border-navy-border shadow-xl overflow-x-auto max-w-full pointer-events-auto">
+          <div className="flex items-center gap-1 px-2 text-xs font-bold text-gold border-r border-navy-border mr-1">
+            <Compass className="w-3.5 h-3.5 text-gold" />
             <span className="hidden sm:inline">District:</span>
           </div>
           {NEIGHBOURHOOD_CENTERS.map(item => (
@@ -334,8 +335,8 @@ export function PropertyMapView({
               onClick={() => handleNeighbourhoodChange(item)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
                 selectedNeighbourhood === item.id
-                  ? 'bg-navy text-white shadow-xs'
-                  : 'text-estate-700 hover:text-navy hover:bg-estate-100'
+                  ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-black shadow-gold'
+                  : 'text-estate-300 hover:text-gold hover:bg-navy-surface'
               }`}
             >
               {item.name}
@@ -344,25 +345,25 @@ export function PropertyMapView({
         </div>
 
         {/* Privacy rule badge */}
-        <div className="hidden lg:flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-estate-200 text-xs shadow-sm pointer-events-auto text-estate-700">
-          <EyeOff className="w-3.5 h-3.5 text-emerald shrink-0" />
+        <div className="hidden lg:flex items-center gap-2 bg-navy-card/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-navy-border text-xs shadow-md pointer-events-auto text-estate-200">
+          <EyeOff className="w-3.5 h-3.5 text-gold shrink-0" />
           <span className="text-[11px]">
-            <strong>Privacy Protected:</strong> Exact gate coordinates released upon confirmed booking.
+            <strong className="text-gold">Privacy Protected:</strong> Coordinates released upon confirmed booking.
           </span>
         </div>
       </div>
 
       {/* OVERLAY 2: Bottom-Left Facility Filter Control */}
-      <div className="absolute bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-estate-200 shadow-lg pointer-events-auto max-w-xs text-xs space-y-2">
-        <div className="flex items-center justify-between border-b border-estate-100 pb-1.5">
-          <span className="font-bold text-navy flex items-center gap-1 text-[11px] uppercase tracking-wider">
-            <Layers className="w-3.5 h-3.5 text-emerald" />
+      <div className="absolute bottom-4 left-4 z-10 bg-navy-card/95 backdrop-blur-md p-2.5 rounded-2xl border border-navy-border shadow-xl pointer-events-auto max-w-xs text-xs space-y-2 text-estate-200">
+        <div className="flex items-center justify-between border-b border-navy-border pb-1.5">
+          <span className="font-bold text-white flex items-center gap-1 text-[11px] uppercase tracking-wider">
+            <Layers className="w-3.5 h-3.5 text-gold" />
             Nearby Facilities
           </span>
           <button
             type="button"
             onClick={() => setShowFacilitiesLayer(!showFacilitiesLayer)}
-            className="text-[10px] font-bold text-emerald hover:underline"
+            className="text-[10px] font-bold text-gold hover:underline"
           >
             {showFacilitiesLayer ? 'Hide All' : 'Show All'}
           </button>
@@ -416,15 +417,15 @@ export function PropertyMapView({
 
       {/* OVERLAY 3: Floating Active Property Preview Card */}
       {activeProperty && (
-        <div className="absolute bottom-4 right-4 z-10 w-80 bg-white/95 backdrop-blur-md rounded-3xl p-4 border border-estate-200 shadow-2xl animate-fadeIn pointer-events-auto">
+        <div className="absolute bottom-4 right-4 z-10 w-80 bg-navy-card/95 backdrop-blur-md rounded-3xl p-4 border border-navy-border shadow-2xl animate-fadeIn pointer-events-auto text-white">
           <div className="flex items-center justify-between mb-2">
-            <span className="bg-navy text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+            <span className="bg-navy-surface text-gold border border-gold/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
               {activeProperty.category}
             </span>
             <button
               type="button"
               onClick={() => setActiveProperty(null)}
-              className="p-1 hover:bg-estate-100 rounded-full text-estate-400 hover:text-navy transition"
+              className="p-1 hover:bg-navy-surface rounded-full text-estate-400 hover:text-white transition"
             >
               <X className="w-4 h-4" />
             </button>
@@ -436,31 +437,31 @@ export function PropertyMapView({
               alt={activeProperty.title}
               className="w-full h-32 object-cover rounded-2xl"
             />
-            <div className="absolute bottom-2 left-2 bg-navy/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm">
+            <div className="absolute bottom-2 left-2 bg-navy-deep/90 text-gold-light text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm border border-gold/20">
               {activeProperty.furnishingStatus}
             </div>
           </div>
 
-          <p className="text-base font-black text-navy font-display">
+          <p className="text-base font-black text-white font-display">
             {formatPriceDisplay(activeProperty.price, activeProperty.pricePeriod, activeProperty.transactionType)}
           </p>
-          <h4 className="text-xs font-bold text-estate-800 line-clamp-1 mt-0.5">
+          <h4 className="text-xs font-bold text-estate-100 line-clamp-1 mt-0.5">
             {activeProperty.title}
           </h4>
-          <p className="text-[11px] text-estate-500 mb-3">
+          <p className="text-[11px] text-estate-400 mb-3">
             {activeProperty.location.neighbourhoodName}, {activeProperty.location.city}
           </p>
 
-          <div className="flex items-center justify-between pt-2 border-t border-estate-100">
+          <div className="flex items-center justify-between pt-2 border-t border-navy-border">
             <Link
               to={`/neighbourhoods/${activeProperty.location.neighbourhoodId}`}
-              className="text-xs text-emerald font-semibold hover:underline"
+              className="text-xs text-gold font-semibold hover:underline"
             >
               District Intel
             </Link>
             <Link
               to={`/properties/${activeProperty.id}`}
-              className="inline-flex items-center gap-1 px-3 py-1.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-emerald transition shadow-xs"
+              className="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-gold to-gold-light text-navy-deep text-xs font-black rounded-xl hover:shadow-gold transition shadow-xs"
             >
               <span>Explore Home</span>
               <ArrowRight className="w-3 h-3" />

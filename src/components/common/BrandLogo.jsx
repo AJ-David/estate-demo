@@ -49,8 +49,8 @@ export function BrandLogo({
     <div 
       className={`${currentSize.mark} flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:scale-105 ${
         isLight 
-          ? 'bg-navy-surface border border-navy-border text-emerald-light' 
-          : 'bg-navy text-emerald-light border border-navy-deep'
+          ? 'bg-navy-surface border border-navy-border text-gold-light' 
+          : 'bg-navy text-gold border border-navy-border'
       }`}
     >
       <svg 
@@ -64,14 +64,14 @@ export function BrandLogo({
         {/* House / Shield Gable Structure */}
         <path 
           d="M16 4L5 12V25C5 26.1046 5.89543 27 7 27H25C26.1046 27 27 26.1046 27 25V12L16 4Z" 
-          fill={isLight ? '#132238' : '#09111E'} 
-          stroke={isLight ? '#243A5A' : '#1A2C46'} 
+          fill={isLight ? '#11141C' : '#050608'} 
+          stroke={isLight ? '#283042' : '#191E2B'} 
           strokeWidth="1.2"
         />
-        {/* Dynamic Emerald Roofline */}
+        {/* Dynamic Sovereign Gold Roofline */}
         <path 
           d="M3.5 13.5L16 4L28.5 13.5" 
-          stroke="#10B981" 
+          stroke="#C5A059" 
           strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round"
@@ -81,13 +81,13 @@ export function BrandLogo({
           cx="16" 
           cy="18" 
           r="5.5" 
-          fill={isLight ? '#09111E' : '#0E1A2B'} 
-          stroke="#10B981" 
+          fill={isLight ? '#050608' : '#0A0C10'} 
+          stroke="#C5A059" 
           strokeWidth="1.6"
         />
         <path 
           d="M13.8 18L15.3 19.5L18.5 16.5" 
-          stroke="#10B981" 
+          stroke="#C5A059" 
           strokeWidth="1.8" 
           strokeLinecap="round" 
           strokeLinejoin="round"
@@ -116,9 +116,9 @@ export function BrandLogo({
           <span className={`${currentSize.title} font-black tracking-tight font-display ${
             isLight ? 'text-white' : 'text-navy'
           }`}>
-            Vetted<span className={isLight ? 'text-emerald-light' : 'text-emerald'}>Homes</span>
+            Vetted<span className={isLight ? 'text-gold-light' : 'text-gold'}>Homes</span>
           </span>
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald"></span>
+          <span className="inline-block w-2 h-2 rounded-full bg-gold"></span>
         </div>
         {showTagline && (
           <p className={`${currentSize.tagline} uppercase font-bold tracking-widest mt-1 ${

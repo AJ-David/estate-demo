@@ -19,12 +19,12 @@ export function Footer() {
             </p>
 
             <div className="pt-2 flex items-center gap-3 text-xs text-estate-400">
-              <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-md border border-navy-border text-emerald-light">
+              <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-md border border-navy-border text-gold">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 Verified Listings
               </span>
               <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-md border border-navy-border text-estate-300">
-                <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
+                <MessageSquare className="w-3.5 h-3.5 text-gold-light" />
                 Verified Resident Voices
               </span>
             </div>
@@ -37,27 +37,27 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-estate-300">
               <li>
-                <Link to="/neighbourhoods/lekki-phase-1" className="hover:text-emerald-light transition">
+                <Link to="/neighbourhoods/lekki-phase-1" className="hover:text-gold transition">
                   Lekki Phase 1, Lagos
                 </Link>
               </li>
               <li>
-                <Link to="/neighbourhoods/yaba" className="hover:text-emerald-light transition">
+                <Link to="/neighbourhoods/yaba" className="hover:text-gold transition">
                   Yaba Tech Corridor, Lagos
                 </Link>
               </li>
               <li>
-                <Link to="/neighbourhoods/ikeja-gra" className="hover:text-emerald-light transition">
+                <Link to="/neighbourhoods/ikeja-gra" className="hover:text-gold transition">
                   Ikeja GRA, Lagos
                 </Link>
               </li>
               <li>
-                <Link to="/neighbourhoods/maitama" className="hover:text-emerald-light transition">
+                <Link to="/neighbourhoods/maitama" className="hover:text-gold transition">
                   Maitama District, Abuja
                 </Link>
               </li>
               <li>
-                <Link to="/neighbourhoods/surulere" className="hover:text-emerald-light transition">
+                <Link to="/neighbourhoods/surulere" className="hover:text-gold transition">
                   Surulere, Lagos
                 </Link>
               </li>
@@ -71,27 +71,27 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-estate-300">
               <li>
-                <Link to="/community?category=SECURITY" className="hover:text-emerald-light transition">
+                <Link to="/community?category=SECURITY" className="hover:text-gold transition">
                   Security & Safety Pulse
                 </Link>
               </li>
               <li>
-                <Link to="/community?category=INFRASTRUCTURE" className="hover:text-emerald-light transition">
+                <Link to="/community?category=INFRASTRUCTURE" className="hover:text-gold transition">
                   Power & Water Reliability
                 </Link>
               </li>
               <li>
-                <Link to="/community?category=LIVING CONDITIONS" className="hover:text-emerald-light transition">
+                <Link to="/community?category=LIVING CONDITIONS" className="hover:text-gold transition">
                   Drainage & Flooding Data
                 </Link>
               </li>
               <li>
-                <Link to="/community?category=PROPERTY AND LANDLORD EXPERIENCES" className="hover:text-emerald-light transition">
+                <Link to="/community?category=PROPERTY AND LANDLORD EXPERIENCES" className="hover:text-gold transition">
                   Landlord & Lease Realities
                 </Link>
               </li>
               <li>
-                <Link to="/community" className="hover:text-emerald-light transition">
+                <Link to="/community" className="hover:text-gold transition">
                   Resident Q&A Forums
                 </Link>
               </li>
@@ -105,22 +105,22 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-estate-300">
               <li>
-                <Link to="/dashboard/buyer" className="hover:text-emerald-light transition">
+                <Link to="/dashboard/buyer" className="hover:text-gold transition">
                   Tenant & Buyer Portal
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/landlord" className="hover:text-emerald-light transition">
+                <Link to="/dashboard/landlord" className="hover:text-gold transition">
                   Landlord & Agent Suite
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard/moderation" className="hover:text-emerald-light transition">
+                <Link to="/dashboard/moderation" className="hover:text-gold transition">
                   Community Standards & Moderation
                 </Link>
               </li>
               <li>
-                <Link to="/auth?tab=register" className="hover:text-emerald-light transition">
+                <Link to="/auth?tab=register" className="hover:text-gold transition">
                   Join as Verified Agent
                 </Link>
               </li>

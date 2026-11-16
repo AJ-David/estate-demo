@@ -36,7 +36,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
 
   return (
     <div 
-      className={`group bg-white rounded-2xl overflow-hidden border border-estate-200/90 hover:border-emerald-300 hover:shadow-premium transition-all duration-300 flex ${
+      className={`group bg-white rounded-2xl overflow-hidden border border-estate-200/90 hover:border-gold/50 hover:shadow-gold transition-all duration-300 flex ${
         isListLayout ? 'flex-col md:flex-row' : 'flex-col'
       }`}
     >
@@ -79,8 +79,8 @@ export function PropertyCard({ property, layout = 'grid' }) {
         {/* Verification Strip */}
         <div className="absolute bottom-3 left-3 z-10">
           {property.verificationStatus && (
-            <div className="inline-flex items-center gap-1.5 bg-estate-950/80 backdrop-blur-xs text-white text-[11px] font-medium px-2.5 py-1 rounded-full border border-white/10">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-light" />
+            <div className="inline-flex items-center gap-1.5 bg-navy-deep/90 backdrop-blur-xs text-gold-light text-[11px] font-bold px-2.5 py-1 rounded-full border border-gold/30 shadow-xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-gold" />
               <span>{property.verificationStatus}</span>
             </div>
           )}
@@ -100,7 +100,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-bold text-estate-900 group-hover:text-emerald-dark transition-colors line-clamp-1 mb-1 font-display">
+          <h3 className="text-base font-bold text-estate-900 group-hover:text-gold-dark transition-colors line-clamp-1 mb-1 font-display">
             <Link to={`/properties/${property.id}`}>
               {property.title}
             </Link>
@@ -108,7 +108,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
 
           {/* Location */}
           <div className="flex items-center gap-1.5 text-xs text-estate-500 mb-4">
-            <MapPin className="w-3.5 h-3.5 text-emerald shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
             <span className="truncate">{property.location.neighbourhoodName}, {property.location.city}</span>
           </div>
 

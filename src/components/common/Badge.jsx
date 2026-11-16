@@ -11,14 +11,14 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
 
   const variantClasses = {
     default: 'bg-estate-100 text-estate-800 border border-estate-200',
-    primary: 'bg-navy text-white shadow-sm',
-    emerald: 'bg-emerald-50 text-emerald-800 border border-emerald-200',
-    verified: 'bg-emerald-600 text-white shadow-xs',
-    rent: 'bg-blue-50 text-blue-700 border border-blue-200',
-    sale: 'bg-purple-50 text-purple-700 border border-purple-200',
-    shortlet: 'bg-amber-50 text-amber-800 border border-amber-200',
-    warning: 'bg-amber-100 text-amber-800 border border-amber-200',
-    danger: 'bg-rose-50 text-rose-700 border border-rose-200',
+    primary: 'bg-navy text-gold border border-navy-border shadow-sm',
+    emerald: 'bg-gold-50 text-gold-900 border border-gold-200 font-semibold',
+    verified: 'bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black shadow-gold',
+    rent: 'bg-navy-card text-gold-light border border-gold/30 font-semibold',
+    sale: 'bg-gold-50 text-gold-900 border border-gold/40 font-bold',
+    shortlet: 'bg-estate-100 text-estate-800 border border-estate-200 font-semibold',
+    warning: 'bg-amber-50 text-amber-900 border border-amber-200',
+    danger: 'bg-crimson-soft text-crimson border border-crimson-border font-semibold',
   }[variant] || 'bg-estate-100 text-estate-800';
 
   return (
@@ -27,4 +27,3 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
     </span>
   );
 }
-
