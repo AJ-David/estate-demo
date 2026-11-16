@@ -120,14 +120,14 @@ export function PropertyReviewModal({ isOpen, onClose, property, onReviewSubmitt
           )}
 
           {/* Overall score indicator */}
-          <div className="p-4 bg-sand-50 rounded-2xl border border-sand-200 flex items-center justify-between">
+          <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border flex items-center justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-estate-500 block">Computed Overall Score</span>
-              <span className="text-xs text-estate-600">Average of 4 criteria below</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-gold-light block">Computed Overall Score</span>
+              <span className="text-xs text-slate-300">Average of 4 criteria below</span>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-black text-emerald font-display">{calculateOverall()}</span>
-              <span className="text-xs text-estate-400"> / 5.0</span>
+              <span className="text-2xl font-black text-gold font-display">{calculateOverall()}</span>
+              <span className="text-xs text-slate-400"> / 5.0</span>
             </div>
           </div>
 

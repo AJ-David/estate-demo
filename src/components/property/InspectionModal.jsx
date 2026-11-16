@@ -91,7 +91,7 @@ export function InspectionModal({ isOpen, onClose, property }) {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Security Gate Notice */}
-          <div className="p-3 bg-navy-surface border border-gold/30 rounded-xl flex items-start gap-2.5 text-xs text-estate-200">
+          <div className="p-3 bg-navy-surface border border-gold/30 rounded-xl flex items-start gap-2.5 text-xs text-slate-200">
             <ShieldCheck className="w-4 h-4 text-gold shrink-0 mt-0.5" />
             <span>
               For occupant privacy and estate security, exact street gate codes are verified and dispatched once the agent confirms this appointment.
@@ -105,27 +105,27 @@ export function InspectionModal({ isOpen, onClose, property }) {
                 Suggested Date *
               </label>
               <div className="relative">
-                <Calendar className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Calendar className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="date"
                   required
                   value={preferredDate}
                   onChange={(e) => setPreferredDate(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+                  className="w-full pl-9 pr-3 py-2 border border-navy-border rounded-lg text-xs bg-navy-surface text-white focus:ring-1 focus:ring-gold outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-white mb-1">
                 Preferred Time Slot *
               </label>
               <div className="relative">
-                <Clock className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Clock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <select
                   value={preferredTime}
                   onChange={(e) => setPreferredTime(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none bg-white"
+                  className="w-full pl-9 pr-3 py-2 border border-navy-border rounded-lg text-xs focus:ring-1 focus:ring-gold outline-none bg-navy-surface text-white"
                 >
                   <option value="10:00 AM">Morning (10:00 AM)</option>
                   <option value="11:30 AM">Late Morning (11:30 AM)</option>
@@ -139,7 +139,7 @@ export function InspectionModal({ isOpen, onClose, property }) {
           {/* Contact Details */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-white mb-1">
                 Your Full Name *
               </label>
               <input
@@ -148,12 +148,12 @@ export function InspectionModal({ isOpen, onClose, property }) {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="e.g. Tunde Adeleke"
-                className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-lg text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-white mb-1">
                 Mobile Phone (WhatsApp Active) *
               </label>
               <input
@@ -162,13 +162,13 @@ export function InspectionModal({ isOpen, onClose, property }) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+234 800 000 0000"
-                className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-lg text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Email Address *
             </label>
             <input
@@ -177,12 +177,12 @@ export function InspectionModal({ isOpen, onClose, property }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@domain.com"
-              className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-lg text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Inspection Notes / Specific Queries
             </label>
             <textarea
@@ -190,7 +190,7 @@ export function InspectionModal({ isOpen, onClose, property }) {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="E.g. I will be coming with my spouse; would love to inspect water pressure and inverter switch..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-lg text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
             />
           </div>
 
@@ -198,7 +198,7 @@ export function InspectionModal({ isOpen, onClose, property }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-slate-300 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>

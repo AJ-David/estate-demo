@@ -89,16 +89,16 @@ export function NeighbourhoodMetricsBar({ metrics, showSummaries = true }) {
 
             {/* Qualitative honest summary */}
             {showSummaries && data.summary && (
-              <p className="text-xs text-estate-600 leading-relaxed bg-white/70 p-2.5 rounded-lg border border-sand-200/50">
-                <strong className="text-estate-700">Resident Consensus:</strong> {data.summary}
+              <p className="text-xs text-slate-300 leading-relaxed bg-navy-card p-2.5 rounded-lg border border-navy-border">
+                <strong className="text-gold">Resident Consensus:</strong> {data.summary}
               </p>
             )}
           </div>
         );
       })}
 
-      <div className="flex items-start gap-2 p-3 bg-estate-100/70 rounded-xl text-[11px] text-estate-500">
-        <Info className="w-4 h-4 text-estate-400 shrink-0 mt-0.5" />
+      <div className="flex items-start gap-2 p-3 bg-navy-card rounded-xl text-[11px] text-slate-300 border border-navy-border">
+        <Info className="w-4 h-4 text-gold shrink-0 mt-0.5" />
         <span>
           These indicators are calculated directly from verified resident questionnaires, crowd-sourced infrastructure reports, and physical inspections.
         </span>

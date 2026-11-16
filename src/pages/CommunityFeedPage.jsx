@@ -92,7 +92,7 @@ export function CommunityFeedPage() {
           <h1 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">
             Neighbourhood Community Discussions
           </h1>
-          <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
             Unfiltered, ground-truth discussions about living conditions, power reliability, drainage, security vigilance, and landlord realities across Nigerian urban estates.
           </p>
         </div>
@@ -134,13 +134,13 @@ export function CommunityFeedPage() {
       </div>
 
       {/* Safety Policy & Anti-Defamation Banner */}
-      <div className="bg-navy-card rounded-3xl p-4 sm:p-5 border border-navy-border shadow-premium flex flex-col sm:flex-row items-start gap-3.5 text-xs text-estate-300">
+      <div className="bg-navy-card rounded-3xl p-4 sm:p-5 border border-navy-border shadow-premium flex flex-col sm:flex-row items-start gap-3.5 text-xs text-slate-300">
         <ShieldCheck className="w-5 h-5 text-gold shrink-0 mt-0.5" />
         <div className="space-y-1">
           <span className="font-bold text-white text-sm block">
             Community Integrity & Resident Protection Guidelines
           </span>
-          <p className="leading-relaxed text-estate-400 text-[11px]">
+          <p className="leading-relaxed text-slate-300 text-[11px]">
             To ensure genuine transparency without enabling harassment or defamation, posts naming private individuals, disclosing exact private gate numbers, or leaking phone numbers are strictly prohibited. Security observations represent contributor experiences and do not legally certify a neighbourhood as unsafe.
           </p>
         </div>
@@ -156,7 +156,7 @@ export function CommunityFeedPage() {
             className={`px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-1.5 ${
               selectedCategory === cat.id
                 ? 'bg-gold text-navy-deep font-black shadow-gold'
-                : 'bg-navy-surface text-estate-300 hover:bg-navy-border border border-navy-border'
+                : 'bg-navy-surface text-slate-300 hover:bg-navy-border border border-navy-border hover:text-white'
             }`}
           >
             <span>{cat.label}</span>
@@ -165,16 +165,16 @@ export function CommunityFeedPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-3xl border border-estate-200 p-4 shadow-subtle flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="bg-navy-card rounded-3xl border border-navy-border p-4 shadow-premium flex flex-col md:flex-row gap-4 items-center justify-between">
         
         {/* Neighbourhood Dropdown */}
         <div className="flex items-center gap-2 w-full md:w-auto">
-          <MapPin className="w-4 h-4 text-emerald shrink-0" />
-          <span className="text-xs text-estate-500 font-semibold">Location:</span>
+          <MapPin className="w-4 h-4 text-gold shrink-0" />
+          <span className="text-xs text-gold-light font-bold">Location:</span>
           <select
             value={selectedNeighbourhood}
             onChange={(e) => setSelectedNeighbourhood(e.target.value)}
-            className="py-1.5 px-3 rounded-xl border border-estate-200 text-xs font-semibold text-estate-800 bg-sand-50/60 focus:ring-1 focus:ring-emerald outline-none"
+            className="py-1.5 px-3 rounded-xl border border-navy-border text-xs font-semibold text-white bg-navy-surface focus:ring-1 focus:ring-gold outline-none"
           >
             <option value="ALL">All Neighbourhoods</option>
             {DEMO_NEIGHBOURHOODS.map(n => (
@@ -185,25 +185,25 @@ export function CommunityFeedPage() {
 
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search discussions, topics, tags..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none bg-sand-50/50"
+            className="w-full pl-9 pr-3 py-2 border border-navy-border rounded-xl text-xs text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none bg-navy-surface"
           />
         </div>
 
         {/* Sort */}
         <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-          <span className="text-xs text-estate-400 font-semibold">Sort:</span>
+          <span className="text-xs text-slate-300 font-semibold">Sort:</span>
           <div className="flex items-center p-1 bg-navy-surface rounded-xl border border-navy-border">
             <button
               type="button"
               onClick={() => setSortBy('newest')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'newest' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
+                sortBy === 'newest' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-slate-300 hover:text-white'
               }`}
             >
               Newest
@@ -212,7 +212,7 @@ export function CommunityFeedPage() {
               type="button"
               onClick={() => setSortBy('helpful')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'helpful' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
+                sortBy === 'helpful' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-slate-300 hover:text-white'
               }`}
             >
               Most Helpful
@@ -221,7 +221,7 @@ export function CommunityFeedPage() {
               type="button"
               onClick={() => setSortBy('trending')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'trending' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
+                sortBy === 'trending' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-slate-300 hover:text-white'
               }`}
             >
               Trending
@@ -283,7 +283,7 @@ export function CommunityFeedPage() {
                 className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
                 <p className="font-bold text-white">#Drainage & Flood Clearance</p>
-                <p className="text-[11px] text-estate-400">Lekki Admiralty & Surulere updates</p>
+                <p className="text-[11px] text-slate-300">Lekki Admiralty & Surulere updates</p>
               </button>
               <button
                 type="button"
@@ -291,7 +291,7 @@ export function CommunityFeedPage() {
                 className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
                 <p className="font-bold text-white">#Solar Inverter Setup Costs</p>
-                <p className="text-[11px] text-estate-400">Managing 24/7 power in Yaba</p>
+                <p className="text-[11px] text-slate-300">Managing 24/7 power in Yaba</p>
               </button>
               <button
                 type="button"
@@ -299,7 +299,7 @@ export function CommunityFeedPage() {
                 className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
                 <p className="font-bold text-white">#Estate Gate Night Pass Protocols</p>
-                <p className="text-[11px] text-estate-400">Admiralty & Ikeja GRA vigilance</p>
+                <p className="text-[11px] text-slate-300">Admiralty & Ikeja GRA vigilance</p>
               </button>
               <button
                 type="button"
@@ -307,7 +307,7 @@ export function CommunityFeedPage() {
                 className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
                 <p className="font-bold text-white">#Service Charge Transparency</p>
-                <p className="text-[11px] text-estate-400">Diesel contribution audits</p>
+                <p className="text-[11px] text-slate-300">Diesel contribution audits</p>
               </button>
             </div>
           </div>
@@ -318,7 +318,7 @@ export function CommunityFeedPage() {
               <ShieldCheck className="w-4 h-4 text-gold" />
               Verified Resident Badge
             </span>
-            <p className="text-estate-300 leading-relaxed text-[11px]">
+            <p className="text-slate-300 leading-relaxed text-[11px]">
               Residents who verify their residential connection with utility receipts or landlord agreements earn a green badge on their posts. This builds genuine trust across the community.
             </p>
             <Link

@@ -286,7 +286,7 @@ export function PropertyDetailPage() {
           {/* Description */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-display">About This Property</h2>
-            <p className="text-sm sm:text-base text-estate-300 leading-relaxed whitespace-pre-line">
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed whitespace-pre-line">
               {property.description}
             </p>
           </section>
@@ -296,7 +296,7 @@ export function PropertyDetailPage() {
             <h2 className="text-xl font-bold text-white font-display">Features & Infrastructure</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {property.amenities?.map((amenity, i) => (
-                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-navy-card border border-navy-border shadow-xs text-xs font-semibold text-estate-200">
+                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-navy-card border border-navy-border shadow-xs text-xs font-semibold text-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />
                   <span>{amenity}</span>
                 </div>
@@ -319,9 +319,9 @@ export function PropertyDetailPage() {
 
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <span className="text-xs text-estate-400 block">Overall Score</span>
+                  <span className="text-xs text-slate-300 block">Overall Score</span>
                   <span className="text-2xl font-black text-gold font-display">
-                    {neighbourhood.livabilityScore}<span className="text-xs text-estate-400 font-normal">/10</span>
+                    {neighbourhood.livabilityScore}<span className="text-xs text-slate-400 font-normal">/10</span>
                   </span>
                 </div>
                 <Link
@@ -341,7 +341,7 @@ export function PropertyDetailPage() {
                   <Zap className="w-4 h-4 text-amber-400" />
                   <span>Power / Grid</span>
                 </div>
-                <p className="text-xs text-estate-300 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {neighbourhood.metrics?.electricity?.summary || '18-20 hrs grid + estate generator backup.'}
                 </p>
               </div>
@@ -351,7 +351,7 @@ export function PropertyDetailPage() {
                   <Droplet className="w-4 h-4 text-blue-400" />
                   <span>Water Table</span>
                 </div>
-                <p className="text-xs text-estate-300 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {neighbourhood.metrics?.water?.summary || 'Industrial water filtration standard.'}
                 </p>
               </div>
@@ -361,13 +361,13 @@ export function PropertyDetailPage() {
                   <CloudRain className="w-4 h-4 text-purple-400" />
                   <span>Drainage & Floods</span>
                 </div>
-                <p className="text-xs text-estate-300 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {neighbourhood.metrics?.roadsDrainage?.summary || 'Elevated street with underground drainage.'}
                 </p>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center justify-between text-xs text-estate-400 border-t border-navy-border">
+            <div className="pt-2 flex items-center justify-between text-xs text-slate-300 border-t border-navy-border">
               <span>Backed by <strong className="text-white">{neighbourhood.verifiedResidentsCount || 342} verified resident responses</strong>.</span>
               <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-gold font-bold hover:underline">
                 Ask a resident in the forum →
@@ -480,7 +480,7 @@ export function PropertyDetailPage() {
                       </div>
                     </div>
 
-                    <p className="text-estate-300 leading-relaxed">{rev.comment}</p>
+                    <p className="text-slate-200 leading-relaxed">{rev.comment}</p>
                   </div>
                 ))
               )}

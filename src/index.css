@@ -7,17 +7,20 @@
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #06070B;
-    color: #F1F5F9;
+    color: #CBD5E1;
   }
   body {
     background-color: #06070B !important;
-    color: #F1F5F9 !important;
+    color: #CBD5E1 !important;
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     letter-spacing: -0.02em;
     color: #FFFFFF !important;
+  }
+  p {
+    color: #CBD5E1;
   }
 }
 
@@ -37,32 +40,50 @@
 .text-slate-800,
 .text-neutral-900,
 .text-neutral-800,
+.text-zinc-900,
+.text-zinc-800,
 .text-black {
   color: #FFFFFF !important;
 }
 
-/* Secondary & Body Text -> Platinum & Ice Silver */
+/* High-Emphasis Text, Accents, Key Labels -> Brilliant Ice Silver */
 .text-estate-700,
 .text-estate-600,
+.text-estate-200,
+.text-estate-100,
 .text-gray-700,
 .text-gray-600,
+.text-gray-200,
+.text-gray-100,
 .text-slate-700,
 .text-slate-600,
+.text-slate-200,
+.text-slate-100,
 .text-neutral-700,
-.text-neutral-600 {
+.text-neutral-600,
+.text-neutral-200,
+.text-neutral-100 {
   color: #E2E8F0 !important;
 }
 
-/* Tertiary / Metadata Text -> Cool Muted Slate (Never Dark Grey!) */
+/* Body Text, Subtitles, Descriptions, Metadata & Paragraphs -> Crisp Light Platinum (Never Dark Blue/Gray) */
 .text-estate-500,
 .text-estate-400,
+.text-estate-300,
+.text-estate-50,
 .text-gray-500,
 .text-gray-400,
+.text-gray-300,
+.text-gray-50,
 .text-slate-500,
 .text-slate-400,
+.text-slate-300,
+.text-slate-50,
 .text-neutral-500,
-.text-neutral-400 {
-  color: #94A3B8 !important;
+.text-neutral-400,
+.text-neutral-300,
+.text-neutral-50 {
+  color: #CBD5E1 !important;
 }
 
 /* Colored Accents High Contrast on Dark */

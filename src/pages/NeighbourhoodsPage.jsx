@@ -47,7 +47,7 @@ export function NeighbourhoodsPage() {
         <h1 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">
           Nigeria's Neighbourhood Directory
         </h1>
-        <p className="text-xs sm:text-sm text-estate-400 leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
           Detailed infrastructure diagnostics, crowd-sourced safety ratings, power stability metrics and resident discussions across key urban districts in Lagos and Abuja.
         </p>
       </div>
@@ -65,7 +65,7 @@ export function NeighbourhoodsPage() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap ${
                 selectedCity === city
                   ? 'bg-gold text-navy-deep font-black shadow-gold'
-                  : 'text-estate-400 hover:text-white'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               {city === 'All' ? 'All Cities' : `${city}`}

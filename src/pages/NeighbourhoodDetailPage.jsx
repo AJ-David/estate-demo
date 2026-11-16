@@ -119,7 +119,7 @@ export function NeighbourhoodDetailPage() {
     <div className="space-y-8 pb-16">
       
       {/* Hero Header */}
-      <section className="relative bg-navy text-white pt-10 pb-16 overflow-hidden border-b border-estate-800">
+      <section className="relative bg-navy-deep text-white pt-10 pb-16 overflow-hidden border-b border-navy-border">
         {/* Background Image overlay */}
         <div className="absolute inset-0 opacity-20">
           <img
@@ -128,23 +128,23 @@ export function NeighbourhoodDetailPage() {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/85 to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
           
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-estate-400">
-            <Link to="/" className="hover:text-white transition">Home</Link>
+          <div className="flex items-center gap-2 text-xs text-slate-300">
+            <Link to="/" className="hover:text-gold transition">Home</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link to="/neighbourhoods" className="hover:text-white transition">Neighbourhoods</Link>
+            <Link to="/neighbourhoods" className="hover:text-gold transition">Neighbourhoods</Link>
             <ChevronRight className="w-3.5 h-3.5" />
             <span className="text-white font-bold">{neighbourhood.name}</span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="space-y-3 max-w-3xl">
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald">
-                <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-semibold text-gold">
+                <MapPin className="w-4 h-4 text-gold" />
                 <span>{neighbourhood.city}, {neighbourhood.state}, {neighbourhood.country}</span>
               </div>
 
@@ -152,43 +152,43 @@ export function NeighbourhoodDetailPage() {
                 {neighbourhood.name}
               </h1>
 
-              <p className="text-sm sm:text-base text-estate-300 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl">
                 {neighbourhood.description}
               </p>
             </div>
 
             {/* Livability score pill */}
-            <div className="bg-estate-900/90 backdrop-blur-md p-5 rounded-3xl border border-estate-700 text-center shrink-0 shadow-lg">
-              <span className="text-xs uppercase tracking-wider font-bold text-estate-400 block mb-1">
+            <div className="bg-navy-card/90 backdrop-blur-md p-5 rounded-3xl border border-gold/40 text-center shrink-0 shadow-gold">
+              <span className="text-xs uppercase tracking-wider font-bold text-slate-300 block mb-1">
                 Livability Rating
               </span>
-              <p className="text-4xl font-black text-emerald font-display">
+              <p className="text-4xl font-black text-gold font-display">
                 {neighbourhood.livabilityScore}
-                <span className="text-base text-estate-400 font-normal">/10</span>
+                <span className="text-base text-slate-300 font-normal">/10</span>
               </p>
-              <div className="mt-2 text-[11px] text-estate-300">
+              <div className="mt-2 text-[11px] text-slate-300">
                 <span>{neighbourhood.verifiedResidentsCount || 240} Verified Contributors</span>
               </div>
             </div>
           </div>
 
           {/* Quick Metrics Bar on Hero */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-estate-800 text-xs">
-            <div className="bg-estate-900/60 p-3 rounded-2xl border border-estate-800">
-              <span className="text-estate-400 block text-[11px]">Avg 3-Bed Rent</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-navy-border text-xs">
+            <div className="bg-navy-surface p-3 rounded-2xl border border-navy-border">
+              <span className="text-slate-300 block text-[11px]">Avg 3-Bed Rent</span>
               <p className="font-bold text-white text-sm mt-0.5">{neighbourhood.avgRent3Bed || '₦7,500,000 / yr'}</p>
             </div>
-            <div className="bg-estate-900/60 p-3 rounded-2xl border border-estate-800">
-              <span className="text-estate-400 block text-[11px]">Avg 4-Bed Sale</span>
+            <div className="bg-navy-surface p-3 rounded-2xl border border-navy-border">
+              <span className="text-slate-300 block text-[11px]">Avg 4-Bed Sale</span>
               <p className="font-bold text-white text-sm mt-0.5">{neighbourhood.avgSale4Bed || '₦220,000,000'}</p>
             </div>
-            <div className="bg-estate-900/60 p-3 rounded-2xl border border-estate-800">
-              <span className="text-estate-400 block text-[11px]">Active Listings</span>
+            <div className="bg-navy-surface p-3 rounded-2xl border border-navy-border">
+              <span className="text-slate-300 block text-[11px]">Active Listings</span>
               <p className="font-bold text-white text-sm mt-0.5">{activeProperties.length} Available</p>
             </div>
-            <div className="bg-estate-900/60 p-3 rounded-2xl border border-estate-800">
-              <span className="text-estate-400 block text-[11px]">Security Assessment</span>
-              <p className="font-bold text-emerald text-sm mt-0.5">
+            <div className="bg-navy-surface p-3 rounded-2xl border border-navy-border">
+              <span className="text-slate-300 block text-[11px]">Security Assessment</span>
+              <p className="font-bold text-gold text-sm mt-0.5">
                 {neighbourhood.metrics?.security?.rating || 'Gated Street Patrol'}
               </p>
             </div>

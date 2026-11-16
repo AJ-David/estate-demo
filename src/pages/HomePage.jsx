@@ -66,7 +66,7 @@ export function HomePage() {
             </h1>
 
             {/* Supporting Text */}
-            <p className="text-base sm:text-lg text-estate-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
               Discover verified properties, explore real living conditions, and hear vetted resident experiences before signing your lease.
             </p>
 
@@ -88,7 +88,7 @@ export function HomePage() {
                       className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition ${
                         transactionType === tab.value
                           ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep shadow-gold'
-                          : 'text-estate-300 hover:text-gold hover:bg-navy-surface'
+                          : 'text-slate-300 hover:text-gold hover:bg-navy-surface'
                       }`}
                     >
                       {tab.label}
@@ -181,7 +181,7 @@ export function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-black text-white font-display">
               Featured Verified Properties
             </h2>
-            <p className="text-xs sm:text-sm text-estate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-300 mt-1">
               Every home includes verified inspections and verified neighbourhood livability metrics.
             </p>
           </div>
@@ -212,7 +212,7 @@ export function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-black text-white font-display">
               Explore Key Communities
             </h2>
-            <p className="text-xs sm:text-sm text-estate-400 mt-1">
+            <p className="text-xs sm:text-sm text-slate-300 mt-1">
               Understand power uptime, water quality, safety, and flood vulnerability before signing a lease.
             </p>
           </div>
@@ -242,7 +242,7 @@ export function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-black text-white font-display mt-1">
               How VettedHomes Works
             </h2>
-            <p className="text-xs sm:text-sm text-estate-300 mt-2">
+            <p className="text-xs sm:text-sm text-slate-300 mt-2">
               A transparent, community-grounded journey designed to eliminate blind leasing and property regrets.
             </p>
           </div>
@@ -256,7 +256,7 @@ export function HomePage() {
               <h3 className="text-lg font-bold text-white font-display mb-2">
                 Discover Verified Homes
               </h3>
-              <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Filter across verified houses, duplexes, serviced apartments, and short-lets with authentic photos and transparent pricing.
               </p>
             </div>
@@ -272,7 +272,7 @@ export function HomePage() {
               <h3 className="text-lg font-bold text-white font-display mb-2">
                 Know The Real Neighbourhood
               </h3>
-              <p className="text-xs sm:text-sm text-estate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                 Read crowd-sourced resident data on power uptime, road conditions, drainage flood risks, and gated security protocols.
               </p>
             </div>
@@ -285,7 +285,7 @@ export function HomePage() {
               <h3 className="text-lg font-bold text-white font-display mb-2">
                 Schedule Safe Inspections
               </h3>
-              <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Connect directly with certified agents or landlords. Book physical inspections with verified estate security gate passes.
               </p>
             </div>
@@ -312,7 +312,7 @@ export function HomePage() {
                 Zero Sales Fluff.
               </h2>
 
-              <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                 Ask questions before you sign. Compare internet latency, transformer stability, flood resilience, and landlord responsiveness from people living there.
               </p>
 
@@ -325,7 +325,7 @@ export function HomePage() {
                 </Link>
                 <Link
                   to="/neighbourhoods"
-                  className="px-5 py-2.5 bg-navy-surface hover:bg-navy-surface/80 border border-navy-border text-estate-200 hover:text-gold text-xs sm:text-sm font-semibold rounded-xl transition text-center"
+                  className="px-5 py-2.5 bg-navy-surface hover:bg-navy-surface/80 border border-navy-border text-slate-200 hover:text-gold text-xs sm:text-sm font-semibold rounded-xl transition text-center"
                 >
                   Browse Locations
                 </Link>
@@ -341,10 +341,10 @@ export function HomePage() {
                       <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                       {post.author.name} ({post.author.badge})
                     </span>
-                    <span className="text-estate-400 text-[11px]">{post.createdAt}</span>
+                    <span className="text-slate-400 text-[11px]">{post.createdAt}</span>
                   </div>
                   <h4 className="text-sm font-bold text-white font-display mb-1">{post.title}</h4>
-                  <p className="text-xs text-estate-300 line-clamp-2 leading-relaxed">{post.content}</p>
+                  <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">{post.content}</p>
                 </div>
               ))}
             </div>
@@ -363,7 +363,7 @@ export function HomePage() {
           <h2 className="text-2xl sm:text-3xl font-black text-white font-display mt-1">
             Why VettedHomes is Different
           </h2>
-          <p className="text-xs sm:text-sm text-estate-300 mt-2">
+          <p className="text-xs sm:text-sm text-slate-300 mt-2">
             Generic portals display photos. VettedHomes shows you the living reality of the neighbourhood.
           </p>
         </div>
@@ -374,7 +374,7 @@ export function HomePage() {
               <Zap className="w-5 h-5 text-gold" />
             </div>
             <h4 className="text-sm font-bold text-white font-display">Power & Grid Tracking</h4>
-            <p className="text-xs text-estate-300 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Track actual public grid availability hours and generator requirements per street.
             </p>
           </div>
@@ -384,7 +384,7 @@ export function HomePage() {
               <CloudRain className="w-5 h-5" />
             </div>
             <h4 className="text-sm font-bold text-white font-display">Flood History & Drainage</h4>
-            <p className="text-xs text-estate-300 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Identify streets with elevated drainage canals versus low-lying pooling zones.
             </p>
           </div>
@@ -394,7 +394,7 @@ export function HomePage() {
               <ShieldCheck className="w-5 h-5" />
             </div>
             <h4 className="text-sm font-bold text-white font-display">Resident-Verified Intel</h4>
-            <p className="text-xs text-estate-300 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Discussions are tagged by verified resident status to filter out marketing fluff.
             </p>
           </div>
@@ -404,7 +404,7 @@ export function HomePage() {
               <CheckCircle2 className="w-5 h-5 text-gold" />
             </div>
             <h4 className="text-sm font-bold text-white font-display">Privacy & Safe Inspections</h4>
-            <p className="text-xs text-estate-300 leading-relaxed">
+            <p className="text-xs text-slate-300 leading-relaxed">
               Occupant privacy protected with approximate maps; gate codes issued upon confirmed bookings.
             </p>
           </div>
@@ -421,7 +421,7 @@ export function HomePage() {
             <h3 className="text-2xl sm:text-3xl font-black text-white font-display">
               List Your Properties on Nigeria's Most Trusted Portal
             </h3>
-            <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Reach qualified tenants and buyers who appreciate quality homes in great neighbourhoods. Benefit from verified agent badges and streamlined inspection scheduling.
             </p>
           </div>

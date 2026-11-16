@@ -71,18 +71,18 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Safety standards callout */}
-        <div className="bg-navy-surface p-3.5 rounded-2xl border border-navy-border text-xs text-estate-300 space-y-1">
+        <div className="bg-navy-surface p-3.5 rounded-2xl border border-navy-border text-xs text-slate-200 space-y-1">
           <div className="flex items-center gap-1.5 font-bold text-white">
             <ShieldCheck className="w-4 h-4 text-gold" />
             <span>Community Safety & Anti-Doxxing Protocol</span>
           </div>
-          <p className="text-[11px] text-estate-400 leading-relaxed">
+          <p className="text-[11px] text-slate-300 leading-relaxed">
             VettedHomes prohibits public accusations naming private individuals, exact gate/house numbers, or publishing phone numbers. Focus on general infrastructure, road conditions, power reliability, and helpful neighborhood context.
           </p>
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2 text-xs text-rose-700 animate-fadeIn">
+          <div className="p-3 bg-rose-950/40 border border-rose-500/30 rounded-xl flex items-center gap-2 text-xs text-rose-300 animate-fadeIn">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -91,13 +91,13 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
         {/* Neighbourhood & Category Selectors */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Neighbourhood *
             </label>
             <select
               value={neighbourhoodId}
               onChange={(e) => setNeighbourhoodId(e.target.value)}
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs bg-navy-surface text-white focus:ring-1 focus:ring-gold outline-none"
             >
               {DEMO_NEIGHBOURHOODS.map(n => (
                 <option key={n.id} value={n.id}>{n.name} ({n.city})</option>
@@ -106,13 +106,13 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Discussion Category *
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs bg-navy-surface text-white focus:ring-1 focus:ring-gold outline-none"
             >
               <option value="INFRASTRUCTURE">Power & Infrastructure (Electricity, Water, Roads)</option>
               <option value="SECURITY">Security & Safety Observation</option>
@@ -125,7 +125,7 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
 
         {/* Title */}
         <div>
-          <label className="block text-xs font-bold text-estate-800 mb-1">
+          <label className="block text-xs font-bold text-white mb-1">
             Discussion Headline *
           </label>
           <input
@@ -134,13 +134,13 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="E.g. Road drainage status after heavy rain; or 6-month fiber stability review..."
-            className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+            className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
           />
         </div>
 
         {/* Content */}
         <div>
-          <label className="block text-xs font-bold text-estate-800 mb-1">
+          <label className="block text-xs font-bold text-white mb-1">
             Your Detailed Experience or Question *
           </label>
           <textarea
@@ -149,13 +149,13 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Share factual insights, timeline, streets involved (e.g. Admiralty corridor, Commercial Ave), and practical advice for other residents..."
-            className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+            className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
           />
         </div>
 
         {/* Tags */}
         <div>
-          <label className="block text-xs font-bold text-estate-800 mb-1">
+          <label className="block text-xs font-bold text-white mb-1">
             Tags (comma separated)
           </label>
           <input
@@ -163,13 +163,13 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
             value={tags}
             onChange={(e) => setTags(e.target.value)}
             placeholder="e.g. Electricity, Inverter, Drainage, Security"
-            className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+            className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
           />
         </div>
 
         {/* Checkbox standards */}
         <div className="space-y-2 pt-2 border-t border-navy-border">
-          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-300">
+          <label className="flex items-start gap-2 cursor-pointer text-xs text-slate-300">
             <input
               type="checkbox"
               checked={isVerifiedResident}
@@ -179,7 +179,7 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
             <span>I currently reside or have previously lived in this neighbourhood.</span>
           </label>
 
-          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-300">
+          <label className="flex items-start gap-2 cursor-pointer text-xs text-slate-300">
             <input
               type="checkbox"
               required
@@ -198,7 +198,7 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
+            className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-slate-300 hover:bg-navy-surface hover:text-white"
           >
             Cancel
           </button>

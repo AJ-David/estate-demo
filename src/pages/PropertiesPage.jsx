@@ -61,7 +61,7 @@ export function PropertiesPage() {
         <h1 className="text-2xl sm:text-3xl font-black text-white font-display">
           Properties in Nigeria
         </h1>
-        <p className="text-xs sm:text-sm text-estate-400 mt-1">
+        <p className="text-xs sm:text-sm text-slate-300 mt-1">
           Explore verified homes paired with neighbourhood power, safety and drainage insights.
         </p>
       </div>
@@ -80,7 +80,7 @@ export function PropertiesPage() {
       {loading ? (
         <div className="py-20 text-center space-y-3">
           <div className="w-10 h-10 border-4 border-navy-border border-t-gold rounded-full animate-spin mx-auto"></div>
-          <p className="text-xs font-semibold text-estate-400">Scanning verified properties & neighbourhood intel...</p>
+          <p className="text-xs font-semibold text-slate-300">Scanning verified properties & neighbourhood intel...</p>
         </div>
       ) : viewMode === 'map' ? (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
