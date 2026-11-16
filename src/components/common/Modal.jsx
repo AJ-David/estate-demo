@@ -22,23 +22,23 @@ export function Modal({ isOpen, onClose, title, subtitle, children, maxWidth = '
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-estate-950/60 backdrop-blur-sm transition-opacity" 
+        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity" 
         onClick={onClose} 
       />
 
       {/* Modal Dialog */}
       <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-        <div className={`relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-estate-100`}>
+        <div className={`relative transform overflow-hidden rounded-3xl bg-navy-card text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-navy-border`}>
           {/* Header */}
-          <div className="flex items-start justify-between border-b border-estate-100 px-6 py-5 bg-sand-50">
+          <div className="flex items-start justify-between border-b border-navy-border px-6 py-5 bg-navy-surface">
             <div>
-              <h3 className="text-lg font-bold text-estate-900 font-display">{title}</h3>
-              {subtitle && <p className="text-xs text-estate-500 mt-0.5">{subtitle}</p>}
+              <h3 className="text-lg font-black text-white font-display tracking-tight">{title}</h3>
+              {subtitle && <p className="text-xs text-estate-400 mt-0.5">{subtitle}</p>}
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg p-1.5 text-estate-400 hover:bg-estate-100 hover:text-estate-700 transition"
+              className="rounded-xl p-2 text-estate-400 hover:bg-navy-border hover:text-white transition"
               aria-label="Close"
             >
               <X className="h-5 w-5" />
@@ -46,7 +46,7 @@ export function Modal({ isOpen, onClose, title, subtitle, children, maxWidth = '
           </div>
 
           {/* Content */}
-          <div className="px-6 py-5">
+          <div className="px-6 py-5 text-estate-100">
             {children}
           </div>
         </div>

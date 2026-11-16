@@ -53,37 +53,37 @@ export function InspectionModal({ isOpen, onClose, property }) {
     >
       {submitted ? (
         <div className="text-center py-6 space-y-4">
-          <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto shadow-inner">
+          <div className="w-16 h-16 bg-emerald-950/70 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 className="w-9 h-9" />
           </div>
           <div>
-            <h4 className="text-xl font-bold text-navy font-display">Inspection Request Confirmed!</h4>
-            <p className="text-sm text-estate-600 mt-1 max-w-sm mx-auto">
-              The listing agent/host <strong className="text-navy">{property.agent?.name}</strong> has received your appointment request.
+            <h4 className="text-xl font-black text-white font-display">Inspection Request Confirmed!</h4>
+            <p className="text-sm text-estate-300 mt-1 max-w-sm mx-auto">
+              The listing agent/host <strong className="text-gold">{property.agent?.name}</strong> has received your appointment request.
             </p>
           </div>
 
-          <div className="bg-sand-100 rounded-xl p-4 text-left border border-sand-200 max-w-sm mx-auto space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-estate-500">Estate Security Gate Pass:</span>
-              <span className="font-mono font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+          <div className="bg-navy-surface rounded-2xl p-4 text-left border border-gold/40 max-w-sm mx-auto space-y-2 text-xs">
+            <div className="flex justify-between items-center">
+              <span className="text-estate-400">Estate Security Gate Pass:</span>
+              <span className="font-mono font-bold text-gold bg-navy-card px-2 py-0.5 rounded border border-gold/40 text-sm">
                 {confirmationCode}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-estate-500">Scheduled Schedule:</span>
-              <span className="font-semibold text-estate-800">{preferredDate} at {preferredTime}</span>
+              <span className="text-estate-400">Scheduled Schedule:</span>
+              <span className="font-semibold text-white">{preferredDate} at {preferredTime}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-estate-500">Security Gate Protocol:</span>
-              <span className="font-semibold text-emerald-800">Pass code dispatched to WhatsApp</span>
+              <span className="text-estate-400">Security Gate Protocol:</span>
+              <span className="font-semibold text-emerald-400">Pass code dispatched to WhatsApp</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={handleReset}
-            className="w-full max-w-sm py-2.5 bg-navy text-white text-sm font-semibold rounded-xl hover:bg-estate-900 transition"
+            className="w-full max-w-sm py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-sm font-black rounded-xl transition shadow-gold tracking-wide"
           >
             Done
           </button>
@@ -91,8 +91,8 @@ export function InspectionModal({ isOpen, onClose, property }) {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Security Gate Notice */}
-          <div className="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl flex items-start gap-2.5 text-xs text-emerald-900">
-            <ShieldCheck className="w-4 h-4 text-emerald shrink-0 mt-0.5" />
+          <div className="p-3 bg-navy-surface border border-gold/30 rounded-xl flex items-start gap-2.5 text-xs text-estate-200">
+            <ShieldCheck className="w-4 h-4 text-gold shrink-0 mt-0.5" />
             <span>
               For occupant privacy and estate security, exact street gate codes are verified and dispatched once the agent confirms this appointment.
             </span>
@@ -101,7 +101,7 @@ export function InspectionModal({ isOpen, onClose, property }) {
           {/* Date & Time Picker */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-white mb-1">
                 Suggested Date *
               </label>
               <div className="relative">
@@ -194,18 +194,18 @@ export function InspectionModal({ isOpen, onClose, property }) {
             />
           </div>
 
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-estate-100">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-border">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-lg text-estate-700 hover:bg-estate-50"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2 bg-emerald text-white text-xs font-bold rounded-lg hover:bg-emerald-dark shadow-sm transition disabled:opacity-70"
+              className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition disabled:opacity-70 tracking-wide"
             >
               {loading ? 'Submitting Request...' : 'Confirm Inspection Request'}
             </button>

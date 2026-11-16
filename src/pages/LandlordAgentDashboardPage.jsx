@@ -307,33 +307,33 @@ export function LandlordAgentDashboardPage() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
-          <span className="text-xs text-estate-500">Active Listings</span>
-          <p className="text-2xl font-black text-navy font-display">{myListings.length}</p>
-          <p className="text-[11px] text-emerald-700 font-semibold">100% Verified status</p>
+        <div className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-1">
+          <span className="text-xs text-estate-400">Active Listings</span>
+          <p className="text-2xl font-black text-white font-display">{myListings.length}</p>
+          <p className="text-[11px] text-gold font-semibold">100% Verified status</p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
-          <span className="text-xs text-estate-500">Total Views This Week</span>
-          <p className="text-2xl font-black text-navy font-display">1,042</p>
-          <p className="text-[11px] text-emerald-700 font-semibold">↑ 18% vs last week</p>
+        <div className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-1">
+          <span className="text-xs text-estate-400">Total Views This Week</span>
+          <p className="text-2xl font-black text-white font-display">1,042</p>
+          <p className="text-[11px] text-emerald-400 font-semibold">↑ 18% vs last week</p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
-          <span className="text-xs text-estate-500">Client Conversations</span>
-          <p className="text-2xl font-black text-navy font-display">{conversations.length}</p>
-          <p className="text-[11px] text-amber-600 font-semibold">Live two-way messaging</p>
+        <div className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-1">
+          <span className="text-xs text-estate-400">Client Conversations</span>
+          <p className="text-2xl font-black text-white font-display">{conversations.length}</p>
+          <p className="text-[11px] text-amber-400 font-semibold">Live two-way messaging</p>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-1">
-          <span className="text-xs text-estate-500">Scheduled Inspections</span>
-          <p className="text-2xl font-black text-navy font-display">{inspections.length}</p>
-          <p className="text-[11px] text-emerald-700 font-semibold">Gate passes managed</p>
+        <div className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-1">
+          <span className="text-xs text-estate-400">Scheduled Inspections</span>
+          <p className="text-2xl font-black text-white font-display">{inspections.length}</p>
+          <p className="text-[11px] text-gold font-semibold">Gate passes managed</p>
         </div>
       </div>
 
       {/* Main Suite Tabs */}
-      <div className="flex items-center gap-2 border-b border-estate-200 pb-2 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-navy-border pb-3 overflow-x-auto">
         {[
           { id: 'portfolio', label: 'Property Portfolio', count: myListings.length, icon: Building2 },
           { id: 'inspections', label: 'Tours & Security Gate Passes', count: inspections.length, icon: Calendar },
@@ -348,15 +348,15 @@ export function LandlordAgentDashboardPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-navy text-white shadow-xs'
-                  : 'text-estate-600 hover:text-navy hover:bg-estate-100'
+                  ? 'bg-gold text-navy-deep font-black shadow-gold'
+                  : 'text-estate-400 hover:text-white hover:bg-navy-surface border border-transparent'
               }`}
             >
               <Icon className="w-4 h-4" />
               <span>{tab.label}</span>
               {tab.count !== null && (
-                <span className={`px-2 py-0.5 rounded-full text-[10px] ${
-                  activeTab === tab.id ? 'bg-emerald text-white' : 'bg-estate-200 text-estate-700'
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  activeTab === tab.id ? 'bg-navy-deep text-gold' : 'bg-navy-surface text-estate-300'
                 }`}>
                   {tab.count}
                 </span>
@@ -608,15 +608,15 @@ export function LandlordAgentDashboardPage() {
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
-                  <XAxis dataKey="day" stroke="#64748B" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#232938" />
+                  <XAxis dataKey="day" stroke="#94A3B8" fontSize={12} tickLine={false} />
+                  <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#0E1A2B', borderRadius: '12px', border: 'none', color: '#fff', fontSize: '12px' }}
-                    itemStyle={{ color: '#34D399' }}
+                    contentStyle={{ backgroundColor: '#12151F', borderRadius: '12px', border: '1px solid #D4AF37', color: '#fff', fontSize: '12px', boxShadow: '0 0 15px rgba(212, 175, 55, 0.25)' }}
+                    itemStyle={{ color: '#DFC37F' }}
                   />
-                  <Bar dataKey="views" name="Listing Views" fill="#0E1A2B" radius={[6, 6, 0, 0]} />
-                  <Bar dataKey="enquiries" name="Enquiries" fill="#059669" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="views" name="Listing Views" fill="#D4AF37" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="enquiries" name="Enquiries" fill="#10B981" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -624,22 +624,22 @@ export function LandlordAgentDashboardPage() {
 
           {/* Conversion Funnel */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
-              <span className="text-estate-500 block">Inquiry to Inspection Conversion</span>
-              <p className="text-2xl font-black text-navy font-display">33.3%</p>
-              <p className="text-emerald-700 font-semibold">Exceeds Lagos benchmark (22%)</p>
+            <div className="p-5 bg-navy-card rounded-3xl border border-navy-border shadow-premium space-y-1">
+              <span className="text-estate-400 block">Inquiry to Inspection Conversion</span>
+              <p className="text-2xl font-black text-white font-display">33.3%</p>
+              <p className="text-gold font-semibold">Exceeds Lagos benchmark (22%)</p>
             </div>
 
-            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
-              <span className="text-estate-500 block">Tour to Tenancy Deal Rate</span>
-              <p className="text-2xl font-black text-navy font-display">45.0%</p>
-              <p className="text-emerald-700 font-semibold">High interest in verified duplexes</p>
+            <div className="p-5 bg-navy-card rounded-3xl border border-navy-border shadow-premium space-y-1">
+              <span className="text-estate-400 block">Tour to Tenancy Deal Rate</span>
+              <p className="text-2xl font-black text-white font-display">45.0%</p>
+              <p className="text-emerald-400 font-semibold">High interest in verified duplexes</p>
             </div>
 
-            <div className="p-5 bg-white rounded-3xl border border-estate-200 shadow-subtle space-y-1">
-              <span className="text-estate-500 block">Average Days on Market</span>
-              <p className="text-2xl font-black text-navy font-display">14 Days</p>
-              <p className="text-emerald-700 font-semibold">2.4x faster than unverified platforms</p>
+            <div className="p-5 bg-navy-card rounded-3xl border border-navy-border shadow-premium space-y-1">
+              <span className="text-estate-400 block">Average Days on Market</span>
+              <p className="text-2xl font-black text-white font-display">14 Days</p>
+              <p className="text-gold font-semibold">2.4x faster than unverified platforms</p>
             </div>
           </div>
         </div>

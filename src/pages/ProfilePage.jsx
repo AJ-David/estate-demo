@@ -104,32 +104,32 @@ export function ProfilePage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       
       {/* Header Profile Card */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-estate-200 shadow-premium flex flex-col sm:flex-row items-center gap-6">
+      <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-navy-border shadow-premium flex flex-col sm:flex-row items-center gap-6">
         <div className="relative">
           <img
             src={avatar || user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
             alt={user?.name}
-            className="w-24 h-24 rounded-2xl object-cover ring-4 ring-emerald-100 shadow-md"
+            className="w-24 h-24 rounded-2xl object-cover ring-4 ring-gold/40 shadow-gold"
           />
           {user?.isVerified && (
-            <span className="absolute -bottom-1.5 -right-1.5 bg-emerald text-white p-1 rounded-full shadow-md" title="Verified Identity">
-              <ShieldCheck className="w-4 h-4" />
+            <span className="absolute -bottom-1.5 -right-1.5 bg-gold text-navy-deep p-1.5 rounded-full shadow-md" title="Verified Identity">
+              <ShieldCheck className="w-4 h-4 font-black" />
             </span>
           )}
         </div>
 
         <div className="space-y-1.5 text-center sm:text-left flex-1">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-            <h1 className="text-2xl font-bold text-navy font-display">{user?.name}</h1>
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase tracking-wider">
+            <h1 className="text-2xl font-black text-white font-display">{user?.name}</h1>
+            <span className="bg-navy-surface text-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-gold/40 uppercase tracking-wider">
               {activeRole.replace('_', ' ')}
             </span>
           </div>
-          <p className="text-xs text-estate-500">{user?.email}</p>
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-xs text-estate-600">
-            <span><strong>Active Roles:</strong> {user?.roles?.map(r => r.replace('_', ' ')).join(', ')}</span>
+          <p className="text-xs text-estate-400">{user?.email}</p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-xs text-estate-400">
+            <span><strong className="text-white">Active Roles:</strong> {user?.roles?.map(r => r.replace('_', ' ')).join(', ')}</span>
             <span>•</span>
-            <span className="text-emerald font-semibold">
+            <span className="text-gold font-semibold">
               {isConfigured ? 'Connected to Supabase' : 'Local Demo Storage Mode'}
             </span>
           </div>
@@ -137,7 +137,7 @@ export function ProfilePage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-estate-200 pb-2 overflow-x-auto text-xs sm:text-sm font-bold">
+      <div className="flex items-center gap-2 border-b border-navy-border pb-3 overflow-x-auto text-xs sm:text-sm font-bold">
         {[
           { id: 'details', label: 'Personal Information', icon: User },
           { id: 'roles', label: 'Multi-Role Settings', icon: Layers },
@@ -152,8 +152,8 @@ export function ProfilePage() {
               onClick={() => { setActiveTab(tab.id); setStatusMsg({ type: '', text: '' }); }}
               className={`px-4 py-2.5 rounded-xl transition flex items-center gap-2 whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-navy text-white shadow-xs'
-                  : 'text-estate-600 hover:text-navy hover:bg-estate-100'
+                  ? 'bg-gold text-navy-deep font-black shadow-gold'
+                  : 'text-estate-400 hover:text-white hover:bg-navy-surface border border-transparent'
               }`}
             >
               <Icon className="w-4 h-4" />

@@ -174,20 +174,20 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider mb-1">
               <Building2 className="w-4 h-4" />
-              <span>Curated Listings</span>
+              <span>Curated Sovereign Listings</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-navy font-display">
+            <h2 className="text-2xl sm:text-3xl font-black text-white font-display">
               Featured Verified Properties
             </h2>
-            <p className="text-xs sm:text-sm text-estate-500 mt-1">
+            <p className="text-xs sm:text-sm text-estate-400 mt-1">
               Every home includes verified inspections and verified neighbourhood livability metrics.
             </p>
           </div>
           <Link
             to="/properties"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-navy hover:text-emerald transition"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gold hover:text-gold-light transition"
           >
             <span>Browse All Properties</span>
             <ArrowRight className="w-4 h-4" />
@@ -205,20 +205,20 @@ export function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider mb-1">
               <Compass className="w-4 h-4" />
               <span>Neighbourhood Intelligence</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-navy font-display">
+            <h2 className="text-2xl sm:text-3xl font-black text-white font-display">
               Explore Key Communities
             </h2>
-            <p className="text-xs sm:text-sm text-estate-500 mt-1">
+            <p className="text-xs sm:text-sm text-estate-400 mt-1">
               Understand power uptime, water quality, safety, and flood vulnerability before signing a lease.
             </p>
           </div>
           <Link
             to="/neighbourhoods"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-navy hover:text-emerald transition"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gold hover:text-gold-light transition"
           >
             <span>View All Neighbourhoods</span>
             <ArrowRight className="w-4 h-4" />
@@ -233,59 +233,59 @@ export function HomePage() {
       </section>
 
       {/* 4. HOW VETTEDHOMES WORKS */}
-      <section id="how-it-works" className="bg-sand-100 py-16 sm:py-20 border-y border-estate-200/80">
+      <section id="how-it-works" className="bg-navy-deep py-16 sm:py-20 border-y border-navy-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold text-emerald uppercase tracking-wider">
+            <span className="text-xs font-bold text-gold uppercase tracking-wider">
               Smart Real Estate Decision Workflow
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-navy font-display mt-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-white font-display mt-1">
               How VettedHomes Works
             </h2>
-            <p className="text-xs sm:text-sm text-estate-600 mt-2">
+            <p className="text-xs sm:text-sm text-estate-300 mt-2">
               A transparent, community-grounded journey designed to eliminate blind leasing and property regrets.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-estate-200/80 shadow-subtle relative">
-              <span className="w-10 h-10 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-display mb-5 shadow-xs">
+            <div className="bg-navy-card rounded-2xl p-6 sm:p-8 border border-navy-border shadow-xl relative">
+              <span className="w-10 h-10 rounded-xl bg-navy-surface text-gold border border-navy-border font-black flex items-center justify-center font-display mb-5 shadow-xs">
                 01
               </span>
-              <h3 className="text-lg font-bold text-navy font-display mb-2">
+              <h3 className="text-lg font-bold text-white font-display mb-2">
                 Discover Verified Homes
               </h3>
-              <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
                 Filter across verified houses, duplexes, serviced apartments, and short-lets with authentic photos and transparent pricing.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gold/50 shadow-gold relative ring-1 ring-gold/20">
+            <div className="bg-navy-card rounded-2xl p-6 sm:p-8 border border-gold/50 shadow-gold relative ring-1 ring-gold/30">
               <div className="absolute -top-3 right-6 bg-gradient-to-r from-gold to-gold-dark text-navy-deep text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full shadow-xs">
                 Signature Feature
               </div>
               <span className="w-10 h-10 rounded-xl bg-gold text-navy-deep font-black flex items-center justify-center font-display mb-5 shadow-xs">
                 02
               </span>
-              <h3 className="text-lg font-bold text-navy font-display mb-2">
+              <h3 className="text-lg font-bold text-white font-display mb-2">
                 Know The Real Neighbourhood
               </h3>
-              <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-estate-200 leading-relaxed">
                 Read crowd-sourced resident data on power uptime, road conditions, drainage flood risks, and gated security protocols.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-estate-200/80 shadow-subtle relative">
-              <span className="w-10 h-10 rounded-xl bg-navy text-white font-bold flex items-center justify-center font-display mb-5 shadow-xs">
+            <div className="bg-navy-card rounded-2xl p-6 sm:p-8 border border-navy-border shadow-xl relative">
+              <span className="w-10 h-10 rounded-xl bg-navy-surface text-gold border border-navy-border font-black flex items-center justify-center font-display mb-5 shadow-xs">
                 03
               </span>
-              <h3 className="text-lg font-bold text-navy font-display mb-2">
+              <h3 className="text-lg font-bold text-white font-display mb-2">
                 Schedule Safe Inspections
               </h3>
-              <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
                 Connect directly with certified agents or landlords. Book physical inspections with verified estate security gate passes.
               </p>
             </div>
@@ -357,54 +357,54 @@ export function HomePage() {
       {/* 6. WHY CHOOSE VETTEDHOMES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold text-emerald uppercase tracking-wider">
+          <span className="text-xs font-bold text-gold uppercase tracking-wider">
             Built for Integrity
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-navy font-display mt-1">
+          <h2 className="text-2xl sm:text-3xl font-black text-white font-display mt-1">
             Why VettedHomes is Different
           </h2>
-          <p className="text-xs sm:text-sm text-estate-600 mt-2">
+          <p className="text-xs sm:text-sm text-estate-300 mt-2">
             Generic portals display photos. VettedHomes shows you the living reality of the neighbourhood.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-6 bg-white rounded-2xl border border-estate-200 shadow-subtle space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald flex items-center justify-center font-bold">
-              <Zap className="w-5 h-5" />
+          <div className="p-6 bg-navy-card rounded-2xl border border-navy-border shadow-xl space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center font-bold border border-gold/20">
+              <Zap className="w-5 h-5 text-gold" />
             </div>
-            <h4 className="text-sm font-bold text-navy font-display">Power & Grid Tracking</h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <h4 className="text-sm font-bold text-white font-display">Power & Grid Tracking</h4>
+            <p className="text-xs text-estate-300 leading-relaxed">
               Track actual public grid availability hours and generator requirements per street.
             </p>
           </div>
 
-          <div className="p-6 bg-white rounded-2xl border border-estate-200 shadow-subtle space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+          <div className="p-6 bg-navy-card rounded-2xl border border-navy-border shadow-xl space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-sky-950/60 text-sky-400 flex items-center justify-center font-bold border border-sky-800/40">
               <CloudRain className="w-5 h-5" />
             </div>
-            <h4 className="text-sm font-bold text-navy font-display">Flood History & Drainage</h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <h4 className="text-sm font-bold text-white font-display">Flood History & Drainage</h4>
+            <p className="text-xs text-estate-300 leading-relaxed">
               Identify streets with elevated drainage canals versus low-lying pooling zones.
             </p>
           </div>
 
-          <div className="p-6 bg-white rounded-2xl border border-estate-200 shadow-subtle space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+          <div className="p-6 bg-navy-card rounded-2xl border border-navy-border shadow-xl space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-purple-950/60 text-purple-300 flex items-center justify-center font-bold border border-purple-800/40">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <h4 className="text-sm font-bold text-navy font-display">Resident-Verified Intel</h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <h4 className="text-sm font-bold text-white font-display">Resident-Verified Intel</h4>
+            <p className="text-xs text-estate-300 leading-relaxed">
               Discussions are tagged by verified resident status to filter out marketing fluff.
             </p>
           </div>
 
-          <div className="p-6 bg-white rounded-2xl border border-estate-200 shadow-subtle space-y-2">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-              <CheckCircle2 className="w-5 h-5" />
+          <div className="p-6 bg-navy-card rounded-2xl border border-navy-border shadow-xl space-y-2">
+            <div className="w-10 h-10 rounded-xl bg-gold/15 text-gold-light flex items-center justify-center font-bold border border-gold/20">
+              <CheckCircle2 className="w-5 h-5 text-gold" />
             </div>
-            <h4 className="text-sm font-bold text-navy font-display">Privacy & Safe Inspections</h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <h4 className="text-sm font-bold text-white font-display">Privacy & Safe Inspections</h4>
+            <p className="text-xs text-estate-300 leading-relaxed">
               Occupant privacy protected with approximate maps; gate codes issued upon confirmed bookings.
             </p>
           </div>
@@ -413,15 +413,15 @@ export function HomePage() {
 
       {/* 7. CALL TO ACTION: LANDLORDS & AGENTS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-sand-100 rounded-3xl p-8 sm:p-12 border border-sand-200 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-navy-card via-navy-deep to-navy-card rounded-3xl p-8 sm:p-12 border border-navy-border shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-white">
           <div className="space-y-3 max-w-xl">
-            <span className="text-xs font-bold text-emerald uppercase tracking-wider">
+            <span className="text-xs font-bold text-gold uppercase tracking-wider">
               Landlords & Certified Agents
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-navy font-display">
+            <h3 className="text-2xl sm:text-3xl font-black text-white font-display">
               List Your Properties on Nigeria's Most Trusted Portal
             </h3>
-            <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
               Reach qualified tenants and buyers who appreciate quality homes in great neighbourhoods. Benefit from verified agent badges and streamlined inspection scheduling.
             </p>
           </div>
@@ -429,13 +429,13 @@ export function HomePage() {
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Link
               to="/auth?tab=register&role=landlord_owner"
-              className="px-6 py-3 bg-navy hover:bg-estate-900 text-white text-xs sm:text-sm font-bold rounded-xl shadow-md transition text-center"
+              className="px-6 py-3 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep text-xs sm:text-sm font-black rounded-xl shadow-gold transition text-center"
             >
               Register as Landlord
             </Link>
             <Link
               to="/auth?tab=register&role=agent"
-              className="px-6 py-3 bg-white hover:bg-estate-50 border border-estate-200 text-navy text-xs sm:text-sm font-bold rounded-xl shadow-xs transition text-center"
+              className="px-6 py-3 bg-navy-surface hover:bg-navy-surface/80 border border-gold/40 text-gold-light hover:text-white text-xs sm:text-sm font-bold rounded-xl shadow-xs transition text-center"
             >
               Register as Agent
             </Link>

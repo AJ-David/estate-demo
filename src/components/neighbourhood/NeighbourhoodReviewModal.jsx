@@ -162,10 +162,10 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
               <span className="text-[10px] text-estate-400">Rush hour traffic, road condition, bridge or metro connection</span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-estate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-navy">
+            <div className="p-3 bg-navy-surface rounded-xl border border-navy-border space-y-1.5">
+              <div className="flex justify-between text-xs font-bold text-white">
                 <span>Cleanliness & Drainage Resistance</span>
-                <span className="text-emerald font-black">{cleanlinessRating} / 10</span>
+                <span className="text-gold font-black">{cleanlinessRating} / 10</span>
               </div>
               <input
                 type="range"
@@ -174,7 +174,7 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
                 step="0.5"
                 value={cleanlinessRating}
                 onChange={(e) => setCleanlinessRating(Number(e.target.value))}
-                className="w-full accent-emerald cursor-pointer"
+                className="w-full accent-gold cursor-pointer"
               />
               <span className="text-[10px] text-estate-400">Flash flood resilience, waste management, road cleanliness</span>
             </div>
@@ -182,7 +182,7 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
 
           {/* Comment */}
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Your Living Experience Insights *
             </label>
             <textarea
@@ -191,21 +191,21 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Detail flood patterns during rainy season, internet speeds (e.g. Starlink, FiberOne), estate gate lock-up times, and supermarket access..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs outline-none bg-navy-deep text-white"
             />
           </div>
 
           {/* Verification check */}
-          <div className="pt-2 border-t border-estate-100">
-            <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-700">
+          <div className="pt-2 border-t border-navy-border">
+            <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-300">
               <input
                 type="checkbox"
                 checked={isVerifiedResident}
                 onChange={(e) => setIsVerifiedResident(e.target.checked)}
-                className="mt-0.5 rounded text-emerald focus:ring-emerald"
+                className="mt-0.5 rounded text-gold focus:ring-gold"
               />
               <span>
-                <strong>Verified Resident Badge:</strong> I confirm I live or previously resided in this neighbourhood.
+                <strong className="text-gold">Verified Resident Badge:</strong> I confirm I live or previously resided in this neighbourhood.
               </span>
             </label>
           </div>
@@ -215,18 +215,18 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
           </p>
 
           {/* Actions */}
-          <div className="pt-3 flex items-center justify-end gap-3 border-t border-estate-100">
+          <div className="pt-3 flex items-center justify-end gap-3 border-t border-navy-border">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-xl text-estate-700 hover:bg-estate-50"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition flex items-center gap-1.5 shadow-xs disabled:opacity-50"
+              className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition flex items-center gap-1.5 disabled:opacity-50 tracking-wide"
             >
               {submitting ? (
                 <>

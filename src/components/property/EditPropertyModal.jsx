@@ -173,18 +173,18 @@ export function EditPropertyModal({ isOpen, onClose, property, onUpdated }) {
           />
         </div>
 
-        <div className="pt-2 flex items-center justify-end gap-3 border-t border-estate-100">
+        <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-border">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-xl text-estate-700 hover:bg-estate-50"
+            className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="px-5 py-2 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl transition disabled:opacity-70"
+            className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition disabled:opacity-70 tracking-wide"
           >
             {loading ? 'Saving Changes...' : 'Save Updates'}
           </button>

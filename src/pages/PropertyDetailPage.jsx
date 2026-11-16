@@ -141,11 +141,11 @@ export function PropertyDetailPage() {
             onClick={() => toggleSave(property.id)}
             className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-semibold transition ${
               saved
-                ? 'bg-rose-50 text-rose-600 border-rose-200 shadow-xs'
-                : 'bg-white text-estate-700 border-estate-200 hover:bg-estate-50'
+                ? 'bg-rose-950/70 text-rose-300 border-rose-500/40 shadow-xs'
+                : 'bg-navy-card text-estate-200 border-navy-border hover:bg-navy-surface hover:text-white'
             }`}
           >
-            <Heart className={`w-4 h-4 ${saved ? 'fill-current text-rose-600' : ''}`} />
+            <Heart className={`w-4 h-4 ${saved ? 'fill-current text-rose-400' : ''}`} />
             <span>{saved ? 'Saved' : 'Save Property'}</span>
           </button>
 
@@ -159,7 +159,7 @@ export function PropertyDetailPage() {
                 alert('Property link copied to clipboard!');
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-estate-200 text-xs font-semibold text-estate-700 hover:bg-estate-50 bg-white transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-navy-border text-xs font-semibold text-estate-200 hover:bg-navy-surface hover:text-white bg-navy-card transition"
           >
             <Share2 className="w-4 h-4" />
             <span>Share</span>
@@ -168,30 +168,30 @@ export function PropertyDetailPage() {
       </div>
 
       {/* Title & Key Stats Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-estate-200">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-navy-border">
         <div className="space-y-2 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant={property.transactionType === 'rent' ? 'rent' : property.transactionType === 'sale' ? 'sale' : 'shortlet'}>
               {property.transactionType === 'rent' ? 'For Rent' : property.transactionType === 'sale' ? 'For Sale' : 'Short-Let'}
             </Badge>
-            <span className="bg-estate-100 text-estate-800 text-xs font-semibold px-2.5 py-1 rounded-full border border-estate-200">
+            <span className="bg-navy-surface text-estate-200 text-xs font-semibold px-2.5 py-1 rounded-full border border-navy-border">
               {property.category}
             </span>
-            <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200">
+            <span className="inline-flex items-center gap-1 bg-emerald-950/80 text-emerald-300 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-500/40">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
               {property.verificationStatus || 'VettedHomes Verified'}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-navy font-display tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-display tracking-tight">
             {property.title}
           </h1>
 
-          <div className="flex items-center gap-2 text-xs sm:text-sm text-estate-600">
-            <MapPin className="w-4 h-4 text-emerald shrink-0" />
-            <span>{property.location?.address}</span>
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-estate-400">
+            <MapPin className="w-4 h-4 text-gold shrink-0" />
+            <span className="text-estate-200">{property.location?.address}</span>
             <span>•</span>
-            <Link to={`/neighbourhoods/${neighbourhood.id}`} className="text-emerald font-semibold hover:underline">
+            <Link to={`/neighbourhoods/${neighbourhood.id}`} className="text-gold font-semibold hover:underline">
               {neighbourhood.name}, {neighbourhood.city}
             </Link>
           </div>
@@ -202,11 +202,11 @@ export function PropertyDetailPage() {
           <p className="text-xs uppercase tracking-wider font-bold text-estate-400">
             Listing Price
           </p>
-          <p className="text-3xl sm:text-4xl font-black text-navy font-display mt-0.5">
+          <p className="text-3xl sm:text-4xl font-black text-white font-display mt-0.5">
             {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
           </p>
-          <p className="text-xs text-estate-500 mt-1">
-            Status: <strong className="text-emerald-700">{property.availabilityStatus || 'Available Now'}</strong>
+          <p className="text-xs text-estate-400 mt-1">
+            Status: <strong className="text-emerald-400">{property.availabilityStatus || 'Available Now'}</strong>
           </p>
         </div>
       </div>
@@ -253,31 +253,31 @@ export function PropertyDetailPage() {
         <div className="lg:col-span-8 space-y-10">
           
           {/* Key Specs Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-sand-50 rounded-2xl border border-sand-200/90 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-navy-card rounded-2xl border border-navy-border text-center">
             <div className="p-2">
-              <span className="text-xs text-estate-500 block mb-1">Bedrooms</span>
-              <p className="text-lg font-bold text-navy flex items-center justify-center gap-1.5">
-                <Bed className="w-5 h-5 text-emerald" />
+              <span className="text-xs text-estate-400 block mb-1">Bedrooms</span>
+              <p className="text-lg font-bold text-white flex items-center justify-center gap-1.5">
+                <Bed className="w-5 h-5 text-gold" />
                 <span>{property.bedrooms} Beds</span>
               </p>
             </div>
-            <div className="p-2 border-l border-sand-200">
-              <span className="text-xs text-estate-500 block mb-1">Bathrooms</span>
-              <p className="text-lg font-bold text-navy flex items-center justify-center gap-1.5">
-                <Bath className="w-5 h-5 text-emerald" />
+            <div className="p-2 border-l border-navy-border">
+              <span className="text-xs text-estate-400 block mb-1">Bathrooms</span>
+              <p className="text-lg font-bold text-white flex items-center justify-center gap-1.5">
+                <Bath className="w-5 h-5 text-gold" />
                 <span>{property.bathrooms} Baths</span>
               </p>
             </div>
-            <div className="p-2 border-l border-sand-200">
-              <span className="text-xs text-estate-500 block mb-1">Property Size</span>
-              <p className="text-lg font-bold text-navy flex items-center justify-center gap-1.5">
-                <Maximize2 className="w-5 h-5 text-emerald" />
+            <div className="p-2 border-l border-navy-border">
+              <span className="text-xs text-estate-400 block mb-1">Property Size</span>
+              <p className="text-lg font-bold text-white flex items-center justify-center gap-1.5">
+                <Maximize2 className="w-5 h-5 text-gold" />
                 <span>{property.sizeSqm} m²</span>
               </p>
             </div>
-            <div className="p-2 border-l border-sand-200">
-              <span className="text-xs text-estate-500 block mb-1">Furnishing</span>
-              <p className="text-sm font-bold text-navy mt-1">
+            <div className="p-2 border-l border-navy-border">
+              <span className="text-xs text-estate-400 block mb-1">Furnishing</span>
+              <p className="text-sm font-bold text-white mt-1">
                 {property.furnishingStatus}
               </p>
             </div>
@@ -285,19 +285,19 @@ export function PropertyDetailPage() {
 
           {/* Description */}
           <section className="space-y-3">
-            <h2 className="text-xl font-bold text-navy font-display">About This Property</h2>
-            <p className="text-sm sm:text-base text-estate-700 leading-relaxed whitespace-pre-line">
+            <h2 className="text-xl font-bold text-white font-display">About This Property</h2>
+            <p className="text-sm sm:text-base text-estate-300 leading-relaxed whitespace-pre-line">
               {property.description}
             </p>
           </section>
 
           {/* Amenities & Features */}
           <section className="space-y-4">
-            <h2 className="text-xl font-bold text-navy font-display">Features & Infrastructure</h2>
+            <h2 className="text-xl font-bold text-white font-display">Features & Infrastructure</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {property.amenities?.map((amenity, i) => (
-                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-estate-200 shadow-xs text-xs font-semibold text-estate-800">
-                  <CheckCircle2 className="w-4 h-4 text-emerald shrink-0" />
+                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-navy-card border border-navy-border shadow-xs text-xs font-semibold text-estate-200">
+                  <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />
                   <span>{amenity}</span>
                 </div>
               ))}
@@ -305,28 +305,28 @@ export function PropertyDetailPage() {
           </section>
 
           {/* SIGNATURE: NEIGHBOURHOOD INTELLIGENCE SUMMARY */}
-          <section className="bg-gradient-to-br from-sand-50 to-emerald-50/30 rounded-3xl p-6 sm:p-8 border border-emerald-200/80 shadow-subtle space-y-6">
+          <section className="bg-gradient-to-br from-navy-card via-navy-card to-navy-surface rounded-3xl p-6 sm:p-8 border border-gold/40 shadow-premium space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <div className="flex items-center gap-2 text-xs font-bold text-emerald uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider mb-1">
                   <ShieldCheck className="w-4 h-4" />
                   <span>Neighbourhood Ground-Truth Intelligence</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-navy font-display">
+                <h3 className="text-xl sm:text-2xl font-black text-white font-display">
                   {neighbourhood.name} Livability Snapshot
                 </h3>
               </div>
 
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <span className="text-xs text-estate-500 block">Overall Score</span>
-                  <span className="text-2xl font-black text-navy font-display">
+                  <span className="text-xs text-estate-400 block">Overall Score</span>
+                  <span className="text-2xl font-black text-gold font-display">
                     {neighbourhood.livabilityScore}<span className="text-xs text-estate-400 font-normal">/10</span>
                   </span>
                 </div>
                 <Link
                   to={`/neighbourhoods/${neighbourhood.id}`}
-                  className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-emerald transition flex items-center gap-1.5"
+                  className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep font-bold text-xs rounded-xl transition flex items-center gap-1.5 shadow-gold"
                 >
                   <span>Full Intel & Discussions</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -336,40 +336,40 @@ export function PropertyDetailPage() {
 
             {/* Quick 3-card intelligence verdict */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-2xl border border-estate-200/80 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-bold text-navy mb-1.5">
-                  <Zap className="w-4 h-4 text-amber-500" />
+              <div className="bg-navy-surface p-4 rounded-2xl border border-navy-border shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-bold text-white mb-1.5">
+                  <Zap className="w-4 h-4 text-amber-400" />
                   <span>Power / Grid</span>
                 </div>
-                <p className="text-xs text-estate-600 leading-relaxed">
+                <p className="text-xs text-estate-300 leading-relaxed">
                   {neighbourhood.metrics?.electricity?.summary || '18-20 hrs grid + estate generator backup.'}
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-2xl border border-estate-200/80 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-bold text-navy mb-1.5">
-                  <Droplet className="w-4 h-4 text-blue-500" />
+              <div className="bg-navy-surface p-4 rounded-2xl border border-navy-border shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-bold text-white mb-1.5">
+                  <Droplet className="w-4 h-4 text-blue-400" />
                   <span>Water Table</span>
                 </div>
-                <p className="text-xs text-estate-600 leading-relaxed">
+                <p className="text-xs text-estate-300 leading-relaxed">
                   {neighbourhood.metrics?.water?.summary || 'Industrial water filtration standard.'}
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-2xl border border-estate-200/80 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-bold text-navy mb-1.5">
-                  <CloudRain className="w-4 h-4 text-purple-500" />
+              <div className="bg-navy-surface p-4 rounded-2xl border border-navy-border shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-bold text-white mb-1.5">
+                  <CloudRain className="w-4 h-4 text-purple-400" />
                   <span>Drainage & Floods</span>
                 </div>
-                <p className="text-xs text-estate-600 leading-relaxed">
+                <p className="text-xs text-estate-300 leading-relaxed">
                   {neighbourhood.metrics?.roadsDrainage?.summary || 'Elevated street with underground drainage.'}
                 </p>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center justify-between text-xs text-estate-500 border-t border-emerald-200/60">
-              <span>Backed by <strong>{neighbourhood.verifiedResidentsCount || 342} verified resident responses</strong>.</span>
-              <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-emerald font-bold hover:underline">
+            <div className="pt-2 flex items-center justify-between text-xs text-estate-400 border-t border-navy-border">
+              <span>Backed by <strong className="text-white">{neighbourhood.verifiedResidentsCount || 342} verified resident responses</strong>.</span>
+              <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-gold font-bold hover:underline">
                 Ask a resident in the forum →
               </Link>
             </div>
@@ -492,22 +492,22 @@ export function PropertyDetailPage() {
         {/* Right Column (4 cols) — Sticky Agent & Contact Card */}
         <div className="lg:col-span-4 sticky top-24 space-y-6">
           
-          <div className="bg-white rounded-3xl border border-estate-200 shadow-premium p-6 space-y-6">
+          <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-6 space-y-6">
             
             {/* Agent Profile Header */}
-            <div className="flex items-center gap-4 pb-5 border-b border-estate-100">
+            <div className="flex items-center gap-4 pb-5 border-b border-navy-border">
               <img
                 src={property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
                 alt={property.agent?.name}
-                className="w-14 h-14 rounded-2xl object-cover ring-2 ring-emerald-300 shadow-sm"
+                className="w-14 h-14 rounded-2xl object-cover ring-2 ring-gold/40 shadow-sm"
               />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h4 className="text-sm font-bold text-navy font-display">{property.agent?.name}</h4>
-                  <ShieldCheck className="w-4 h-4 text-emerald" />
+                  <h4 className="text-sm font-bold text-white font-display">{property.agent?.name}</h4>
+                  <ShieldCheck className="w-4 h-4 text-gold" />
                 </div>
-                <p className="text-xs text-estate-500">{property.agent?.company}</p>
-                <div className="flex items-center gap-1 mt-1 text-[11px] text-amber-600 font-semibold">
+                <p className="text-xs text-estate-400">{property.agent?.company}</p>
+                <div className="flex items-center gap-1 mt-1 text-[11px] text-amber-400 font-semibold">
                   <Star className="w-3 h-3 fill-current" />
                   <span>{property.agent?.rating || 4.9} Rating</span>
                   <span className="text-estate-400">• {property.agent?.listingsCount || 12} listings</span>
@@ -520,7 +520,7 @@ export function PropertyDetailPage() {
               <button
                 type="button"
                 onClick={() => setIsInspectionOpen(true)}
-                className="w-full py-3.5 px-4 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 group"
+                className="w-full py-3.5 px-4 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 group tracking-wide"
               >
                 <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>Schedule Physical Inspection</span>
@@ -529,16 +529,16 @@ export function PropertyDetailPage() {
               <button
                 type="button"
                 onClick={handleOpenChat}
-                className="w-full py-3 px-4 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-3 px-4 bg-navy-surface hover:bg-navy-border text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 border border-navy-border shadow-sm"
               >
-                <MessageSquare className="w-4 h-4 text-emerald" />
+                <MessageSquare className="w-4 h-4 text-gold" />
                 <span>Chat Directly with Agent</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}
-                className="w-full py-2.5 px-4 bg-sand-50 hover:bg-sand-100 border border-sand-200 text-estate-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
               >
                 <span>Submit Formal Written Enquiry</span>
               </button>
@@ -547,20 +547,20 @@ export function PropertyDetailPage() {
                 href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20VettedHomes.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 bg-emerald-950/40 hover:bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
               >
-                <Phone className="w-3.5 h-3.5 text-emerald" />
+                <Phone className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Direct WhatsApp Contact</span>
               </a>
             </div>
 
             {/* Security Guarantee Box */}
-            <div className="p-3.5 bg-sand-50 rounded-2xl border border-sand-200 text-xs text-estate-600 space-y-1">
-              <span className="font-bold text-navy flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
+            <div className="p-3.5 bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-300 space-y-1">
+              <span className="font-bold text-gold flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                 VettedHomes Direct Guarantee
               </span>
-              <p className="text-[11px] leading-relaxed">
+              <p className="text-[11px] text-estate-400 leading-relaxed">
                 Zero advance inspection payment policy. Never pay inspection fees to unknown individuals. Report suspicious claims directly to our support desk.
               </p>
             </div>
@@ -568,16 +568,16 @@ export function PropertyDetailPage() {
           </div>
 
           {/* Quick link to Neighbourhood Community */}
-          <div className="bg-sand-100 rounded-2xl p-5 border border-sand-200 space-y-2">
-            <h4 className="text-xs font-bold text-navy uppercase tracking-wider">
+          <div className="bg-navy-card rounded-2xl p-5 border border-navy-border space-y-2">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Have Questions About {neighbourhood.name}?
             </h4>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <p className="text-xs text-estate-400 leading-relaxed">
               Ask active residents about night security, generator maintenance schedules, and landlord responsiveness.
             </p>
             <Link
               to={`/community?neighbourhood=${neighbourhood.id}`}
-              className="inline-flex items-center gap-1 text-xs font-bold text-emerald hover:underline pt-1"
+              className="inline-flex items-center gap-1 text-xs font-bold text-gold hover:underline pt-1"
             >
               <span>Visit {neighbourhood.name} Discussion Board</span>
               <ChevronRight className="w-3 h-3" />

@@ -83,16 +83,16 @@ export function CommunityFeedPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
       {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-estate-200">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-navy-border">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
-            <MessageSquareText className="w-3.5 h-3.5 text-emerald" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-surface text-gold text-xs font-bold border border-gold/40">
+            <MessageSquareText className="w-3.5 h-3.5 text-gold" />
             <span>VettedHomes Signature Community</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-navy font-display tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">
             Neighbourhood Community Discussions
           </h1>
-          <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+          <p className="text-xs sm:text-sm text-estate-300 leading-relaxed">
             Unfiltered, ground-truth discussions about living conditions, power reliability, drainage, security vigilance, and landlord realities across Nigerian urban estates.
           </p>
         </div>
@@ -104,13 +104,13 @@ export function CommunityFeedPage() {
               onClick={() => toggleFollowNeighbourhood(selectedNeighbourhood)}
               className={`px-4 py-3 rounded-2xl text-xs font-bold transition flex items-center gap-2 border ${
                 followedNeighbourhoods.includes(selectedNeighbourhood)
-                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                  : 'bg-white text-navy border-estate-200 hover:bg-estate-50'
+                  ? 'bg-gold/20 text-gold-light border-gold/50 shadow-gold'
+                  : 'bg-navy-card text-estate-200 border-navy-border hover:bg-navy-surface hover:text-white'
               }`}
             >
               {followedNeighbourhoods.includes(selectedNeighbourhood) ? (
                 <>
-                  <BookmarkCheck className="w-4 h-4 text-emerald" />
+                  <BookmarkCheck className="w-4 h-4 text-gold" />
                   <span>Following District</span>
                 </>
               ) : (
@@ -125,7 +125,7 @@ export function CommunityFeedPage() {
           <button
             type="button"
             onClick={() => setIsCreateModalOpen(true)}
-            className="px-5 py-3 bg-emerald hover:bg-emerald-dark text-white rounded-2xl text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition flex items-center justify-center gap-2"
+            className="px-5 py-3 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-2xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 tracking-wide"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Start a Discussion</span>

@@ -45,17 +45,17 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
         {/* Status Card */}
         <div className={`p-4 rounded-2xl border flex items-start gap-3 text-xs ${
           isConfigured 
-            ? 'bg-emerald-50 border-emerald-200 text-emerald-900' 
-            : 'bg-amber-50 border-amber-200 text-amber-900'
+            ? 'bg-navy-surface border-emerald-500/40 text-emerald-300' 
+            : 'bg-navy-surface border-gold/40 text-gold-light'
         }`}>
-          <div className="p-2 rounded-xl bg-white shadow-xs shrink-0">
-            <Database className={`w-5 h-5 ${isConfigured ? 'text-emerald' : 'text-amber-600'}`} />
+          <div className="p-2 rounded-xl bg-navy-card shadow-xs shrink-0 border border-navy-border">
+            <Database className={`w-5 h-5 ${isConfigured ? 'text-emerald-400' : 'text-gold'}`} />
           </div>
           <div>
-            <h4 className="font-bold text-sm">
+            <h4 className="font-bold text-sm text-white">
               {isConfigured ? 'Live Supabase Backend Connected' : 'Running in Local Demo Sandbox Mode'}
             </h4>
-            <p className="mt-0.5 leading-relaxed">
+            <p className="mt-0.5 leading-relaxed text-estate-300">
               {isConfigured 
                 ? 'Authentication, user profiles, and multi-role operations are synced with your live Supabase PostgreSQL database.'
                 : 'The application is running with local browser storage persistence. To connect your live Supabase cloud project, add your URL and Anon Key to .env and run supabase/schema.sql in the Supabase SQL editor.'
@@ -66,33 +66,33 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
 
         {/* Database Tables Overview */}
         <div>
-          <h4 className="text-xs font-bold text-navy uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <Layers className="w-4 h-4 text-emerald" />
+          <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Layers className="w-4 h-4 text-gold" />
             <span>Configured Tables with Row Level Security (RLS)</span>
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1">
             {tablesList.map(t => (
-              <div key={t.name} className="p-2.5 bg-sand-50 rounded-xl border border-sand-200 text-xs">
+              <div key={t.name} className="p-2.5 bg-navy-surface rounded-xl border border-navy-border text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono font-bold text-navy">{t.name}</span>
-                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-1.5 py-0.5 rounded">
+                  <span className="font-mono font-bold text-gold">{t.name}</span>
+                  <span className="text-[10px] bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 font-semibold px-1.5 py-0.5 rounded">
                     RLS Enabled
                   </span>
                 </div>
-                <p className="text-[11px] text-estate-500 mt-0.5">{t.desc}</p>
+                <p className="text-[11px] text-estate-400 mt-0.5">{t.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Setup Instructions */}
-        <div className="bg-white p-4 rounded-2xl border border-estate-200 text-xs space-y-2">
+        <div className="bg-navy-surface p-4 rounded-2xl border border-navy-border text-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-navy">Quick Supabase Setup:</span>
+            <span className="font-bold text-white">Quick Supabase Setup:</span>
             <button
               type="button"
               onClick={copyEnvSnippet}
-              className="text-emerald hover:text-emerald-dark font-bold flex items-center gap-1"
+              className="text-gold hover:text-gold-light font-bold flex items-center gap-1"
             >
               <Copy className="w-3.5 h-3.5" />
               <span>{copied ? 'Copied Snippet!' : 'Copy .env variables'}</span>

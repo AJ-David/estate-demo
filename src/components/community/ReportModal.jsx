@@ -50,38 +50,38 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
     >
       {submitted ? (
         <div className="text-center py-6 space-y-4">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-14 h-14 bg-emerald-950/70 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h4 className="text-lg font-bold text-navy font-display">Report Received</h4>
-          <p className="text-xs text-estate-600 max-w-sm mx-auto leading-relaxed">
+          <h4 className="text-lg font-black text-white font-display">Report Received</h4>
+          <p className="text-xs text-estate-300 max-w-sm mx-auto leading-relaxed">
             Thank you for helping protect community integrity. The VettedHomes Trust & Safety desk reviews reported content against anti-doxxing and defamation standards within 4 hours.
           </p>
           <button
             type="button"
             onClick={handleReset}
-            className="w-full max-w-xs py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+            className="w-full max-w-xs py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-black rounded-xl transition shadow-gold tracking-wide"
           >
             Done
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <div className="p-3 bg-amber-950/60 rounded-2xl border border-amber-500/40 text-xs text-amber-300 flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <span>
               VettedHomes strictly prohibits harassment, disclosure of private residential identities or house numbers, and unsubstantiated alarmist rumors.
             </span>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Primary Reason for Report *
             </label>
             <select
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs bg-navy-surface text-white outline-none"
             >
               <option value="defamation">Defamation / Naming Private Individuals</option>
               <option value="privacy_doxxing">Exposing Exact Private Address or Phone Number</option>
@@ -93,7 +93,7 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Additional Details *
             </label>
             <textarea
@@ -102,22 +102,22 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               placeholder="Explain why this content violates community safety guidelines..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs outline-none bg-navy-deep text-white"
             />
           </div>
 
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-estate-100">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-border">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-xl text-estate-700 hover:bg-estate-50"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-5 py-2 bg-rose-600 text-white text-xs font-bold rounded-xl hover:bg-rose-700 transition disabled:opacity-50 flex items-center gap-1.5"
+              className="px-5 py-2.5 bg-crimson hover:bg-crimson-light text-white text-xs font-black rounded-xl shadow-lg transition disabled:opacity-50 flex items-center gap-1.5"
             >
               {submitting ? (
                 <>

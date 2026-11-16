@@ -168,24 +168,24 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
         </div>
 
         {/* Checkbox standards */}
-        <div className="space-y-2 pt-2 border-t border-estate-100">
-          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-700">
+        <div className="space-y-2 pt-2 border-t border-navy-border">
+          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-300">
             <input
               type="checkbox"
               checked={isVerifiedResident}
               onChange={(e) => setIsVerifiedResident(e.target.checked)}
-              className="mt-0.5 rounded text-emerald focus:ring-emerald"
+              className="mt-0.5 rounded text-gold focus:ring-gold"
             />
             <span>I currently reside or have previously lived in this neighbourhood.</span>
           </label>
 
-          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-700">
+          <label className="flex items-start gap-2 cursor-pointer text-xs text-estate-300">
             <input
               type="checkbox"
               required
               checked={guidelinesAccepted}
               onChange={(e) => setGuidelinesAccepted(e.target.checked)}
-              className="mt-0.5 rounded text-emerald focus:ring-emerald"
+              className="mt-0.5 rounded text-gold focus:ring-gold"
             />
             <span>
               I certify this is an honest account free from defamatory accusations naming private persons, commercial harassment, or private address disclosure.
@@ -194,18 +194,18 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
         </div>
 
         {/* Action Footer */}
-        <div className="pt-3 flex items-center justify-end gap-3 border-t border-estate-100">
+        <div className="pt-3 flex items-center justify-end gap-3 border-t border-navy-border">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-xl text-estate-700 hover:bg-estate-50"
+            className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="inline-flex items-center gap-1.5 px-5 py-2 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark shadow-sm transition disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition disabled:opacity-50 tracking-wide"
           >
             {submitting ? (
               <>

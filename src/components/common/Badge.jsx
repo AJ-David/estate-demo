@@ -10,16 +10,16 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
   }[size] || 'px-2.5 py-1 text-xs';
 
   const variantClasses = {
-    default: 'bg-estate-100 text-estate-800 border border-estate-200',
-    primary: 'bg-navy text-gold border border-navy-border shadow-sm',
-    emerald: 'bg-gold-50 text-gold-900 border border-gold-200 font-semibold',
-    verified: 'bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black shadow-gold',
-    rent: 'bg-navy-card text-gold-light border border-gold/30 font-semibold',
-    sale: 'bg-gold-50 text-gold-900 border border-gold/40 font-bold',
-    shortlet: 'bg-estate-100 text-estate-800 border border-estate-200 font-semibold',
-    warning: 'bg-amber-50 text-amber-900 border border-amber-200',
-    danger: 'bg-crimson-soft text-crimson border border-crimson-border font-semibold',
-  }[variant] || 'bg-estate-100 text-estate-800';
+    default: 'bg-navy-surface text-estate-200 border border-navy-border font-medium',
+    primary: 'bg-navy-card text-gold-light border border-gold/40 shadow-gold font-semibold',
+    emerald: 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/40 font-semibold',
+    verified: 'bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black shadow-gold tracking-wide',
+    rent: 'bg-navy-surface text-gold-light border border-gold/40 font-semibold',
+    sale: 'bg-gold-500/20 text-gold-300 border border-gold/50 font-bold',
+    shortlet: 'bg-navy-surface text-estate-100 border border-navy-border font-semibold',
+    warning: 'bg-amber-950/70 text-amber-300 border border-amber-500/40 font-semibold',
+    danger: 'bg-crimson-dark/70 text-rose-300 border border-crimson/50 font-semibold',
+  }[variant] || 'bg-navy-surface text-estate-200 border border-navy-border';
 
   return (
     <span className={`${baseClasses} ${sizeClasses} ${variantClasses} ${className}`}>

@@ -33,7 +33,7 @@ export function App() {
       <SavedPropertiesProvider>
         <Router>
           <ScrollToTop />
-          <div className="flex flex-col min-h-screen bg-sand-warm text-estate-900 selection:bg-emerald-100 selection:text-emerald-900">
+          <div className="flex flex-col min-h-screen bg-navy-deep text-estate-100 selection:bg-gold selection:text-navy-deep">
             {/* Top Navigation */}
             <Navbar />
 

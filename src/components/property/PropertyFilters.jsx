@@ -39,12 +39,12 @@ export function PropertyFilters({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-estate-200 shadow-subtle p-4 lg:p-6 mb-8 transition-all">
+    <div className="bg-navy-card rounded-2xl border border-navy-border shadow-xl p-4 lg:p-6 mb-8 transition-all text-white">
       {/* Top Bar: Primary Search & Transaction Switch */}
-      <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between pb-4 border-b border-estate-100">
+      <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between pb-4 border-b border-navy-border">
         
         {/* Transaction Type Buttons */}
-        <div className="flex items-center gap-1.5 p-1 bg-estate-100 rounded-xl overflow-x-auto">
+        <div className="flex items-center gap-1.5 p-1 bg-navy-deep rounded-xl border border-navy-border overflow-x-auto">
           {TRANSACTION_TYPES.map(t => (
             <button
               key={t.value}
@@ -52,8 +52,8 @@ export function PropertyFilters({
               onClick={() => setFilters(prev => ({ ...prev, transactionType: t.value }))}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
                 filters.transactionType === t.value
-                  ? 'bg-white text-navy shadow-xs'
-                  : 'text-estate-600 hover:text-navy'
+                  ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-bold shadow-gold'
+                  : 'text-estate-300 hover:text-gold'
               }`}
             >
               {t.label}
@@ -69,13 +69,13 @@ export function PropertyFilters({
             placeholder="Search by neighbourhood (e.g. Lekki, Yaba, Ikeja, Maitama) or keyword..."
             value={filters.search}
             onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-estate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald focus:border-transparent bg-sand-50/50"
+            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-navy-border text-sm focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold bg-navy-deep text-white placeholder:text-estate-500"
           />
           {filters.search && (
             <button
               type="button"
               onClick={() => setFilters(prev => ({ ...prev, search: '' }))}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-estate-400 hover:text-estate-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-estate-400 hover:text-white"
             >
               <X className="w-4 h-4" />
             </button>
@@ -84,12 +84,12 @@ export function PropertyFilters({
 
         {/* View Mode Toggle Buttons */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center p-1 bg-estate-100 rounded-xl border border-estate-200">
+          <div className="flex items-center p-1 bg-navy-deep rounded-xl border border-navy-border">
             <button
               type="button"
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition ${
-                viewMode === 'grid' ? 'bg-white text-emerald shadow-xs' : 'text-estate-500 hover:text-navy'
+                viewMode === 'grid' ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep shadow-gold' : 'text-estate-400 hover:text-gold'
               }`}
               title="Grid View"
             >
@@ -99,7 +99,7 @@ export function PropertyFilters({
               type="button"
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-lg transition ${
-                viewMode === 'list' ? 'bg-white text-emerald shadow-xs' : 'text-estate-500 hover:text-navy'
+                viewMode === 'list' ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep shadow-gold' : 'text-estate-400 hover:text-gold'
               }`}
               title="List View"
             >
@@ -109,7 +109,7 @@ export function PropertyFilters({
               type="button"
               onClick={() => setViewMode('map')}
               className={`p-2 rounded-lg transition flex items-center gap-1 px-2.5 ${
-                viewMode === 'map' ? 'bg-white text-emerald shadow-xs' : 'text-estate-500 hover:text-navy'
+                viewMode === 'map' ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep shadow-gold' : 'text-estate-400 hover:text-gold'
               }`}
               title="Interactive Map View"
             >
@@ -123,8 +123,8 @@ export function PropertyFilters({
             onClick={() => setShowAdvanced(!showAdvanced)}
             className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl border text-xs font-semibold transition ${
               showAdvanced || (filters.category !== 'All Types' || filters.bedrooms !== 'all' || filters.amenities?.length > 0)
-                ? 'border-emerald-500 bg-emerald-50 text-emerald-800'
-                : 'border-estate-200 text-estate-700 hover:bg-estate-50'
+                ? 'border-gold/50 bg-gold/15 text-gold'
+                : 'border-navy-border text-estate-300 hover:bg-navy-surface hover:text-white'
             }`}
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -139,60 +139,60 @@ export function PropertyFilters({
         <div className="flex flex-wrap items-center gap-3">
           {/* Property Category */}
           <div className="flex items-center gap-1.5">
-            <span className="text-estate-500 font-medium">Type:</span>
+            <span className="text-estate-400 font-medium">Type:</span>
             <select
               value={filters.category}
               onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value }))}
-              className="py-1.5 px-2.5 rounded-lg border border-estate-200 text-xs font-medium text-estate-800 bg-white focus:outline-none focus:ring-1 focus:ring-emerald"
+              className="py-1.5 px-2.5 rounded-lg border border-navy-border text-xs font-medium text-white bg-navy-deep focus:outline-none focus:ring-1 focus:ring-gold"
             >
               {PROPERTY_TYPES.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat} className="bg-navy-card text-white">{cat}</option>
               ))}
             </select>
           </div>
 
           {/* Bedrooms */}
           <div className="flex items-center gap-1.5">
-            <span className="text-estate-500 font-medium">Beds:</span>
+            <span className="text-estate-400 font-medium">Beds:</span>
             <select
               value={filters.bedrooms}
               onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: e.target.value }))}
-              className="py-1.5 px-2.5 rounded-lg border border-estate-200 text-xs font-medium text-estate-800 bg-white focus:outline-none focus:ring-1 focus:ring-emerald"
+              className="py-1.5 px-2.5 rounded-lg border border-navy-border text-xs font-medium text-white bg-navy-deep focus:outline-none focus:ring-1 focus:ring-gold"
             >
-              <option value="all">Any Beds</option>
-              <option value="1">1 Bedroom</option>
-              <option value="2">2 Bedrooms</option>
-              <option value="3">3 Bedrooms</option>
-              <option value="4">4 Bedrooms</option>
-              <option value="5">5+ Bedrooms</option>
+              <option value="all" className="bg-navy-card text-white">Any Beds</option>
+              <option value="1" className="bg-navy-card text-white">1 Bedroom</option>
+              <option value="2" className="bg-navy-card text-white">2 Bedrooms</option>
+              <option value="3" className="bg-navy-card text-white">3 Bedrooms</option>
+              <option value="4" className="bg-navy-card text-white">4 Bedrooms</option>
+              <option value="5" className="bg-navy-card text-white">5+ Bedrooms</option>
             </select>
           </div>
 
           {/* Sorting */}
           <div className="flex items-center gap-1.5">
-            <span className="text-estate-500 font-medium">Sort:</span>
+            <span className="text-estate-400 font-medium">Sort:</span>
             <select
               value={filters.sortBy}
               onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
-              className="py-1.5 px-2.5 rounded-lg border border-estate-200 text-xs font-medium text-estate-800 bg-white focus:outline-none focus:ring-1 focus:ring-emerald"
+              className="py-1.5 px-2.5 rounded-lg border border-navy-border text-xs font-medium text-white bg-navy-deep focus:outline-none focus:ring-1 focus:ring-gold"
             >
-              <option value="newest">Newest Listed</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-              <option value="neighbourhood_score">Top Livability Score</option>
+              <option value="newest" className="bg-navy-card text-white">Newest Listed</option>
+              <option value="price_asc" className="bg-navy-card text-white">Price: Low to High</option>
+              <option value="price_desc" className="bg-navy-card text-white">Price: High to Low</option>
+              <option value="neighbourhood_score" className="bg-navy-card text-white">Top Livability Score</option>
             </select>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-estate-500">
-            Showing <strong className="text-navy">{totalResults}</strong> properties
+          <span className="text-estate-400">
+            Showing <strong className="text-gold font-bold">{totalResults}</strong> properties
           </span>
           {(filters.search || filters.category !== 'All Types' || filters.bedrooms !== 'all' || filters.transactionType !== 'all' || filters.amenities?.length > 0) && (
             <button
               type="button"
               onClick={onReset}
-              className="inline-flex items-center gap-1 text-emerald font-semibold hover:text-emerald-dark"
+              className="inline-flex items-center gap-1 text-gold font-bold hover:text-gold-light"
             >
               <RotateCcw className="w-3 h-3" />
               Reset

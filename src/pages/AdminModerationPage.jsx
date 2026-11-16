@@ -45,70 +45,70 @@ export function AdminModerationPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy text-white rounded-3xl shadow-xl border border-estate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy-card text-white rounded-3xl shadow-premium border border-navy-border">
         <div>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-emerald" />
+            <ShieldCheck className="w-6 h-6 text-gold" />
             <h1 className="text-xl sm:text-2xl font-black font-display text-white">
               Trust, Safety & Moderation Console
             </h1>
           </div>
-          <p className="text-xs text-estate-300 mt-1">
+          <p className="text-xs text-estate-400 mt-1">
             Audit reported community claims, filter unverified security allegations, and enforce anti-defamation & privacy policies.
           </p>
         </div>
 
         <div className="flex items-center gap-3 text-xs">
-          <span className="bg-estate-900 px-3.5 py-2 rounded-xl border border-estate-700 font-bold text-emerald">
+          <span className="bg-navy-surface px-3.5 py-2 rounded-xl border border-gold/40 font-bold text-gold">
             Pending Queue: {reports.length} Items
           </span>
         </div>
       </div>
 
       {notification && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
-          <CheckCircle2 className="w-4 h-4 text-emerald shrink-0" />
+        <div className="p-4 bg-navy-surface border border-emerald-500/40 text-emerald-300 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{notification}</span>
         </div>
       )}
 
       {/* Safety Policy Checklist */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
-          <span className="font-bold text-navy flex items-center gap-1.5">
-            <ShieldAlert className="w-4 h-4 text-rose-500" />
+        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
+          <span className="font-bold text-white flex items-center gap-1.5">
+            <ShieldAlert className="w-4 h-4 text-rose-400" />
             Anti-Doxxing & Privacy Rule
           </span>
-          <p className="text-estate-600 text-[11px] leading-relaxed">
+          <p className="text-estate-400 text-[11px] leading-relaxed">
             Immediately redact or remove posts containing private house numbers, names of private occupants, or private phone numbers.
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
-          <span className="font-bold text-navy flex items-center gap-1.5">
-            <AlertTriangle className="w-4 h-4 text-amber-500" />
+        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
+          <span className="font-bold text-white flex items-center gap-1.5">
+            <AlertTriangle className="w-4 h-4 text-amber-400" />
             Security Allegation Labeling
           </span>
-          <p className="text-estate-600 text-[11px] leading-relaxed">
+          <p className="text-estate-400 text-[11px] leading-relaxed">
             Never label an entire neighbourhood or property as dangerous based on single unverified posts. Apply the cautionary badge.
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-3xl border border-estate-200 shadow-subtle text-xs space-y-1">
-          <span className="font-bold text-navy flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald" />
+        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
+          <span className="font-bold text-white flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-gold" />
             Zero Advance Inspection Fees
           </span>
-          <p className="text-estate-600 text-[11px] leading-relaxed">
+          <p className="text-estate-400 text-[11px] leading-relaxed">
             Any agent or landlord charging money before physical tours is immediately suspended pending license review.
           </p>
         </div>
       </div>
 
       {/* Reports Queue */}
-      <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle overflow-hidden">
-        <div className="p-5 border-b border-estate-100 flex items-center justify-between">
-          <h2 className="text-base font-bold text-navy font-display">
+      <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium overflow-hidden">
+        <div className="p-5 border-b border-navy-border flex items-center justify-between">
+          <h2 className="text-base font-bold text-white font-display">
             Pending Moderation Queue ({reports.length})
           </h2>
           <span className="text-xs text-estate-400">Response SLA: &lt; 4 Hours</span>

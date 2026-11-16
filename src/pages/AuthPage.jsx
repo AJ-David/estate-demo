@@ -168,30 +168,30 @@ export function AuthPage() {
         {/* Brand Logo & Header */}
         <div className="text-center space-y-2">
           <div className="flex justify-center">
-            <BrandLogo size="lg" variant="dark" showTagline={false} />
+            <BrandLogo size="lg" variant="light" showTagline={false} />
           </div>
-          <p className="text-xs text-estate-500 font-medium">
+          <p className="text-xs text-estate-400 font-medium">
             Nigeria's Verified Property & Neighbourhood Platform
           </p>
 
           {/* Connection Status Pill */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold bg-white border border-estate-200 text-estate-600 shadow-xs">
-            <span className={`w-2 h-2 rounded-full ${isConfigured ? 'bg-emerald animate-pulse' : 'bg-amber-400'}`}></span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold bg-navy-card border border-navy-border text-estate-300 shadow-xs">
+            <span className={`w-2 h-2 rounded-full ${isConfigured ? 'bg-gold animate-pulse' : 'bg-amber-400'}`}></span>
             <span>{isConfigured ? 'Live Supabase Connected' : 'Local Demo Sandbox Mode'}</span>
           </div>
         </div>
 
         {/* Auth Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-estate-200 shadow-premium">
+        <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-navy-border shadow-2xl text-white">
           
           {/* Tab Switcher (Visible only on login and register) */}
           {(activeTab === 'login' || activeTab === 'register') && (
-            <div className="grid grid-cols-2 gap-1 p-1 bg-estate-100 rounded-2xl mb-6 text-xs font-bold">
+            <div className="grid grid-cols-2 gap-1 p-1 bg-navy-deep rounded-2xl mb-6 text-xs font-bold border border-navy-border">
               <button
                 type="button"
                 onClick={() => { setActiveTab('login'); setError(''); setSuccessMessage(''); }}
                 className={`py-2 rounded-xl transition ${
-                  activeTab === 'login' ? 'bg-white text-navy shadow-xs' : 'text-estate-500 hover:text-navy'
+                  activeTab === 'login' ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
                 }`}
               >
                 Sign In
@@ -200,7 +200,7 @@ export function AuthPage() {
                 type="button"
                 onClick={() => { setActiveTab('register'); setError(''); setSuccessMessage(''); }}
                 className={`py-2 rounded-xl transition ${
-                  activeTab === 'register' ? 'bg-white text-navy shadow-xs' : 'text-estate-500 hover:text-navy'
+                  activeTab === 'register' ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
                 }`}
               >
                 Create Account
@@ -303,10 +303,10 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
+                className="w-full py-3 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
               >
                 {loading ? 'Authenticating...' : 'Sign In to VettedHomes'}
-                {!loading && <ArrowRight className="w-4 h-4" />}
+                {!loading && <ArrowRight className="w-4 h-4 text-navy-deep" />}
               </button>
 
               <div className="pt-2 text-center text-xs text-estate-500">

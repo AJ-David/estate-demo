@@ -200,7 +200,7 @@ export function NeighbourhoodDetailPage() {
       {/* Main Tabs Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex items-center gap-2 border-b border-estate-200 pb-2 mb-8 overflow-x-auto">
+        <div className="flex items-center gap-2 border-b border-navy-border pb-3 mb-8 overflow-x-auto">
           {[
             { id: 'overview', label: 'Neighbourhood Diagnostics & Intelligence', count: null },
             { id: 'map', label: 'Interactive District Map & Enclave', count: null },
@@ -213,14 +213,14 @@ export function NeighbourhoodDetailPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-navy text-white shadow-xs'
-                  : 'text-estate-600 hover:text-navy hover:bg-estate-100'
+                  ? 'bg-gold text-navy-deep font-black shadow-gold'
+                  : 'text-estate-400 hover:text-white hover:bg-navy-surface border border-transparent'
               }`}
             >
               <span>{tab.label}</span>
               {tab.count !== null && (
-                <span className={`px-2 py-0.5 rounded-full text-[10px] ${
-                  activeTab === tab.id ? 'bg-emerald text-white' : 'bg-estate-200 text-estate-700'
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  activeTab === tab.id ? 'bg-navy-deep text-gold' : 'bg-navy-surface text-estate-300'
                 }`}>
                   {tab.count}
                 </span>

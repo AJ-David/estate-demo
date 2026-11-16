@@ -53,17 +53,17 @@ export function EnquiryModal({ isOpen, onClose, property }) {
     >
       {sent ? (
         <div className="text-center py-6 space-y-4">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-14 h-14 bg-emerald-950/70 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-inner">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h4 className="text-lg font-bold text-navy font-display">Message Sent to {property.agent?.name}!</h4>
-          <p className="text-xs text-estate-600 max-w-sm mx-auto">
+          <h4 className="text-lg font-black text-white font-display">Message Sent to {property.agent?.name}!</h4>
+          <p className="text-xs text-estate-300 max-w-sm mx-auto">
             Your enquiry has been logged into your tenant dashboard. The agent typically replies within 30 minutes during business hours.
           </p>
           <button
             type="button"
             onClick={handleReset}
-            className="w-full max-w-xs py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+            className="w-full max-w-xs py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-black rounded-xl transition shadow-gold tracking-wide"
           >
             Close
           </button>
@@ -71,21 +71,21 @@ export function EnquiryModal({ isOpen, onClose, property }) {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Agent Mini Card */}
-          <div className="flex items-center gap-3 p-3 bg-sand-50 rounded-xl border border-sand-200">
+          <div className="flex items-center gap-3 p-3 bg-navy-surface rounded-xl border border-navy-border">
             <img
               src={property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
               alt={property.agent?.name}
-              className="w-10 h-10 rounded-full object-cover ring-1 ring-emerald-300"
+              className="w-10 h-10 rounded-full object-cover ring-1 ring-gold/40"
             />
             <div>
-              <p className="text-xs font-bold text-estate-900">{property.agent?.name}</p>
-              <p className="text-[11px] text-estate-500">{property.agent?.company} • {property.agent?.role}</p>
+              <p className="text-xs font-bold text-white">{property.agent?.name}</p>
+              <p className="text-[11px] text-estate-400">{property.agent?.company} • {property.agent?.role}</p>
             </div>
           </div>
 
           {/* Quick Click Prompts */}
           <div>
-            <label className="block text-[11px] font-bold text-estate-600 mb-1.5 uppercase tracking-wider">
+            <label className="block text-[11px] font-bold text-estate-400 mb-1.5 uppercase tracking-wider">
               Quick Questions
             </label>
             <div className="flex flex-wrap gap-1.5">
@@ -94,7 +94,7 @@ export function EnquiryModal({ isOpen, onClose, property }) {
                   key={q}
                   type="button"
                   onClick={() => setMessage(prev => prev ? `${prev}\n${q}` : q)}
-                  className="text-left text-xs bg-estate-100 hover:bg-emerald-50 hover:text-emerald-800 text-estate-700 px-2.5 py-1.5 rounded-lg border border-estate-200 transition"
+                  className="text-left text-xs bg-navy-surface hover:bg-gold/20 hover:text-gold-light text-estate-200 px-2.5 py-1.5 rounded-lg border border-navy-border transition"
                 >
                   {q}
                 </button>
@@ -103,7 +103,7 @@ export function EnquiryModal({ isOpen, onClose, property }) {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-white mb-1">
               Your Message *
             </label>
             <textarea
@@ -112,45 +112,45 @@ export function EnquiryModal({ isOpen, onClose, property }) {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Hi, I am interested in this listing. Could you share details regarding..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs focus:ring-1 focus:ring-emerald outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs outline-none bg-navy-deep text-white"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Your Name *</label>
+              <label className="block text-xs font-bold text-white mb-1">Your Name *</label>
               <input
                 type="text"
                 required
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs outline-none bg-navy-deep text-white"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Phone / WhatsApp *</label>
+              <label className="block text-xs font-bold text-white mb-1">Phone / WhatsApp *</label>
               <input
                 type="tel"
                 required
                 value={senderContact}
                 onChange={(e) => setSenderContact(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-lg text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs outline-none bg-navy-deep text-white"
               />
             </div>
           </div>
 
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-estate-100">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-border">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-lg text-estate-700 hover:bg-estate-50"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-estate-300 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-5 py-2 bg-navy text-white text-xs font-bold rounded-lg hover:bg-emerald transition disabled:opacity-70"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition disabled:opacity-70 tracking-wide"
             >
               <Send className="w-3.5 h-3.5" />
               {loading ? 'Sending...' : 'Send Enquiry'}

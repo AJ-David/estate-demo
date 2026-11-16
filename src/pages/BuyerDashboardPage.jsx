@@ -126,7 +126,7 @@ export function BuyerDashboardPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-estate-200 pb-2 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-navy-border pb-3 overflow-x-auto">
         {[
           { id: 'saved', label: 'Saved Properties', count: savedProperties.length, icon: Heart },
           { id: 'inspections', label: 'Inspection Appointments', count: inspections.length, icon: Calendar },
@@ -141,14 +141,14 @@ export function BuyerDashboardPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-navy text-white shadow-xs'
-                  : 'text-estate-600 hover:text-navy hover:bg-estate-100'
+                  ? 'bg-gold text-navy-deep font-black shadow-gold'
+                  : 'text-estate-400 hover:text-white hover:bg-navy-surface border border-transparent'
               }`}
             >
               <Icon className="w-4 h-4" />
               <span>{tab.label}</span>
-              <span className={`px-2 py-0.5 rounded-full text-[10px] ${
-                activeTab === tab.id ? 'bg-emerald text-white' : 'bg-estate-200 text-estate-700'
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === tab.id ? 'bg-navy-deep text-gold' : 'bg-navy-surface text-estate-300'
               }`}>
                 {tab.count}
               </span>
@@ -234,22 +234,22 @@ export function BuyerDashboardPage() {
 
                 {/* Gate Pass Code */}
                 {insp.gateCode ? (
-                  <div className="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between">
+                  <div className="p-3.5 bg-navy-surface rounded-xl border border-gold/40 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-5 h-5 text-emerald shrink-0" />
+                      <ShieldCheck className="w-5 h-5 text-gold shrink-0" />
                       <div>
-                        <span className="text-[10px] font-bold text-emerald-900 uppercase tracking-wider block">Security Gate Pass Code</span>
-                        <span className="text-base font-black text-navy font-mono tracking-widest">{insp.gateCode}</span>
+                        <span className="text-[10px] font-bold text-gold uppercase tracking-wider block">Security Gate Pass Code</span>
+                        <span className="text-base font-black text-white font-mono tracking-widest">{insp.gateCode}</span>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => copyCode(insp.gateCode)}
-                      className="p-2 bg-white rounded-lg border border-emerald-200 hover:bg-emerald-100 text-emerald-800 transition flex items-center gap-1 text-xs font-bold"
+                      className="p-2 bg-navy-card rounded-lg border border-gold/40 hover:bg-gold hover:text-navy-deep text-gold-light transition flex items-center gap-1 text-xs font-bold"
                     >
                       {copiedGateCode === insp.gateCode ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald" />
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
                           <span>Copied</span>
                         </>
                       ) : (
@@ -261,7 +261,7 @@ export function BuyerDashboardPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="p-3 bg-sand-50 rounded-xl text-xs text-estate-600 border border-sand-200 flex items-start gap-2">
+                  <div className="p-3 bg-navy-surface rounded-xl text-xs text-estate-400 border border-navy-border flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald shrink-0 mt-0.5" />
                     <span>
                       <strong>Estate Security Notice:</strong> Gate pass verification will be confirmed by estate security prior to inspection.
