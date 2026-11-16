@@ -78,7 +78,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
           </div>
           <div className="flex justify-between items-center">
             <span className="text-estate-400">Active Listings:</span>
-            <span className="font-semibold text-estate-200">{neighbourhood.activeListingsCount} homes</span>
+            <span className="font-semibold text-white">{neighbourhood.activeListingsCount} homes</span>
           </div>
           <div className="flex justify-between items-center">
             <span className="text-estate-400">Verified Residents:</span>

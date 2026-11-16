@@ -46,7 +46,7 @@ export function Modal({ isOpen, onClose, title, subtitle, children, maxWidth = '
           </div>
 
           {/* Content */}
-          <div className="px-6 py-5 text-estate-100">
+          <div className="px-6 py-5 text-slate-100">
             {children}
           </div>
         </div>

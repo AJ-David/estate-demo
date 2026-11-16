@@ -32,10 +32,10 @@ export function Footer() {
 
           {/* Key Neighbourhoods */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-estate-300 font-display">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-gold font-display">
               Top Locations
             </h4>
-            <ul className="space-y-2 text-sm text-estate-300">
+            <ul className="space-y-2 text-sm text-estate-400">
               <li>
                 <Link to="/neighbourhoods/lekki-phase-1" className="hover:text-gold transition">
                   Lekki Phase 1, Lagos
@@ -66,10 +66,10 @@ export function Footer() {
 
           {/* Community & Intelligence */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-estate-300 font-display">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-gold font-display">
               Neighbourhood Intel
             </h4>
-            <ul className="space-y-2 text-sm text-estate-300">
+            <ul className="space-y-2 text-sm text-estate-400">
               <li>
                 <Link to="/community?category=SECURITY" className="hover:text-gold transition">
                   Security & Safety Pulse
@@ -100,10 +100,10 @@ export function Footer() {
 
           {/* Portals & Trust */}
           <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-estate-300 font-display">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-gold font-display">
               Portals & Safety
             </h4>
-            <ul className="space-y-2 text-sm text-estate-300">
+            <ul className="space-y-2 text-sm text-estate-400">
               <li>
                 <Link to="/dashboard/buyer" className="hover:text-gold transition">
                   Tenant & Buyer Portal

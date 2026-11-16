@@ -53,7 +53,7 @@ export function PropertyFilters({
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
                 filters.transactionType === t.value
                   ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-bold shadow-gold'
-                  : 'text-estate-300 hover:text-gold'
+                  : 'text-slate-300 hover:text-gold hover:bg-navy-surface'
               }`}
             >
               {t.label}
@@ -124,7 +124,7 @@ export function PropertyFilters({
             className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl border text-xs font-semibold transition ${
               showAdvanced || (filters.category !== 'All Types' || filters.bedrooms !== 'all' || filters.amenities?.length > 0)
                 ? 'border-gold/50 bg-gold/15 text-gold'
-                : 'border-navy-border text-estate-300 hover:bg-navy-surface hover:text-white'
+                : 'border-navy-border text-slate-300 hover:bg-navy-surface hover:text-white'
             }`}
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -203,10 +203,10 @@ export function PropertyFilters({
 
       {/* Expandable Advanced Filter Drawer */}
       {showAdvanced && (
-        <div className="mt-4 pt-4 border-t border-estate-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn">
+        <div className="mt-4 pt-4 border-t border-navy-border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn">
           {/* Price Range */}
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-2">
+            <label className="block text-xs font-bold text-white mb-2 font-display">
               Price Range (₦)
             </label>
             <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export function PropertyFilters({
                 placeholder="Min Price (₦)"
                 value={filters.minPrice || ''}
                 onChange={(e) => setFilters(prev => ({ ...prev, minPrice: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-estate-200 text-xs focus:ring-1 focus:ring-emerald outline-none"
+                className="w-full px-3 py-2 rounded-lg border border-navy-border bg-navy-surface text-white placeholder-estate-400 text-xs focus:ring-1 focus:ring-gold outline-none"
               />
               <span className="text-estate-400 font-bold">—</span>
               <input
@@ -223,14 +223,14 @@ export function PropertyFilters({
                 placeholder="Max Price (₦)"
                 value={filters.maxPrice || ''}
                 onChange={(e) => setFilters(prev => ({ ...prev, maxPrice: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg border border-estate-200 text-xs focus:ring-1 focus:ring-emerald outline-none"
+                className="w-full px-3 py-2 rounded-lg border border-navy-border bg-navy-surface text-white placeholder-estate-400 text-xs focus:ring-1 focus:ring-gold outline-none"
               />
             </div>
           </div>
 
           {/* Key Amenities Checkboxes */}
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold text-estate-800 mb-2">
+            <label className="block text-xs font-bold text-white mb-2 font-display">
               Desired Infrastructure & Amenities
             </label>
             <div className="flex flex-wrap gap-2">
@@ -241,10 +241,10 @@ export function PropertyFilters({
                     key={item}
                     type="button"
                     onClick={() => handleAmenityToggle(item)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                       checked
-                        ? 'bg-emerald text-white shadow-xs'
-                        : 'bg-estate-50 text-estate-700 hover:bg-estate-100 border border-estate-200'
+                        ? 'bg-gold text-navy-deep shadow-gold'
+                        : 'bg-navy-surface text-slate-300 hover:text-white border border-navy-border'
                     }`}
                   >
                     {item}

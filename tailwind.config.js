@@ -6,18 +6,32 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        // Sovereign Obsidian & Gunmetal Spectrum (Replaces light gray pastels with dark luxury)
+      borderColor: {
+        estate: {
+          50: '#12151F',
+          100: '#181E2C',
+          200: '#262F43',  // Dark Gunmetal/Slate Border
+          300: '#333F58',
+        }
+      },
+      backgroundColor: {
         estate: {
           50: '#080A0E',   // Pitch Obsidian
           100: '#0F131C',  // Dark Gunmetal
-          200: '#1A212E',  // Dark Slate Border
-          300: '#2A3449',  // Muted Slate
-          400: '#73839C',  // Slate Muted Label
-          500: '#94A3B8',  // Cool Platinum Muted (High Contrast)
-          600: '#CBD5E1',  // Crisp Light Platinum Body
-          700: '#E2E8F0',  // Brilliant Ice Silver
-          800: '#F1F5F9',  // Near-White
+        }
+      },
+      colors: {
+        // Sovereign Platinum & Silver Spectrum for crisp, high-contrast typography on dark themes
+        estate: {
+          50: '#94A3B8',
+          100: '#F1F5F9',  // Near-White
+          200: '#E2E8F0',  // Brilliant Ice Silver
+          300: '#CBD5E1',  // Crisp Light Platinum Body
+          400: '#94A3B8',  // Cool Platinum Muted (High Contrast Secondary)
+          500: '#E2E8F0',  // Brilliant Ice Silver
+          600: '#F1F5F9',  // Near-White
+          700: '#F8FAFC',  // Brilliant Ice White
+          800: '#FFFFFF',  // Pure Crisp White
           900: '#FFFFFF',  // Pure Crisp White
           950: '#FFFFFF',  // Pure Crisp White
         },

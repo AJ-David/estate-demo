@@ -145,7 +145,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
                 <span className="flex items-center justify-center w-5 h-5 rounded-md bg-gold/20 text-gold-light border border-gold/30 font-bold text-[10px]">
                   {property.neighbourhoodSnapshot.score}
                 </span>
-                <span className="text-estate-200 font-medium">
+                <span className="text-white font-medium">
                   {property.neighbourhoodSnapshot.name} Livability
                 </span>
               </div>
