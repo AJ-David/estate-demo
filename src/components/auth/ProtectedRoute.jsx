@@ -10,8 +10,8 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
   if (loading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 space-y-4">
-        <div className="w-10 h-10 border-4 border-estate-200 border-t-emerald rounded-full animate-spin"></div>
-        <p className="text-xs font-semibold text-estate-500">Checking authorization...</p>
+        <div className="w-10 h-10 border-4 border-navy-border border-t-gold rounded-full animate-spin"></div>
+        <p className="text-xs font-semibold text-slate-200">Checking authorization...</p>
       </div>
     );
   }

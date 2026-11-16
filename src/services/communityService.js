@@ -97,7 +97,11 @@ export async function fetchCommunityPosts({
   }
 
   // Local user-created posts fallback
-  const localPosts = JSON.parse(localStorage.getItem('estatelens_custom_posts') || '[]');
+  const localPosts = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_posts') ||
+    localStorage.getItem('estatelens_custom_posts') ||
+    '[]'
+  );
 
   // Combine DB posts + Local posts + Demo posts
   let combined = [...dbPosts, ...localPosts];
@@ -206,8 +210,12 @@ export async function createCommunityPost({
   }
 
   // Save locally
-  const current = JSON.parse(localStorage.getItem('estatelens_custom_posts') || '[]');
-  localStorage.setItem('estatelens_custom_posts', JSON.stringify([newPost, ...current]));
+  const current = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_posts') ||
+    localStorage.getItem('estatelens_custom_posts') ||
+    '[]'
+  );
+  localStorage.setItem('vettedhomes_custom_posts', JSON.stringify([newPost, ...current]));
 
   return { success: true, post: newPost };
 }
@@ -215,7 +223,11 @@ export async function createCommunityPost({
 // 3. Upvote or Downvote a Post
 export async function voteCommunityPost(postId, voteType, user) {
   // Save vote record to prevent duplicate votes
-  const userVotes = JSON.parse(localStorage.getItem('estatelens_user_votes') || '{}');
+  const userVotes = JSON.parse(
+    localStorage.getItem('vettedhomes_user_votes') ||
+    localStorage.getItem('estatelens_user_votes') ||
+    '{}'
+  );
   const previousVote = userVotes[postId];
 
   let voteDelta = 0;
@@ -231,7 +243,7 @@ export async function voteCommunityPost(postId, voteType, user) {
       voteDelta = previousVote === 'up' ? -1 : 0;
     }
   }
-  localStorage.setItem('estatelens_user_votes', JSON.stringify(userVotes));
+  localStorage.setItem('vettedhomes_user_votes', JSON.stringify(userVotes));
 
   if (isSupabaseConfigured && user?.id && !postId.startsWith('post-')) {
     try {
@@ -288,9 +300,13 @@ export async function addCommunityComment({ postId, content, user }) {
   }
 
   // Local storage comments tracking
-  const commentsMap = JSON.parse(localStorage.getItem('estatelens_comments_map') || '{}');
+  const commentsMap = JSON.parse(
+    localStorage.getItem('vettedhomes_comments_map') ||
+    localStorage.getItem('estatelens_comments_map') ||
+    '{}'
+  );
   commentsMap[postId] = [...(commentsMap[postId] || []), newComment];
-  localStorage.setItem('estatelens_comments_map', JSON.stringify(commentsMap));
+  localStorage.setItem('vettedhomes_comments_map', JSON.stringify(commentsMap));
 
   return { success: true, comment: newComment };
 }
@@ -335,8 +351,12 @@ export async function submitModerationReport({
   }
 
   // Persist locally for immediate reflection in moderation console
-  const reports = JSON.parse(localStorage.getItem('estatelens_moderation_reports') || '[]');
-  localStorage.setItem('estatelens_moderation_reports', JSON.stringify([newReport, ...reports]));
+  const reports = JSON.parse(
+    localStorage.getItem('vettedhomes_moderation_reports') ||
+    localStorage.getItem('estatelens_moderation_reports') ||
+    '[]'
+  );
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify([newReport, ...reports]));
 
   return { success: true, report: newReport };
 }
@@ -379,7 +399,11 @@ export async function fetchModerationReports() {
     }
   ];
 
-  const localReports = JSON.parse(localStorage.getItem('estatelens_moderation_reports') || '[]');
+  const localReports = JSON.parse(
+    localStorage.getItem('vettedhomes_moderation_reports') ||
+    localStorage.getItem('estatelens_moderation_reports') ||
+    '[]'
+  );
   return [...localReports, ...defaultReports];
 }
 
@@ -387,13 +411,17 @@ export async function fetchModerationReports() {
 export async function resolveModerationReport(reportId, action) {
   let reports = await fetchModerationReports();
   reports = reports.filter(r => r.id !== reportId);
-  localStorage.setItem('estatelens_moderation_reports', JSON.stringify(reports));
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(reports));
 
   if (action === 'Takedown') {
     // If it's a post, flag it as hidden in local store
-    const localPosts = JSON.parse(localStorage.getItem('estatelens_custom_posts') || '[]');
+    const localPosts = JSON.parse(
+      localStorage.getItem('vettedhomes_custom_posts') ||
+      localStorage.getItem('estatelens_custom_posts') ||
+      '[]'
+    );
     const updated = localPosts.filter(p => p.id !== reportId);
-    localStorage.setItem('estatelens_custom_posts', JSON.stringify(updated));
+    localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
   }
 
   return { success: true };

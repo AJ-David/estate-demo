@@ -191,7 +191,7 @@ export const DEMO_PROPERTIES = [
       'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80'
     ],
-    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=demo',
+    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=F_fK89t3bOU',
     amenities: [
       '24/7 Gated Security',
       'Treated Water System',
@@ -253,7 +253,7 @@ export const DEMO_PROPERTIES = [
       'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80'
     ],
-    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=demo2',
+    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=kR2g3121X7s',
     amenities: [
       '24/7 Guaranteed Power',
       'Swimming Pool',
@@ -315,7 +315,7 @@ export const DEMO_PROPERTIES = [
       'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80'
     ],
-    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=demo3',
+    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=1F_s8f1uO70',
     amenities: [
       'Diplomatic Guard Post',
       'Private Heated Pool',
@@ -377,7 +377,7 @@ export const DEMO_PROPERTIES = [
       'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80'
     ],
-    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=demo4',
+    videoWalkthroughUrl: 'https://www.youtube.com/watch?v=d_U_o_K-z1g',
     amenities: [
       'Private Direct Elevator',
       'Panoramic Wrap Balcony',
@@ -720,7 +720,7 @@ export const DEMO_PROPERTY_REVIEWS = [
 export const DEMO_USER = {
   id: 'usr-demo-001',
   name: 'Babatunde Adeleke',
-  email: 'babatunde@vettedhomes.demo',
+  email: 'babatunde@vettedhomes.ng',
   phone: '+234 803 123 4567',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
   roles: ['buyer_tenant', 'landlord_owner'], // Multiple roles supported!

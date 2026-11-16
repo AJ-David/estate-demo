@@ -370,12 +370,12 @@ export function PropertyMapView({
         </div>
 
         {showFacilitiesLayer && (
-          <div className="grid grid-cols-2 gap-1 text-[11px]">
+          <div className="grid grid-cols-2 gap-1.5 text-[11px]">
             <button
               type="button"
               onClick={() => toggleFacilityType('Healthcare')}
-              className={`px-2 py-1 rounded-lg font-semibold flex items-center gap-1.5 transition text-left ${
-                visibleFacilities.Healthcare ? 'bg-red-50 text-red-700 border border-red-200' : 'text-estate-400 bg-estate-50'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
+                visibleFacilities.Healthcare ? 'bg-rose-950/80 text-rose-300 border-rose-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
               }`}
             >
               <span>🏥</span>
@@ -384,8 +384,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Education')}
-              className={`px-2 py-1 rounded-lg font-semibold flex items-center gap-1.5 transition text-left ${
-                visibleFacilities.Education ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'text-estate-400 bg-estate-50'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
+                visibleFacilities.Education ? 'bg-sky-950/80 text-sky-300 border-sky-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
               }`}
             >
               <span>🏫</span>
@@ -394,8 +394,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Shopping')}
-              className={`px-2 py-1 rounded-lg font-semibold flex items-center gap-1.5 transition text-left ${
-                visibleFacilities.Shopping ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'text-estate-400 bg-estate-50'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
+                visibleFacilities.Shopping ? 'bg-amber-950/80 text-amber-300 border-amber-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
               }`}
             >
               <span>🛒</span>
@@ -404,8 +404,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Transit')}
-              className={`px-2 py-1 rounded-lg font-semibold flex items-center gap-1.5 transition text-left ${
-                visibleFacilities.Transit ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'text-estate-400 bg-estate-50'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
+                visibleFacilities.Transit ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
               }`}
             >
               <span>🚌</span>

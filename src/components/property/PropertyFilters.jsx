@@ -69,7 +69,7 @@ export function PropertyFilters({
             placeholder="Search by neighbourhood (e.g. Lekki, Yaba, Ikeja, Maitama) or keyword..."
             value={filters.search}
             onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-navy-border text-sm focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold bg-navy-deep text-white placeholder:text-estate-500"
+            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-navy-border text-sm focus:outline-none focus:ring-1 focus:ring-gold focus:border-gold bg-navy-deep text-white placeholder:text-slate-400"
           />
           {filters.search && (
             <button

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Search, 
@@ -17,6 +17,9 @@ import {
   Star
 } from 'lucide-react';
 import { DEMO_PROPERTIES, DEMO_NEIGHBOURHOODS, DEMO_COMMUNITY_POSTS, PROPERTY_TYPES } from '../data/demoData';
+import { fetchProperties } from '../services/propertyService';
+import { fetchNeighbourhoods } from '../services/neighbourhoodService';
+import { fetchCommunityPosts } from '../services/communityService';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { NeighbourhoodCard } from '../components/neighbourhood/NeighbourhoodCard';
 import { PostCard } from '../components/community/PostCard';
@@ -27,6 +30,32 @@ export function HomePage() {
   const [searchLocation, setSearchLocation] = useState('');
   const [propertyType, setPropertyType] = useState('All Types');
 
+  const [properties, setProperties] = useState(DEMO_PROPERTIES);
+  const [neighbourhoods, setNeighbourhoods] = useState(DEMO_NEIGHBOURHOODS);
+  const [communityPosts, setCommunityPosts] = useState(DEMO_COMMUNITY_POSTS);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadLiveData() {
+      try {
+        const [props, nHods, posts] = await Promise.all([
+          fetchProperties(),
+          fetchNeighbourhoods(),
+          fetchCommunityPosts()
+        ]);
+        if (isMounted) {
+          if (props && props.length > 0) setProperties(props);
+          if (nHods && nHods.length > 0) setNeighbourhoods(nHods);
+          if (posts && posts.length > 0) setCommunityPosts(posts);
+        }
+      } catch (err) {
+        console.warn('Error loading dynamic homepage data:', err);
+      }
+    }
+    loadLiveData();
+    return () => { isMounted = false; };
+  }, []);
+
   const handleHeroSearch = (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
@@ -36,9 +65,9 @@ export function HomePage() {
     navigate(`/properties?${params.toString()}`);
   };
 
-  const featuredProperties = DEMO_PROPERTIES.filter(p => p.featured).slice(0, 3);
-  const topNeighbourhoods = DEMO_NEIGHBOURHOODS.slice(0, 3);
-  const recentCommunityPosts = DEMO_COMMUNITY_POSTS.slice(0, 2);
+  const featuredProperties = properties.filter(p => p.featured).slice(0, 3);
+  const topNeighbourhoods = neighbourhoods.slice(0, 3);
+  const recentCommunityPosts = communityPosts.slice(0, 2);
 
   return (
     <div className="space-y-20 pb-20">
@@ -111,7 +140,7 @@ export function HomePage() {
                         placeholder="Lekki, Yaba, Ikeja, Maitama..."
                         value={searchLocation}
                         onChange={(e) => setSearchLocation(e.target.value)}
-                        className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-navy-border text-xs sm:text-sm font-medium focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy-deep text-white placeholder:text-estate-500"
+                        className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-navy-border text-xs sm:text-sm font-medium focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy-deep text-white placeholder:text-slate-400"
                       />
                     </div>
                   </div>

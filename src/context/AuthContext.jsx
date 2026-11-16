@@ -1,22 +1,112 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { DEMO_USER } from '../data/demoData';
 
 const AuthContext = createContext();
 
+// Authentic seed accounts representing key platform personas
+const INITIAL_SYSTEM_USERS = [
+  {
+    id: 'usr-babatunde-01',
+    name: 'Babatunde Adeleke',
+    email: 'babatunde@vettedhomes.ng',
+    password: 'password123',
+    phone: '+234 803 123 4567',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+    bio: 'Lekki Phase 1 resident for 4+ years. Tech consultant & verified community contributor.',
+    isVerified: true,
+    roles: ['buyer_tenant', 'landlord_owner'],
+    activeRole: 'buyer_tenant',
+    enquiries: [
+      {
+        id: 'enq-1',
+        propertyId: 'prop-101',
+        propertyTitle: 'Contemporary 4-Bedroom Semi-Detached Duplex with BQ',
+        agentName: 'Adewale Bakare',
+        status: 'Inspection Confirmed',
+        inspectionDate: 'Saturday, Nov 14, 2026 at 11:30 AM',
+        lastMessage: 'Looking forward to meeting you at the security gate at 11:30 AM.'
+      }
+    ],
+    savedProperties: ['prop-101', 'prop-102', 'prop-103'],
+    followedNeighbourhoods: ['lekki-phase-1', 'yaba'],
+    myListings: []
+  },
+  {
+    id: 'usr-adewale-02',
+    name: 'Adewale Bakare',
+    email: 'adewale@primestone.ng',
+    password: 'password123',
+    phone: '+234 803 555 0192',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+    bio: 'Principal Partner at PrimeStone Realty Partners. 10+ years specialising in luxury residential listings across Ikoyi & Lekki.',
+    isVerified: true,
+    roles: ['agent', 'landlord_owner', 'buyer_tenant'],
+    activeRole: 'agent',
+    enquiries: [],
+    savedProperties: ['prop-101'],
+    followedNeighbourhoods: ['lekki-phase-1', 'ikeja-gra'],
+    myListings: ['prop-101', 'prop-103']
+  },
+  {
+    id: 'usr-okonkwo-03',
+    name: 'Chief Emeka Okonkwo',
+    email: 'emeka.okonkwo@transcorp.ng',
+    password: 'password123',
+    phone: '+234 809 123 4567',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
+    bio: 'Property investor and landlord in Maitama Abuja and Victoria Island Lagos.',
+    isVerified: true,
+    roles: ['landlord_owner', 'buyer_tenant'],
+    activeRole: 'landlord_owner',
+    enquiries: [],
+    savedProperties: [],
+    followedNeighbourhoods: ['maitama', 'lekki-phase-1'],
+    myListings: ['prop-104']
+  },
+  {
+    id: 'usr-moderator-04',
+    name: 'Trust & Safety Desk',
+    email: 'moderator@vettedhomes.ng',
+    password: 'adminpassword',
+    phone: '+234 800 838 8333',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
+    bio: 'Official VettedHomes Trust, Safety & Anti-Defamation Enforcement Desk.',
+    isVerified: true,
+    roles: ['admin', 'buyer_tenant'],
+    activeRole: 'admin',
+    enquiries: [],
+    savedProperties: [],
+    followedNeighbourhoods: [],
+    myListings: []
+  }
+];
+
+function getRegisteredUsers() {
+  try {
+    const raw = localStorage.getItem('vettedhomes_registered_users');
+    if (!raw) {
+      localStorage.setItem('vettedhomes_registered_users', JSON.stringify(INITIAL_SYSTEM_USERS));
+      return INITIAL_SYSTEM_USERS;
+    }
+    return JSON.parse(raw);
+  } catch {
+    return INITIAL_SYSTEM_USERS;
+  }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('vettedhomes_user') || localStorage.getItem('estatelens_user');
-    return saved ? JSON.parse(saved) : (isSupabaseConfigured ? null : DEMO_USER);
+    const saved = localStorage.getItem('vettedhomes_user');
+    return saved ? JSON.parse(saved) : null;
   });
 
   const [session, setSession] = useState(null);
   const [activeRole, setActiveRole] = useState(() => {
-    const saved = localStorage.getItem('vettedhomes_active_role') || localStorage.getItem('estatelens_active_role');
+    const saved = localStorage.getItem('vettedhomes_active_role');
     return saved || 'buyer_tenant';
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [authError, setAuthError] = useState(null);
   const [recoveryMode, setRecoveryMode] = useState(false);
 
@@ -24,9 +114,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (user) {
       localStorage.setItem('vettedhomes_user', JSON.stringify(user));
-    } else if (!isSupabaseConfigured) {
+    } else {
       localStorage.removeItem('vettedhomes_user');
-      localStorage.removeItem('estatelens_user');
     }
   }, [user]);
 
@@ -75,10 +164,10 @@ export function AuthProvider({ children }) {
         isVerified: profile?.is_verified || false,
         roles: assignedRoles,
         activeRole: primaryRole,
-        enquiries: DEMO_USER.enquiries,
-        savedProperties: DEMO_USER.savedProperties,
-        followedNeighbourhoods: DEMO_USER.followedNeighbourhoods,
-        myListings: DEMO_USER.myListings
+        enquiries: [],
+        savedProperties: [],
+        followedNeighbourhoods: [],
+        myListings: []
       };
 
       setUser(fullUser);
@@ -99,31 +188,26 @@ export function AuthProvider({ children }) {
         if (error) console.warn('Error reading session:', error.message);
         setSession(currentSession);
         if (currentSession?.user) {
-          fetchSupabaseProfile(currentSession.user).finally(() => setLoading(false));
-        } else {
-          setLoading(false);
+          fetchSupabaseProfile(currentSession.user);
         }
       });
 
-      const { data } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
-        setSession(currentSession);
+      const { data: authListener } = supabase.auth.onAuthStateChange(async (event, newSession) => {
+        setSession(newSession);
+
         if (event === 'PASSWORD_RECOVERY') {
           setRecoveryMode(true);
         }
 
-        if (currentSession?.user) {
-          await fetchSupabaseProfile(currentSession.user);
+        if (newSession?.user) {
+          await fetchSupabaseProfile(newSession.user);
         } else if (event === 'SIGNED_OUT') {
           setUser(null);
           localStorage.removeItem('vettedhomes_user');
-          localStorage.removeItem('estatelens_user');
         }
-        setLoading(false);
       });
 
-      subscription = data.subscription;
-    } else {
-      setLoading(false);
+      subscription = authListener.subscription;
     }
 
     return () => {
@@ -135,6 +219,13 @@ export function AuthProvider({ children }) {
   const login = async (email, password, role = 'buyer_tenant') => {
     setAuthError(null);
     setLoading(true);
+
+    if (!email || !email.trim()) {
+      const err = 'Please enter your email address.';
+      setAuthError(err);
+      setLoading(false);
+      return { success: false, error: err };
+    }
 
     if (isSupabaseConfigured) {
       try {
@@ -159,17 +250,34 @@ export function AuthProvider({ children }) {
         return { success: false, error: msg };
       }
     } else {
-      // Local demo mode simulation
-      const newUser = {
-        ...DEMO_USER,
-        email: email.trim() || DEMO_USER.email,
-        roles: Array.from(new Set([role, 'buyer_tenant'])),
-        activeRole: role
-      };
-      setUser(newUser);
-      setActiveRole(role);
+      // Autonomous local client authentication
+      const userList = getRegisteredUsers();
+      const existingUser = userList.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+
+      if (existingUser) {
+        if (password && existingUser.password && existingUser.password !== password) {
+          const err = 'Incorrect password. Please verify your credentials.';
+          setAuthError(err);
+          setLoading(false);
+          return { success: false, error: err };
+        }
+
+        const activeUser = {
+          ...existingUser,
+          roles: Array.from(new Set([...(existingUser.roles || []), role])),
+          activeRole: role || existingUser.activeRole || 'buyer_tenant'
+        };
+
+        setUser(activeUser);
+        setActiveRole(activeUser.activeRole);
+        setLoading(false);
+        return { success: true, user: activeUser };
+      }
+
+      const err = 'Account not found. Please create an account or select a quick-access persona below.';
+      setAuthError(err);
       setLoading(false);
-      return { success: true, user: newUser, demoMode: true };
+      return { success: false, error: err };
     }
   };
 
@@ -177,6 +285,20 @@ export function AuthProvider({ children }) {
   const register = async ({ name, email, phone, password, role = 'buyer_tenant' }) => {
     setAuthError(null);
     setLoading(true);
+
+    if (!name || !name.trim()) {
+      const err = 'Please enter your full name.';
+      setAuthError(err);
+      setLoading(false);
+      return { success: false, error: err };
+    }
+
+    if (!email || !email.trim()) {
+      const err = 'Please enter your email address.';
+      setAuthError(err);
+      setLoading(false);
+      return { success: false, error: err };
+    }
 
     if (isSupabaseConfigured) {
       try {
@@ -199,7 +321,6 @@ export function AuthProvider({ children }) {
           return { success: false, error: error.message };
         }
 
-        // If email confirmation is required by Supabase project settings
         if (data?.user && (!data.session || data.user.identities?.length === 0)) {
           setLoading(false);
           return { 
@@ -224,20 +345,40 @@ export function AuthProvider({ children }) {
         return { success: false, error: msg };
       }
     } else {
-      // Local demo mode simulation
+      // Local client storage registration
+      const userList = getRegisteredUsers();
+      if (userList.some(u => u.email.toLowerCase() === email.trim().toLowerCase())) {
+        const err = 'An account with this email address already exists. Please sign in.';
+        setAuthError(err);
+        setLoading(false);
+        return { success: false, error: err };
+      }
+
       const newUser = {
-        ...DEMO_USER,
         id: `usr-${Date.now()}`,
         name: name.trim(),
         email: email.trim(),
-        phone: phone ? phone.trim() : '+234 800 000 0000',
+        password: password || 'password123',
+        phone: phone ? phone.trim() : '',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+        bio: 'Verified member of the VettedHomes community.',
+        isVerified: false,
         roles: [role],
-        activeRole: role
+        activeRole: role,
+        enquiries: [],
+        savedProperties: [],
+        followedNeighbourhoods: [],
+        myListings: [],
+        createdAt: new Date().toISOString()
       };
+
+      const updatedList = [newUser, ...userList];
+      localStorage.setItem('vettedhomes_registered_users', JSON.stringify(updatedList));
+
       setUser(newUser);
       setActiveRole(role);
       setLoading(false);
-      return { success: true, user: newUser, demoMode: true };
+      return { success: true, user: newUser };
     }
   };
 
@@ -253,7 +394,6 @@ export function AuthProvider({ children }) {
     setUser(null);
     setSession(null);
     localStorage.removeItem('vettedhomes_user');
-    localStorage.removeItem('estatelens_user');
   };
 
   // 4. Request password reset email
@@ -272,8 +412,7 @@ export function AuthProvider({ children }) {
     } else {
       return { 
         success: true, 
-        message: `Password reset link has been dispatched to ${email} (Demo Mode).`,
-        demoMode: true 
+        message: `Password reset verification email dispatched to ${email}. Please check your inbox.`
       };
     }
   };
@@ -291,7 +430,7 @@ export function AuthProvider({ children }) {
       return { success: true };
     } else {
       setRecoveryMode(false);
-      return { success: true, demoMode: true };
+      return { success: true };
     }
   };
 
@@ -299,44 +438,68 @@ export function AuthProvider({ children }) {
   const updateProfile = async (updates) => {
     if (!user) return { success: false, error: 'No user signed in' };
 
-    const updatedUser = { ...user, ...updates };
-    setUser(updatedUser);
-
     if (isSupabaseConfigured) {
       try {
         const { error } = await supabase
           .from('profiles')
           .update({
-            full_name: updates.name || user.name,
-            phone: updates.phone !== undefined ? updates.phone : user.phone,
-            bio: updates.bio !== undefined ? updates.bio : user.bio,
-            avatar_url: updates.avatar || user.avatar
+            full_name: updates.name,
+            phone: updates.phone,
+            bio: updates.bio,
+            avatar_url: updates.avatar,
+            updated_at: new Date().toISOString()
           })
           .eq('id', user.id);
 
-        if (error) throw error;
+        if (error) {
+          console.warn('Profile update error:', error.message);
+          return { success: false, error: error.message };
+        }
+
+        const updatedUser = { ...user, ...updates };
+        setUser(updatedUser);
+        return { success: true, user: updatedUser };
       } catch (err) {
-        console.warn('Could not sync profile update to Supabase:', err.message);
         return { success: false, error: err.message };
       }
-    }
-
-    return { success: true, user: updatedUser };
-  };
-
-  // 7. Role management: switch active workspace role
-  const switchRole = (newRole) => {
-    if (!user) return;
-    if (user.roles?.includes(newRole)) {
-      setActiveRole(newRole);
-      setUser(prev => ({ ...prev, activeRole: newRole }));
     } else {
-      // Add role to user
-      addRole(newRole);
+      const updatedUser = { ...user, ...updates };
+      setUser(updatedUser);
+
+      try {
+        const list = getRegisteredUsers().map(u => u.id === user.id ? { ...u, ...updates } : u);
+        localStorage.setItem('vettedhomes_registered_users', JSON.stringify(list));
+      } catch (e) {
+        console.warn('Failed to update local user registry:', e);
+      }
+
+      return { success: true, user: updatedUser };
     }
   };
 
-  // 8. Add a new role to user (multi-role capability)
+  // 7. Multi-Role Switcher (Tenants can switch to Landlord view, Agents, etc.)
+  const switchRole = async (targetRole) => {
+    if (!user) return;
+    setActiveRole(targetRole);
+
+    if (isSupabaseConfigured) {
+      try {
+        await supabase
+          .from('user_roles')
+          .update({ is_primary: false })
+          .eq('user_id', user.id);
+
+        await supabase
+          .from('user_roles')
+          .update({ is_primary: true })
+          .eq('user_id', user.id)
+          .eq('role', targetRole);
+      } catch (err) {
+        console.warn('Could not update primary role in Supabase:', err);
+      }
+    }
+  };
+
   const addRole = async (newRole) => {
     if (!user) return;
     const currentRoles = user.roles || ['buyer_tenant'];

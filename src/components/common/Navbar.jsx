@@ -15,18 +15,15 @@ import {
   ChevronDown,
   LogOut,
   LayoutDashboard,
-  Database,
   Settings
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useSavedProperties } from '../../context/SavedPropertiesContext';
-import { DatabaseStatusModal } from './DatabaseStatusModal';
 import { BrandLogo } from './BrandLogo';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [dbModalOpen, setDbModalOpen] = useState(false);
   const { user, isAuthenticated, activeRole, switchRole, logout, isConfigured } = useAuth();
   const { savedCount } = useSavedProperties();
   const navigate = useNavigate();
@@ -99,21 +96,6 @@ export function Navbar() {
 
             {/* Desktop Right Actions */}
             <div className="hidden lg:flex items-center space-x-3">
-              {/* Database Status Button */}
-              <button
-                type="button"
-                onClick={() => setDbModalOpen(true)}
-                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-[11px] font-semibold transition ${
-                  isConfigured
-                    ? 'bg-navy-card border-navy-border text-gold-light hover:border-gold/50'
-                    : 'bg-navy-card border-navy-border text-estate-400 hover:border-gold/40 hover:text-white'
-                }`}
-                title="View Supabase PostgreSQL Database Architecture"
-              >
-                <Database className={`w-3.5 h-3.5 ${isConfigured ? 'text-gold' : 'text-amber-400'}`} />
-                <span>{isConfigured ? 'DB: Supabase Live' : 'DB: Local Sandbox'}</span>
-              </button>
-
               {/* Saved properties */}
               <Link
                 to="/dashboard/saved"
@@ -272,14 +254,6 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <div className="flex items-center space-x-3 lg:hidden">
-              <button
-                type="button"
-                onClick={() => setDbModalOpen(true)}
-                className="p-1.5 text-slate-300 hover:text-white"
-                title="Database Status"
-              >
-                <Database className="w-4 h-4 text-gold" />
-              </button>
               <Link
                 to="/dashboard/saved"
                 className="relative p-2 text-slate-300 hover:text-rose-400"
@@ -383,12 +357,6 @@ export function Navbar() {
           </div>
         )}
       </header>
-
-      {/* Database Status Modal */}
-      <DatabaseStatusModal
-        isOpen={dbModalOpen}
-        onClose={() => setDbModalOpen(false)}
-      />
     </>
   );
 }

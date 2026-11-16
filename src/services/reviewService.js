@@ -138,7 +138,11 @@ export async function fetchPropertyReviews(propertyId) {
   }
 
   // Local user-submitted reviews
-  const localMap = JSON.parse(localStorage.getItem('estatelens_property_reviews') || '{}');
+  const localMap = JSON.parse(
+    localStorage.getItem('vettedhomes_property_reviews') ||
+    localStorage.getItem('estatelens_property_reviews') ||
+    '{}'
+  );
   const localList = localMap[propertyId] || [];
 
   const defaultList = DEFAULT_PROPERTY_REVIEWS[propertyId] || [];
@@ -194,9 +198,13 @@ export async function submitPropertyReview({
   }
 
   // Persist locally
-  const localMap = JSON.parse(localStorage.getItem('estatelens_property_reviews') || '{}');
+  const localMap = JSON.parse(
+    localStorage.getItem('vettedhomes_property_reviews') ||
+    localStorage.getItem('estatelens_property_reviews') ||
+    '{}'
+  );
   localMap[propertyId] = [newReview, ...(localMap[propertyId] || [])];
-  localStorage.setItem('estatelens_property_reviews', JSON.stringify(localMap));
+  localStorage.setItem('vettedhomes_property_reviews', JSON.stringify(localMap));
 
   return { success: true, review: newReview };
 }
@@ -238,7 +246,11 @@ export async function fetchNeighbourhoodReviews(neighbourhoodId) {
   }
 
   // Local user-submitted reviews
-  const localMap = JSON.parse(localStorage.getItem('estatelens_neighbourhood_reviews') || '{}');
+  const localMap = JSON.parse(
+    localStorage.getItem('vettedhomes_neighbourhood_reviews') ||
+    localStorage.getItem('estatelens_neighbourhood_reviews') ||
+    '{}'
+  );
   const localList = localMap[neighbourhoodId] || [];
 
   const defaultList = DEFAULT_NEIGHBOURHOOD_REVIEWS[neighbourhoodId] || [];
@@ -294,9 +306,13 @@ export async function submitNeighbourhoodReview({
   }
 
   // Persist locally
-  const localMap = JSON.parse(localStorage.getItem('estatelens_neighbourhood_reviews') || '{}');
+  const localMap = JSON.parse(
+    localStorage.getItem('vettedhomes_neighbourhood_reviews') ||
+    localStorage.getItem('estatelens_neighbourhood_reviews') ||
+    '{}'
+  );
   localMap[neighbourhoodId] = [newReview, ...(localMap[neighbourhoodId] || [])];
-  localStorage.setItem('estatelens_neighbourhood_reviews', JSON.stringify(localMap));
+  localStorage.setItem('vettedhomes_neighbourhood_reviews', JSON.stringify(localMap));
 
   return { success: true, review: newReview };
 }

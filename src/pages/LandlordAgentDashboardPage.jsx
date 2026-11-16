@@ -299,8 +299,8 @@ export function LandlordAgentDashboardPage() {
       </div>
 
       {notification && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
-          <CheckCircle2 className="w-4 h-4 text-emerald shrink-0" />
+        <div className="p-4 bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{notification}</span>
         </div>
       )}
@@ -382,10 +382,10 @@ export function LandlordAgentDashboardPage() {
               <span>Loading your property portfolio...</span>
             </div>
           ) : myListings.length === 0 ? (
-            <div className="p-12 text-center text-xs text-estate-400">
-              <Building2 className="w-10 h-10 text-estate-500 mx-auto mb-2" />
+            <div className="p-12 text-center text-xs text-slate-300">
+              <Building2 className="w-10 h-10 text-slate-400 mx-auto mb-2" />
               <p className="font-bold text-white text-sm">No properties in your portfolio yet</p>
-              <p className="mt-1">Click "Create New Listing" to publish your first property.</p>
+              <p className="mt-1 text-slate-300">Click "Create New Listing" to publish your first property.</p>
             </div>
           ) : (
             <div className="divide-y divide-navy-border">
@@ -655,7 +655,7 @@ export function LandlordAgentDashboardPage() {
       >
         <form onSubmit={handleCreateListing} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-slate-100 mb-1">
               Property Title *
             </label>
             <input
@@ -664,39 +664,39 @@ export function LandlordAgentDashboardPage() {
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="e.g. Contemporary 4-Bedroom Semi-Detached Duplex with BQ"
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Category *</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Category *</label>
               <select
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               >
                 {PROPERTY_TYPES.filter(t => t !== 'All Types').map(t => (
-                  <option key={t} value={t}>{t}</option>
+                  <option key={t} value={t} className="bg-navy-deep text-white">{t}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Transaction *</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Transaction *</label>
               <select
                 value={newTransactionType}
                 onChange={(e) => setNewTransactionType(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               >
-                <option value="rent">For Rent</option>
-                <option value="sale">For Sale</option>
-                <option value="short-let">Short-Let</option>
+                <option value="rent" className="bg-navy-deep text-white">For Rent</option>
+                <option value="sale" className="bg-navy-deep text-white">For Sale</option>
+                <option value="short-let" className="bg-navy-deep text-white">Short-Let</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 {newTransactionType === 'short-let' ? 'Price per Night (₦) *' : newTransactionType === 'sale' ? 'Sale Price (₦) *' : 'Annual Rent (₦) *'}
               </label>
               <input
@@ -705,86 +705,86 @@ export function LandlordAgentDashboardPage() {
                 value={newPrice}
                 onChange={(e) => setNewPrice(e.target.value)}
                 placeholder="e.g. 7500000"
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Neighbourhood *</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Neighbourhood *</label>
               <select
                 value={newNeighbourhood}
                 onChange={(e) => setNewNeighbourhood(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               >
                 {DEMO_NEIGHBOURHOODS.map(n => (
-                  <option key={n.id} value={n.id}>{n.name} ({n.city})</option>
+                  <option key={n.id} value={n.id} className="bg-navy-deep text-white">{n.name} ({n.city})</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Street / Enclave Address *</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Street / Enclave Address *</label>
               <input
                 type="text"
                 required
                 value={newAddress}
                 onChange={(e) => setNewAddress(e.target.value)}
                 placeholder="e.g. Off Admiralty Way, Lekki Phase 1"
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Bedrooms</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Bedrooms</label>
               <input
                 type="number"
                 value={newBedrooms}
                 onChange={(e) => setNewBedrooms(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Bathrooms</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Bathrooms</label>
               <input
                 type="number"
                 value={newBathrooms}
                 onChange={(e) => setNewBathrooms(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Size (m²)</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Size (m²)</label>
               <input
                 type="number"
                 value={newSizeSqm}
                 onChange={(e) => setNewSizeSqm(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Furnishing</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Furnishing</label>
               <select
                 value={newFurnishing}
                 onChange={(e) => setNewFurnishing(e.target.value)}
-                className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs bg-white outline-none"
+                className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               >
-                <option value="Semi-Furnished">Semi-Furnished</option>
-                <option value="Fully Furnished">Fully Furnished</option>
-                <option value="Unfurnished">Unfurnished</option>
+                <option value="Semi-Furnished" className="bg-navy-deep text-white">Semi-Furnished</option>
+                <option value="Fully Furnished" className="bg-navy-deep text-white">Fully Furnished</option>
+                <option value="Unfurnished" className="bg-navy-deep text-white">Unfurnished</option>
               </select>
             </div>
           </div>
 
           {/* Image Upload Component */}
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">
+            <label className="block text-xs font-bold text-slate-100 mb-1">
               Property Photographs (Multi-image upload supported)
             </label>
-            <div className="border-2 border-dashed border-estate-200 rounded-2xl p-4 text-center hover:bg-sand-50 transition cursor-pointer relative">
+            <div className="border-2 border-dashed border-navy-border rounded-2xl p-4 text-center hover:bg-navy-surface transition cursor-pointer relative">
               <input
                 type="file"
                 multiple
@@ -794,64 +794,65 @@ export function LandlordAgentDashboardPage() {
               />
               <Upload className="w-6 h-6 text-gold mx-auto mb-1" />
               <p className="text-xs font-semibold text-white">Click or drag images to upload</p>
-              <p className="text-[10px] text-estate-400">JPEG, PNG, WebP up to 10MB each</p>
+              <p className="text-[10px] text-slate-300">JPEG, PNG, WebP up to 10MB each</p>
             </div>
 
             {/* Image Previews */}
             {imagePreviews.length > 0 && (
               <div className="flex gap-2 mt-2 overflow-x-auto pb-1">
                 {imagePreviews.map((src, i) => (
-                  <img key={i} src={src} alt="Preview" className="w-16 h-16 rounded-xl object-cover ring-1 ring-emerald-300" />
+                  <img key={i} src={src} alt="Preview" className="w-16 h-16 rounded-xl object-cover ring-1 ring-gold" />
                 ))}
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">Or Paste Image URLs (comma separated)</label>
+            <label className="block text-xs font-bold text-slate-100 mb-1">Or Paste Image URLs (comma separated)</label>
             <input
               type="text"
               value={imageUrlInput}
               onChange={(e) => setImageUrlInput(e.target.value)}
               placeholder="https://images.unsplash.com/..., https://..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">Features & Amenities (comma separated)</label>
+            <label className="block text-xs font-bold text-slate-100 mb-1">Features & Amenities (comma separated)</label>
             <input
               type="text"
               value={newAmenities}
               onChange={(e) => setNewAmenities(e.target.value)}
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none"
+              placeholder="Swimming pool, 24/7 Security, Inverter, Dedicated Transformer"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-estate-800 mb-1">Property Description *</label>
+            <label className="block text-xs font-bold text-slate-100 mb-1">Property Description *</label>
             <textarea
               required
               rows="3"
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
               placeholder="Describe layout, marble kitchen counters, power inverter, and access security..."
-              className="w-full px-3 py-2 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+              className="w-full px-3 py-2 border border-navy-border rounded-xl text-xs text-white bg-navy-surface placeholder-slate-400 outline-none focus:ring-1 focus:ring-gold"
             />
           </div>
 
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-estate-100">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-navy-border">
             <button
               type="button"
               onClick={() => setIsCreateModalOpen(false)}
-              className="px-4 py-2 border border-estate-200 text-xs font-semibold rounded-xl text-estate-700 hover:bg-estate-50"
+              className="px-4 py-2 border border-navy-border text-xs font-semibold rounded-xl text-slate-200 hover:bg-navy-surface hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 bg-emerald hover:bg-emerald-dark text-white text-xs font-bold rounded-xl transition disabled:opacity-70 flex items-center gap-1.5"
+              className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition disabled:opacity-70 flex items-center gap-1.5 tracking-wide"
             >
               {isSubmitting ? 'Uploading & Creating...' : 'Publish to Marketplace'}
             </button>

@@ -5,10 +5,10 @@ export function NeighbourhoodMetricsBar({ metrics, showSummaries = true }) {
   if (!metrics) return null;
 
   const getScoreColor = (score) => {
-    if (score >= 8.5) return 'bg-emerald-500 text-emerald-700';
-    if (score >= 7.0) return 'bg-emerald-600 text-emerald-800';
-    if (score >= 5.5) return 'bg-amber-500 text-amber-700';
-    return 'bg-rose-500 text-rose-700';
+    if (score >= 8.5) return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+    if (score >= 7.0) return 'bg-emerald-600/20 text-emerald-200 border-emerald-500/30';
+    if (score >= 5.5) return 'bg-amber-500/20 text-amber-300 border-amber-500/30';
+    return 'bg-rose-500/20 text-rose-300 border-rose-500/30';
   };
 
   const items = [

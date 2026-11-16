@@ -116,14 +116,14 @@ export function AdminModerationPage() {
 
         {loading ? (
           <div className="py-20 text-center space-y-3">
-            <Loader2 className="w-8 h-8 text-emerald animate-spin mx-auto" />
-            <p className="text-xs text-estate-500 font-semibold">Loading flagged reports queue...</p>
+            <Loader2 className="w-8 h-8 text-gold animate-spin mx-auto" />
+            <p className="text-xs text-slate-200 font-semibold">Loading flagged reports queue...</p>
           </div>
         ) : reports.length === 0 ? (
           <div className="py-16 text-center space-y-2">
             <CheckCircle2 className="w-12 h-12 text-gold mx-auto" />
             <p className="text-sm font-bold text-white">Moderation Queue is Clean</p>
-            <p className="text-xs text-estate-400">All community reports have been audited and acted upon.</p>
+            <p className="text-xs text-slate-300">All community reports have been audited and acted upon.</p>
           </div>
         ) : (
           <div className="divide-y divide-navy-border">
@@ -136,46 +136,46 @@ export function AdminModerationPage() {
                         ? 'bg-rose-950/80 text-rose-300 border border-rose-500/30'
                         : report.severity === 'High'
                         ? 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
-                        : 'bg-navy-surface text-estate-300 border border-navy-border'
+                        : 'bg-navy-surface text-slate-200 border border-navy-border'
                     }`}>
                       {report.severity} Priority
                     </span>
-                    <span className="text-xs text-estate-400">• {report.targetType}</span>
-                    <span className="text-xs text-estate-400">• {report.time}</span>
+                    <span className="text-xs text-slate-300">• {report.targetType}</span>
+                    <span className="text-xs text-slate-300">• {report.time}</span>
                   </div>
 
-                  <span className="text-xs text-estate-400">
+                  <span className="text-xs text-slate-300">
                     Reported by: <strong className="text-gold">{report.reportedBy}</strong>
                   </span>
                 </div>
 
                 <div>
                   <h3 className="text-sm sm:text-base font-bold text-white font-display">{report.title}</h3>
-                  <p className="text-xs text-estate-400 mt-0.5">
+                  <p className="text-xs text-slate-300 mt-0.5">
                     Violation Category: <strong className="text-gold">{report.reason}</strong>
                   </p>
                 </div>
 
-                <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-300 italic">
+                <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-slate-200 italic">
                   "{report.snippet}"
                 </div>
 
                 {/* Moderation Actions */}
                 <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-                  <span className="text-estate-400 text-[11px]">Report ID: {report.id}</span>
+                  <span className="text-slate-400 text-[11px]">Report ID: {report.id}</span>
                   
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => handleAction(report.id, 'Dismiss')}
-                      className="px-3.5 py-2 bg-estate-100 hover:bg-estate-200 text-estate-700 font-bold rounded-xl transition"
+                      className="px-3.5 py-2 bg-navy-surface hover:bg-navy-border text-slate-200 font-bold rounded-xl border border-navy-border transition"
                     >
                       Dismiss (No Violation)
                     </button>
                     <button
                       type="button"
                       onClick={() => handleAction(report.id, 'Redact')}
-                      className="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-bold rounded-xl transition flex items-center gap-1.5"
+                      className="px-3.5 py-2 bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 font-bold rounded-xl transition flex items-center gap-1.5"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                       <span>Redact Personal Details</span>

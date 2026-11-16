@@ -88,8 +88,8 @@ export function NeighbourhoodDetailPage() {
   if (loading || !neighbourhood) {
     return (
       <div className="py-32 text-center space-y-3">
-        <Loader2 className="w-10 h-10 text-emerald animate-spin mx-auto" />
-        <p className="text-xs font-semibold text-estate-500">Compiling neighbourhood intelligence & community reports...</p>
+        <Loader2 className="w-10 h-10 text-gold animate-spin mx-auto" />
+        <p className="text-xs font-semibold text-slate-200">Compiling neighbourhood intelligence & community reports...</p>
       </div>
     );
   }
@@ -302,7 +302,7 @@ export function NeighbourhoodDetailPage() {
                       <p className="text-xs text-estate-400 leading-relaxed">
                         {intelligenceSummary.categories.electricity.summary}
                       </p>
-                      <p className="text-[11px] text-estate-500 italic">
+                      <p className="text-[11px] text-slate-300 italic">
                         Note: {intelligenceSummary.categories.electricity.uncertaintyNote}
                       </p>
                     </div>
@@ -343,7 +343,7 @@ export function NeighbourhoodDetailPage() {
                       <p className="text-xs text-estate-400 leading-relaxed">
                         {intelligenceSummary.categories.roadConditions.summary}
                       </p>
-                      <p className="text-[11px] text-estate-500 italic">
+                      <p className="text-[11px] text-slate-300 italic">
                         {intelligenceSummary.categories.roadConditions.uncertaintyNote}
                       </p>
                     </div>
@@ -608,9 +608,9 @@ export function NeighbourhoodDetailPage() {
 
             {activeProperties.length === 0 ? (
               <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
-                <Building2 className="w-12 h-12 text-estate-500 mx-auto mb-2" />
+                <Building2 className="w-12 h-12 text-slate-400 mx-auto mb-2" />
                 <p className="text-sm font-bold text-white">No active listings in this neighbourhood right now</p>
-                <p className="text-xs text-estate-400 mt-1 mb-4">Check back soon or explore adjacent areas.</p>
+                <p className="text-xs text-slate-300 mt-1 mb-4">Check back soon or explore adjacent areas.</p>
                 <Link
                   to="/properties"
                   className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl transition shadow-gold"

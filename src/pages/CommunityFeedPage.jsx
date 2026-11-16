@@ -92,7 +92,7 @@ export function CommunityFeedPage() {
           <h1 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">
             Neighbourhood Community Discussions
           </h1>
-          <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed">
             Unfiltered, ground-truth discussions about living conditions, power reliability, drainage, security vigilance, and landlord realities across Nigerian urban estates.
           </p>
         </div>
@@ -239,13 +239,13 @@ export function CommunityFeedPage() {
           {loading ? (
             <div className="py-20 text-center space-y-3">
               <Loader2 className="w-10 h-10 text-gold animate-spin mx-auto" />
-              <p className="text-xs font-semibold text-estate-400">Retrieving neighbourhood community forum discussions...</p>
+              <p className="text-xs font-semibold text-slate-300">Retrieving neighbourhood community forum discussions...</p>
             </div>
           ) : posts.length === 0 ? (
             <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
-              <MessageSquareText className="w-12 h-12 text-estate-500 mx-auto mb-3" />
+              <MessageSquareText className="w-12 h-12 text-slate-400 mx-auto mb-3" />
               <h3 className="text-lg font-bold text-white font-display">No discussions found</h3>
-              <p className="text-xs sm:text-sm text-estate-400 mt-1 mb-5">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 mb-5">
                 No posts match your selected filters. Be the first to start a conversation!
               </p>
               <button

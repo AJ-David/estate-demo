@@ -71,9 +71,14 @@ export function AuthPage() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
-    const res = await login(email || 'babatunde@vettedhomes.demo', password, selectedRole);
+    if (!email || !email.trim()) {
+      setError('Please enter your email address.');
+      return;
+    }
+
+    setLoading(true);
+    const res = await login(email.trim(), password, selectedRole);
     setLoading(false);
 
     if (res.success) {
@@ -84,10 +89,37 @@ export function AuthPage() {
     }
   };
 
+  const handlePersonaSignIn = async (personaEmail, personaRole) => {
+    setError('');
+    setLoading(true);
+    setEmail(personaEmail);
+    setSelectedRole(personaRole);
+    const res = await login(personaEmail, 'password123', personaRole);
+    setLoading(false);
+    if (res.success) {
+      const destination = redirectPath || (personaRole === 'landlord_owner' || personaRole === 'agent' ? '/dashboard/landlord' : personaRole === 'admin' ? '/dashboard/moderation' : '/dashboard/buyer');
+      navigate(destination);
+    } else {
+      setError(res.error || 'Could not authenticate persona.');
+    }
+  };
+
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
+    if (!name.trim()) {
+      setError('Please enter your full name.');
+      return;
+    }
+    if (!email.trim()) {
+      setError('Please enter your email address.');
+      return;
+    }
+    if (!password) {
+      setError('Please enter a secure password.');
+      return;
+    }
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
@@ -99,9 +131,9 @@ export function AuthPage() {
 
     setLoading(true);
     const res = await register({
-      name: name || 'Demo Resident',
-      email: email || 'user@vettedhomes.ng',
-      phone: phone || '+234 800 000 0000',
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
       password,
       role: selectedRole
     });
@@ -171,14 +203,8 @@ export function AuthPage() {
             <BrandLogo size="lg" variant="light" showTagline={false} />
           </div>
           <p className="text-xs text-slate-300 font-medium">
-            Nigeria's Verified Property & Neighbourhood Platform
+            Nigeria's Verified Property & Sovereign Neighbourhood Platform
           </p>
-
-          {/* Connection Status Pill */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-semibold bg-navy-card border border-navy-border text-slate-300 shadow-xs">
-            <span className={`w-2 h-2 rounded-full ${isConfigured ? 'bg-gold animate-pulse' : 'bg-amber-400'}`}></span>
-            <span>{isConfigured ? 'Live Supabase Connected' : 'Local Demo Sandbox Mode'}</span>
-          </div>
         </div>
 
         {/* Auth Card */}
@@ -237,7 +263,7 @@ export function AuthPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. babatunde@vettedhomes.demo"
+                    placeholder="e.g. adeleke@vettedhomes.ng"
                     className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
                   />
                 </div>
@@ -309,8 +335,45 @@ export function AuthPage() {
                 {!loading && <ArrowRight className="w-4 h-4 text-navy-deep" />}
               </button>
 
-              <div className="pt-2 text-center text-xs text-slate-400">
-                <span>Demo mode preloads sample credentials. Simply click <strong>Sign In</strong>.</span>
+              {/* Quick Access Sovereign Personas for seamless testing */}
+              <div className="pt-4 mt-2 border-t border-navy-border/80">
+                <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-2.5 text-center">
+                  Quick Access Sovereign Personas
+                </p>
+                <div className="grid grid-cols-2 gap-2 text-left">
+                  <button
+                    type="button"
+                    onClick={() => handlePersonaSignIn('babatunde@vettedhomes.ng', 'buyer_tenant')}
+                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
+                  >
+                    <span className="font-bold text-white text-xs block group-hover:text-gold">Babatunde A.</span>
+                    <span className="text-[10px] text-slate-400 block">Verified Resident</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePersonaSignIn('adewale@primestone.ng', 'agent')}
+                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
+                  >
+                    <span className="font-bold text-white text-xs block group-hover:text-gold">Adewale B.</span>
+                    <span className="text-[10px] text-slate-400 block">Licensed Agent</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePersonaSignIn('emeka.okonkwo@transcorp.ng', 'landlord_owner')}
+                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
+                  >
+                    <span className="font-bold text-white text-xs block group-hover:text-gold">Chief Okonkwo</span>
+                    <span className="text-[10px] text-slate-400 block">Property Owner</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePersonaSignIn('moderator@vettedhomes.ng', 'admin')}
+                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
+                  >
+                    <span className="font-bold text-white text-xs block group-hover:text-gold">Trust & Safety</span>
+                    <span className="text-[10px] text-slate-400 block">Moderation Lead</span>
+                  </button>
+                </div>
               </div>
             </form>
           )}

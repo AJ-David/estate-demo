@@ -108,8 +108,8 @@ export async function fetchProperties(filters = {}) {
     }
   }
 
-  // Combine with demo properties or use demo if database is empty
-  const localSaved = JSON.parse(localStorage.getItem('estatelens_custom_properties') || '[]');
+  // Combine with initial properties or use catalog if database is empty
+  const localSaved = JSON.parse(localStorage.getItem('vettedhomes_custom_properties') || localStorage.getItem('estatelens_custom_properties') || '[]');
   const combined = [...localSaved, ...allProperties];
   
   if (combined.length === 0) {
@@ -190,7 +190,11 @@ export async function fetchPropertyById(id) {
   }
 
   // Check custom local storage
-  const localSaved = JSON.parse(localStorage.getItem('estatelens_custom_properties') || '[]');
+  const localSaved = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_properties') ||
+    localStorage.getItem('estatelens_custom_properties') ||
+    '[]'
+  );
   const localMatch = localSaved.find(p => p.id === id);
   if (localMatch) return localMatch;
 
@@ -320,8 +324,12 @@ export async function createProperty(propertyData, user) {
   }
 
   // Always sync to localStorage as well for high reliability
-  const currentCustom = JSON.parse(localStorage.getItem('estatelens_custom_properties') || '[]');
-  localStorage.setItem('estatelens_custom_properties', JSON.stringify([newPropertyObj, ...currentCustom]));
+  const currentCustom = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_properties') ||
+    localStorage.getItem('estatelens_custom_properties') ||
+    '[]'
+  );
+  localStorage.setItem('vettedhomes_custom_properties', JSON.stringify([newPropertyObj, ...currentCustom]));
 
   return newPropertyObj;
 }
@@ -348,9 +356,13 @@ export async function updateProperty(id, updates, user) {
   }
 
   // Update local storage
-  const currentCustom = JSON.parse(localStorage.getItem('estatelens_custom_properties') || '[]');
+  const currentCustom = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_properties') ||
+    localStorage.getItem('estatelens_custom_properties') ||
+    '[]'
+  );
   const updated = currentCustom.map(p => p.id === id ? { ...p, ...updates } : p);
-  localStorage.setItem('estatelens_custom_properties', JSON.stringify(updated));
+  localStorage.setItem('vettedhomes_custom_properties', JSON.stringify(updated));
 
   return { success: true };
 }
@@ -365,9 +377,13 @@ export async function deleteProperty(id, user) {
     }
   }
 
-  const currentCustom = JSON.parse(localStorage.getItem('estatelens_custom_properties') || '[]');
+  const currentCustom = JSON.parse(
+    localStorage.getItem('vettedhomes_custom_properties') ||
+    localStorage.getItem('estatelens_custom_properties') ||
+    '[]'
+  );
   const filtered = currentCustom.filter(p => p.id !== id);
-  localStorage.setItem('estatelens_custom_properties', JSON.stringify(filtered));
+  localStorage.setItem('vettedhomes_custom_properties', JSON.stringify(filtered));
 
   return { success: true };
 }

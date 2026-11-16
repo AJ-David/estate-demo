@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Heart, MapPin, MessageSquare, Mail, Phone, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Heart, MapPin, MessageSquare, Mail, Phone, ExternalLink, Database } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { DatabaseStatusModal } from './DatabaseStatusModal';
 
 export function Footer() {
+  const [dbModalOpen, setDbModalOpen] = useState(false);
+
   return (
     <footer className="bg-navy-deep text-white border-t border-navy-border pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -138,16 +141,30 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-estate-400">
+        <div className="pt-6 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {new Date().getFullYear()} VettedHomes Technologies Ltd. Built for Nigeria, architected for global scale.</p>
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-6">
             <span className="hover:text-white cursor-pointer transition">Privacy Policy</span>
             <span className="hover:text-white cursor-pointer transition">Terms of Service</span>
             <span className="hover:text-white cursor-pointer transition">Community Guidelines</span>
+            <button
+              type="button"
+              onClick={() => setDbModalOpen(true)}
+              className="text-xs text-gold/80 hover:text-gold flex items-center gap-1.5 transition font-semibold"
+            >
+              <Database className="w-3.5 h-3.5 text-gold" />
+              <span>System Architecture</span>
+            </button>
           </div>
         </div>
 
       </div>
+
+      {/* Database Status Modal */}
+      <DatabaseStatusModal
+        isOpen={dbModalOpen}
+        onClose={() => setDbModalOpen(false)}
+      />
     </footer>
   );
 }

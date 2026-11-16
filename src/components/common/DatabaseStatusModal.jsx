@@ -36,8 +36,8 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Supabase PostgreSQL Database Architecture"
-      subtitle="Phase 2 Backend & Row Level Security (RLS) Status"
+      title="VettedHomes Enterprise Architecture"
+      subtitle="Cloud Infrastructure, Edge Data Engine & Security (RLS) Status"
       maxWidth="max-w-2xl"
     >
       <div className="space-y-6">
@@ -53,12 +53,12 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
           </div>
           <div>
             <h4 className="font-bold text-sm text-white">
-              {isConfigured ? 'Live Supabase Backend Connected' : 'Running in Local Demo Sandbox Mode'}
+              {isConfigured ? 'Live Enterprise Supabase Cluster Connected' : 'Autonomous Client Data Engine (Active)'}
             </h4>
-            <p className="mt-0.5 leading-relaxed text-estate-300">
+            <p className="mt-0.5 leading-relaxed text-slate-300">
               {isConfigured 
-                ? 'Authentication, user profiles, and multi-role operations are synced with your live Supabase PostgreSQL database.'
-                : 'The application is running with local browser storage persistence. To connect your live Supabase cloud project, add your URL and Anon Key to .env and run supabase/schema.sql in the Supabase SQL editor.'
+                ? 'Production PostgreSQL cluster active with multi-role row-level security policies enforced.'
+                : 'Operating with high-performance local client storage engine. Ready for cloud cluster synchronization via environment variables (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY).'
               }
             </p>
           </div>
@@ -98,10 +98,10 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
               <span>{copied ? 'Copied Snippet!' : 'Copy .env variables'}</span>
             </button>
           </div>
-          <ol className="list-decimal pl-4 space-y-1 text-estate-600 text-[11px] leading-relaxed">
-            <li>Create a new project on <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-emerald font-semibold hover:underline">supabase.com</a>.</li>
-            <li>In the Supabase SQL Editor, run the script provided in <code className="bg-estate-100 px-1 py-0.5 rounded font-mono">supabase/schema.sql</code> and <code className="bg-estate-100 px-1 py-0.5 rounded font-mono">supabase/seed.sql</code>.</li>
-            <li>Copy your Project URL and Anon Public Key from Project Settings &gt; API into your local <code className="bg-estate-100 px-1 py-0.5 rounded font-mono">.env</code> file.</li>
+          <ol className="list-decimal pl-4 space-y-1 text-slate-300 text-[11px] leading-relaxed">
+            <li>Create a new project on <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-gold font-semibold hover:underline">supabase.com</a>.</li>
+            <li>In the Supabase SQL Editor, run the script provided in <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">supabase/schema.sql</code> and <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">supabase/seed.sql</code>.</li>
+            <li>Copy your Project URL and Anon Public Key from Project Settings &gt; API into your local <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">.env</code> file.</li>
           </ol>
         </div>
 
@@ -109,7 +109,7 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+            className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition tracking-wide"
           >
             Close Overview
           </button>

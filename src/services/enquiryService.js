@@ -41,8 +41,12 @@ export async function sendPropertyEnquiry({
   }
 
   // Save to local enquiries store
-  const stored = JSON.parse(localStorage.getItem('estatelens_enquiries') || '[]');
-  localStorage.setItem('estatelens_enquiries', JSON.stringify([newEnquiry, ...stored]));
+  const stored = JSON.parse(
+    localStorage.getItem('vettedhomes_enquiries') ||
+    localStorage.getItem('estatelens_enquiries') ||
+    '[]'
+  );
+  localStorage.setItem('vettedhomes_enquiries', JSON.stringify([newEnquiry, ...stored]));
 
   return { success: true, enquiry: newEnquiry };
 }
@@ -99,8 +103,12 @@ export async function schedulePhysicalInspection({
     }
   }
 
-  const stored = JSON.parse(localStorage.getItem('estatelens_inspections') || '[]');
-  localStorage.setItem('estatelens_inspections', JSON.stringify([inspectionObj, ...stored]));
+  const stored = JSON.parse(
+    localStorage.getItem('vettedhomes_inspections') ||
+    localStorage.getItem('estatelens_inspections') ||
+    '[]'
+  );
+  localStorage.setItem('vettedhomes_inspections', JSON.stringify([inspectionObj, ...stored]));
 
   return { success: true, inspection: inspectionObj, gateCode };
 }
@@ -133,7 +141,11 @@ export async function getUserInspections(userId) {
     }
   }
 
-  const localSaved = JSON.parse(localStorage.getItem('estatelens_inspections') || '[]');
+  const localSaved = JSON.parse(
+    localStorage.getItem('vettedhomes_inspections') ||
+    localStorage.getItem('estatelens_inspections') ||
+    '[]'
+  );
   if (list.length === 0 && localSaved.length === 0) {
     return DEMO_USER.enquiries;
   }
@@ -170,7 +182,11 @@ export async function getUserEnquiries(userId) {
     }
   }
 
-  const localEnquiries = JSON.parse(localStorage.getItem('estatelens_enquiries') || '[]');
+  const localEnquiries = JSON.parse(
+    localStorage.getItem('vettedhomes_enquiries') ||
+    localStorage.getItem('estatelens_enquiries') ||
+    '[]'
+  );
   const formattedLocal = localEnquiries.map(e => ({
     id: e.id,
     propertyId: e.propertyId,

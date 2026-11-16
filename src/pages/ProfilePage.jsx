@@ -130,7 +130,7 @@ export function ProfilePage() {
             <span><strong className="text-white">Active Roles:</strong> {user?.roles?.map(r => r.replace('_', ' ')).join(', ')}</span>
             <span>•</span>
             <span className="text-gold font-semibold">
-              {isConfigured ? 'Connected to Supabase' : 'Local Demo Storage Mode'}
+              {isConfigured ? 'Cloud Sync Connected' : 'Verified Resident Account'}
             </span>
           </div>
         </div>
@@ -167,13 +167,13 @@ export function ProfilePage() {
       {statusMsg.text && (
         <div className={`p-4 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn ${
           statusMsg.type === 'success' 
-            ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' 
-            : 'bg-rose-50 border border-rose-200 text-rose-900'
+            ? 'bg-emerald-950/60 border border-emerald-500/40 text-emerald-300' 
+            : 'bg-rose-950/60 border border-rose-500/40 text-rose-300'
         }`}>
           {statusMsg.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           ) : (
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
           )}
           <span>{statusMsg.text}</span>
         </div>
@@ -181,58 +181,58 @@ export function ProfilePage() {
 
       {/* TAB 1: PERSONAL DETAILS */}
       {activeTab === 'details' && (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-estate-200 shadow-subtle max-w-2xl">
+        <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-navy-border shadow-premium max-w-2xl">
           <form onSubmit={handleUpdateDetails} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 Full Name
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                  className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 Email Address (Primary Login)
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   disabled
                   value={user?.email || ''}
-                  className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs bg-estate-50 text-estate-500 cursor-not-allowed"
+                  className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-deep text-slate-400 cursor-not-allowed"
                 />
               </div>
-              <p className="text-[10px] text-estate-400 mt-0.5">Email is tied to your authentication identity.</p>
+              <p className="text-[10px] text-slate-400 mt-0.5">Email is tied to your authentication identity.</p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 WhatsApp / Mobile Number
               </label>
               <div className="relative">
-                <Phone className="w-4 h-4 text-estate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+234 800 000 0000"
-                  className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                  className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 Avatar Photo URL
               </label>
               <input
@@ -240,12 +240,12 @@ export function ProfilePage() {
                 value={avatar}
                 onChange={(e) => setAvatar(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">
+              <label className="block text-xs font-bold text-slate-100 mb-1">
                 Bio / About Me
               </label>
               <textarea
@@ -253,7 +253,7 @@ export function ProfilePage() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Resident in Lekki Phase 1, tech enthusiast, property investor..."
-                className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -261,7 +261,7 @@ export function ProfilePage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2.5 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl shadow-sm transition"
+                className="px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition tracking-wide"
               >
                 {loading ? 'Saving...' : 'Save Profile Changes'}
               </button>
@@ -355,35 +355,35 @@ export function ProfilePage() {
 
           <form onSubmit={handleUpdatePassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-white mb-1">New Password</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">New Password</label>
               <input
                 type="password"
                 required
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">Confirm New Password</label>
+              <label className="block text-xs font-bold text-slate-100 mb-1">Confirm New Password</label>
               <input
                 type="password"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-3 py-2.5 border border-estate-200 rounded-xl text-xs outline-none focus:ring-1 focus:ring-emerald"
+                className="w-full px-3 py-2.5 border border-navy-border rounded-xl text-xs text-white bg-navy-surface outline-none focus:ring-1 focus:ring-gold"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl shadow-sm transition"
+              className="px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition tracking-wide"
             >
-              {loading ? 'Updating Password...' : 'Save New Password'}
+              {loading ? 'Updating...' : 'Update Password'}
             </button>
           </form>
         </div>

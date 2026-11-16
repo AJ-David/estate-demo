@@ -162,8 +162,8 @@ export function BuyerDashboardPage() {
         <div className="space-y-4">
           {loading ? (
             <div className="py-20 text-center">
-              <Loader2 className="w-8 h-8 text-emerald animate-spin mx-auto mb-2" />
-              <p className="text-xs text-estate-500 font-semibold">Loading saved properties...</p>
+              <Loader2 className="w-8 h-8 text-gold animate-spin mx-auto mb-2" />
+              <p className="text-xs text-slate-200 font-semibold">Loading saved properties...</p>
             </div>
           ) : savedProperties.length === 0 ? (
             <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
@@ -279,7 +279,7 @@ export function BuyerDashboardPage() {
         <div className="space-y-4 max-w-4xl">
           {conversations.length === 0 ? (
             <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
-              <MessageSquare className="w-12 h-12 text-estate-500 mx-auto mb-3" />
+              <MessageSquare className="w-12 h-12 text-slate-400 mx-auto mb-3" />
               <h3 className="text-base font-bold text-white font-display">No conversation threads yet</h3>
               <p className="text-xs text-estate-400 mt-1 mb-4">Have questions about rent terms or service charges? Click "Chat Directly with Agent" on any property.</p>
               <Link to="/properties" className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition inline-block">
