@@ -73,17 +73,17 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
     >
       {submitted ? (
         <div className="text-center py-8 space-y-4">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-14 h-14 bg-emerald-950/80 text-emerald-300 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h4 className="text-lg font-bold text-navy font-display">Evaluation Recorded</h4>
-          <p className="text-xs text-estate-600 max-w-sm mx-auto leading-relaxed">
+          <h4 className="text-lg font-bold text-white font-display">Evaluation Recorded</h4>
+          <p className="text-xs text-estate-400 max-w-sm mx-auto leading-relaxed">
             Thank you for contributing to Nigeria's ground-truth location intelligence. Your rating informs prospective residents on real living conditions.
           </p>
           <button
             type="button"
             onClick={handleReset}
-            className="w-full max-w-xs py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+            className="w-full max-w-xs py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
           >
             Done
           </button>
@@ -91,30 +91,30 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2 text-xs text-rose-700">
+            <div className="p-3 bg-rose-950/60 border border-rose-500/30 rounded-xl flex items-center gap-2 text-xs text-rose-300">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Computed overall banner */}
-          <div className="p-4 bg-sand-50 rounded-2xl border border-sand-200 flex items-center justify-between">
+          <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border flex items-center justify-between">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-estate-500 block">Overall Livability Contribution</span>
-              <span className="text-xs text-estate-600">Calculated from 4 core urban dimensions</span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-estate-400 block">Overall Livability Contribution</span>
+              <span className="text-xs text-estate-300">Calculated from 4 core urban dimensions</span>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-black text-emerald font-display">{calculateOverall()}</span>
+              <span className="text-2xl font-black text-gold font-display">{calculateOverall()}</span>
               <span className="text-xs text-estate-400"> / 10.0</span>
             </div>
           </div>
 
           {/* Multi-criteria sliders */}
           <div className="space-y-3">
-            <div className="p-3 bg-white rounded-xl border border-estate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-navy">
+            <div className="p-3 bg-navy-surface rounded-xl border border-navy-border space-y-1.5">
+              <div className="flex justify-between text-xs font-bold text-white">
                 <span>Security & Street Vigilance</span>
-                <span className="text-emerald font-black">{safetyRating} / 10</span>
+                <span className="text-gold font-black">{safetyRating} / 10</span>
               </div>
               <input
                 type="range"
@@ -123,15 +123,15 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
                 step="0.5"
                 value={safetyRating}
                 onChange={(e) => setSafetyRating(Number(e.target.value))}
-                className="w-full accent-emerald cursor-pointer"
+                className="w-full accent-gold cursor-pointer"
               />
               <span className="text-[10px] text-estate-400">Gated closes, vigilante presence, nocturnal lighting</span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-estate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-navy">
+            <div className="p-3 bg-navy-surface rounded-xl border border-navy-border space-y-1.5">
+              <div className="flex justify-between text-xs font-bold text-white">
                 <span>Power & Infrastructure Stability</span>
-                <span className="text-emerald font-black">{infrastructureRating} / 10</span>
+                <span className="text-gold font-black">{infrastructureRating} / 10</span>
               </div>
               <input
                 type="range"
@@ -140,15 +140,15 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
                 step="0.5"
                 value={infrastructureRating}
                 onChange={(e) => setInfrastructureRating(Number(e.target.value))}
-                className="w-full accent-emerald cursor-pointer"
+                className="w-full accent-gold cursor-pointer"
               />
               <span className="text-[10px] text-estate-400">Public feeder uptime, transformer maintenance, borehole water</span>
             </div>
 
-            <div className="p-3 bg-white rounded-xl border border-estate-200 space-y-1.5">
-              <div className="flex justify-between text-xs font-bold text-navy">
+            <div className="p-3 bg-navy-surface rounded-xl border border-navy-border space-y-1.5">
+              <div className="flex justify-between text-xs font-bold text-white">
                 <span>Accessibility & Transit Links</span>
-                <span className="text-emerald font-black">{accessibilityRating} / 10</span>
+                <span className="text-gold font-black">{accessibilityRating} / 10</span>
               </div>
               <input
                 type="range"
@@ -157,7 +157,7 @@ export function NeighbourhoodReviewModal({ isOpen, onClose, neighbourhood, onRev
                 step="0.5"
                 value={accessibilityRating}
                 onChange={(e) => setAccessibilityRating(Number(e.target.value))}
-                className="w-full accent-emerald cursor-pointer"
+                className="w-full accent-gold cursor-pointer"
               />
               <span className="text-[10px] text-estate-400">Rush hour traffic, road condition, bridge or metro connection</span>
             </div>

@@ -273,9 +273,9 @@ export function ProfilePage() {
       {/* TAB 2: MULTI-ROLE SETTINGS */}
       {activeTab === 'roles' && (
         <div className="space-y-6 max-w-2xl">
-          <div className="bg-sand-50 p-5 rounded-3xl border border-sand-200 text-xs text-estate-700 space-y-1">
-            <h3 className="font-bold text-navy text-sm">Unified Multi-Role Capability</h3>
-            <p className="text-[11px] leading-relaxed">
+          <div className="bg-navy-card p-5 rounded-3xl border border-navy-border shadow-premium text-xs text-estate-300 space-y-1">
+            <h3 className="font-bold text-white text-sm">Unified Multi-Role Capability</h3>
+            <p className="text-[11px] leading-relaxed text-estate-400">
               In VettedHomes, you do not need multiple logins. You can be an active tenant searching for an apartment while also listing properties as a landlord or managing clients as a licensed agent.
             </p>
           </div>
@@ -290,40 +290,40 @@ export function ProfilePage() {
                   key={roleItem.id}
                   className={`p-5 rounded-2xl border transition ${
                     isCurrentActive
-                      ? 'bg-emerald-50/50 border-emerald-300 ring-1 ring-emerald-300'
+                      ? 'bg-navy-surface border-gold/50 ring-1 ring-gold/40'
                       : hasRole
-                      ? 'bg-white border-estate-200'
-                      : 'bg-estate-50/70 border-dashed border-estate-300'
+                      ? 'bg-navy-card border-navy-border'
+                      : 'bg-navy-deep/60 border-dashed border-navy-border'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-bold text-navy font-display">{roleItem.title}</h4>
+                        <h4 className="text-sm font-bold text-white font-display">{roleItem.title}</h4>
                         {isCurrentActive && (
-                          <span className="bg-emerald text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          <span className="bg-gold text-navy-deep text-[10px] font-bold px-2 py-0.5 rounded-full">
                             Active Workspace
                           </span>
                         )}
                         {hasRole && !isCurrentActive && (
-                          <span className="bg-estate-200 text-estate-700 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                          <span className="bg-navy-surface text-estate-300 border border-navy-border text-[10px] font-semibold px-2 py-0.5 rounded-full">
                             Added to Account
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-estate-600 mt-1">{roleItem.description}</p>
+                      <p className="text-xs text-estate-400 mt-1">{roleItem.description}</p>
                     </div>
 
                     <div className="shrink-0">
                       {isCurrentActive ? (
-                        <span className="text-xs font-bold text-emerald flex items-center gap-1">
+                        <span className="text-xs font-bold text-gold flex items-center gap-1">
                           <CheckCircle2 className="w-4 h-4" /> Current View
                         </span>
                       ) : hasRole ? (
                         <button
                           type="button"
                           onClick={() => switchRole(roleItem.id)}
-                          className="px-3.5 py-1.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+                          className="px-3.5 py-1.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
                         >
                           Switch to this View
                         </button>
@@ -331,7 +331,7 @@ export function ProfilePage() {
                         <button
                           type="button"
                           onClick={() => addRole(roleItem.id)}
-                          className="px-3.5 py-1.5 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition"
+                          className="px-3.5 py-1.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
                         >
                           + Activate Role
                         </button>
@@ -347,15 +347,15 @@ export function ProfilePage() {
 
       {/* TAB 3: PASSWORD & SECURITY */}
       {activeTab === 'security' && (
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-estate-200 shadow-subtle max-w-2xl space-y-6">
+        <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-navy-border shadow-premium max-w-2xl space-y-6">
           <div>
-            <h3 className="text-base font-bold text-navy font-display">Update Password</h3>
-            <p className="text-xs text-estate-500 mt-0.5">Ensure your account uses a strong, unique password.</p>
+            <h3 className="text-base font-bold text-white font-display">Update Password</h3>
+            <p className="text-xs text-estate-400 mt-0.5">Ensure your account uses a strong, unique password.</p>
           </div>
 
           <form onSubmit={handleUpdatePassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-estate-800 mb-1">New Password</label>
+              <label className="block text-xs font-bold text-white mb-1">New Password</label>
               <input
                 type="password"
                 required
@@ -392,45 +392,45 @@ export function ProfilePage() {
       {/* TAB 4: BADGES & VERIFICATION */}
       {activeTab === 'verification' && (
         <div className="space-y-6 max-w-2xl">
-          <div className="bg-white rounded-3xl p-6 border border-estate-200 shadow-subtle space-y-4">
+          <div className="bg-navy-card rounded-3xl p-6 border border-navy-border shadow-premium space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-emerald-100 text-emerald rounded-2xl flex items-center justify-center font-bold">
-                <ShieldCheck className="w-6 h-6" />
+              <div className="w-12 h-12 bg-navy-surface text-gold rounded-2xl flex items-center justify-center font-bold border border-gold/30">
+                <ShieldCheck className="w-6 h-6 text-gold" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-navy font-display">Verified Resident Badge</h3>
-                <p className="text-xs text-estate-500">Unlocks verified resident credibility on community discussions.</p>
+                <h3 className="text-base font-bold text-white font-display">Verified Resident Badge</h3>
+                <p className="text-xs text-estate-400">Unlocks verified resident credibility on community discussions.</p>
               </div>
             </div>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <p className="text-xs text-estate-300 leading-relaxed">
               Earn the Verified Resident badge for your neighbourhood by submitting proof of address (utility bill, tenancy agreement, or estate association dues receipt).
             </p>
             <button
               type="button"
               onClick={() => alert('Verification submission portal: Upload utility bill or estate receipt to request badge.')}
-              className="px-4 py-2 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition"
+              className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
             >
               Request Resident Verification
             </button>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 border border-estate-200 shadow-subtle space-y-4">
+          <div className="bg-navy-card rounded-3xl p-6 border border-navy-border shadow-premium space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-navy text-emerald-light rounded-2xl flex items-center justify-center font-bold">
-                <Building2 className="w-6 h-6" />
+              <div className="w-12 h-12 bg-navy-surface text-gold rounded-2xl flex items-center justify-center font-bold border border-gold/30">
+                <Building2 className="w-6 h-6 text-gold" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-navy font-display">Certified Agent & Landlord Badge</h3>
-                <p className="text-xs text-estate-500">Allows posting unlimited verified properties and hosting tours.</p>
+                <h3 className="text-base font-bold text-white font-display">Certified Agent & Landlord Badge</h3>
+                <p className="text-xs text-estate-400">Allows posting unlimited verified properties and hosting tours.</p>
               </div>
             </div>
-            <p className="text-xs text-estate-600 leading-relaxed">
+            <p className="text-xs text-estate-300 leading-relaxed">
               VettedHomes requires real estate agents to submit license or CAC registration details before advertising properties.
             </p>
             <button
               type="button"
               onClick={() => alert('Agent verification portal: Upload agency certification or title documents.')}
-              className="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+              className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
             >
               Request Agent Badge
             </button>

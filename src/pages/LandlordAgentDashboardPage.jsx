@@ -250,17 +250,17 @@ export function LandlordAgentDashboardPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white rounded-3xl border border-estate-200 shadow-subtle">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy-card rounded-3xl border border-navy-border shadow-premium">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-black text-navy font-display">
+            <h1 className="text-xl sm:text-2xl font-black text-white font-display">
               Landlord & Real Estate Agent Suite
             </h1>
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="bg-navy-surface text-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-gold/40">
               Verified Partner
             </span>
           </div>
-          <p className="text-xs text-estate-500 mt-1">
+          <p className="text-xs text-estate-400 mt-1">
             Manage your property portfolio, inspection schedules, and listing performance.
           </p>
         </div>
@@ -268,9 +268,9 @@ export function LandlordAgentDashboardPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Link
             to="/dashboard/buyer"
-            className="px-3.5 py-2.5 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+            className="px-3.5 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
           >
-            <ArrowRightLeft className="w-3.5 h-3.5 text-emerald" />
+            <ArrowRightLeft className="w-3.5 h-3.5 text-gold" />
             <span>Switch to Tenant / Buyer View</span>
           </Link>
 
@@ -279,10 +279,10 @@ export function LandlordAgentDashboardPage() {
               type="button"
               disabled={isSeeding}
               onClick={handleSeedSupabase}
-              className="px-4 py-2.5 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
               title="Populate Supabase tables with sample verified listings"
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald" />
+              <Sparkles className="w-3.5 h-3.5 text-gold" />
               <span>{isSeeding ? 'Seeding...' : 'Seed Sample Homes to DB'}</span>
             </button>
           )}
@@ -290,9 +290,9 @@ export function LandlordAgentDashboardPage() {
           <button
             type="button"
             onClick={() => setIsCreateModalOpen(true)}
-            className="px-5 py-2.5 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition flex items-center justify-center gap-2"
+            className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black rounded-xl text-xs sm:text-sm shadow-gold hover:brightness-110 transition flex items-center justify-center gap-2"
           >
-            <PlusCircle className="w-4 h-4" />
+            <PlusCircle className="w-4 h-4 text-navy-deep" />
             <span>Create New Listing</span>
           </button>
         </div>
@@ -368,55 +368,55 @@ export function LandlordAgentDashboardPage() {
 
       {/* TAB 1: PORTFOLIO LISTINGS */}
       {activeTab === 'portfolio' && (
-        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle overflow-hidden">
-          <div className="p-6 border-b border-estate-100 flex items-center justify-between">
+        <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium overflow-hidden">
+          <div className="p-6 border-b border-navy-border flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-navy font-display">Your Property Listings ({myListings.length})</h3>
-              <p className="text-xs text-estate-500">Manage pricing, status, and inspection availability.</p>
+              <h3 className="text-base font-bold text-white font-display">Your Property Listings ({myListings.length})</h3>
+              <p className="text-xs text-estate-400">Manage pricing, status, and inspection availability.</p>
             </div>
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-xs text-estate-500">
-              <div className="w-8 h-8 border-4 border-estate-200 border-t-emerald rounded-full animate-spin mx-auto mb-2"></div>
+            <div className="p-12 text-center text-xs text-estate-400">
+              <div className="w-8 h-8 border-4 border-navy-border border-t-gold rounded-full animate-spin mx-auto mb-2"></div>
               <span>Loading your property portfolio...</span>
             </div>
           ) : myListings.length === 0 ? (
-            <div className="p-12 text-center text-xs text-estate-500">
-              <Building2 className="w-10 h-10 text-estate-300 mx-auto mb-2" />
-              <p className="font-bold text-navy text-sm">No properties in your portfolio yet</p>
+            <div className="p-12 text-center text-xs text-estate-400">
+              <Building2 className="w-10 h-10 text-estate-500 mx-auto mb-2" />
+              <p className="font-bold text-white text-sm">No properties in your portfolio yet</p>
               <p className="mt-1">Click "Create New Listing" to publish your first property.</p>
             </div>
           ) : (
-            <div className="divide-y divide-estate-100">
+            <div className="divide-y divide-navy-border">
               {myListings.map(listing => (
-                <div key={listing.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-sand-50/50 transition">
+                <div key={listing.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-navy-surface/50 transition">
                   
                   <div className="flex items-center gap-4">
                     <img
                       src={listing.images?.[0] || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80'}
                       alt={listing.title}
-                      className="w-16 h-16 rounded-xl object-cover shrink-0"
+                      className="w-16 h-16 rounded-xl object-cover shrink-0 ring-1 ring-gold/20"
                     />
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           listing.availabilityStatus === 'Available Now'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-estate-200 text-estate-700'
+                            ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30'
+                            : 'bg-navy-surface text-estate-300 border border-navy-border'
                         }`}>
                           {listing.availabilityStatus || 'Active'}
                         </span>
-                        <span className="text-xs text-estate-500">{listing.category}</span>
-                        <span className="text-xs text-emerald font-semibold uppercase">{listing.transactionType}</span>
+                        <span className="text-xs text-estate-400">{listing.category}</span>
+                        <span className="text-xs text-gold font-semibold uppercase">{listing.transactionType}</span>
                       </div>
-                      <h4 className="text-sm font-bold text-navy font-display line-clamp-1">
-                        <Link to={`/properties/${listing.id}`} className="hover:text-emerald">
+                      <h4 className="text-sm font-bold text-white font-display line-clamp-1">
+                        <Link to={`/properties/${listing.id}`} className="hover:text-gold transition">
                           {listing.title}
                         </Link>
                       </h4>
-                      <p className="text-xs text-estate-500">
-                        {listing.location?.neighbourhoodName || 'Lagos'} • <strong className="text-navy">₦{Number(listing.price).toLocaleString()} / {listing.pricePeriod}</strong>
+                      <p className="text-xs text-estate-400">
+                        {listing.location?.neighbourhoodName || 'Lagos'} • <strong className="text-gold">₦{Number(listing.price).toLocaleString()} / {listing.pricePeriod}</strong>
                       </p>
                     </div>
                   </div>
@@ -425,7 +425,7 @@ export function LandlordAgentDashboardPage() {
                   <div className="flex items-center gap-2 justify-between md:justify-end text-xs">
                     <Link
                       to={`/properties/${listing.id}`}
-                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      className="p-2 border border-navy-border rounded-lg text-estate-300 hover:bg-navy-surface hover:text-white transition"
                       title="View Property Page"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -433,19 +433,19 @@ export function LandlordAgentDashboardPage() {
                     <button
                       type="button"
                       onClick={() => toggleListingStatus(listing.id)}
-                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      className="p-2 border border-navy-border rounded-lg text-estate-300 hover:bg-navy-surface hover:text-white transition"
                       title={listing.availabilityStatus === 'Available Now' ? 'Pause Listing' : 'Activate Listing'}
                     >
                       {listing.availabilityStatus === 'Available Now' ? (
-                        <PauseCircle className="w-4 h-4 text-amber-600" />
+                        <PauseCircle className="w-4 h-4 text-amber-400" />
                       ) : (
-                        <PlayCircle className="w-4 h-4 text-emerald" />
+                        <PlayCircle className="w-4 h-4 text-emerald-400" />
                       )}
                     </button>
                     <button
                       type="button"
                       onClick={() => setEditingProperty(listing)}
-                      className="p-2 border border-estate-200 rounded-lg text-estate-600 hover:bg-estate-100 transition"
+                      className="p-2 border border-navy-border rounded-lg text-estate-300 hover:bg-navy-surface hover:text-white transition"
                       title="Edit Listing"
                     >
                       <Edit className="w-4 h-4" />
@@ -453,7 +453,7 @@ export function LandlordAgentDashboardPage() {
                     <button
                       type="button"
                       onClick={() => handleDeleteListing(listing.id)}
-                      className="p-2 border border-rose-200 text-rose-600 rounded-lg hover:bg-rose-50 transition"
+                      className="p-2 border border-rose-500/30 text-rose-400 rounded-lg hover:bg-rose-950/30 transition"
                       title="Delete Listing"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -469,13 +469,13 @@ export function LandlordAgentDashboardPage() {
 
       {/* TAB 2: TOURS & SECURITY GATE PASSES */}
       {activeTab === 'inspections' && (
-        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle p-6 space-y-6">
-          <div className="border-b border-estate-100 pb-3 flex items-center justify-between">
+        <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-6 space-y-6">
+          <div className="border-b border-navy-border pb-3 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-navy font-display">Scheduled Physical Inspections</h3>
-              <p className="text-xs text-estate-500">Approve tour windows and dispatch security gate pass codes to verified visitors.</p>
+              <h3 className="text-base font-bold text-white font-display">Scheduled Physical Inspections</h3>
+              <p className="text-xs text-estate-400">Approve tour windows and dispatch security gate pass codes to verified visitors.</p>
             </div>
-            <span className="text-xs text-estate-500 font-semibold">{inspections.length} Bookings</span>
+            <span className="text-xs text-gold font-semibold">{inspections.length} Bookings</span>
           </div>
 
           <div className="space-y-4">
@@ -483,37 +483,37 @@ export function LandlordAgentDashboardPage() {
               <p className="text-xs text-estate-400 italic py-8 text-center">No inspection requests pending.</p>
             ) : (
               inspections.map(insp => (
-                <div key={insp.id} className="p-5 rounded-2xl bg-sand-50/70 border border-sand-200 space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-sand-200 pb-3">
+                <div key={insp.id} className="p-5 rounded-2xl bg-navy-surface border border-navy-border space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-navy-border pb-3">
                     <div>
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        insp.status === 'Inspection Confirmed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                        insp.status === 'Inspection Confirmed' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/30' : 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
                       }`}>
                         {insp.status || 'Pending Approval'}
                       </span>
-                      <h4 className="text-sm font-bold text-navy font-display mt-1">{insp.propertyTitle}</h4>
+                      <h4 className="text-sm font-bold text-white font-display mt-1">{insp.propertyTitle}</h4>
                     </div>
 
                     <div className="text-left sm:text-right text-xs">
                       <span className="text-estate-400 text-[11px] block">Requested Time</span>
-                      <strong className="text-navy">{insp.inspectionDate}</strong>
+                      <strong className="text-gold">{insp.inspectionDate}</strong>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
                     <div>
-                      <span className="text-estate-500 block text-[11px]">Prospective Tenant / Buyer:</span>
-                      <span className="font-bold text-navy">{insp.fullName || 'Registered User'}</span> ({insp.phone || 'Contact via Portal'})
+                      <span className="text-estate-400 block text-[11px]">Prospective Tenant / Buyer:</span>
+                      <span className="font-bold text-white">{insp.fullName || 'Registered User'}</span> <span className="text-estate-400">({insp.phone || 'Contact via Portal'})</span>
                     </div>
 
                     {insp.gateCode ? (
-                      <div className="flex items-center gap-2 p-2 bg-emerald-50 rounded-xl border border-emerald-200">
-                        <ShieldCheck className="w-4 h-4 text-emerald shrink-0" />
-                        <span className="font-mono font-black text-navy">{insp.gateCode}</span>
+                      <div className="flex items-center gap-2 p-2 bg-navy-card rounded-xl border border-gold/30">
+                        <ShieldCheck className="w-4 h-4 text-gold shrink-0" />
+                        <span className="font-mono font-black text-gold">{insp.gateCode}</span>
                         <button
                           type="button"
                           onClick={() => copyCode(insp.gateCode)}
-                          className="px-2 py-1 bg-white rounded-lg border border-emerald-200 text-[10px] font-bold text-emerald-800 hover:bg-emerald-100 transition"
+                          className="px-2 py-1 bg-navy-surface rounded-lg border border-gold/30 text-[10px] font-bold text-gold hover:bg-navy-border transition"
                         >
                           {copiedGateCode === insp.gateCode ? 'Copied' : 'Copy Code'}
                         </button>
@@ -522,7 +522,7 @@ export function LandlordAgentDashboardPage() {
                       <button
                         type="button"
                         onClick={() => handleApproveInspection(insp.id)}
-                        className="px-4 py-2 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-xs"
+                        className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-gold hover:brightness-110"
                       >
                         <UserCheck className="w-3.5 h-3.5" />
                         <span>Approve & Dispatch Gate Pass</span>
@@ -538,37 +538,37 @@ export function LandlordAgentDashboardPage() {
 
       {/* TAB 3: CLIENT CONVERSATIONS */}
       {activeTab === 'conversations' && (
-        <div className="bg-white rounded-3xl border border-estate-200 shadow-subtle p-6 space-y-4">
-          <div className="border-b border-estate-100 pb-3 flex items-center justify-between">
+        <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-6 space-y-4">
+          <div className="border-b border-navy-border pb-3 flex items-center justify-between">
             <div>
-              <h3 className="text-base font-bold text-navy font-display">Client Enquiries & Conversations</h3>
-              <p className="text-xs text-estate-500">Live two-way portal messages from prospective tenants and buyers.</p>
+              <h3 className="text-base font-bold text-white font-display">Client Enquiries & Conversations</h3>
+              <p className="text-xs text-estate-400">Live two-way portal messages from prospective tenants and buyers.</p>
             </div>
-            <span className="text-xs text-estate-500 font-semibold">{conversations.length} Active Threads</span>
+            <span className="text-xs text-gold font-semibold">{conversations.length} Active Threads</span>
           </div>
 
           <div className="space-y-3">
             {conversations.map(conv => (
               <div 
                 key={conv.id}
-                className="p-4 bg-sand-50/70 rounded-2xl border border-sand-200 hover:border-emerald-300 transition space-y-2 text-xs"
+                className="p-4 bg-navy-surface rounded-2xl border border-navy-border hover:border-gold/50 transition space-y-2 text-xs"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <img
                       src={conv.counterpart?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
                       alt={conv.counterpart?.name}
-                      className="w-9 h-9 rounded-xl object-cover ring-1 ring-emerald-200"
+                      className="w-9 h-9 rounded-xl object-cover ring-1 ring-gold/40"
                     />
                     <div>
-                      <span className="font-bold text-navy block text-sm">{conv.counterpart?.name}</span>
+                      <span className="font-bold text-white block text-sm">{conv.counterpart?.name}</span>
                       <span className="text-estate-400 text-[11px]">{conv.propertyTitle}</span>
                     </div>
                   </div>
                   <span className="text-estate-400 text-[10px]">{conv.lastMessageTime}</span>
                 </div>
 
-                <p className="text-estate-700 bg-white p-3 rounded-xl border border-estate-200 leading-relaxed italic">
+                <p className="text-estate-300 bg-navy-card p-3 rounded-xl border border-navy-border leading-relaxed italic">
                   "{conv.lastMessage}"
                 </p>
 
@@ -579,9 +579,9 @@ export function LandlordAgentDashboardPage() {
                       setActiveConversation(conv);
                       setIsChatOpen(true);
                     }}
-                    className="px-4 py-2 bg-navy hover:bg-estate-900 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-xs"
+                    className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow-gold"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 text-emerald" />
+                    <MessageSquare className="w-3.5 h-3.5 text-navy-deep" />
                     <span>Open Live Message Thread</span>
                   </button>
                 </div>
@@ -594,15 +594,15 @@ export function LandlordAgentDashboardPage() {
       {/* TAB 4: RECHARTS PERFORMANCE ANALYTICS */}
       {activeTab === 'analytics' && (
         <div className="space-y-6">
-          <div className="bg-white p-6 rounded-3xl border border-estate-200 shadow-subtle space-y-4">
+          <div className="bg-navy-card p-6 rounded-3xl border border-navy-border shadow-premium space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold text-navy font-display">
+                <h3 className="text-base font-bold text-white font-display">
                   Listing Impressions & Enquiry Dynamics
                 </h3>
-                <p className="text-xs text-estate-500">Daily breakdown of unique user views across your portfolio.</p>
+                <p className="text-xs text-estate-400">Daily breakdown of unique user views across your portfolio.</p>
               </div>
-              <span className="text-xs text-estate-500 font-semibold">Last 7 Days</span>
+              <span className="text-xs text-gold font-semibold">Last 7 Days</span>
             </div>
 
             <div className="h-64 w-full">
@@ -792,8 +792,8 @@ export function LandlordAgentDashboardPage() {
                 onChange={handleImageFileChange}
                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
               />
-              <Upload className="w-6 h-6 text-emerald mx-auto mb-1" />
-              <p className="text-xs font-semibold text-navy">Click or drag images to upload</p>
+              <Upload className="w-6 h-6 text-gold mx-auto mb-1" />
+              <p className="text-xs font-semibold text-white">Click or drag images to upload</p>
               <p className="text-[10px] text-estate-400">JPEG, PNG, WebP up to 10MB each</p>
             </div>
 

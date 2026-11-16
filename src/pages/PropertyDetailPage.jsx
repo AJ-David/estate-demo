@@ -103,10 +103,10 @@ export function PropertyDetailPage() {
 
   if (!property) {
     return (
-      <div className="max-w-md mx-auto my-16 text-center space-y-4 p-8 bg-white rounded-3xl border border-estate-200">
-        <h2 className="text-xl font-bold text-navy">Property Not Found</h2>
-        <p className="text-xs text-estate-500">This property may have been removed or leased.</p>
-        <Link to="/properties" className="inline-block px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl">
+      <div className="max-w-md mx-auto my-16 text-center space-y-4 p-8 bg-navy-card rounded-3xl border border-navy-border shadow-premium">
+        <h2 className="text-xl font-bold text-white font-display">Property Not Found</h2>
+        <p className="text-xs text-estate-400">This property may have been removed or leased.</p>
+        <Link to="/properties" className="inline-block px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition">
           Browse Available Properties
         </Link>
       </div>
@@ -123,16 +123,16 @@ export function PropertyDetailPage() {
       
       {/* Top Breadcrumb & Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-xs text-estate-500">
-          <Link to="/" className="hover:text-navy transition">Home</Link>
+        <div className="flex items-center gap-2 text-xs text-estate-400">
+          <Link to="/" className="hover:text-gold transition">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to="/properties" className="hover:text-navy transition">Properties</Link>
+          <Link to="/properties" className="hover:text-gold transition">Properties</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to={`/neighbourhoods/${neighbourhood.id}`} className="hover:text-navy transition font-medium text-emerald-800">
+          <Link to={`/neighbourhoods/${neighbourhood.id}`} className="hover:text-gold transition font-medium text-gold-light">
             {neighbourhood.name}
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-estate-800 font-bold truncate max-w-xs">{property.title}</span>
+          <span className="text-white font-bold truncate max-w-xs">{property.title}</span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -379,14 +379,14 @@ export function PropertyDetailPage() {
           <section className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-navy font-display">Location & Proximity</h2>
-                <p className="text-xs text-estate-500">
+                <h2 className="text-xl font-bold text-white font-display">Location & Proximity</h2>
+                <p className="text-xs text-estate-400">
                   Approximate radius shown for security; gate code dispatched on inspection.
                 </p>
               </div>
             </div>
 
-            <div className="rounded-3xl overflow-hidden border border-estate-200">
+            <div className="rounded-3xl overflow-hidden border border-navy-border shadow-premium">
               <PropertyMapView
                 properties={[property]}
                 selectedPropertyId={property.id}
@@ -397,12 +397,12 @@ export function PropertyDetailPage() {
             {/* Nearby facilities */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {neighbourhood.nearbyFacilities?.map((fac, i) => (
-                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-sand-50 border border-sand-200 text-xs">
+                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-navy-surface border border-navy-border text-xs">
                   <div>
-                    <span className="font-semibold text-estate-900 block">{fac.name}</span>
-                    <span className="text-[10px] text-estate-500">{fac.type}</span>
+                    <span className="font-semibold text-white block">{fac.name}</span>
+                    <span className="text-[10px] text-estate-400">{fac.type}</span>
                   </div>
-                  <span className="font-bold text-navy bg-white px-2 py-1 rounded-md border border-estate-200 text-[11px]">
+                  <span className="font-bold text-gold bg-navy-card px-2 py-1 rounded-md border border-gold/30 text-[11px]">
                     {fac.distance}
                   </span>
                 </div>
@@ -411,11 +411,11 @@ export function PropertyDetailPage() {
           </section>
 
           {/* Property Reviews & Experience */}
-          <section className="space-y-4 pt-6 border-t border-estate-200">
+          <section className="space-y-4 pt-6 border-t border-navy-border">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-xl font-bold text-navy font-display">Verified Tenant Reviews</h2>
-                <p className="text-xs text-estate-500">
+                <h2 className="text-xl font-bold text-white font-display">Verified Tenant Reviews</h2>
+                <p className="text-xs text-estate-400">
                   Real assessments from former occupants and certified pre-lease inspectors.
                 </p>
               </div>
@@ -423,34 +423,34 @@ export function PropertyDetailPage() {
               <button
                 type="button"
                 onClick={() => setIsReviewOpen(true)}
-                className="px-4 py-2 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 self-start sm:self-auto"
+                className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl transition flex items-center gap-1.5 self-start sm:self-auto shadow-gold"
               >
-                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                <Star className="w-3.5 h-3.5 text-navy-deep fill-navy-deep" />
                 <span>Write a Verified Review</span>
               </button>
             </div>
 
             <div className="space-y-3">
               {reviews.length === 0 ? (
-                <div className="p-8 text-center bg-sand-50 rounded-2xl border border-sand-200 text-xs text-estate-500">
+                <div className="p-8 text-center bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-400">
                   No reviews recorded yet for this property. Be the first verified occupant to evaluate it!
                 </div>
               ) : (
                 reviews.map(rev => (
-                  <div key={rev.id} className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle text-xs space-y-3">
+                  <div key={rev.id} className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium text-xs space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <img
                           src={rev.reviewerAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
                           alt={rev.reviewerName}
-                          className="w-8 h-8 rounded-full object-cover ring-1 ring-estate-200"
+                          className="w-8 h-8 rounded-full object-cover ring-1 ring-gold/30"
                         />
                         <div>
                           <div className="flex items-center gap-1.5">
-                            <span className="font-bold text-estate-900 text-sm">{rev.reviewerName}</span>
+                            <span className="font-bold text-white text-sm">{rev.reviewerName}</span>
                             {rev.isVerifiedExperience && (
-                              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
-                                <ShieldCheck className="w-3 h-3 text-emerald" />
+                              <span className="bg-emerald-950/80 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/30 flex items-center gap-1">
+                                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                                 Verified Tenant
                               </span>
                             )}
@@ -461,26 +461,26 @@ export function PropertyDetailPage() {
                     </div>
 
                     {/* Criteria ratings bar */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-2 px-3 bg-sand-50/70 rounded-xl border border-sand-200 text-[11px]">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-2 px-3 bg-navy-surface rounded-xl border border-navy-border text-[11px]">
                       <div>
                         <span className="text-estate-400 block text-[10px]">Condition</span>
-                        <span className="font-bold text-navy">{rev.conditionRating || 4.5} ★</span>
+                        <span className="font-bold text-gold">{rev.conditionRating || 4.5} ★</span>
                       </div>
                       <div>
                         <span className="text-estate-400 block text-[10px]">Listing Accuracy</span>
-                        <span className="font-bold text-navy">{rev.accuracyRating || 4.8} ★</span>
+                        <span className="font-bold text-gold">{rev.accuracyRating || 4.8} ★</span>
                       </div>
                       <div>
                         <span className="text-estate-400 block text-[10px]">Maintenance</span>
-                        <span className="font-bold text-navy">{rev.maintenanceRating || 4.3} ★</span>
+                        <span className="font-bold text-gold">{rev.maintenanceRating || 4.3} ★</span>
                       </div>
                       <div>
                         <span className="text-estate-400 block text-[10px]">Value Ratio</span>
-                        <span className="font-bold text-navy">{rev.valueRating || 4.5} ★</span>
+                        <span className="font-bold text-gold">{rev.valueRating || 4.5} ★</span>
                       </div>
                     </div>
 
-                    <p className="text-estate-700 leading-relaxed">{rev.comment}</p>
+                    <p className="text-estate-300 leading-relaxed">{rev.comment}</p>
                   </div>
                 ))
               )}

@@ -464,14 +464,14 @@ export function AuthPage() {
           {activeTab === 'forgot' && (
             <form onSubmit={handleForgotSubmit} className="space-y-4">
               <div className="space-y-1">
-                <h3 className="text-base font-bold text-navy font-display">Reset Your Password</h3>
-                <p className="text-xs text-estate-500">
+                <h3 className="text-base font-bold text-white font-display">Reset Your Password</h3>
+                <p className="text-xs text-estate-400">
                   Enter your registered email address and we will dispatch a secure reset link.
                 </p>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-estate-800 mb-1">
+                <label className="block text-xs font-bold text-white mb-1">
                   Email Address *
                 </label>
                 <div className="relative">
@@ -482,7 +482,7 @@ export function AuthPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@domain.com"
-                    className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+                    className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-deep text-white focus:ring-1 focus:ring-gold outline-none"
                   />
                 </div>
               </div>
@@ -490,7 +490,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition disabled:opacity-70"
+                className="w-full py-2.5 bg-gradient-to-r from-gold to-gold-dark text-navy-deep text-xs font-bold rounded-xl shadow-gold hover:brightness-110 transition disabled:opacity-70"
               >
                 {loading ? 'Sending link...' : 'Send Password Reset Link'}
               </button>
@@ -498,7 +498,7 @@ export function AuthPage() {
               <button
                 type="button"
                 onClick={() => { setActiveTab('login'); setSuccessMessage(''); setError(''); }}
-                className="w-full text-center text-xs text-estate-600 hover:text-navy font-semibold py-1"
+                className="w-full text-center text-xs text-estate-400 hover:text-gold font-semibold py-1"
               >
                 Back to Sign In
               </button>
@@ -509,14 +509,14 @@ export function AuthPage() {
           {activeTab === 'reset' && (
             <form onSubmit={handleResetPasswordSubmit} className="space-y-4">
               <div className="space-y-1">
-                <h3 className="text-base font-bold text-navy font-display">Create New Password</h3>
-                <p className="text-xs text-estate-500">
+                <h3 className="text-base font-bold text-white font-display">Create New Password</h3>
+                <p className="text-xs text-estate-400">
                   Enter a new secure password for your VettedHomes account.
                 </p>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-estate-800 mb-1">
+                <label className="block text-xs font-bold text-white mb-1">
                   New Password *
                 </label>
                 <div className="relative">
@@ -527,7 +527,7 @@ export function AuthPage() {
                     value={newResetPassword}
                     onChange={(e) => setNewResetPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
+                    className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-deep text-white focus:ring-1 focus:ring-gold outline-none"
                   />
                 </div>
               </div>
@@ -535,7 +535,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition disabled:opacity-70"
+                className="w-full py-2.5 bg-gradient-to-r from-gold to-gold-dark text-navy-deep text-xs font-bold rounded-xl shadow-gold hover:brightness-110 transition disabled:opacity-70"
               >
                 {loading ? 'Updating Password...' : 'Save & Update Password'}
               </button>
@@ -545,24 +545,24 @@ export function AuthPage() {
           {/* 5. EMAIL VERIFICATION NOTICE SCREEN */}
           {activeTab === 'verify_email' && (
             <div className="text-center py-6 space-y-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-navy-surface text-gold rounded-full flex items-center justify-center mx-auto border border-gold/30">
                 <Mail className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-navy font-display">Confirm Your Email</h3>
-                <p className="text-xs text-estate-600 mt-1 max-w-xs mx-auto leading-relaxed">
-                  We have sent an authentication confirmation email to <strong className="text-navy">{email}</strong>. Click the link in the message to activate your account.
+                <h3 className="text-lg font-bold text-white font-display">Confirm Your Email</h3>
+                <p className="text-xs text-estate-400 mt-1 max-w-xs mx-auto leading-relaxed">
+                  We have sent an authentication confirmation email to <strong className="text-gold">{email}</strong>. Click the link in the message to activate your account.
                 </p>
               </div>
 
-              <div className="p-3 bg-sand-50 rounded-xl border border-sand-200 text-[11px] text-estate-500 text-left">
+              <div className="p-3 bg-navy-surface rounded-xl border border-navy-border text-[11px] text-estate-400 text-left">
                 <strong>Tip:</strong> If you do not see the confirmation email within 2 minutes, check your spam or promotional folders.
               </div>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('login')}
-                className="w-full py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+                className="w-full py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
               >
                 Proceed to Sign In
               </button>

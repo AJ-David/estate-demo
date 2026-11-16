@@ -80,7 +80,7 @@ export function PropertyReviewModal({ isOpen, onClose, property, onReviewSubmitt
             />
           </button>
         ))}
-        <span className="text-xs font-black text-navy ml-2">{rating}.0 / 5.0</span>
+        <span className="text-xs font-black text-gold ml-2">{rating}.0 / 5.0</span>
       </div>
     );
   };
@@ -95,17 +95,17 @@ export function PropertyReviewModal({ isOpen, onClose, property, onReviewSubmitt
     >
       {submitted ? (
         <div className="text-center py-8 space-y-4">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-14 h-14 bg-emerald-950/80 text-emerald-300 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h4 className="text-lg font-bold text-navy font-display">Review Published</h4>
-          <p className="text-xs text-estate-600 max-w-sm mx-auto leading-relaxed">
+          <h4 className="text-lg font-bold text-white font-display">Review Published</h4>
+          <p className="text-xs text-estate-400 max-w-sm mx-auto leading-relaxed">
             Your evaluation has been recorded and will assist fellow home-seekers in making informed rental and purchasing decisions.
           </p>
           <button
             type="button"
             onClick={handleReset}
-            className="w-full max-w-xs py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition"
+            className="w-full max-w-xs py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
           >
             Return to Property Page
           </button>

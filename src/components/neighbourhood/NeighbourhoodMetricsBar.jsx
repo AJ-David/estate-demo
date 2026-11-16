@@ -57,20 +57,20 @@ export function NeighbourhoodMetricsBar({ metrics, showSummaries = true }) {
         const percentage = (data.score / 10) * 100;
 
         return (
-          <div key={key} className="bg-sand-50/70 p-4 rounded-xl border border-sand-200">
+          <div key={key} className="bg-navy-surface p-4 rounded-xl border border-navy-border">
             <div className="flex items-center justify-between mb-1.5">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 bg-white rounded-lg shadow-xs text-navy border border-estate-200">
-                  <Icon className="w-4 h-4 text-emerald" />
+                <div className="p-1.5 bg-navy-card rounded-lg shadow-xs text-gold border border-gold/30">
+                  <Icon className="w-4 h-4 text-gold" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-estate-900">{title}</h4>
-                  <span className="text-[11px] text-estate-500 font-medium">{data.rating}</span>
+                  <h4 className="text-xs font-bold text-white font-display">{title}</h4>
+                  <span className="text-[11px] text-estate-400 font-medium">{data.rating}</span>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="text-sm font-extrabold text-navy font-display">
+                <span className="text-sm font-extrabold text-gold font-display">
                   {data.score}
                 </span>
                 <span className="text-[10px] text-estate-400">/10</span>
@@ -78,7 +78,7 @@ export function NeighbourhoodMetricsBar({ metrics, showSummaries = true }) {
             </div>
 
             {/* Score Bar */}
-            <div className="w-full bg-estate-200 rounded-full h-2 overflow-hidden mb-2">
+            <div className="w-full bg-navy-deep rounded-full h-2 overflow-hidden mb-2">
               <div
                 className={`h-full rounded-full transition-all duration-700 ${
                   data.score >= 8 ? 'bg-emerald' : data.score >= 6.5 ? 'bg-amber-500' : 'bg-rose-500'

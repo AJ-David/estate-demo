@@ -134,20 +134,20 @@ export function CommunityFeedPage() {
       </div>
 
       {/* Safety Policy & Anti-Defamation Banner */}
-      <div className="bg-sand-100 rounded-3xl p-4 sm:p-5 border border-sand-200 flex flex-col sm:flex-row items-start gap-3.5 text-xs text-estate-700">
-        <ShieldCheck className="w-5 h-5 text-emerald shrink-0 mt-0.5" />
+      <div className="bg-navy-card rounded-3xl p-4 sm:p-5 border border-navy-border shadow-premium flex flex-col sm:flex-row items-start gap-3.5 text-xs text-estate-300">
+        <ShieldCheck className="w-5 h-5 text-gold shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <span className="font-bold text-navy text-sm block">
+          <span className="font-bold text-white text-sm block">
             Community Integrity & Resident Protection Guidelines
           </span>
-          <p className="leading-relaxed text-estate-600 text-[11px]">
+          <p className="leading-relaxed text-estate-400 text-[11px]">
             To ensure genuine transparency without enabling harassment or defamation, posts naming private individuals, disclosing exact private gate numbers, or leaking phone numbers are strictly prohibited. Security observations represent contributor experiences and do not legally certify a neighbourhood as unsafe.
           </p>
         </div>
       </div>
 
       {/* Category Navigation Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-estate-100">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-navy-border">
         {COMMUNITY_CATEGORIES.map(cat => (
           <button
             key={cat.id}
@@ -155,8 +155,8 @@ export function CommunityFeedPage() {
             onClick={() => setSelectedCategory(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap flex items-center gap-1.5 ${
               selectedCategory === cat.id
-                ? 'bg-navy text-white shadow-xs'
-                : 'bg-white text-estate-700 hover:bg-estate-100 border border-estate-200'
+                ? 'bg-gold text-navy-deep font-black shadow-gold'
+                : 'bg-navy-surface text-estate-300 hover:bg-navy-border border border-navy-border'
             }`}
           >
             <span>{cat.label}</span>
@@ -197,13 +197,13 @@ export function CommunityFeedPage() {
 
         {/* Sort */}
         <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-          <span className="text-xs text-estate-500 font-semibold">Sort:</span>
-          <div className="flex items-center p-1 bg-estate-100 rounded-xl">
+          <span className="text-xs text-estate-400 font-semibold">Sort:</span>
+          <div className="flex items-center p-1 bg-navy-surface rounded-xl border border-navy-border">
             <button
               type="button"
               onClick={() => setSortBy('newest')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'newest' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
+                sortBy === 'newest' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
               }`}
             >
               Newest
@@ -212,7 +212,7 @@ export function CommunityFeedPage() {
               type="button"
               onClick={() => setSortBy('helpful')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'helpful' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
+                sortBy === 'helpful' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
               }`}
             >
               Most Helpful
@@ -221,7 +221,7 @@ export function CommunityFeedPage() {
               type="button"
               onClick={() => setSortBy('trending')}
               className={`px-3 py-1 text-xs font-semibold rounded-lg transition ${
-                sortBy === 'trending' ? 'bg-white text-navy shadow-xs' : 'text-estate-600'
+                sortBy === 'trending' ? 'bg-gold text-navy-deep font-bold shadow-gold' : 'text-estate-400 hover:text-white'
               }`}
             >
               Trending
@@ -238,20 +238,20 @@ export function CommunityFeedPage() {
         <div className="lg:col-span-8 space-y-4">
           {loading ? (
             <div className="py-20 text-center space-y-3">
-              <Loader2 className="w-10 h-10 text-emerald animate-spin mx-auto" />
-              <p className="text-xs font-semibold text-estate-500">Retrieving neighbourhood community forum discussions...</p>
+              <Loader2 className="w-10 h-10 text-gold animate-spin mx-auto" />
+              <p className="text-xs font-semibold text-estate-400">Retrieving neighbourhood community forum discussions...</p>
             </div>
           ) : posts.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 shadow-subtle">
-              <MessageSquareText className="w-12 h-12 text-estate-400 mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-navy font-display">No discussions found</h3>
-              <p className="text-xs sm:text-sm text-estate-500 mt-1 mb-5">
+            <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
+              <MessageSquareText className="w-12 h-12 text-estate-500 mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-white font-display">No discussions found</h3>
+              <p className="text-xs sm:text-sm text-estate-400 mt-1 mb-5">
                 No posts match your selected filters. Be the first to start a conversation!
               </p>
               <button
                 type="button"
                 onClick={() => setIsCreateModalOpen(true)}
-                className="px-5 py-2.5 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition"
+                className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
               >
                 Create New Post
               </button>
@@ -271,59 +271,59 @@ export function CommunityFeedPage() {
         <div className="lg:col-span-4 space-y-6 sticky top-24">
           
           {/* Trending Topics */}
-          <div className="bg-white rounded-3xl p-6 border border-estate-200 shadow-subtle space-y-4">
-            <h3 className="text-sm font-bold text-navy font-display uppercase tracking-wider flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-500" />
+          <div className="bg-navy-card rounded-3xl p-6 border border-navy-border shadow-premium space-y-4">
+            <h3 className="text-sm font-bold text-white font-display uppercase tracking-wider flex items-center gap-2">
+              <Flame className="w-4 h-4 text-gold" />
               <span>Trending Neighbourhood Topics</span>
             </h3>
             <div className="space-y-2.5 text-xs">
               <button
                 type="button"
                 onClick={() => setSearchQuery('Drainage')}
-                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
-                <p className="font-bold text-estate-900">#Drainage & Flood Clearance</p>
-                <p className="text-[11px] text-estate-500">Lekki Admiralty & Surulere updates</p>
+                <p className="font-bold text-white">#Drainage & Flood Clearance</p>
+                <p className="text-[11px] text-estate-400">Lekki Admiralty & Surulere updates</p>
               </button>
               <button
                 type="button"
                 onClick={() => setSearchQuery('Inverter')}
-                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
-                <p className="font-bold text-estate-900">#Solar Inverter Setup Costs</p>
-                <p className="text-[11px] text-estate-500">Managing 24/7 power in Yaba</p>
+                <p className="font-bold text-white">#Solar Inverter Setup Costs</p>
+                <p className="text-[11px] text-estate-400">Managing 24/7 power in Yaba</p>
               </button>
               <button
                 type="button"
                 onClick={() => setSearchQuery('Security')}
-                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
-                <p className="font-bold text-estate-900">#Estate Gate Night Pass Protocols</p>
-                <p className="text-[11px] text-estate-500">Admiralty & Ikeja GRA vigilance</p>
+                <p className="font-bold text-white">#Estate Gate Night Pass Protocols</p>
+                <p className="text-[11px] text-estate-400">Admiralty & Ikeja GRA vigilance</p>
               </button>
               <button
                 type="button"
                 onClick={() => setSearchQuery('Service Charge')}
-                className="w-full text-left p-3 rounded-2xl bg-sand-50 hover:bg-sand-100 border border-sand-200 transition"
+                className="w-full text-left p-3 rounded-2xl bg-navy-surface hover:bg-navy-border border border-navy-border transition"
               >
-                <p className="font-bold text-estate-900">#Service Charge Transparency</p>
-                <p className="text-[11px] text-estate-500">Diesel contribution audits</p>
+                <p className="font-bold text-white">#Service Charge Transparency</p>
+                <p className="text-[11px] text-estate-400">Diesel contribution audits</p>
               </button>
             </div>
           </div>
 
           {/* Resident Verification Info Card */}
-          <div className="bg-emerald-50 rounded-3xl p-6 border border-emerald-200 shadow-subtle space-y-3 text-xs">
-            <span className="font-bold text-emerald-900 text-sm flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald" />
+          <div className="bg-navy-card rounded-3xl p-6 border border-gold/40 shadow-premium space-y-3 text-xs">
+            <span className="font-bold text-white text-sm flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-gold" />
               Verified Resident Badge
             </span>
-            <p className="text-estate-700 leading-relaxed text-[11px]">
+            <p className="text-estate-300 leading-relaxed text-[11px]">
               Residents who verify their residential connection with utility receipts or landlord agreements earn a green badge on their posts. This builds genuine trust across the community.
             </p>
             <Link
               to="/profile"
-              className="text-xs font-bold text-emerald-800 hover:underline block pt-1"
+              className="text-xs font-bold text-gold hover:underline block pt-1"
             >
               Learn about resident verification →
             </Link>

@@ -113,17 +113,13 @@ export function BrandLogo({
       {markElement}
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5 leading-none">
-          <span className={`${currentSize.title} font-black tracking-tight font-display ${
-            isLight ? 'text-white' : 'text-navy'
-          }`}>
-            Vetted<span className={isLight ? 'text-gold-light' : 'text-gold'}>Homes</span>
+          <span className={`${currentSize.title} font-black tracking-tight font-display text-white`}>
+            Vetted<span className="text-gold-light">Homes</span>
           </span>
           <span className="inline-block w-2 h-2 rounded-full bg-gold"></span>
         </div>
         {showTagline && (
-          <p className={`${currentSize.tagline} uppercase font-bold tracking-widest mt-1 ${
-            isLight ? 'text-estate-300' : 'text-estate-500'
-          } font-sans`}>
+          <p className={`${currentSize.tagline} uppercase font-bold tracking-widest mt-1 text-estate-400 font-sans`}>
             Verified Properties & Intel
           </p>
         )}

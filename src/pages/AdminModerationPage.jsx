@@ -121,22 +121,22 @@ export function AdminModerationPage() {
           </div>
         ) : reports.length === 0 ? (
           <div className="py-16 text-center space-y-2">
-            <CheckCircle2 className="w-12 h-12 text-emerald mx-auto" />
-            <p className="text-sm font-bold text-navy">Moderation Queue is Clean</p>
+            <CheckCircle2 className="w-12 h-12 text-gold mx-auto" />
+            <p className="text-sm font-bold text-white">Moderation Queue is Clean</p>
             <p className="text-xs text-estate-400">All community reports have been audited and acted upon.</p>
           </div>
         ) : (
-          <div className="divide-y divide-estate-100">
+          <div className="divide-y divide-navy-border">
             {reports.map(report => (
-              <div key={report.id} className="p-5 sm:p-6 hover:bg-sand-50/50 transition space-y-3">
+              <div key={report.id} className="p-5 sm:p-6 hover:bg-navy-surface/50 transition space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                       report.severity === 'Critical'
-                        ? 'bg-rose-100 text-rose-800 border border-rose-200'
+                        ? 'bg-rose-950/80 text-rose-300 border border-rose-500/30'
                         : report.severity === 'High'
-                        ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                        : 'bg-estate-100 text-estate-700'
+                        ? 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
+                        : 'bg-navy-surface text-estate-300 border border-navy-border'
                     }`}>
                       {report.severity} Priority
                     </span>
@@ -144,19 +144,19 @@ export function AdminModerationPage() {
                     <span className="text-xs text-estate-400">• {report.time}</span>
                   </div>
 
-                  <span className="text-xs text-estate-500">
-                    Reported by: <strong className="text-navy">{report.reportedBy}</strong>
+                  <span className="text-xs text-estate-400">
+                    Reported by: <strong className="text-gold">{report.reportedBy}</strong>
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-navy font-display">{report.title}</h3>
-                  <p className="text-xs text-estate-500 mt-0.5">
-                    Violation Category: <strong className="text-estate-800">{report.reason}</strong>
+                  <h3 className="text-sm sm:text-base font-bold text-white font-display">{report.title}</h3>
+                  <p className="text-xs text-estate-400 mt-0.5">
+                    Violation Category: <strong className="text-gold">{report.reason}</strong>
                   </p>
                 </div>
 
-                <div className="p-3 bg-estate-50 rounded-2xl border border-estate-200 text-xs text-estate-700 italic">
+                <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-300 italic">
                   "{report.snippet}"
                 </div>
 

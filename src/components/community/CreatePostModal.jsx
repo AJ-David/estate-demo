@@ -71,12 +71,12 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Safety standards callout */}
-        <div className="bg-sand-100 p-3.5 rounded-2xl border border-sand-200 text-xs text-estate-700 space-y-1">
-          <div className="flex items-center gap-1.5 font-bold text-navy">
-            <ShieldCheck className="w-4 h-4 text-emerald" />
+        <div className="bg-navy-surface p-3.5 rounded-2xl border border-navy-border text-xs text-estate-300 space-y-1">
+          <div className="flex items-center gap-1.5 font-bold text-white">
+            <ShieldCheck className="w-4 h-4 text-gold" />
             <span>Community Safety & Anti-Doxxing Protocol</span>
           </div>
-          <p className="text-[11px] text-estate-600 leading-relaxed">
+          <p className="text-[11px] text-estate-400 leading-relaxed">
             VettedHomes prohibits public accusations naming private individuals, exact gate/house numbers, or publishing phone numbers. Focus on general infrastructure, road conditions, power reliability, and helpful neighborhood context.
           </p>
         </div>

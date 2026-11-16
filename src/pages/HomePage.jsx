@@ -60,7 +60,7 @@ export function HomePage() {
             {/* Suggested Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-display leading-[1.1]">
               Find Your Next Home. <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold">
+              <span className="text-gold-light block sm:inline mt-1 sm:mt-0 drop-shadow-sm">
                 Know Your Next Neighbourhood.
               </span>
             </h1>

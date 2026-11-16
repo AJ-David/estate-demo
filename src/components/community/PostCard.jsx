@@ -98,10 +98,10 @@ export function PostCard({ post, onReport }) {
   };
 
   return (
-    <article className="bg-white rounded-3xl border border-estate-200/90 shadow-subtle p-5 sm:p-6 mb-4 hover:border-estate-300 transition-all">
+    <article className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-5 sm:p-6 mb-4 hover:border-gold/40 transition-all">
       {/* Pinned strip */}
       {post.pinned && (
-        <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full w-fit mb-3 border border-emerald-200">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-gold bg-navy-surface px-3 py-1 rounded-full w-fit mb-3 border border-gold/30">
           <Pin className="w-3.5 h-3.5 rotate-45" />
           <span>Pinned Neighbourhood Announcement</span>
         </div>
@@ -113,16 +113,16 @@ export function PostCard({ post, onReport }) {
           <img
             src={post.author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
             alt={post.author?.name}
-            className="w-10 h-10 rounded-2xl object-cover ring-2 ring-emerald-100"
+            className="w-10 h-10 rounded-2xl object-cover ring-2 ring-gold/30"
           />
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-estate-900 font-display">
+              <span className="text-sm font-bold text-white font-display">
                 {post.author?.name || 'Local Resident'}
               </span>
               {post.verifiedResident && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                  <ShieldCheck className="w-3 h-3 text-emerald" />
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">
+                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
                   Verified Resident
                 </span>
               )}
@@ -145,19 +145,19 @@ export function PostCard({ post, onReport }) {
       </div>
 
       {/* Post Title */}
-      <h3 className="text-base sm:text-lg font-bold text-navy font-display mb-2 leading-snug">
+      <h3 className="text-base sm:text-lg font-bold text-white font-display mb-2 leading-snug">
         {post.title}
       </h3>
 
       {/* Post Content */}
-      <p className="text-xs sm:text-sm text-estate-700 leading-relaxed mb-4 whitespace-pre-line">
+      <p className="text-xs sm:text-sm text-estate-300 leading-relaxed mb-4 whitespace-pre-line">
         {post.content}
       </p>
 
       {/* Security Disclaimer Notice if category is security */}
       {post.category?.toUpperCase() === 'SECURITY' && (
-        <div className="flex items-start gap-2.5 p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 mb-4">
-          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2.5 p-3 bg-amber-950/40 rounded-2xl border border-amber-500/30 text-xs text-amber-200 mb-4">
+          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
           <span>
             <strong>Community Observation:</strong> This post reflects an individual resident report. In accordance with safety policies, emergency or urgent security concerns should be reported directly to local estate gate controllers and emergency services.
           </span>
@@ -226,10 +226,10 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={handleShare}
-            className="flex items-center gap-1 text-estate-500 hover:text-navy transition"
+            className="flex items-center gap-1 text-estate-400 hover:text-gold transition"
             title="Copy share link"
           >
-            {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald" /> : <Share2 className="w-3.5 h-3.5" />}
+            {copiedLink ? <Check className="w-3.5 h-3.5 text-gold" /> : <Share2 className="w-3.5 h-3.5" />}
             <span className="hidden sm:inline">{copiedLink ? 'Copied' : 'Share'}</span>
           </button>
 
@@ -237,7 +237,7 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={() => onReport && onReport(post)}
-            className="flex items-center gap-1 text-estate-400 hover:text-rose-600 transition"
+            className="flex items-center gap-1 text-estate-400 hover:text-rose-400 transition"
             title="Report inappropriate content"
           >
             <Flag className="w-3.5 h-3.5" />
@@ -248,22 +248,22 @@ export function PostCard({ post, onReport }) {
 
       {/* Expandable Comments Section */}
       {showComments && (
-        <div className="mt-4 pt-4 border-t border-estate-100 space-y-3 animate-fadeIn">
+        <div className="mt-4 pt-4 border-t border-navy-border space-y-3 animate-fadeIn">
           {comments.length === 0 ? (
-            <p className="text-xs text-estate-500 italic py-2">No comments yet. Share your experience or reply below.</p>
+            <p className="text-xs text-estate-400 italic py-2">No comments yet. Share your experience or reply below.</p>
           ) : (
             comments.map(c => (
-              <div key={c.id} className="bg-sand-50/70 p-3 rounded-2xl border border-sand-200 text-xs space-y-1">
+              <div key={c.id} className="bg-navy-surface p-3 rounded-2xl border border-navy-border text-xs space-y-1">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-navy">{c.author}</span>
-                    <span className="text-[10px] bg-white text-estate-700 px-2 py-0.5 rounded-full border border-estate-200">
+                    <span className="font-bold text-white">{c.author}</span>
+                    <span className="text-[10px] bg-navy-card text-gold px-2 py-0.5 rounded-full border border-gold/30">
                       {c.badge || 'Resident'}
                     </span>
                   </div>
                   <span className="text-estate-400 text-[10px]">{c.createdAt}</span>
                 </div>
-                <p className="text-estate-700 leading-relaxed">{c.content}</p>
+                <p className="text-estate-300 leading-relaxed">{c.content}</p>
               </div>
             ))
           )}

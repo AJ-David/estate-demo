@@ -58,10 +58,10 @@ export function PropertiesPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-black text-navy font-display">
+        <h1 className="text-2xl sm:text-3xl font-black text-white font-display">
           Properties in Nigeria
         </h1>
-        <p className="text-xs sm:text-sm text-estate-600 mt-1">
+        <p className="text-xs sm:text-sm text-estate-400 mt-1">
           Explore verified homes paired with neighbourhood power, safety and drainage insights.
         </p>
       </div>

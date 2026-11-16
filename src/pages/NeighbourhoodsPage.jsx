@@ -40,14 +40,14 @@ export function NeighbourhoodsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Page Header */}
       <div className="max-w-3xl space-y-2">
-        <div className="flex items-center gap-2 text-xs font-bold text-emerald uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-xs font-bold text-gold uppercase tracking-wider">
           <Compass className="w-4 h-4" />
           <span>Location Intelligence Hub</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-black text-navy font-display tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">
           Nigeria's Neighbourhood Directory
         </h1>
-        <p className="text-xs sm:text-sm text-estate-600 leading-relaxed">
+        <p className="text-xs sm:text-sm text-estate-400 leading-relaxed">
           Detailed infrastructure diagnostics, crowd-sourced safety ratings, power stability metrics and resident discussions across key urban districts in Lagos and Abuja.
         </p>
       </div>
@@ -127,24 +127,24 @@ export function NeighbourhoodsPage() {
       )}
 
       {/* Trust & Methodology Footnote */}
-      <div className="bg-sand-50 rounded-3xl p-6 border border-sand-200 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-estate-600">
+      <div className="bg-navy-card rounded-3xl p-6 border border-navy-border flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-estate-400">
         <div className="space-y-1.5 max-w-2xl">
-          <span className="font-bold text-navy flex items-center gap-1.5 text-sm">
-            <ShieldCheck className="w-4 h-4 text-emerald" />
+          <span className="font-bold text-white flex items-center gap-1.5 text-sm">
+            <ShieldCheck className="w-4 h-4 text-gold" />
             VettedHomes Neighbourhood Intelligence Methodology
           </span>
-          <p className="text-[11px] leading-relaxed">
+          <p className="text-[11px] leading-relaxed text-estate-400">
             Every metric combines historical transformer uptime datasets, flood topography mapping, and verified questionnaires submitted by vetted local residents. We do not accept sponsorship payments to inflate livability scores.
           </p>
         </div>
         <div className="shrink-0 flex items-center gap-3">
-          <div className="p-3 bg-white rounded-2xl border border-sand-200 text-center">
+          <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-center">
             <span className="text-[10px] text-estate-400 block font-semibold">Tracked Enclaves</span>
-            <span className="text-base font-black text-navy">{neighbourhoods.length} Districts</span>
+            <span className="text-base font-black text-white">{neighbourhoods.length} Districts</span>
           </div>
-          <div className="p-3 bg-white rounded-2xl border border-sand-200 text-center">
+          <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-center">
             <span className="text-[10px] text-estate-400 block font-semibold">Active Verifiers</span>
-            <span className="text-base font-black text-emerald">1,240+ Residents</span>
+            <span className="text-base font-black text-gold">1,240+ Residents</span>
           </div>
         </div>
       </div>

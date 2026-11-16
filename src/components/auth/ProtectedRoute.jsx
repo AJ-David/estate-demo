@@ -29,23 +29,23 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
     if (hasRoleInAccount && !isActiveRoleAllowed) {
       const targetRole = allowedRoles.find(r => user.roles.includes(r));
       return (
-        <div className="max-w-xl mx-auto my-16 p-8 bg-white rounded-3xl border border-estate-200 shadow-premium text-center space-y-5">
-          <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto">
+        <div className="max-w-xl mx-auto my-16 p-8 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-center space-y-5">
+          <div className="w-12 h-12 bg-amber-950/60 text-amber-400 rounded-2xl flex items-center justify-center mx-auto border border-amber-500/30">
             <ShieldAlert className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-navy font-display">Switch Active Role Required</h2>
-            <p className="text-xs text-estate-600 mt-1.5 leading-relaxed">
-              You are currently viewing VettedHomes in <strong className="text-navy">{activeRole.replace('_', ' ')}</strong> mode. This section requires <strong className="text-navy">{targetRole.replace('_', ' ')}</strong> mode.
+            <h2 className="text-xl font-bold text-white font-display">Switch Active Role Required</h2>
+            <p className="text-xs text-estate-400 mt-1.5 leading-relaxed">
+              You are currently viewing VettedHomes in <strong className="text-gold">{activeRole.replace('_', ' ')}</strong> mode. This section requires <strong className="text-gold">{targetRole.replace('_', ' ')}</strong> mode.
             </p>
           </div>
           <button
             type="button"
             onClick={() => switchRole(targetRole)}
-            className="w-full py-3 bg-emerald hover:bg-emerald-dark text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+            className="w-full py-3 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-gold"
           >
             <span>Switch to {targetRole.replace('_', ' ')} Workspace</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-navy-deep" />
           </button>
         </div>
       );
@@ -55,23 +55,23 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
     if (!hasRoleInAccount) {
       const requiredRoleName = allowedRoles[0].replace('_', ' ');
       return (
-        <div className="max-w-xl mx-auto my-16 p-8 bg-white rounded-3xl border border-estate-200 shadow-premium text-center space-y-5">
-          <div className="w-12 h-12 bg-sand-100 text-navy rounded-2xl flex items-center justify-center mx-auto">
-            <PlusCircle className="w-6 h-6 text-emerald" />
+        <div className="max-w-xl mx-auto my-16 p-8 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-center space-y-5">
+          <div className="w-12 h-12 bg-navy-surface text-gold rounded-2xl flex items-center justify-center mx-auto border border-gold/30">
+            <PlusCircle className="w-6 h-6 text-gold" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-navy font-display">Upgrade Your Account Access</h2>
-            <p className="text-xs text-estate-600 mt-1.5 leading-relaxed">
+            <h2 className="text-xl font-bold text-white font-display">Upgrade Your Account Access</h2>
+            <p className="text-xs text-estate-400 mt-1.5 leading-relaxed">
               This area is restricted to {requiredRoleName} accounts. Because VettedHomes accounts support multiple roles simultaneously, you can add this role to your existing account right now.
             </p>
           </div>
           <button
             type="button"
             onClick={() => switchRole(allowedRoles[0])}
-            className="w-full py-3 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+            className="w-full py-3 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-gold"
           >
             <span>Activate {requiredRoleName} Role on My Account</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-navy-deep" />
           </button>
         </div>
       );

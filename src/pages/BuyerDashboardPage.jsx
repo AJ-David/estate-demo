@@ -86,21 +86,21 @@ export function BuyerDashboardPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       
       {/* Dashboard Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white rounded-3xl border border-estate-200 shadow-subtle">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy-card rounded-3xl border border-navy-border shadow-premium">
         <div className="flex items-center gap-4">
           <img
             src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
             alt={user?.name}
-            className="w-16 h-16 rounded-2xl object-cover ring-2 ring-emerald-300 shadow-sm"
+            className="w-16 h-16 rounded-2xl object-cover ring-2 ring-gold/40 shadow-sm"
           />
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl sm:text-2xl font-black text-navy font-display">{user?.name || 'Valued Client'}</h1>
-              <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+              <h1 className="text-xl sm:text-2xl font-black text-white font-display">{user?.name || 'Valued Client'}</h1>
+              <span className="bg-navy-surface text-gold text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-gold/40">
                 Buyer & Tenant Portal
               </span>
             </div>
-            <p className="text-xs text-estate-500 mt-0.5">
+            <p className="text-xs text-estate-400 mt-0.5">
               {user?.email} {user?.phone ? `• ${user.phone}` : ''}
             </p>
           </div>
@@ -109,15 +109,15 @@ export function BuyerDashboardPage() {
         <div className="flex flex-wrap items-center gap-3">
           <Link
             to="/dashboard/landlord"
-            className="px-3.5 py-2.5 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy text-xs font-bold rounded-xl transition flex items-center gap-1.5"
+            className="px-3.5 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 hover:text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5"
           >
-            <ArrowRightLeft className="w-3.5 h-3.5 text-emerald" />
+            <ArrowRightLeft className="w-3.5 h-3.5 text-gold" />
             <span>Switch to Landlord Portal</span>
           </Link>
 
           <Link
             to="/properties"
-            className="px-4 py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-estate-900 transition flex items-center gap-1.5 shadow-sm"
+            className="px-4 py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-black rounded-xl transition flex items-center gap-1.5 shadow-gold tracking-wide"
           >
             <Building2 className="w-4 h-4" />
             <span>Search Properties</span>
@@ -166,11 +166,11 @@ export function BuyerDashboardPage() {
               <p className="text-xs text-estate-500 font-semibold">Loading saved properties...</p>
             </div>
           ) : savedProperties.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 shadow-subtle">
-              <Heart className="w-12 h-12 text-estate-300 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-navy font-display">No saved properties yet</h3>
-              <p className="text-xs text-estate-500 mt-1 mb-4">Click the heart icon on any property listing to save it to your dashboard.</p>
-              <Link to="/properties" className="px-5 py-2.5 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition inline-flex items-center gap-2">
+            <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
+              <Heart className="w-12 h-12 text-estate-400 mx-auto mb-3" />
+              <h3 className="text-base font-bold text-white font-display">No saved properties yet</h3>
+              <p className="text-xs text-estate-400 mt-1 mb-4">Click the heart icon on any property listing to save it to your dashboard.</p>
+              <Link to="/properties" className="px-5 py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-xs font-black rounded-xl transition inline-flex items-center gap-2 shadow-gold tracking-wide">
                 <Building2 className="w-4 h-4" />
                 Browse Market Properties
               </Link>
@@ -191,41 +191,41 @@ export function BuyerDashboardPage() {
       {activeTab === 'inspections' && (
         <div className="space-y-4 max-w-3xl">
           {inspections.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 shadow-subtle">
-              <Calendar className="w-12 h-12 text-estate-300 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-navy font-display">No inspections booked yet</h3>
-              <p className="text-xs text-estate-500 mt-1 mb-4">Find a property you like and book a physical tour with guaranteed zero advance tour fees.</p>
-              <Link to="/properties" className="px-4 py-2 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition inline-block">
+            <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
+              <Calendar className="w-12 h-12 text-estate-400 mx-auto mb-3" />
+              <h3 className="text-base font-bold text-white font-display">No inspections booked yet</h3>
+              <p className="text-xs text-estate-400 mt-1 mb-4">Find a property you like and book a physical tour with guaranteed zero advance tour fees.</p>
+              <Link to="/properties" className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-black rounded-xl transition inline-block shadow-gold tracking-wide">
                 Explore Verified Listings
               </Link>
             </div>
           ) : (
             inspections.map(insp => (
-              <div key={insp.id} className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-estate-100">
+              <div key={insp.id} className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-navy-border">
                   <div>
-                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase tracking-wider">
+                    <span className="text-[10px] font-bold text-gold bg-navy-surface px-2.5 py-0.5 rounded-full border border-gold/40 uppercase tracking-wider">
                       {insp.status || 'Confirmed'}
                     </span>
-                    <h3 className="text-sm font-bold text-navy font-display mt-1">{insp.propertyTitle}</h3>
+                    <h3 className="text-sm font-bold text-white font-display mt-1">{insp.propertyTitle}</h3>
                   </div>
                   <div className="text-left sm:text-right">
                     <span className="text-[11px] text-estate-400 block">Scheduled Window</span>
-                    <span className="text-xs font-bold text-estate-800 flex items-center gap-1 sm:justify-end">
-                      <Clock className="w-3.5 h-3.5 text-emerald" />
+                    <span className="text-xs font-bold text-estate-200 flex items-center gap-1 sm:justify-end">
+                      <Clock className="w-3.5 h-3.5 text-gold" />
                       {insp.inspectionDate}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-2 text-xs pt-1">
-                  <span className="text-estate-600">
-                    Host: <strong className="text-estate-900">{insp.fullName || 'Verified Agent'}</strong> ({insp.phone || 'Contact via portal'})
+                  <span className="text-estate-400">
+                    Host: <strong className="text-white">{insp.fullName || 'Verified Agent'}</strong> ({insp.phone || 'Contact via portal'})
                   </span>
                   {insp.propertyId && (
                     <Link
                       to={`/properties/${insp.propertyId}`}
-                      className="text-xs font-bold text-navy hover:text-emerald inline-flex items-center gap-1"
+                      className="text-xs font-bold text-gold hover:text-gold-light inline-flex items-center gap-1"
                     >
                       View Property Details <ChevronRight className="w-3.5 h-3.5" />
                     </Link>
@@ -278,11 +278,11 @@ export function BuyerDashboardPage() {
       {activeTab === 'enquiries' && (
         <div className="space-y-4 max-w-4xl">
           {conversations.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-estate-200 p-8 shadow-subtle">
-              <MessageSquare className="w-12 h-12 text-estate-300 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-navy font-display">No conversation threads yet</h3>
-              <p className="text-xs text-estate-500 mt-1 mb-4">Have questions about rent terms or service charges? Click "Chat Directly with Agent" on any property.</p>
-              <Link to="/properties" className="px-4 py-2 bg-emerald text-white text-xs font-bold rounded-xl hover:bg-emerald-dark transition inline-block">
+            <div className="text-center py-16 bg-navy-card rounded-3xl border border-navy-border p-8 shadow-premium">
+              <MessageSquare className="w-12 h-12 text-estate-500 mx-auto mb-3" />
+              <h3 className="text-base font-bold text-white font-display">No conversation threads yet</h3>
+              <p className="text-xs text-estate-400 mt-1 mb-4">Have questions about rent terms or service charges? Click "Chat Directly with Agent" on any property.</p>
+              <Link to="/properties" className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition inline-block">
                 Browse Properties
               </Link>
             </div>
@@ -291,33 +291,33 @@ export function BuyerDashboardPage() {
               {conversations.map(conv => (
                 <div 
                   key={conv.id} 
-                  className="bg-white p-5 rounded-3xl border border-estate-200 shadow-subtle hover:border-emerald-300 transition space-y-3"
+                  className="bg-navy-card p-5 rounded-3xl border border-navy-border shadow-premium hover:border-gold/40 transition space-y-3"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-estate-100 pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-navy-border pb-3">
                     <div className="flex items-center gap-3">
                       <img
                         src={conv.counterpart?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
                         alt={conv.counterpart?.name}
-                        className="w-10 h-10 rounded-2xl object-cover ring-2 ring-emerald-100"
+                        className="w-10 h-10 rounded-2xl object-cover ring-2 ring-gold/30"
                       />
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-sm font-bold text-navy font-display">{conv.counterpart?.name}</span>
+                          <span className="text-sm font-bold text-white font-display">{conv.counterpart?.name}</span>
                           {conv.counterpart?.isVerified && (
-                            <ShieldCheck className="w-4 h-4 text-emerald" />
+                            <ShieldCheck className="w-4 h-4 text-gold" />
                           )}
-                          <span className="text-[10px] bg-sand-100 text-estate-700 px-2 py-0.5 rounded-full font-semibold">
+                          <span className="text-[10px] bg-navy-surface text-gold border border-gold/30 px-2 py-0.5 rounded-full font-semibold">
                             {conv.counterpart?.role}
                           </span>
                         </div>
-                        <span className="text-xs text-estate-500">{conv.counterpart?.phone}</span>
+                        <span className="text-xs text-estate-400">{conv.counterpart?.phone}</span>
                       </div>
                     </div>
 
                     <div className="text-left sm:text-right">
                       <span className="text-[11px] text-estate-400 block">{conv.lastMessageTime}</span>
                       {conv.unreadCount > 0 && (
-                        <span className="px-2 py-0.5 bg-emerald text-white text-[10px] font-bold rounded-full">
+                        <span className="px-2 py-0.5 bg-gold text-navy-deep text-[10px] font-bold rounded-full">
                           {conv.unreadCount} New
                         </span>
                       )}
@@ -325,15 +325,15 @@ export function BuyerDashboardPage() {
                   </div>
 
                   {/* Message bubble preview */}
-                  <div className="p-3.5 bg-sand-50/80 rounded-2xl border border-sand-200 text-xs text-estate-700 leading-relaxed">
-                    <span className="font-bold text-navy block mb-0.5 text-[11px]">Latest Exchange:</span>
+                  <div className="p-3.5 bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-300 leading-relaxed">
+                    <span className="font-bold text-white block mb-0.5 text-[11px]">Latest Exchange:</span>
                     "{conv.lastMessage}"
                   </div>
 
                   {/* Footer actions */}
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
-                    <span className="text-estate-500 text-[11px] font-medium truncate max-w-sm">
-                      Re: <strong className="text-navy">{conv.propertyTitle}</strong>
+                    <span className="text-estate-400 text-[11px] font-medium truncate max-w-sm">
+                      Re: <strong className="text-gold">{conv.propertyTitle}</strong>
                     </span>
 
                     <div className="flex items-center gap-2">
@@ -343,15 +343,15 @@ export function BuyerDashboardPage() {
                           setActiveConversation(conv);
                           setIsChatOpen(true);
                         }}
-                        className="px-4 py-2 bg-navy hover:bg-estate-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs"
+                        className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-gold"
                       >
-                        <MessageSquare className="w-3.5 h-3.5 text-emerald" />
+                        <MessageSquare className="w-3.5 h-3.5 text-navy-deep" />
                         <span>Open Live Chat ({conv.messages?.length || 0})</span>
                       </button>
 
                       <Link
                         to={`/properties/${conv.propertyId}`}
-                        className="px-3 py-2 border border-estate-200 hover:bg-sand-50 rounded-xl text-estate-700 text-xs font-semibold transition"
+                        className="px-3 py-2 border border-navy-border hover:bg-navy-surface rounded-xl text-estate-300 text-xs font-semibold transition"
                       >
                         View Listing
                       </Link>
@@ -368,23 +368,23 @@ export function BuyerDashboardPage() {
       {activeTab === 'neighbourhoods' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {followedNeighbourhoods.map(neighbourhood => (
-            <div key={neighbourhood.id} className="bg-white p-5 rounded-2xl border border-estate-200 shadow-subtle space-y-3">
+            <div key={neighbourhood.id} className="bg-navy-card p-5 rounded-2xl border border-navy-border shadow-premium space-y-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-base font-bold text-navy font-display">{neighbourhood.name}</h3>
-                  <p className="text-xs text-estate-500">{neighbourhood.city}, {neighbourhood.state}</p>
+                  <h3 className="text-base font-bold text-white font-display">{neighbourhood.name}</h3>
+                  <p className="text-xs text-estate-400">{neighbourhood.city}, {neighbourhood.state}</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-lg font-bold text-navy">{neighbourhood.livabilityScore}</span>
+                  <span className="text-lg font-bold text-gold">{neighbourhood.livabilityScore}</span>
                   <span className="text-xs text-estate-400">/10</span>
                 </div>
               </div>
-              <p className="text-xs text-estate-600 line-clamp-2">{neighbourhood.description}</p>
-              <div className="pt-2 border-t border-estate-100 flex items-center justify-between text-xs">
-                <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-emerald font-semibold hover:underline">
+              <p className="text-xs text-estate-400 line-clamp-2">{neighbourhood.description}</p>
+              <div className="pt-2 border-t border-navy-border flex items-center justify-between text-xs">
+                <Link to={`/community?neighbourhood=${neighbourhood.id}`} className="text-gold font-semibold hover:underline">
                   View Community Feed
                 </Link>
-                <Link to={`/neighbourhoods/${neighbourhood.id}`} className="font-bold text-navy hover:text-emerald">
+                <Link to={`/neighbourhoods/${neighbourhood.id}`} className="font-bold text-white hover:text-gold transition">
                   Neighbourhood Intel →
                 </Link>
               </div>

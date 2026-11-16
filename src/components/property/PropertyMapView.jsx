@@ -234,13 +234,13 @@ export function PropertyMapView({
           >
             <Popup className="custom-popup" minWidth={200}>
               <div className="p-1 text-xs">
-                <span className="text-[10px] font-bold text-white bg-navy px-2 py-0.5 rounded-full inline-block mb-1">
+                <span className="text-[10px] font-bold text-navy-deep bg-gold px-2 py-0.5 rounded-full inline-block mb-1">
                   {fac.type}
                 </span>
-                <h4 className="font-bold text-navy text-sm font-display">{fac.name}</h4>
-                <p className="text-[11px] text-estate-600 mt-0.5">{fac.rating}</p>
-                <div className="mt-2 pt-2 border-t border-estate-100 flex items-center justify-between text-[11px] text-estate-500">
-                  <span className="flex items-center gap-1 font-semibold text-emerald">
+                <h4 className="font-bold text-white text-sm font-display">{fac.name}</h4>
+                <p className="text-[11px] text-estate-300 mt-0.5">{fac.rating}</p>
+                <div className="mt-2 pt-2 border-t border-navy-border flex items-center justify-between text-[11px] text-estate-400">
+                  <span className="flex items-center gap-1 font-semibold text-gold">
                     <Navigation className="w-3 h-3" /> {fac.distance}
                   </span>
                   <span className="capitalize">{fac.neighbourhoodKey.replace(/-/g, ' ')}</span>
@@ -287,17 +287,17 @@ export function PropertyMapView({
                       alt={property.title}
                       className="w-full h-28 object-cover rounded-xl mb-2"
                     />
-                    <div className="flex items-center gap-1 text-[10px] text-emerald font-bold mb-1">
+                    <div className="flex items-center gap-1 text-[10px] text-gold font-bold mb-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>{property.verificationStatus}</span>
                     </div>
-                    <h4 className="text-xs font-bold text-navy line-clamp-1 mb-1 font-display">
+                    <h4 className="text-xs font-bold text-white line-clamp-1 mb-1 font-display">
                       {property.title}
                     </h4>
-                    <p className="text-sm font-black text-navy mb-2">
+                    <p className="text-sm font-black text-gold mb-2">
                       {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
                     </p>
-                    <div className="flex items-center gap-3 text-xs text-estate-600 mb-3">
+                    <div className="flex items-center gap-3 text-xs text-estate-400 mb-3">
                       <span className="flex items-center gap-1">
                         <Bed className="w-3.5 h-3.5" /> {property.bedrooms} Beds
                       </span>
@@ -307,7 +307,7 @@ export function PropertyMapView({
                     </div>
                     <Link
                       to={`/properties/${property.id}`}
-                      className="block text-center w-full py-2 px-3 bg-navy text-white text-xs font-bold rounded-xl hover:bg-emerald transition shadow-xs"
+                      className="block text-center w-full py-2 px-3 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl transition shadow-gold"
                     >
                       View Details & Security Intel
                     </Link>
