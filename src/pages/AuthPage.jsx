@@ -17,6 +17,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BrandLogo } from '../components/common/BrandLogo';
 
 export function AuthPage() {
   const [searchParams] = useSearchParams();
@@ -72,7 +73,7 @@ export function AuthPage() {
     setError('');
     setLoading(true);
 
-    const res = await login(email || 'babatunde@estatelens.demo', password, selectedRole);
+    const res = await login(email || 'babatunde@vettedhomes.demo', password, selectedRole);
     setLoading(false);
 
     if (res.success) {
@@ -99,7 +100,7 @@ export function AuthPage() {
     setLoading(true);
     const res = await register({
       name: name || 'Demo Resident',
-      email: email || 'user@estatelens.ng',
+      email: email || 'user@vettedhomes.ng',
       phone: phone || '+234 800 000 0000',
       password,
       role: selectedRole
@@ -110,7 +111,7 @@ export function AuthPage() {
       if (res.requiresVerification) {
         setActiveTab('verify_email');
       } else {
-        setSuccessMessage('Account registered successfully! Welcome to EstateLens.');
+        setSuccessMessage('Account registered successfully! Welcome to VettedHomes.');
         setTimeout(() => {
           const destination = redirectPath || (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer');
           navigate(destination);
@@ -166,14 +167,9 @@ export function AuthPage() {
         
         {/* Brand Logo & Header */}
         <div className="text-center space-y-2">
-          <Link to="/" className="inline-flex items-center gap-2.5">
-            <div className="w-11 h-11 rounded-2xl bg-navy text-emerald flex items-center justify-center shadow-md">
-              <Building2 className="w-6 h-6 text-emerald-light" />
-            </div>
-            <span className="text-2xl font-black text-navy font-display tracking-tight">
-              Estate<span className="text-emerald">Lens</span>
-            </span>
-          </Link>
+          <div className="flex justify-center">
+            <BrandLogo size="lg" variant="dark" showTagline={false} />
+          </div>
           <p className="text-xs text-estate-500 font-medium">
             Nigeria's Verified Property & Neighbourhood Platform
           </p>
@@ -241,7 +237,7 @@ export function AuthPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. babatunde@estatelens.demo"
+                    placeholder="e.g. babatunde@vettedhomes.demo"
                     className="w-full pl-9 pr-3 py-2.5 border border-estate-200 rounded-xl text-xs focus:ring-1 focus:ring-emerald outline-none"
                   />
                 </div>
@@ -309,7 +305,7 @@ export function AuthPage() {
                 disabled={loading}
                 className="w-full py-3 bg-navy hover:bg-estate-900 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
               >
-                {loading ? 'Authenticating...' : 'Sign In to EstateLens'}
+                {loading ? 'Authenticating...' : 'Sign In to VettedHomes'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
 
@@ -515,7 +511,7 @@ export function AuthPage() {
               <div className="space-y-1">
                 <h3 className="text-base font-bold text-navy font-display">Create New Password</h3>
                 <p className="text-xs text-estate-500">
-                  Enter a new secure password for your EstateLens account.
+                  Enter a new secure password for your VettedHomes account.
                 </p>
               </div>
 

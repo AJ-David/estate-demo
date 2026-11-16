@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, ShieldCheck, Heart, MapPin, MessageSquare, Mail, Phone, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Heart, MapPin, MessageSquare, Mail, Phone, ExternalLink } from 'lucide-react';
+import { BrandLogo } from './BrandLogo';
 
 export function Footer() {
   return (
@@ -10,14 +11,7 @@ export function Footer() {
           
           {/* Brand & Vision */}
           <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-navy-surface flex items-center justify-center border border-navy-border text-emerald-light">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <span className="text-2xl font-black tracking-tight text-white font-display">
-                Estate<span className="text-emerald-light">Lens</span>
-              </span>
-            </Link>
+            <BrandLogo size="md" variant="light" showTagline={true} />
             
             <p className="text-sm text-estate-300 leading-relaxed max-w-sm">
               Nigeria's premier real estate discovery and neighbourhood intelligence platform. 
@@ -140,12 +134,12 @@ export function Footer() {
           <span className="font-bold text-amber-400 block mb-1">
             Community Integrity & Safety Standard:
           </span>
-          EstateLens provides moderated community perspectives and crowd-sourced infrastructure observations. For resident safety and privacy, private pinpoint coordinates are obfuscated on public maps. Community submissions reflect contributor experiences and do not constitute official legal certifications. Read our community guidelines for reporting procedures.
+          VettedHomes provides moderated community perspectives and crowd-sourced infrastructure observations. For resident safety and privacy, private pinpoint coordinates are obfuscated on public maps. Community submissions reflect contributor experiences and do not constitute official legal certifications. Read our community guidelines for reporting procedures.
         </div>
 
         {/* Bottom bar */}
         <div className="pt-6 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-estate-400">
-          <p>© {new Date().getFullYear()} EstateLens Technologies Ltd. Built for Nigeria, architected for global scale.</p>
+          <p>© {new Date().getFullYear()} VettedHomes Technologies Ltd. Built for Nigeria, architected for global scale.</p>
           <div className="flex items-center space-x-6">
             <span className="hover:text-white cursor-pointer transition">Privacy Policy</span>
             <span className="hover:text-white cursor-pointer transition">Terms of Service</span>

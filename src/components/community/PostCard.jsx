@@ -30,7 +30,11 @@ export function PostCard({ post, onReport }) {
 
   // Load any local comments for this post
   useEffect(() => {
-    const commentsMap = JSON.parse(localStorage.getItem('estatelens_comments_map') || '{}');
+    const commentsMap = JSON.parse(
+      localStorage.getItem('vettedhomes_comments_map') || 
+      localStorage.getItem('estatelens_comments_map') || 
+      '{}'
+    );
     if (commentsMap[post.id]) {
       setComments(prev => {
         const existingIds = new Set(prev.map(c => c.id));
@@ -39,7 +43,11 @@ export function PostCard({ post, onReport }) {
       });
     }
 
-    const userVotes = JSON.parse(localStorage.getItem('estatelens_user_votes') || '{}');
+    const userVotes = JSON.parse(
+      localStorage.getItem('vettedhomes_user_votes') || 
+      localStorage.getItem('estatelens_user_votes') || 
+      '{}'
+    );
     if (userVotes[post.id]) {
       setUserVote(userVotes[post.id]);
     }

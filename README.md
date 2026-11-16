@@ -1,15 +1,15 @@
-# EstateLens — Full-Stack Real Estate & Neighbourhood Intelligence Platform
+# VettedHomes — Full-Stack Real Estate & Neighbourhood Intelligence Platform
 
-> **Find Your Next Home. Know Your Next Neighbourhood.**  
+> **Verified Properties. Real Neighbourhood Truth.**  
 > A premium, full-stack real estate discovery and location intelligence platform combining property transactions (rent, sale, short-let), interactive geospatial mapping, two-way agent communication, and location-based community forums where residents share ground-truth living experiences.
 
 ---
 
 ## 🌟 Executive Overview & Signature Differentiator
 
-Most real estate platforms show pictures of an apartment but conceal the realities of living in that location. **EstateLens** solves this asymmetric information problem.
+Most real estate platforms show pictures of an apartment but conceal the realities of living in that location. **VettedHomes** solves this asymmetric information problem.
 
-EstateLens bridges property discovery with a dedicated **Neighbourhood Intelligence** and **Community Discussion System**. Prospective tenants and buyers can evaluate critical infrastructure realities—such as public grid electricity uptime, borehole water salinity, drainage flood risks, gated street security protocols, and internet broadband coverage—directly from vetted resident consensus before scheduling physical tours.
+VettedHomes bridges property discovery with a dedicated **Neighbourhood Intelligence** and **Community Discussion System**. Prospective tenants and buyers can evaluate critical infrastructure realities—such as public grid electricity uptime, borehole water salinity, drainage flood risks, gated street security protocols, and internet broadband coverage—directly from vetted resident consensus before scheduling physical tours.
 
 Initial focus is on Nigerian urban centres (Lagos, Abuja) with architecture designed for global scalability.
 
@@ -98,7 +98,7 @@ Initial focus is on Nigerian urban centres (Lagos, Abuja) with architecture desi
 
 ## 🗄️ Database Architecture & Supabase Setup
 
-EstateLens includes enterprise-grade PostgreSQL scripts located in `supabase/`:
+VettedHomes includes enterprise-grade PostgreSQL scripts located in `supabase/`:
 
 - **`supabase/schema.sql`**: 18 relational tables, foreign key constraints, automated timestamp triggers, and Row Level Security (RLS) policies.
 - **`supabase/seed.sql`**: Pre-seeded data with Nigerian urban districts, infrastructure metrics, and sample community discussions.
@@ -122,7 +122,7 @@ EstateLens includes enterprise-grade PostgreSQL scripts located in `supabase/`:
    VITE_SUPABASE_ANON_KEY=your-anon-publishable-key
    ```
 
-*Note: EstateLens features an automated hybrid storage fallback. If Supabase credentials are not provided or if the network is disconnected, the application operates gracefully with pre-populated demo records.*
+*Note: VettedHomes features an automated hybrid storage fallback. If Supabase credentials are not provided or if the network is disconnected, the application operates gracefully with pre-populated demo records.*
 
 ---
 
@@ -135,8 +135,8 @@ EstateLens includes enterprise-grade PostgreSQL scripts located in `supabase/`:
 ### Quick Start
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/estatelens.git
-cd estatelens
+git clone https://github.com/your-username/vettedhomes.git
+cd vettedhomes
 
 # 2. Install dependencies
 npm install
@@ -160,16 +160,16 @@ npm run preview
 
 ## 🌐 Deployment Guide (Vercel)
 
-EstateLens is optimized for zero-configuration continuous deployment on **Vercel**:
+VettedHomes is optimized for zero-configuration continuous deployment on **Vercel**:
 
 1. Push your repository to **GitHub**:
    ```bash
    git add .
-   git commit -m "feat: initial EstateLens production release"
+   git commit -m "feat: initial VettedHomes production release"
    git push origin main
    ```
 2. Log into [Vercel](https://vercel.com) and click **Add New... > Project**.
-3. Import your `estatelens` repository.
+3. Import your `vettedhomes` repository.
 4. In the **Configure Project** screen:
    - **Framework Preset**: Vite
    - **Build Command**: `npm run build`

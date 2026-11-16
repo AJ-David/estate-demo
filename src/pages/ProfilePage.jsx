@@ -276,7 +276,7 @@ export function ProfilePage() {
           <div className="bg-sand-50 p-5 rounded-3xl border border-sand-200 text-xs text-estate-700 space-y-1">
             <h3 className="font-bold text-navy text-sm">Unified Multi-Role Capability</h3>
             <p className="text-[11px] leading-relaxed">
-              In EstateLens, you do not need multiple logins. You can be an active tenant searching for an apartment while also listing properties as a landlord or managing clients as a licensed agent.
+              In VettedHomes, you do not need multiple logins. You can be an active tenant searching for an apartment while also listing properties as a landlord or managing clients as a licensed agent.
             </p>
           </div>
 
@@ -425,7 +425,7 @@ export function ProfilePage() {
               </div>
             </div>
             <p className="text-xs text-estate-600 leading-relaxed">
-              EstateLens requires real estate agents to submit license or CAC registration details before advertising properties.
+              VettedHomes requires real estate agents to submit license or CAC registration details before advertising properties.
             </p>
             <button
               type="button"

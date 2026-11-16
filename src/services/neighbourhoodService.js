@@ -221,7 +221,7 @@ export async function getNeighbourhoodIntelligenceSummary(neighbourhoodId) {
         reportCount: propertyPosts.length,
         statusLevel: 'Advisory Level',
         summary: 'Tenants report high agent responsiveness for premium duplexes, but advise inspecting transformer diesel contribution rates prior to signing tenancy agreements.',
-        uncertaintyNote: 'Zero advance inspection fees policy is strictly enforced on EstateLens to protect prospective tenants.'
+        uncertaintyNote: 'Zero advance inspection fees policy is strictly enforced on VettedHomes to protect prospective tenants.'
       }
     }
   };

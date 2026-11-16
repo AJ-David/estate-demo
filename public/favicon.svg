@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Rounded Shield Base -->
+  <rect width="48" height="48" rx="12" fill="#0E1A2B"/>
+  
+  <!-- Architectural House Silhouette with Vetting Shield Crest -->
+  <path d="M24 10L11 20V36C11 37.1046 11.8954 38 13 38H35C36.1046 38 37 37.1046 37 36V20L24 10Z" fill="#132238" stroke="#243A5A" stroke-width="1.5"/>
+  
+  <!-- Modern Clean Roofline -->
+  <path d="M9 22L24 10L39 22" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Vetting Verified Check / Lens Focal Core -->
+  <circle cx="24" cy="27" r="7" fill="#0E1A2B" stroke="#10B981" stroke-width="2"/>
+  <path d="M21 27L23 29L27 25" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+

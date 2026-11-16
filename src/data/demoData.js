@@ -1,5 +1,5 @@
 /**
- * ESTATELENS — TEMPORARY DEMO DATA (PHASE 1)
+ * VETTEDHOMES — SEED & DEMO DATA
  * Clearly identified demo datasets representing properties, neighbourhoods,
  * community posts, reviews, and user profiles across key locations in Nigeria.
  * Scalable for international expansion in future phases.
@@ -182,7 +182,7 @@ export const DEMO_PROPERTIES = [
     sizeSqm: 380,
     furnishingStatus: 'Semi-Furnished',
     availabilityStatus: 'Available Now',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-02',
     images: [
@@ -245,7 +245,7 @@ export const DEMO_PROPERTIES = [
     sizeSqm: 140,
     furnishingStatus: 'Fully Furnished',
     availabilityStatus: 'Available Immediately',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-04',
     images: [
@@ -306,7 +306,7 @@ export const DEMO_PROPERTIES = [
     sizeSqm: 1250,
     furnishingStatus: 'Semi-Furnished',
     availabilityStatus: 'Available for Sale',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-10-28',
     images: [
@@ -369,7 +369,7 @@ export const DEMO_PROPERTIES = [
     sizeSqm: 260,
     furnishingStatus: 'Unfurnished',
     availabilityStatus: 'Available for Sale',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-01',
     images: [
@@ -429,7 +429,7 @@ export const DEMO_PROPERTIES = [
     sizeSqm: 85,
     furnishingStatus: 'Fully Furnished',
     availabilityStatus: 'Booking Calendar Open',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-05',
     images: [
@@ -720,7 +720,7 @@ export const DEMO_PROPERTY_REVIEWS = [
 export const DEMO_USER = {
   id: 'usr-demo-001',
   name: 'Babatunde Adeleke',
-  email: 'babatunde@estatelens.demo',
+  email: 'babatunde@vettedhomes.demo',
   phone: '+234 803 123 4567',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
   roles: ['buyer_tenant', 'landlord_owner'], // Multiple roles supported!

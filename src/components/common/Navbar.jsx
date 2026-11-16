@@ -21,6 +21,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { useSavedProperties } from '../../context/SavedPropertiesContext';
 import { DatabaseStatusModal } from './DatabaseStatusModal';
+import { BrandLogo } from './BrandLogo';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -47,22 +48,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-20">
             
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-11 h-11 rounded-xl bg-navy flex items-center justify-center text-white shadow-md group-hover:bg-estate-900 transition-all duration-300">
-                <Building2 className="w-6 h-6 text-emerald-light" />
-              </div>
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-2xl font-black tracking-tight text-navy font-display">
-                    Estate<span className="text-emerald">Lens</span>
-                  </span>
-                  <span className="inline-block w-2 h-2 rounded-full bg-emerald"></span>
-                </div>
-                <p className="text-[10px] tracking-wider uppercase font-semibold text-estate-500">
-                  Property & Neighbourhood Intel
-                </p>
-              </div>
-            </Link>
+            <BrandLogo size="md" variant="dark" showTagline={true} />
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1">

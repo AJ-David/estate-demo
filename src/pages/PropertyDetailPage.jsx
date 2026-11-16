@@ -85,7 +85,7 @@ export function PropertyDetailPage() {
     });
 
     if (res.success) {
-      const stored = JSON.parse(localStorage.getItem('estatelens_conversations') || '[]');
+      const stored = JSON.parse(localStorage.getItem('vettedhomes_conversations') || localStorage.getItem('estatelens_conversations') || '[]');
       const targetConv = stored.find(c => c.id === res.conversationId);
       setActiveConversation(targetConv);
       setIsChatOpen(true);
@@ -179,7 +179,7 @@ export function PropertyDetailPage() {
             </span>
             <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full border border-emerald-200">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
-              {property.verificationStatus || 'EstateLens Verified'}
+              {property.verificationStatus || 'VettedHomes Verified'}
             </span>
           </div>
 
@@ -223,7 +223,7 @@ export function PropertyDetailPage() {
           {/* Privacy watermark badge */}
           <div className="absolute bottom-4 left-4 bg-estate-950/75 backdrop-blur-xs text-white text-xs px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-2">
             <EyeOff className="w-4 h-4 text-emerald-light" />
-            <span>EstateLens Privacy Protocol: Public imagery protects resident identity.</span>
+            <span>VettedHomes Privacy Protocol: Public imagery protects resident identity.</span>
           </div>
         </div>
 
@@ -544,7 +544,7 @@ export function PropertyDetailPage() {
               </button>
 
               <a
-                href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20EstateLens.`}
+                href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20VettedHomes.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 bg-sand-100 hover:bg-sand-200 border border-sand-200 text-navy rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
@@ -558,7 +558,7 @@ export function PropertyDetailPage() {
             <div className="p-3.5 bg-sand-50 rounded-2xl border border-sand-200 text-xs text-estate-600 space-y-1">
               <span className="font-bold text-navy flex items-center gap-1">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald" />
-                EstateLens Direct Guarantee
+                VettedHomes Direct Guarantee
               </span>
               <p className="text-[11px] leading-relaxed">
                 Zero advance inspection payment policy. Never pay inspection fees to unknown individuals. Report suspicious claims directly to our support desk.

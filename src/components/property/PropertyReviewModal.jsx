@@ -197,7 +197,7 @@ export function PropertyReviewModal({ isOpen, onClose, property, onReviewSubmitt
           </div>
 
           <p className="text-[11px] text-estate-400 italic">
-            * Reviews reflect subjective opinions of users and do not constitute warranties by EstateLens.
+            * Reviews reflect subjective opinions of users and do not constitute warranties by VettedHomes.
           </p>
 
           {/* Footer Actions */}

@@ -6,13 +6,13 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('estatelens_user');
+    const saved = localStorage.getItem('vettedhomes_user') || localStorage.getItem('estatelens_user');
     return saved ? JSON.parse(saved) : (isSupabaseConfigured ? null : DEMO_USER);
   });
 
   const [session, setSession] = useState(null);
   const [activeRole, setActiveRole] = useState(() => {
-    const saved = localStorage.getItem('estatelens_active_role');
+    const saved = localStorage.getItem('vettedhomes_active_role') || localStorage.getItem('estatelens_active_role');
     return saved || 'buyer_tenant';
   });
 
@@ -23,14 +23,15 @@ export function AuthProvider({ children }) {
   // Sync user and activeRole to local storage
   useEffect(() => {
     if (user) {
-      localStorage.setItem('estatelens_user', JSON.stringify(user));
+      localStorage.setItem('vettedhomes_user', JSON.stringify(user));
     } else if (!isSupabaseConfigured) {
+      localStorage.removeItem('vettedhomes_user');
       localStorage.removeItem('estatelens_user');
     }
   }, [user]);
 
   useEffect(() => {
-    localStorage.setItem('estatelens_active_role', activeRole);
+    localStorage.setItem('vettedhomes_active_role', activeRole);
   }, [activeRole]);
 
   // Load user profile and user_roles from Supabase
@@ -114,6 +115,7 @@ export function AuthProvider({ children }) {
           await fetchSupabaseProfile(currentSession.user);
         } else if (event === 'SIGNED_OUT') {
           setUser(null);
+          localStorage.removeItem('vettedhomes_user');
           localStorage.removeItem('estatelens_user');
         }
         setLoading(false);
@@ -250,6 +252,7 @@ export function AuthProvider({ children }) {
     }
     setUser(null);
     setSession(null);
+    localStorage.removeItem('vettedhomes_user');
     localStorage.removeItem('estatelens_user');
   };
 

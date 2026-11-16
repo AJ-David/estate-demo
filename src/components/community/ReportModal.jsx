@@ -55,7 +55,7 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
           </div>
           <h4 className="text-lg font-bold text-navy font-display">Report Received</h4>
           <p className="text-xs text-estate-600 max-w-sm mx-auto leading-relaxed">
-            Thank you for helping protect community integrity. The EstateLens Trust & Safety desk reviews reported content against anti-doxxing and defamation standards within 4 hours.
+            Thank you for helping protect community integrity. The VettedHomes Trust & Safety desk reviews reported content against anti-doxxing and defamation standards within 4 hours.
           </p>
           <button
             type="button"
@@ -70,7 +70,7 @@ export function ReportModal({ isOpen, onClose, targetItem }) {
           <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
             <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <span>
-              EstateLens strictly prohibits harassment, disclosure of private residential identities or house numbers, and unsubstantiated alarmist rumors.
+              VettedHomes strictly prohibits harassment, disclosure of private residential identities or house numbers, and unsubstantiated alarmist rumors.
             </span>
           </div>
 

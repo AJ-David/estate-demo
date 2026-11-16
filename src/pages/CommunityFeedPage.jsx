@@ -38,7 +38,11 @@ export function CommunityFeedPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [reportTarget, setReportTarget] = useState(null);
   const [followedNeighbourhoods, setFollowedNeighbourhoods] = useState(() => {
-    return JSON.parse(localStorage.getItem('estatelens_followed_neighbourhoods') || '["lekki-phase-1", "yaba"]');
+    return JSON.parse(
+      localStorage.getItem('vettedhomes_followed_neighbourhoods') || 
+      localStorage.getItem('estatelens_followed_neighbourhoods') || 
+      '["lekki-phase-1", "yaba"]'
+    );
   });
 
   // Load community posts
@@ -70,7 +74,7 @@ export function CommunityFeedPage() {
       const updated = prev.includes(nHoodId)
         ? prev.filter(id => id !== nHoodId)
         : [...prev, nHoodId];
-      localStorage.setItem('estatelens_followed_neighbourhoods', JSON.stringify(updated));
+      localStorage.setItem('vettedhomes_followed_neighbourhoods', JSON.stringify(updated));
       return updated;
     });
   };
@@ -83,7 +87,7 @@ export function CommunityFeedPage() {
         <div className="space-y-2 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
             <MessageSquareText className="w-3.5 h-3.5 text-emerald" />
-            <span>EstateLens Signature Community</span>
+            <span>VettedHomes Signature Community</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-navy font-display tracking-tight">
             Neighbourhood Community Discussions

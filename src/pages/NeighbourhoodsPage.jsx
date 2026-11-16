@@ -131,7 +131,7 @@ export function NeighbourhoodsPage() {
         <div className="space-y-1.5 max-w-2xl">
           <span className="font-bold text-navy flex items-center gap-1.5 text-sm">
             <ShieldCheck className="w-4 h-4 text-emerald" />
-            EstateLens Neighbourhood Intelligence Methodology
+            VettedHomes Neighbourhood Intelligence Methodology
           </span>
           <p className="text-[11px] leading-relaxed">
             Every metric combines historical transformer uptime datasets, flood topography mapping, and verified questionnaires submitted by vetted local residents. We do not accept sponsorship payments to inflate livability scores.

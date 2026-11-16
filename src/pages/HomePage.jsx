@@ -228,7 +228,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 4. HOW ESTATELENS WORKS */}
+      {/* 4. HOW VETTEDHOMES WORKS */}
       <section id="how-it-works" className="bg-sand-100 py-16 sm:py-20 border-y border-estate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -236,7 +236,7 @@ export function HomePage() {
               Smart Real Estate Decision Workflow
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-navy font-display mt-1">
-              How EstateLens Works
+              How VettedHomes Works
             </h2>
             <p className="text-xs sm:text-sm text-estate-600 mt-2">
               A transparent, community-grounded journey designed to eliminate blind leasing and property regrets.
@@ -350,17 +350,17 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 6. WHY CHOOSE ESTATELENS */}
+      {/* 6. WHY CHOOSE VETTEDHOMES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold text-emerald uppercase tracking-wider">
             Built for Integrity
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-navy font-display mt-1">
-            Why EstateLens is Different
+            Why VettedHomes is Different
           </h2>
           <p className="text-xs sm:text-sm text-estate-600 mt-2">
-            Generic portals display beautiful photos. EstateLens shows you the living reality of the neighbourhood.
+            Generic portals display photos. VettedHomes shows you the living reality of the neighbourhood.
           </p>
         </div>
 

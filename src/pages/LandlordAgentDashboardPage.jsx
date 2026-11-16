@@ -193,7 +193,7 @@ export function LandlordAgentDashboardPage() {
       setMyListings(prev => [created, ...prev]);
       setIsCreateModalOpen(false);
       resetForm();
-      setNotification('Property listing created and published to EstateLens marketplace!');
+      setNotification('Property listing created and published to VettedHomes marketplace!');
       setTimeout(() => setNotification(''), 4000);
     } catch (err) {
       alert('Error creating listing: ' + err.message);

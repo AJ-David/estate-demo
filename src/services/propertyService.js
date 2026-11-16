@@ -25,10 +25,10 @@ function formatSupabaseProperty(row) {
     rating: 4.9
   } : {
     name: 'Verified Lister',
-    company: 'EstateLens Partner',
+    company: 'VettedHomes Partner',
     role: 'Licensed Agent',
     phone: '+234 803 555 0192',
-    email: 'agent@estatelens.ng',
+    email: 'agent@vettedhomes.ng',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
     verified: true,
     listingsCount: 8,
@@ -51,7 +51,7 @@ function formatSupabaseProperty(row) {
     sizeSqm: row.size_sqm || 250,
     furnishingStatus: row.furnishing_status || 'Semi-Furnished',
     availabilityStatus: row.availability_status || 'Available Now',
-    verificationStatus: row.verification_status || 'EstateLens Verified',
+    verificationStatus: row.verification_status || 'VettedHomes Verified',
     featured: row.featured || false,
     listingDate: row.created_at ? row.created_at.split('T')[0] : '2026-11-09',
     images,
@@ -216,7 +216,7 @@ export async function createProperty(propertyData, user) {
     sizeSqm: Number(propertyData.sizeSqm) || 300,
     furnishingStatus: propertyData.furnishingStatus || 'Semi-Furnished',
     availabilityStatus: propertyData.availabilityStatus || 'Available Now',
-    verificationStatus: 'EstateLens Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: Boolean(propertyData.featured),
     listingDate: new Date().toISOString().split('T')[0],
     images: propertyData.images && propertyData.images.length > 0 
@@ -238,7 +238,7 @@ export async function createProperty(propertyData, user) {
     },
     agent: {
       name: user?.name || 'Verified Lister',
-      company: 'EstateLens Premier Partners',
+      company: 'VettedHomes Premier Partners',
       role: 'Verified Agent',
       phone: user?.phone || '+234 803 555 0192',
       email: user?.email || '',

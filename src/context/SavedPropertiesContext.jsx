@@ -8,7 +8,7 @@ export function SavedPropertiesProvider({ children }) {
   const { user } = useAuth();
   const [savedIds, setSavedIds] = useState(() => {
     try {
-      const stored = localStorage.getItem('estatelens_saved_props');
+      const stored = localStorage.getItem('vettedhomes_saved_props') || localStorage.getItem('estatelens_saved_props');
       return stored ? JSON.parse(stored) : ['prop-101', 'prop-102'];
     } catch {
       return ['prop-101', 'prop-102'];
@@ -42,7 +42,7 @@ export function SavedPropertiesProvider({ children }) {
   // Persist to local storage
   useEffect(() => {
     try {
-      localStorage.setItem('estatelens_saved_props', JSON.stringify(savedIds));
+      localStorage.setItem('vettedhomes_saved_props', JSON.stringify(savedIds));
     } catch (e) {
       console.error('Failed to save to local storage', e);
     }

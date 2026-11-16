@@ -89,13 +89,17 @@ const DEFAULT_CONVERSATIONS = [
 
 // 1. Fetch Conversations for User
 export async function fetchConversations(userId) {
-  const localConversations = JSON.parse(localStorage.getItem('estatelens_conversations') || 'null');
+  const localConversations = JSON.parse(
+    localStorage.getItem('vettedhomes_conversations') || 
+    localStorage.getItem('estatelens_conversations') || 
+    'null'
+  );
   if (localConversations) {
     return localConversations;
   }
 
   // Initialize with realistic Nigerian real estate threads
-  localStorage.setItem('estatelens_conversations', JSON.stringify(DEFAULT_CONVERSATIONS));
+  localStorage.setItem('vettedhomes_conversations', JSON.stringify(DEFAULT_CONVERSATIONS));
   return DEFAULT_CONVERSATIONS;
 }
 
@@ -134,7 +138,7 @@ export async function sendChatMessage({
     return conv;
   });
 
-  localStorage.setItem('estatelens_conversations', JSON.stringify(updated));
+  localStorage.setItem('vettedhomes_conversations', JSON.stringify(updated));
 
   // If Supabase is configured, record in enquiries table
   if (isSupabaseConfigured && senderId && senderId.length > 20) {
@@ -156,7 +160,11 @@ export async function sendChatMessage({
 
   // Simulate realistic automated partner response after 1.5s for demo delight
   setTimeout(() => {
-    const current = JSON.parse(localStorage.getItem('estatelens_conversations') || '[]');
+    const current = JSON.parse(
+      localStorage.getItem('vettedhomes_conversations') || 
+      localStorage.getItem('estatelens_conversations') || 
+      '[]'
+    );
     const conv = current.find(c => c.id === conversationId);
     if (!conv) return;
 
@@ -189,7 +197,7 @@ export async function sendChatMessage({
       return c;
     });
 
-    localStorage.setItem('estatelens_conversations', JSON.stringify(finalConversations));
+    localStorage.setItem('vettedhomes_conversations', JSON.stringify(finalConversations));
   }, 1600);
 
   return { success: true, message: newMessage };
@@ -251,7 +259,7 @@ export async function startPropertyConversation({
   };
 
   const updated = [newConv, ...allConversations];
-  localStorage.setItem('estatelens_conversations', JSON.stringify(updated));
+  localStorage.setItem('vettedhomes_conversations', JSON.stringify(updated));
 
   return { success: true, conversationId: newConv.id };
 }

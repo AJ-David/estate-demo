@@ -77,7 +77,7 @@ export function CreatePostModal({ isOpen, onClose, onPostCreated, initialNeighbo
             <span>Community Safety & Anti-Doxxing Protocol</span>
           </div>
           <p className="text-[11px] text-estate-600 leading-relaxed">
-            EstateLens prohibits public accusations naming private individuals, exact gate/house numbers, or publishing phone numbers. Focus on general infrastructure, road conditions, power reliability, and helpful neighborhood context.
+            VettedHomes prohibits public accusations naming private individuals, exact gate/house numbers, or publishing phone numbers. Focus on general infrastructure, road conditions, power reliability, and helpful neighborhood context.
           </p>
         </div>
 

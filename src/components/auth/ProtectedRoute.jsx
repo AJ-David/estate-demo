@@ -36,7 +36,7 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
           <div>
             <h2 className="text-xl font-bold text-navy font-display">Switch Active Role Required</h2>
             <p className="text-xs text-estate-600 mt-1.5 leading-relaxed">
-              You are currently viewing EstateLens in <strong className="text-navy">{activeRole.replace('_', ' ')}</strong> mode. This section requires <strong className="text-navy">{targetRole.replace('_', ' ')}</strong> mode.
+              You are currently viewing VettedHomes in <strong className="text-navy">{activeRole.replace('_', ' ')}</strong> mode. This section requires <strong className="text-navy">{targetRole.replace('_', ' ')}</strong> mode.
             </p>
           </div>
           <button
@@ -62,7 +62,7 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
           <div>
             <h2 className="text-xl font-bold text-navy font-display">Upgrade Your Account Access</h2>
             <p className="text-xs text-estate-600 mt-1.5 leading-relaxed">
-              This area is restricted to {requiredRoleName} accounts. Because EstateLens accounts support multiple roles simultaneously, you can add this role to your existing account right now.
+              This area is restricted to {requiredRoleName} accounts. Because VettedHomes accounts support multiple roles simultaneously, you can add this role to your existing account right now.
             </p>
           </div>
           <button

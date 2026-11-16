@@ -70,7 +70,7 @@ export function ConversationChatDrawer({
 
     // Check for simulated partner response after 1.8s
     setTimeout(() => {
-      const stored = JSON.parse(localStorage.getItem('estatelens_conversations') || '[]');
+      const stored = JSON.parse(localStorage.getItem('vettedhomes_conversations') || localStorage.getItem('estatelens_conversations') || '[]');
       const updatedConv = stored.find(c => c.id === conversation.id);
       if (updatedConv && updatedConv.messages) {
         setMessages(updatedConv.messages);

@@ -8,7 +8,7 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
   const [copied, setCopied] = useState(false);
 
   const copyEnvSnippet = () => {
-    const snippet = `# EstateLens Supabase Configuration\nVITE_SUPABASE_URL=https://your-project.supabase.co\nVITE_SUPABASE_ANON_KEY=your-anon-key`;
+    const snippet = `# VettedHomes Supabase Configuration\nVITE_SUPABASE_URL=https://your-project.supabase.co\nVITE_SUPABASE_ANON_KEY=your-anon-key`;
     navigator.clipboard.writeText(snippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
