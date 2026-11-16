@@ -3,6 +3,30 @@ import { DEMO_NEIGHBOURHOODS, DEMO_COMMUNITY_POSTS } from '../data/demoData';
 
 // Geospatial polygon boundaries for key Nigerian neighbourhoods
 export const NEIGHBOURHOOD_BOUNDARIES = {
+  'banana-island': [
+    [6.4620, 3.4350],
+    [6.4600, 3.4480],
+    [6.4480, 3.4460],
+    [6.4490, 3.4320]
+  ],
+  'ikoyi': [
+    [6.4600, 3.4180],
+    [6.4580, 3.4420],
+    [6.4380, 3.4390],
+    [6.4400, 3.4150]
+  ],
+  'victoria-island': [
+    [6.4380, 3.4100],
+    [6.4350, 3.4450],
+    [6.4150, 3.4400],
+    [6.4180, 3.4080]
+  ],
+  'eko-atlantic': [
+    [6.4220, 3.4050],
+    [6.4200, 3.4280],
+    [6.4080, 3.4250],
+    [6.4100, 3.4020]
+  ],
   'lekki-phase-1': [
     [6.4580, 3.4680],
     [6.4520, 3.4980],
@@ -24,12 +48,31 @@ export const NEIGHBOURHOOD_BOUNDARIES = {
     [6.5810, 3.3420],
     [6.5920, 3.3390]
   ],
+  'maitama': [
+    [9.0980, 7.4850],
+    [9.0960, 7.5120],
+    [9.0750, 7.5150],
+    [9.0720, 7.4900],
+    [9.0850, 7.4820]
+  ],
   'maitama-abuja': [
     [9.0980, 7.4850],
     [9.0960, 7.5120],
     [9.0750, 7.5150],
     [9.0720, 7.4900],
     [9.0850, 7.4820]
+  ],
+  'asokoro': [
+    [9.0550, 7.5150],
+    [9.0520, 7.5380],
+    [9.0350, 7.5350],
+    [9.0380, 7.5120]
+  ],
+  'guzape': [
+    [9.0380, 7.5010],
+    [9.0350, 7.5220],
+    [9.0180, 7.5190],
+    [9.0200, 7.4980]
   ],
   'surulere': [
     [6.5080, 3.3480],
@@ -42,6 +85,38 @@ export const NEIGHBOURHOOD_BOUNDARIES = {
 
 // Enriched facilities with geospatial coordinates and categories
 export const NEIGHBOURHOOD_FACILITIES = {
+  'banana-island': [
+    { id: 'ban-fac-1', name: 'Lagoon Hospital Ikoyi', type: 'Healthcare', lat: 6.4520, lng: 3.4350, distance: '2.1 km', rating: '5.0★ Private Medical' },
+    { id: 'ban-fac-2', name: 'Banana Island Central Clubhouse', type: 'Recreation', lat: 6.4560, lng: 3.4410, distance: '0.5 km', rating: 'Private Clubhouse & Courts' },
+    { id: 'ban-fac-3', name: 'Deep-Water Marina & Yacht Jetty', type: 'Transit', lat: 6.4580, lng: 3.4420, distance: '0.4 km', rating: 'Lagoon Yacht Access' },
+    { id: 'ban-fac-4', name: 'Banana Island Gourmet Mart', type: 'Shopping', lat: 6.4550, lng: 3.4390, distance: '0.6 km', rating: 'Artisanal Groceries' }
+  ],
+  'ikoyi': [
+    { id: 'iko-fac-1', name: 'First Cardiology Consultants', type: 'Healthcare', lat: 6.4490, lng: 3.4260, distance: '1.2 km', rating: 'Specialist Cardiology' },
+    { id: 'iko-fac-2', name: 'Ikoyi Club 1938 Golf Course', type: 'Recreation', lat: 6.4470, lng: 3.4220, distance: '1.5 km', rating: 'Championship Golf' },
+    { id: 'iko-fac-3', name: 'The Wheatbaker Dining Strip', type: 'Shopping', lat: 6.4510, lng: 3.4320, distance: '0.9 km', rating: 'Luxury Hospitality' },
+    { id: 'iko-fac-4', name: 'Lekki-Ikoyi Link Bridge', type: 'Transit', lat: 6.4505, lng: 3.4480, distance: '1.4 km', rating: 'Toll Expressway' }
+  ],
+  'victoria-island': [
+    { id: 'vi-fac-1', name: 'Reddington Multi-Specialist Hospital', type: 'Healthcare', lat: 6.4290, lng: 3.4220, distance: '0.8 km', rating: 'Emergency & Surgery' },
+    { id: 'vi-fac-2', name: 'The Palms Shopping Mall Oniru', type: 'Shopping', lat: 6.4260, lng: 3.4380, distance: '1.2 km', rating: 'Retail Anchor' },
+    { id: 'vi-fac-3', name: 'Landmark Beach & Promenade', type: 'Recreation', lat: 6.4230, lng: 3.4350, distance: '1.6 km', rating: 'Private Beach Club' },
+    { id: 'vi-fac-4', name: 'US Consulate Victoria Island', type: 'Diplomacy', lat: 6.4320, lng: 3.4180, distance: '1.5 km', rating: 'Diplomatic Enclave' }
+  ],
+  'eko-atlantic': [
+    { id: 'eko-fac-1', name: 'Eko Atlantic Marina & Promenade', type: 'Transit', lat: 6.4180, lng: 3.4120, distance: '0.3 km', rating: 'Helipad & Water Taxis' },
+    { id: 'eko-fac-2', name: 'Alpha 1 Central Commercial Tower', type: 'Shopping', lat: 6.4190, lng: 3.4150, distance: '0.6 km', rating: 'High Finance & Retail' },
+    { id: 'eko-fac-3', name: 'Eko Atlantic Medical Hub', type: 'Healthcare', lat: 6.4160, lng: 3.4140, distance: '1.0 km', rating: 'Tertiary Health' }
+  ],
+  'asokoro': [
+    { id: 'aso-fac-1', name: 'ECOWAS Secretariat Headquarters', type: 'Diplomacy', lat: 9.0450, lng: 7.5220, distance: '1.2 km', rating: 'Diplomatic Compound' },
+    { id: 'aso-fac-2', name: 'Asokoro District Hospital', type: 'Healthcare', lat: 9.0420, lng: 7.5270, distance: '1.4 km', rating: 'General Medical Center' },
+    { id: 'aso-fac-3', name: 'Grand Square Mart Asokoro', type: 'Shopping', lat: 9.0460, lng: 7.5190, distance: '1.6 km', rating: 'Gourmet Shopping' }
+  ],
+  'guzape': [
+    { id: 'guz-fac-1', name: 'Guzape Hilltop Viewpoint', type: 'Recreation', lat: 9.0280, lng: 7.5080, distance: '0.8 km', rating: 'Skyline Overlook' },
+    { id: 'guz-fac-2', name: 'Outer Southern Expressway Link', type: 'Transit', lat: 9.0250, lng: 7.5120, distance: '1.5 km', rating: 'High-speed Highway' }
+  ],
   'lekki-phase-1': [
     { id: 'lek-fac-1', name: 'Evercare Hospital Lekki', type: 'Healthcare', lat: 6.4435, lng: 3.4812, distance: '1.2 km', rating: '4.8★ Multi-specialty' },
     { id: 'lek-fac-2', name: 'Meadow Hall British School', type: 'Education', lat: 6.4520, lng: 3.4910, distance: '2.5 km', rating: 'Early Years - Secondary' },

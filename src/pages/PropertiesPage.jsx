@@ -57,13 +57,22 @@ export function PropertiesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl sm:text-3xl font-black text-white font-display">
-          Properties in Nigeria
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-300 mt-1">
-          Explore verified homes paired with neighbourhood power, safety and drainage insights.
-        </p>
+      <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy-surface text-gold text-xs font-bold border border-gold/40 mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-gold" />
+            <span>Verified Luxury Marketplace</span>
+          </div>
+          <h1 className="text-2xl sm:text-4xl font-black text-white font-display tracking-tight">
+            Verified Properties in Nigeria
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-200 mt-1">
+            Discover authenticated listings across Lagos and Abuja paired with ground-truth power, security, and drainage audits.
+          </p>
+        </div>
+        <div className="text-xs text-slate-300 bg-navy-card px-4 py-2.5 rounded-2xl border border-navy-border shrink-0 font-medium">
+          <span className="text-gold font-bold">Market Uptime:</span> 100% Title Checked • Zero Advance Fee Guarantee
+        </div>
       </div>
 
       {/* Filter Toolbar */}

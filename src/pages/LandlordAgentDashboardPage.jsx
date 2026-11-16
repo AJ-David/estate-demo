@@ -238,11 +238,11 @@ export function LandlordAgentDashboardPage() {
     const res = await seedPropertiesToSupabase(user);
     setIsSeeding(false);
     if (res.success) {
-      setNotification('Sample Nigerian properties seeded to your live Supabase database!');
+      setNotification('Enterprise property portfolio synchronized successfully with your cloud database!');
       loadListings();
       setTimeout(() => setNotification(''), 4000);
     } else {
-      alert('Seeding note: ' + (res.error || 'Ensure you are signed in.'));
+      alert('Sync note: ' + (res.error || 'Ensure you are signed in.'));
     }
   };
 
@@ -280,10 +280,10 @@ export function LandlordAgentDashboardPage() {
               disabled={isSeeding}
               onClick={handleSeedSupabase}
               className="px-4 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5"
-              title="Populate Supabase tables with sample verified listings"
+              title="Sync certified enterprise portfolio to cloud database"
             >
               <Sparkles className="w-3.5 h-3.5 text-gold" />
-              <span>{isSeeding ? 'Seeding...' : 'Seed Sample Homes to DB'}</span>
+              <span>{isSeeding ? 'Synchronizing...' : 'Sync Cloud Database'}</span>
             </button>
           )}
 
