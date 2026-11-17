@@ -211,14 +211,16 @@ export function Navbar() {
                           <Building2 className="w-4 h-4 text-gold" />
                           Landlord & Agent Suite
                         </Link>
-                        <Link
-                          to="/admin"
-                          onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-white/90 transition font-medium"
-                        >
-                          <ShieldCheck className="w-4 h-4 text-gold" />
-                          Admin & Clean Slate Console
-                        </Link>
+                        {user?.roles?.includes('admin') && (
+                          <Link
+                            to="/admin"
+                            onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-gold font-bold transition"
+                          >
+                            <ShieldCheck className="w-4 h-4 text-gold" />
+                            Admin & Clean Slate Console
+                          </Link>
+                        )}
                       </div>
 
                       <div className="border-t border-navy-border pt-1">
@@ -327,14 +329,16 @@ export function Navbar() {
                   >
                     Landlord & Agent Suite
                   </Link>
-                  <Link
-                    to="/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-gold hover:bg-navy-surface transition flex items-center justify-between"
-                  >
-                    <span>Admin & Clean Slate Console</span>
-                    <ShieldCheck className="w-4 h-4 text-gold" />
-                  </Link>
+                  {user?.roles?.includes('admin') && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-3 py-2.5 rounded-lg text-base font-semibold text-gold hover:bg-navy-surface transition flex items-center justify-between"
+                    >
+                      <span>Admin & Clean Slate Console</span>
+                      <ShieldCheck className="w-4 h-4 text-gold" />
+                    </Link>
+                  )}
                   <button
                     type="button"
                     onClick={() => { logout(); setMobileMenuOpen(false); }}

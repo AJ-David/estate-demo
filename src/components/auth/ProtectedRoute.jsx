@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { ShieldAlert, PlusCircle, ArrowRight } from 'lucide-react';
+import { ShieldAlert, PlusCircle, ArrowRight, Lock, Home } from 'lucide-react';
 
 export function ProtectedRoute({ children, allowedRoles = null }) {
   const { user, isAuthenticated, activeRole, switchRole, loading } = useAuth();
@@ -16,6 +16,7 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
     );
   }
 
+  // Not authenticated at all -> Redirect to Auth page
   if (!isAuthenticated) {
     return <Navigate to={`/auth?tab=login&redirect=${encodeURIComponent(location.pathname)}`} replace />;
   }
@@ -24,6 +25,39 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
   if (allowedRoles && allowedRoles.length > 0) {
     const hasRoleInAccount = user?.roles?.some(r => allowedRoles.includes(r));
     const isActiveRoleAllowed = allowedRoles.includes(activeRole);
+
+    // SPECIAL SECURITY RULE: Admin role is strictly guarded
+    if (allowedRoles.includes('admin') && !user?.roles?.includes('admin')) {
+      return (
+        <div className="max-w-xl mx-auto my-16 p-8 bg-navy-card rounded-3xl border border-rose-500/40 shadow-premium text-center space-y-5">
+          <div className="w-14 h-14 bg-rose-950/70 text-rose-400 border border-rose-500/40 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+            <Lock className="w-7 h-7" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-white font-display">Administrator Clearance Required</h2>
+            <p className="text-xs text-estate-300 mt-2 leading-relaxed">
+              The Admin Console & Clean Slate Management console is strictly restricted to the platform system administrator. Your signed-in account (<strong className="text-gold">{user.email}</strong>) does not have administrative privileges.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <Link
+              to="/auth?tab=login&role=admin&redirect=/admin"
+              className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-gold"
+            >
+              <span>Sign In with Admin Account</span>
+              <ArrowRight className="w-4 h-4 text-navy-deep" />
+            </Link>
+            <Link
+              to="/properties"
+              className="w-full sm:w-auto px-6 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 hover:text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+            >
+              <Home className="w-4 h-4" />
+              <span>Back to Properties</span>
+            </Link>
+          </div>
+        </div>
+      );
+    }
 
     // If user has the role but it's not currently active, give them an option to switch
     if (hasRoleInAccount && !isActiveRoleAllowed) {
@@ -51,7 +85,7 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
       );
     }
 
-    // If user does not have the role on their account at all, offer them to add the role
+    // If user does not have the non-admin role, offer to add (e.g. buyer adding landlord role)
     if (!hasRoleInAccount) {
       const requiredRoleName = allowedRoles[0].replace('_', ' ');
       return (
@@ -80,4 +114,3 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
 
   return children;
 }
-

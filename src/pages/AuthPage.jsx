@@ -78,29 +78,34 @@ export function AuthPage() {
     }
 
     setLoading(true);
-    const res = await login(email.trim(), password, selectedRole);
+    const isAdminEmail = email.trim().toLowerCase() === 'admin@vettedhomes.ng';
+    const roleToLogin = isAdminEmail ? 'admin' : selectedRole;
+    const res = await login(email.trim(), password, roleToLogin);
     setLoading(false);
 
     if (res.success) {
-      const destination = redirectPath || (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer');
+      const destination = redirectPath || (
+        isAdminEmail ? '/admin' :
+        (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer')
+      );
       navigate(destination);
     } else {
       setError(res.error || 'Failed to sign in. Please verify your credentials.');
     }
   };
 
-  const handlePersonaSignIn = async (personaEmail, personaRole) => {
+  const handleAdminQuickSignIn = async () => {
     setError('');
     setLoading(true);
-    setEmail(personaEmail);
-    setSelectedRole(personaRole);
-    const res = await login(personaEmail, 'password123', personaRole);
+    setEmail('admin@vettedhomes.ng');
+    setPassword('AdminMaster2026!');
+    setSelectedRole('admin');
+    const res = await login('admin@vettedhomes.ng', 'AdminMaster2026!', 'admin');
     setLoading(false);
     if (res.success) {
-      const destination = redirectPath || (personaRole === 'landlord_owner' || personaRole === 'agent' ? '/dashboard/landlord' : personaRole === 'admin' ? '/dashboard/moderation' : '/dashboard/buyer');
-      navigate(destination);
+      navigate('/admin');
     } else {
-      setError(res.error || 'Could not authenticate persona.');
+      setError(res.error || 'Failed to authenticate administrator.');
     }
   };
 
@@ -157,15 +162,21 @@ export function AuthPage() {
   const handleForgotSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
+    setSuccessMessage('');
 
-    const res = await forgotPassword(email);
+    if (!email.trim()) {
+      setError('Please enter your email address.');
+      return;
+    }
+
+    setLoading(true);
+    const res = await forgotPassword(email.trim());
     setLoading(false);
 
     if (res.success) {
-      setSuccessMessage(res.message || `Password reset link has been dispatched to ${email}. Check your inbox.`);
+      setSuccessMessage(res.message || 'Password reset link sent to your email.');
     } else {
-      setError(res.error || 'Unable to send password reset link.');
+      setError(res.error || 'Failed to send password reset link.');
     }
   };
 
@@ -173,8 +184,8 @@ export function AuthPage() {
     e.preventDefault();
     setError('');
 
-    if (newResetPassword.length < 6) {
-      setError('Password must be at least 6 characters long.');
+    if (!newResetPassword || newResetPassword.length < 6) {
+      setError('Password must be at least 6 characters.');
       return;
     }
 
@@ -183,18 +194,18 @@ export function AuthPage() {
     setLoading(false);
 
     if (res.success) {
-      setSuccessMessage('Your password has been successfully updated! You can now sign in.');
+      setSuccessMessage('Password has been successfully updated! You can now sign in.');
       setTimeout(() => {
         setActiveTab('login');
         setSuccessMessage('');
-      }, 1500);
+      }, 2000);
     } else {
       setError(res.error || 'Failed to update password.');
     }
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-navy-deep">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6">
         
         {/* Brand Logo & Header */}
@@ -210,7 +221,7 @@ export function AuthPage() {
         {/* Auth Card */}
         <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-navy-border shadow-2xl text-white">
           
-          {/* Tab Switcher (Visible only on login and register) */}
+          {/* Tab Switcher (Visible on login and register) */}
           {(activeTab === 'login' || activeTab === 'register') && (
             <div className="grid grid-cols-2 gap-1 p-1 bg-navy-deep rounded-2xl mb-6 text-xs font-bold border border-navy-border">
               <button
@@ -231,6 +242,25 @@ export function AuthPage() {
               >
                 Create Account
               </button>
+            </div>
+          )}
+
+          {/* Context Alert when redirected from a protected route */}
+          {redirectPath && (
+            <div className="p-3.5 mb-4 bg-navy-surface border border-gold/40 rounded-2xl flex items-start gap-2.5 text-xs text-slate-200">
+              <ShieldCheck className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+              <div>
+                <strong className="text-white block font-display">
+                  {redirectPath.includes('admin') || redirectPath.includes('moderation') 
+                    ? 'Administrator Access Required' 
+                    : 'Account Authentication Required'}
+                </strong>
+                <span className="text-estate-300">
+                  {redirectPath.includes('admin') || redirectPath.includes('moderation')
+                    ? 'Please sign in with your system administrator credentials to access the Admin Console.'
+                    : 'Please sign in or create an account to access your private VettedHomes dashboard.'}
+                </span>
+              </div>
             </div>
           )}
 
@@ -263,7 +293,7 @@ export function AuthPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. adeleke@vettedhomes.ng"
+                    placeholder="name@domain.com or admin@vettedhomes.ng"
                     className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
                   />
                 </div>
@@ -331,47 +361,45 @@ export function AuthPage() {
                 disabled={loading}
                 className="w-full py-3 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
               >
-                {loading ? 'Authenticating...' : 'Sign In to VettedHomes'}
+                {loading ? 'Authenticating...' : 'Sign In to Dashboard'}
                 {!loading && <ArrowRight className="w-4 h-4 text-navy-deep" />}
               </button>
 
-              {/* Quick Access Sovereign Personas for seamless testing */}
-              <div className="pt-4 mt-2 border-t border-navy-border/80">
-                <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mb-2.5 text-center">
-                  Quick Access Sovereign Personas
-                </p>
-                <div className="grid grid-cols-2 gap-2 text-left">
+              {/* Dedicated Administrator Access Gateway */}
+              <div className="pt-5 mt-4 border-t border-navy-border/80">
+                <div className="bg-navy-deep/80 rounded-2xl p-4 border border-gold/40 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-gold" />
+                      <span className="text-xs font-bold text-white font-display">System Master Administrator</span>
+                    </div>
+                    <span className="bg-gold/20 text-gold text-[10px] font-bold px-2 py-0.5 rounded-full border border-gold/30">
+                      Owner Only
+                    </span>
+                  </div>
+
+                  <p className="text-[11px] text-estate-300 leading-relaxed">
+                    Dedicated admin access gateway to manage the VettedHomes Admin Console, Clean Slate Toggle, and Moderation Desk.
+                  </p>
+
+                  <div className="p-2.5 bg-navy-surface rounded-xl border border-navy-border/80 text-[11px] space-y-1 font-mono">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Admin Email:</span>
+                      <span className="text-gold font-bold">admin@vettedhomes.ng</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Master Password:</span>
+                      <span className="text-white font-bold">AdminMaster2026!</span>
+                    </div>
+                  </div>
+
                   <button
                     type="button"
-                    onClick={() => handlePersonaSignIn('babatunde@vettedhomes.ng', 'buyer_tenant')}
-                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
+                    onClick={handleAdminQuickSignIn}
+                    className="w-full py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-black shadow-gold transition flex items-center justify-center gap-2 tracking-wide"
                   >
-                    <span className="font-bold text-white text-xs block group-hover:text-gold">Babatunde A.</span>
-                    <span className="text-[10px] text-slate-400 block">Verified Resident</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handlePersonaSignIn('adewale@primestone.ng', 'agent')}
-                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
-                  >
-                    <span className="font-bold text-white text-xs block group-hover:text-gold">Adewale B.</span>
-                    <span className="text-[10px] text-slate-400 block">Licensed Agent</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handlePersonaSignIn('emeka.okonkwo@transcorp.ng', 'landlord_owner')}
-                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
-                  >
-                    <span className="font-bold text-white text-xs block group-hover:text-gold">Chief Okonkwo</span>
-                    <span className="text-[10px] text-slate-400 block">Property Owner</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handlePersonaSignIn('moderator@vettedhomes.ng', 'admin')}
-                    className="p-2.5 rounded-xl bg-navy-surface hover:bg-navy-border border border-navy-border hover:border-gold/40 transition group"
-                  >
-                    <span className="font-bold text-white text-xs block group-hover:text-gold">Trust & Safety</span>
-                    <span className="text-[10px] text-slate-400 block">Moderation Lead</span>
+                    <KeyRound className="w-3.5 h-3.5 text-navy-deep" />
+                    <span>One-Click Sign In as Administrator</span>
                   </button>
                 </div>
               </div>
@@ -428,7 +456,7 @@ export function AuthPage() {
                   </button>
                 </div>
                 <p className="text-[10px] text-slate-400 mt-1">
-                  * Multi-role accounts are fully supported. You can search as a tenant and post as a landlord under one login.
+                  * Multi-role accounts are supported. You can search as a tenant and post as a landlord under one login.
                 </p>
               </div>
 

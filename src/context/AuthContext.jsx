@@ -64,15 +64,15 @@ const INITIAL_SYSTEM_USERS = [
     myListings: ['prop-104']
   },
   {
-    id: 'usr-moderator-04',
-    name: 'Trust & Safety Desk',
-    email: 'moderator@vettedhomes.ng',
-    password: 'adminpassword',
+    id: 'usr-admin-master',
+    name: 'Platform Administrator',
+    email: 'admin@vettedhomes.ng',
+    password: 'AdminMaster2026!',
     phone: '+234 800 838 8333',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
-    bio: 'Official VettedHomes Trust, Safety & Anti-Defamation Enforcement Desk.',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+    bio: 'Executive System Administrator & Platform Master.',
     isVerified: true,
-    roles: ['admin', 'buyer_tenant'],
+    roles: ['admin'],
     activeRole: 'admin',
     enquiries: [],
     savedProperties: [],
@@ -84,11 +84,18 @@ const INITIAL_SYSTEM_USERS = [
 function getRegisteredUsers() {
   try {
     const raw = localStorage.getItem('vettedhomes_registered_users');
-    if (!raw) {
-      localStorage.setItem('vettedhomes_registered_users', JSON.stringify(INITIAL_SYSTEM_USERS));
-      return INITIAL_SYSTEM_USERS;
+    let users = raw ? JSON.parse(raw) : [...INITIAL_SYSTEM_USERS];
+    
+    // Always guarantee admin@vettedhomes.ng is present with admin role and correct password
+    const adminIdx = users.findIndex(u => u.email.toLowerCase() === 'admin@vettedhomes.ng');
+    const masterAdmin = INITIAL_SYSTEM_USERS[3];
+    if (adminIdx === -1) {
+      users = [masterAdmin, ...users];
+    } else {
+      users[adminIdx] = { ...users[adminIdx], ...masterAdmin };
     }
-    return JSON.parse(raw);
+    localStorage.setItem('vettedhomes_registered_users', JSON.stringify(users));
+    return users;
   } catch {
     return INITIAL_SYSTEM_USERS;
   }

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, MapPin, MessageSquare, Mail, Phone, Database, Award, Shield } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { DatabaseStatusModal } from './DatabaseStatusModal';
+import { useAuth } from '../../context/AuthContext';
 
 export function Footer() {
+  const { user } = useAuth();
   const [dbModalOpen, setDbModalOpen] = useState(false);
 
   return (
@@ -159,11 +161,13 @@ export function Footer() {
                   Landlord & Agent Suite
                 </Link>
               </li>
-              <li>
-                <Link to="/admin" className="hover:text-gold transition font-bold text-gold flex items-center gap-1.5">
-                  <span>Admin & Clean Slate Console</span>
-                </Link>
-              </li>
+              {user?.roles?.includes('admin') && (
+                <li>
+                  <Link to="/admin" className="hover:text-gold transition font-bold text-gold flex items-center gap-1.5">
+                    <span>Admin & Clean Slate Console</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link to="/dashboard/moderation" className="hover:text-gold transition">
                   Community Integrity Desk

@@ -89,7 +89,7 @@ export function App() {
                 <Route 
                   path="/dashboard/moderation" 
                   element={
-                    <ProtectedRoute allowedRoles={['admin', 'agent', 'landlord_owner', 'buyer_tenant']}>
+                    <ProtectedRoute allowedRoles={['admin']}>
                       <AdminModerationPage />
                     </ProtectedRoute>
                   } 
@@ -98,7 +98,7 @@ export function App() {
                 <Route 
                   path="/admin" 
                   element={
-                    <ProtectedRoute allowedRoles={['admin', 'agent', 'landlord_owner', 'buyer_tenant']}>
+                    <ProtectedRoute allowedRoles={['admin']}>
                       <AdminModerationPage />
                     </ProtectedRoute>
                   } 
