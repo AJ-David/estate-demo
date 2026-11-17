@@ -411,17 +411,39 @@ function getStoredReports() {
   if (raw !== null) {
     try {
       const parsed = JSON.parse(raw);
-      reports = Array.isArray(parsed) ? parsed : [...DEFAULT_MODERATION_REPORTS];
+      reports = Array.isArray(parsed) ? parsed : [];
     } catch {
-      reports = [...DEFAULT_MODERATION_REPORTS];
+      reports = [];
     }
   } else {
-    reports = [...DEFAULT_MODERATION_REPORTS];
-    localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
+    // Only pre-populate if defaults haven't been resolved
+    reports = DEFAULT_MODERATION_REPORTS.filter(r => !resolvedIds.includes(String(r.id)));
+    localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(reports));
   }
 
   // Filter out any report that has ever been resolved or dismissed
-  return reports.filter(r => !resolvedIds.includes(String(r.id)));
+  const filtered = reports.filter(r => {
+    const id = String(r?.id || r?.targetId || r?.target_id || '');
+    return id && !resolvedIds.includes(id);
+  });
+
+  // Strict deduplication by ID
+  const seen = new Set();
+  const deduped = [];
+  for (const r of filtered) {
+    const id = String(r?.id || r?.targetId || r?.target_id || JSON.stringify(r));
+    if (!seen.has(id)) {
+      seen.add(id);
+      deduped.push(r);
+    }
+  }
+
+  // Keep localStorage clean and synchronized
+  if (deduped.length !== reports.length) {
+    localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(deduped));
+  }
+
+  return deduped;
 }
 
 // 6. Fetch Moderation Reports (for Admin Console)
@@ -449,23 +471,36 @@ export async function resolveModerationReport(reportTarget, action, index) {
     localStorage.setItem('vettedhomes_resolved_reports', JSON.stringify(resolvedIds));
   }
 
-  const allReports = getStoredReports();
-  const updatedReports = allReports.filter((r, i) => {
-    if (targetId && (r?.id || r?.targetId || r?.target_id)) {
-      const rId = r?.id || r?.targetId || r?.target_id;
-      if (String(rId) === String(targetId)) return false;
+  // Directly update vettedhomes_moderation_reports
+  let rawReports = [];
+  try {
+    const raw = localStorage.getItem('vettedhomes_moderation_reports');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) rawReports = parsed;
     }
+  } catch {
+    rawReports = [];
+  }
+
+  const updatedReports = rawReports.filter((r, i) => {
+    const rId = String(r?.id || r?.targetId || r?.target_id || '');
+    if (targetId && rId === String(targetId)) return false;
     if (index !== undefined && i === index) return false;
     return true;
   });
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(updatedReports));
 
   if (action === 'Takedown' && targetId) {
-    const localPosts = JSON.parse(
-      localStorage.getItem('vettedhomes_custom_posts') || '[]'
-    );
-    const updated = localPosts.filter(p => String(p?.id) !== String(targetId));
-    localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
+    try {
+      const localPosts = JSON.parse(
+        localStorage.getItem('vettedhomes_custom_posts') || '[]'
+      );
+      const updated = localPosts.filter(p => String(p?.id) !== String(targetId));
+      localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('Could not remove custom post:', e);
+    }
   }
 
   return { success: true };
@@ -473,14 +508,21 @@ export async function resolveModerationReport(reportTarget, action, index) {
 
 // 8. Clear all moderation reports
 export async function clearAllModerationReports() {
-  // Mark all existing IDs as resolved so they never reappear
-  const allReports = getStoredReports();
   const resolvedIds = JSON.parse(localStorage.getItem('vettedhomes_resolved_reports') || '[]');
-  allReports.forEach(r => {
-    if (!resolvedIds.includes(String(r.id))) {
-      resolvedIds.push(String(r.id));
-    }
+  ['rep-101', 'rep-102', 'rep-103'].forEach(id => {
+    if (!resolvedIds.includes(id)) resolvedIds.push(id);
   });
+
+  try {
+    const raw = JSON.parse(localStorage.getItem('vettedhomes_moderation_reports') || '[]');
+    if (Array.isArray(raw)) {
+      raw.forEach(r => {
+        const id = String(r?.id || r?.targetId || r?.target_id || '');
+        if (id && !resolvedIds.includes(id)) resolvedIds.push(id);
+      });
+    }
+  } catch {}
+
   localStorage.setItem('vettedhomes_resolved_reports', JSON.stringify(resolvedIds));
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify([]));
   return { success: true };
