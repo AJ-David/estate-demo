@@ -404,17 +404,24 @@ const DEFAULT_MODERATION_REPORTS = [
 ];
 
 function getStoredReports() {
+  const resolvedIds = JSON.parse(localStorage.getItem('vettedhomes_resolved_reports') || '[]');
   const raw = localStorage.getItem('vettedhomes_moderation_reports');
+  let reports = [];
+
   if (raw !== null) {
     try {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      reports = Array.isArray(parsed) ? parsed : [...DEFAULT_MODERATION_REPORTS];
     } catch {
-      return [...DEFAULT_MODERATION_REPORTS];
+      reports = [...DEFAULT_MODERATION_REPORTS];
     }
+  } else {
+    reports = [...DEFAULT_MODERATION_REPORTS];
+    localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
   }
-  // Initialize with defaults on very first launch
-  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
-  return [...DEFAULT_MODERATION_REPORTS];
+
+  // Filter out any report that has ever been resolved or dismissed
+  return reports.filter(r => !resolvedIds.includes(String(r.id)));
 }
 
 // 6. Fetch Moderation Reports (for Admin Console)
@@ -424,7 +431,7 @@ export async function fetchModerationReports() {
 
   if (dataMode === 'clean') {
     // Hide all sample reports when clean slate mode is active
-    return allReports.filter(r => !r.isSample && !r.id.startsWith('rep-10'));
+    return allReports.filter(r => !r.isSample && !String(r.id).startsWith('rep-10'));
   }
 
   return allReports;
@@ -432,16 +439,21 @@ export async function fetchModerationReports() {
 
 // 7. Resolve Moderation Report (Dismiss, Redact, Takedown)
 export async function resolveModerationReport(reportId, action) {
+  const resolvedIds = JSON.parse(localStorage.getItem('vettedhomes_resolved_reports') || '[]');
+  if (!resolvedIds.includes(String(reportId))) {
+    resolvedIds.push(String(reportId));
+    localStorage.setItem('vettedhomes_resolved_reports', JSON.stringify(resolvedIds));
+  }
+
   const allReports = getStoredReports();
-  const updatedReports = allReports.filter(r => r.id !== reportId);
+  const updatedReports = allReports.filter(r => String(r.id) !== String(reportId));
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(updatedReports));
 
   if (action === 'Takedown') {
-    // If it's a post, flag it as hidden in local store
     const localPosts = JSON.parse(
       localStorage.getItem('vettedhomes_custom_posts') || '[]'
     );
-    const updated = localPosts.filter(p => p.id !== reportId);
+    const updated = localPosts.filter(p => String(p.id) !== String(reportId));
     localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
   }
 
@@ -450,12 +462,22 @@ export async function resolveModerationReport(reportId, action) {
 
 // 8. Clear all moderation reports
 export async function clearAllModerationReports() {
+  // Mark all existing IDs as resolved so they never reappear
+  const allReports = getStoredReports();
+  const resolvedIds = JSON.parse(localStorage.getItem('vettedhomes_resolved_reports') || '[]');
+  allReports.forEach(r => {
+    if (!resolvedIds.includes(String(r.id))) {
+      resolvedIds.push(String(r.id));
+    }
+  });
+  localStorage.setItem('vettedhomes_resolved_reports', JSON.stringify(resolvedIds));
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify([]));
   return { success: true };
 }
 
 // 9. Reset to default demo reports
 export async function resetDemoModerationReports() {
+  localStorage.removeItem('vettedhomes_resolved_reports');
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
   return { success: true, reports: DEFAULT_MODERATION_REPORTS };
 }

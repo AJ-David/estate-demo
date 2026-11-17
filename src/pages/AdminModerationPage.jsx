@@ -5,6 +5,7 @@ import {
   AlertTriangle, 
   CheckCircle2, 
   XCircle, 
+  X,
   Flag, 
   Eye, 
   UserX, 
@@ -33,10 +34,16 @@ export function AdminModerationPage() {
   const toggleDataMode = async (newMode) => {
     setDataMode(newMode);
     localStorage.setItem('vettedhomes_data_mode', newMode);
-    setLoading(true);
-    const updated = await fetchModerationReports();
-    setReports(updated);
-    setLoading(false);
+    
+    if (newMode === 'clean') {
+      setReports(prev => prev.filter(r => !r.isSample && !String(r.id).startsWith('rep-10')));
+    } else {
+      setLoading(true);
+      const updated = await fetchModerationReports();
+      setReports(updated || []);
+      setLoading(false);
+    }
+
     setNotification(
       newMode === 'clean'
         ? 'Platform switched to Clean Slate Mode: All sample inventory & discussions are now hidden.'
@@ -51,32 +58,50 @@ export function AdminModerationPage() {
 
     fetchModerationReports().then(data => {
       if (isMounted) {
-        setReports(data);
+        setReports(data || []);
         setLoading(false);
       }
     });
 
     return () => { isMounted = false; };
-  }, []);
+  }, [dataMode]);
 
   const handleAction = async (reportId, action) => {
-    await resolveModerationReport(reportId, action);
-    setReports(prev => prev.filter(r => r.id !== reportId));
+    const idStr = String(reportId);
+    // Instant optimistic UI update
+    setReports(prev => prev.filter(r => String(r.id) !== idStr));
     setNotification(`Moderation action executed: ${action} for report #${reportId}`);
+
+    try {
+      await resolveModerationReport(reportId, action);
+    } catch (err) {
+      console.warn('Error resolving report:', err);
+    }
+
     setTimeout(() => setNotification(''), 4500);
   };
 
   const handleClearQueue = async () => {
-    await clearAllModerationReports();
     setReports([]);
     setNotification('Moderation queue has been completely cleared.');
+
+    try {
+      await clearAllModerationReports();
+    } catch (err) {
+      console.warn('Error clearing moderation queue:', err);
+    }
+
     setTimeout(() => setNotification(''), 4000);
   };
 
   const handleResetDemoReports = async () => {
-    const res = await resetDemoModerationReports();
-    setReports(res.reports);
-    setNotification('Sample moderation queue has been restored for testing.');
+    try {
+      const res = await resetDemoModerationReports();
+      setReports(res.reports || []);
+      setNotification('Sample moderation queue has been restored for testing.');
+    } catch (err) {
+      console.warn('Error resetting demo reports:', err);
+    }
     setTimeout(() => setNotification(''), 4000);
   };
 
@@ -264,9 +289,19 @@ export function AdminModerationPage() {
                     <span className="text-xs text-slate-300">• {report.time}</span>
                   </div>
 
-                  <span className="text-xs text-slate-300">
-                    Reported by: <strong className="text-gold">{report.reportedBy}</strong>
-                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-slate-300">
+                      Reported by: <strong className="text-gold">{report.reportedBy}</strong>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleAction(report.id, 'Dismiss')}
+                      className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-navy-border transition"
+                      title="Quick Dismiss"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
 
                 <div>
