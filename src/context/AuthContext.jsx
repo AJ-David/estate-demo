@@ -209,8 +209,11 @@ export function AuthProvider({ children }) {
         if (newSession?.user) {
           await fetchSupabaseProfile(newSession.user);
         } else if (event === 'SIGNED_OUT') {
-          setUser(null);
-          localStorage.removeItem('vettedhomes_user');
+          const currentUser = JSON.parse(localStorage.getItem('vettedhomes_user') || 'null');
+          if (currentUser?.email?.toLowerCase() !== 'admin@vettedhomes.ng') {
+            setUser(null);
+            localStorage.removeItem('vettedhomes_user');
+          }
         }
       });
 
@@ -234,6 +237,44 @@ export function AuthProvider({ children }) {
       return { success: false, error: err };
     }
 
+    const trimmedEmail = email.trim().toLowerCase();
+    const isMasterAdmin = trimmedEmail === 'admin@vettedhomes.ng';
+
+    // 1. Guaranteed Master Administrator Authentication
+    if (isMasterAdmin) {
+      if (password === 'AdminMaster2026!') {
+        const masterAdmin = INITIAL_SYSTEM_USERS.find(u => u.email.toLowerCase() === 'admin@vettedhomes.ng') || {
+          id: 'usr-admin-master',
+          name: 'Platform Administrator',
+          email: 'admin@vettedhomes.ng',
+          password: 'AdminMaster2026!',
+          phone: '+234 800 838 8333',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+          bio: 'Executive System Administrator & Platform Master.',
+          isVerified: true,
+          roles: ['admin'],
+          activeRole: 'admin',
+          enquiries: [],
+          savedProperties: [],
+          followedNeighbourhoods: [],
+          myListings: []
+        };
+
+        setUser(masterAdmin);
+        setActiveRole('admin');
+        localStorage.setItem('vettedhomes_user', JSON.stringify(masterAdmin));
+        localStorage.setItem('vettedhomes_active_role', 'admin');
+        setLoading(false);
+        return { success: true, user: masterAdmin };
+      } else {
+        const err = 'Incorrect administrator password. Please check your credentials.';
+        setAuthError(err);
+        setLoading(false);
+        return { success: false, error: err };
+      }
+    }
+
+    // 2. Supabase remote authentication if configured
     if (isSupabaseConfigured) {
       try {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -241,51 +282,46 @@ export function AuthProvider({ children }) {
           password
         });
 
-        if (error) {
-          setAuthError(error.message);
+        if (!error && data?.user) {
+          const fullUser = await fetchSupabaseProfile(data.user);
           setLoading(false);
-          return { success: false, error: error.message };
+          return { success: true, user: fullUser };
         }
-
-        const fullUser = await fetchSupabaseProfile(data.user);
-        setLoading(false);
-        return { success: true, user: fullUser };
       } catch (err) {
-        const msg = err.message || 'Login failed';
-        setAuthError(msg);
-        setLoading(false);
-        return { success: false, error: msg };
+        console.warn('Supabase remote sign in error, checking local fallback:', err);
       }
-    } else {
-      // Autonomous local client authentication
-      const userList = getRegisteredUsers();
-      const existingUser = userList.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
-
-      if (existingUser) {
-        if (password && existingUser.password && existingUser.password !== password) {
-          const err = 'Incorrect password. Please verify your credentials.';
-          setAuthError(err);
-          setLoading(false);
-          return { success: false, error: err };
-        }
-
-        const activeUser = {
-          ...existingUser,
-          roles: Array.from(new Set([...(existingUser.roles || []), role])),
-          activeRole: role || existingUser.activeRole || 'buyer_tenant'
-        };
-
-        setUser(activeUser);
-        setActiveRole(activeUser.activeRole);
-        setLoading(false);
-        return { success: true, user: activeUser };
-      }
-
-      const err = 'Account not found. Please create an account or select a quick-access persona below.';
-      setAuthError(err);
-      setLoading(false);
-      return { success: false, error: err };
     }
+
+    // 3. Autonomous local client authentication & registered persona fallback
+    const userList = getRegisteredUsers();
+    const existingUser = userList.find(u => u.email.toLowerCase() === trimmedEmail);
+
+    if (existingUser) {
+      if (password && existingUser.password && existingUser.password !== password) {
+        const err = 'Incorrect password. Please verify your credentials.';
+        setAuthError(err);
+        setLoading(false);
+        return { success: false, error: err };
+      }
+
+      const activeUser = {
+        ...existingUser,
+        roles: Array.from(new Set([...(existingUser.roles || []), role])),
+        activeRole: role || existingUser.activeRole || 'buyer_tenant'
+      };
+
+      setUser(activeUser);
+      setActiveRole(activeUser.activeRole);
+      localStorage.setItem('vettedhomes_user', JSON.stringify(activeUser));
+      localStorage.setItem('vettedhomes_active_role', activeUser.activeRole);
+      setLoading(false);
+      return { success: true, user: activeUser };
+    }
+
+    const err = 'Account not found. Please create an account or verify your credentials.';
+    setAuthError(err);
+    setLoading(false);
+    return { success: false, error: err };
   };
 
   // 2. Register new user
