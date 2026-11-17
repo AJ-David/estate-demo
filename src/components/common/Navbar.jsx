@@ -87,6 +87,26 @@ export function Navbar() {
               </Link>
 
               <Link
+                to={
+                  !isAuthenticated 
+                    ? "/login?redirect=/dashboard/buyer" 
+                    : activeRole === 'admin'
+                    ? "/admin"
+                    : activeRole === 'landlord_owner' || activeRole === 'agent'
+                    ? "/dashboard/landlord"
+                    : "/dashboard/buyer"
+                }
+                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+                  location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/admin')
+                    ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                    : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                }`}
+              >
+                <LayoutDashboard className="w-4 h-4 text-gold" />
+                <span>Dashboard</span>
+              </Link>
+
+              <Link
                 to="/#how-it-works"
                 className="px-3.5 py-2 rounded-lg text-sm font-semibold text-white/90 hover:text-gold hover:bg-navy-surface transition-colors"
               >
@@ -239,16 +259,16 @@ export function Navbar() {
               ) : (
                 <div className="flex items-center space-x-2">
                   <Link
-                    to="/auth?tab=login"
+                    to="/login"
                     className="px-4 py-2 text-xs font-bold text-white hover:text-gold hover:bg-navy-surface rounded-xl transition border border-navy-border"
                   >
                     Sign In
                   </Link>
                   <Link
-                    to="/auth?tab=register"
+                    to="/signup"
                     className="px-4 py-2 text-xs font-black text-navy-deep bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold rounded-xl shadow-gold transition"
                   >
-                    Register
+                    Sign Up
                   </Link>
                 </div>
               )}
@@ -350,18 +370,18 @@ export function Navbar() {
               ) : (
                 <div className="pt-4 grid grid-cols-2 gap-2">
                   <Link
-                    to="/auth?tab=login"
+                    to="/login"
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-center py-2.5 rounded-xl border border-navy-border text-sm font-bold text-white hover:text-gold hover:bg-navy-surface transition"
                   >
                     Sign In
                   </Link>
                   <Link
-                    to="/auth?tab=register"
+                    to="/signup"
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-center py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-sm font-black text-navy-deep shadow-gold"
                   >
-                    Register
+                    Sign Up
                   </Link>
                 </div>
               )}

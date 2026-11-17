@@ -16,9 +16,12 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
     );
   }
 
-  // Not authenticated at all -> Redirect to Auth page
+  // Not authenticated at all -> Redirect to Auth / Login page
   if (!isAuthenticated) {
-    return <Navigate to={`/auth?tab=login&redirect=${encodeURIComponent(location.pathname)}`} replace />;
+    if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard/moderation')) {
+      return <Navigate to={`/admin/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
+    }
+    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
   // Check if role restriction applies

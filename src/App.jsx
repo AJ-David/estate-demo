@@ -18,6 +18,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { BuyerDashboardPage } from './pages/BuyerDashboardPage';
 import { LandlordAgentDashboardPage } from './pages/LandlordAgentDashboardPage';
 import { AdminModerationPage } from './pages/AdminModerationPage';
+import { AdminLoginPage } from './pages/AdminLoginPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -48,6 +49,10 @@ export function App() {
                 <Route path="/neighbourhoods/:id" element={<NeighbourhoodDetailPage />} />
                 <Route path="/community" element={<CommunityFeedPage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/login" element={<AuthPage />} />
+                <Route path="/signup" element={<AuthPage />} />
+                <Route path="/register" element={<AuthPage />} />
+                <Route path="/admin/login" element={<AdminLoginPage />} />
 
                 {/* Protected User & Portal Routes */}
                 <Route 

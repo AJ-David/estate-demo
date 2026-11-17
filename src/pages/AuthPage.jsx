@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { 
   Building2, 
   ShieldCheck, 
@@ -32,12 +32,31 @@ export function AuthPage() {
     recoveryMode 
   } = useAuth();
 
-  const initialTab = searchParams.get('tab') || (recoveryMode ? 'reset' : 'login');
+  const location = useLocation();
+
+  const getInitialTab = () => {
+    if (recoveryMode) return 'reset';
+    if (searchParams.get('tab')) return searchParams.get('tab');
+    if (location.pathname === '/signup' || location.pathname === '/register') return 'register';
+    return 'login';
+  };
+
+  const initialTab = getInitialTab();
   const initialRole = searchParams.get('role') || 'buyer_tenant';
   const redirectPath = searchParams.get('redirect');
 
   const [activeTab, setActiveTab] = useState(initialTab); // 'login', 'register', 'forgot', 'reset', 'verify_email'
   const [selectedRole, setSelectedRole] = useState(initialRole);
+
+  useEffect(() => {
+    if (location.pathname === '/signup' || location.pathname === '/register') {
+      setActiveTab('register');
+    } else if (location.pathname === '/login') {
+      setActiveTab('login');
+    } else if (searchParams.get('tab')) {
+      setActiveTab(searchParams.get('tab'));
+    }
+  }, [location.pathname, searchParams]);
 
   // Form states
   const [name, setName] = useState('');
@@ -365,43 +384,17 @@ export function AuthPage() {
                 {!loading && <ArrowRight className="w-4 h-4 text-navy-deep" />}
               </button>
 
-              {/* Dedicated Administrator Access Gateway */}
-              <div className="pt-5 mt-4 border-t border-navy-border/80">
-                <div className="bg-navy-deep/80 rounded-2xl p-4 border border-gold/40 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-gold" />
-                      <span className="text-xs font-bold text-white font-display">System Master Administrator</span>
-                    </div>
-                    <span className="bg-gold/20 text-gold text-[10px] font-bold px-2 py-0.5 rounded-full border border-gold/30">
-                      Owner Only
-                    </span>
-                  </div>
-
-                  <p className="text-[11px] text-estate-300 leading-relaxed">
-                    Dedicated admin access gateway to manage the VettedHomes Admin Console, Clean Slate Toggle, and Moderation Desk.
-                  </p>
-
-                  <div className="p-2.5 bg-navy-surface rounded-xl border border-navy-border/80 text-[11px] space-y-1 font-mono">
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Admin Email:</span>
-                      <span className="text-gold font-bold">admin@vettedhomes.ng</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">Master Password:</span>
-                      <span className="text-white font-bold">AdminMaster2026!</span>
-                    </div>
-                  </div>
-
+              <div className="pt-3 text-center border-t border-navy-border/60">
+                <p className="text-xs text-estate-300">
+                  Don't have an account?{' '}
                   <button
                     type="button"
-                    onClick={handleAdminQuickSignIn}
-                    className="w-full py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-black shadow-gold transition flex items-center justify-center gap-2 tracking-wide"
+                    onClick={() => { setActiveTab('register'); setError(''); setSuccessMessage(''); }}
+                    className="text-gold font-bold hover:underline ml-1"
                   >
-                    <KeyRound className="w-3.5 h-3.5 text-navy-deep" />
-                    <span>One-Click Sign In as Administrator</span>
+                    Create One Here
                   </button>
-                </div>
+                </p>
               </div>
             </form>
           )}
@@ -545,9 +538,22 @@ export function AuthPage() {
                 disabled={loading}
                 className="w-full py-3 bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
               >
-                {loading ? 'Creating Account...' : 'Complete Registration'}
+                {loading ? 'Creating Account & Loading Dashboard...' : 'Complete Registration & Enter Dashboard'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
+
+              <div className="pt-3 text-center border-t border-navy-border/60">
+                <p className="text-xs text-estate-300">
+                  Already have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => { setActiveTab('login'); setError(''); setSuccessMessage(''); }}
+                    className="text-gold font-bold hover:underline ml-1"
+                  >
+                    Sign In Here
+                  </button>
+                </p>
+              </div>
             </form>
           )}
 
@@ -660,6 +666,13 @@ export function AuthPage() {
             </div>
           )}
 
+        </div>
+
+        <div className="text-center">
+          <Link to="/admin/login" className="text-[11px] text-slate-500 hover:text-gold transition inline-flex items-center gap-1">
+            <span>Staff & System Administrator Access</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
 
       </div>
