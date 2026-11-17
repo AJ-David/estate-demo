@@ -23,47 +23,39 @@ export function Footer() {
               We bridge verified property discovery with ground-truth resident data—so you understand living conditions before committing capital or signing a lease.
             </p>
 
-            {/* Physical Offices */}
-            <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-navy-border/80">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span>
-                  <strong className="text-white block">Lagos Corporate Headquarters:</strong>
-                  VettedHomes House, 14B Admiralty Way, Lekki Phase 1, Lagos, Nigeria
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span>
-                  <strong className="text-white block">Abuja Executive Office:</strong>
-                  3rd Floor, Commercial Wing, Transcorp Hilton, Maitama, Abuja FCT
-                </span>
-              </div>
-              <div className="flex items-center gap-4 pt-1 text-slate-300">
-                <span className="flex items-center gap-1.5 hover:text-gold transition">
+            {/* Contact Channels */}
+            <div className="pt-2 border-t border-navy-border/80 space-y-3">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-300">
+                <a 
+                  href="tel:+23418884300"
+                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition"
+                >
                   <Phone className="w-3.5 h-3.5 text-gold" />
-                  +234 (0) 1 888 4300
-                </span>
-                <span className="flex items-center gap-1.5 hover:text-gold transition">
+                  <span>+234 (0) 1 888 4300</span>
+                </a>
+                <a 
+                  href="mailto:concierge@vettedhomes.ng"
+                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition"
+                >
                   <Mail className="w-3.5 h-3.5 text-gold" />
-                  concierge@vettedhomes.ng
+                  <span>concierge@vettedhomes.ng</span>
+                </a>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs">
+                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-gold font-bold">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  LASRERA Certified
+                </span>
+                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-slate-200 font-bold">
+                  <Award className="w-3.5 h-3.5 text-gold" />
+                  REDAN Member
+                </span>
+                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-emerald-300 font-bold">
+                  <Shield className="w-3.5 h-3.5 text-emerald-400" />
+                  NDPR Compliant
                 </span>
               </div>
-            </div>
-
-            <div className="pt-2 flex flex-wrap items-center gap-2 text-xs">
-              <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-gold font-bold">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                LASRERA Certified
-              </span>
-              <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-slate-200 font-bold">
-                <Award className="w-3.5 h-3.5 text-gold" />
-                REDAN Member
-              </span>
-              <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-emerald-300 font-bold">
-                <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                NDPR Compliant
-              </span>
             </div>
           </div>
 
