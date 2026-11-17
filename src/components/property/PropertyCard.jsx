@@ -9,6 +9,7 @@ import {
   ShieldCheck, 
   CheckCircle2, 
   Sparkles,
+  Clock,
   ArrowRight
 } from 'lucide-react';
 import { formatPriceDisplay } from '../../utils/formatters';
@@ -50,11 +51,35 @@ export function PropertyCard({ property, layout = 'grid' }) {
         />
         
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center z-10">
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center z-10 max-w-[75%]">
           {getTransactionBadge()}
           <span className="bg-navy-deep/90 backdrop-blur-xs text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-navy-border">
             {property.category}
           </span>
+          {property.marketStatus === 'recently_leased' && (
+            <span className="bg-emerald-950/95 backdrop-blur-xs text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/60 shadow-sm flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span>{property.marketStatusLabel || 'Recently Leased'}</span>
+            </span>
+          )}
+          {property.marketStatus === 'recently_sold' && (
+            <span className="bg-emerald-950/95 backdrop-blur-xs text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/60 shadow-sm flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span>{property.marketStatusLabel || 'Recently Sold'}</span>
+            </span>
+          )}
+          {property.marketStatus === 'under_escrow' && (
+            <span className="bg-amber-950/95 backdrop-blur-xs text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-500/60 shadow-sm flex items-center gap-1">
+              <Clock className="w-3 h-3 text-amber-400" />
+              <span>Under Escrow</span>
+            </span>
+          )}
+          {(!property.marketStatus || property.marketStatus === 'available') && (
+            <span className="bg-navy-deep/90 backdrop-blur-xs text-gold-light text-[10px] font-bold px-2 py-0.5 rounded-full border border-gold/40 shadow-sm flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-gold" />
+              <span>Exclusive</span>
+            </span>
+          )}
         </div>
 
         {/* Save Button */}

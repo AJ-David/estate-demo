@@ -51,6 +51,10 @@ function formatSupabaseProperty(row) {
     sizeSqm: row.size_sqm || 250,
     furnishingStatus: row.furnishing_status || 'Semi-Furnished',
     availabilityStatus: row.availability_status || 'Available Now',
+    marketStatus: row.market_status || (row.availability_status?.toLowerCase().includes('sold') ? 'recently_sold' : row.availability_status?.toLowerCase().includes('leased') ? 'recently_leased' : row.availability_status?.toLowerCase().includes('escrow') ? 'under_escrow' : 'available'),
+    marketStatusLabel: row.market_status_label || row.availability_status || 'Verified Exclusive Allocation',
+    closedDate: row.closed_date || null,
+    escrowDate: row.escrow_date || null,
     verificationStatus: row.verification_status || 'VettedHomes Verified',
     featured: row.featured || false,
     listingDate: row.created_at ? row.created_at.split('T')[0] : '2026-11-09',
@@ -109,10 +113,13 @@ export async function fetchProperties(filters = {}) {
   }
 
   // Combine with initial properties or use catalog if database is empty
+  const isCleanSlate = localStorage.getItem('vettedhomes_data_mode') === 'clean';
   const localSaved = JSON.parse(localStorage.getItem('vettedhomes_custom_properties') || localStorage.getItem('estatelens_custom_properties') || '[]');
   const combined = [...localSaved, ...allProperties];
   
-  if (combined.length === 0) {
+  if (isCleanSlate) {
+    allProperties = combined;
+  } else if (combined.length === 0) {
     allProperties = [...DEMO_PROPERTIES];
   } else {
     // Merge without duplicates

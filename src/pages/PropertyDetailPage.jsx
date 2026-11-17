@@ -21,7 +21,9 @@ import {
   ExternalLink,
   Star,
   Building,
-  Video
+  Video,
+  Clock,
+  Sparkles
 } from 'lucide-react';
 import { DEMO_NEIGHBOURHOODS, DEMO_PROPERTY_REVIEWS } from '../data/demoData';
 import { formatPriceDisplay } from '../utils/formatters';
@@ -167,6 +169,42 @@ export function PropertyDetailPage() {
         </div>
       </div>
 
+      {/* Off-Market / Velocity Notice Banner */}
+      {(property.marketStatus === 'recently_leased' || property.marketStatus === 'recently_sold' || property.marketStatus === 'under_escrow') && (
+        <div className="bg-gradient-to-r from-navy-card via-navy-card to-navy-surface border border-emerald-500/40 rounded-3xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 shadow-premium">
+          <div className="flex items-start gap-4">
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border ${
+              property.marketStatus === 'under_escrow' 
+                ? 'bg-amber-950/80 border-amber-500/40 text-amber-300' 
+                : 'bg-emerald-950/80 border-emerald-500/40 text-emerald-400'
+            }`}>
+              {property.marketStatus === 'under_escrow' ? <Clock className="w-6 h-6" /> : <CheckCircle2 className="w-6 h-6" />}
+            </div>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-base sm:text-lg font-black text-white font-display">
+                  {property.marketStatusLabel || (property.marketStatus === 'under_escrow' ? 'Under Offer / In Holding Escrow' : 'Recently Closed via VettedHomes')}
+                </h3>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold uppercase tracking-wider">
+                  Verified Transaction
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-200 max-w-2xl leading-relaxed">
+                This residence was recently taken. However, our Private Client Concierge maintains 2–3 identical unlisted residences in {neighbourhood.name} matching this budget and specification. Submit a Private Matching Request to receive curated viewings.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsEnquiryOpen(true)}
+            className="px-5 py-3 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold shrink-0 transition flex items-center justify-center gap-2 tracking-wide"
+          >
+            <Sparkles className="w-4 h-4 text-navy-deep" />
+            <span>Match Similar {neighbourhood.name} Homes</span>
+          </button>
+        </div>
+      )}
+
       {/* Title & Key Stats Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-navy-border">
         <div className="space-y-2 max-w-3xl">
@@ -206,7 +244,15 @@ export function PropertyDetailPage() {
             {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
           </p>
           <p className="text-xs text-estate-400 mt-1">
-            Status: <strong className="text-emerald-400">{property.availabilityStatus || 'Available Now'}</strong>
+            Status: <strong className={
+              property.marketStatus === 'recently_leased' || property.marketStatus === 'recently_sold'
+                ? 'text-emerald-400'
+                : property.marketStatus === 'under_escrow'
+                ? 'text-amber-400'
+                : 'text-gold'
+            }>
+              {property.marketStatusLabel || property.availabilityStatus || 'Available Now'}
+            </strong>
           </p>
         </div>
       </div>
@@ -516,43 +562,84 @@ export function PropertyDetailPage() {
             </div>
 
             {/* Primary Action Buttons */}
-            <div className="space-y-3">
-              <button
-                type="button"
-                onClick={() => setIsInspectionOpen(true)}
-                className="w-full py-3.5 px-4 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 group tracking-wide"
-              >
-                <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span>Schedule Physical Inspection</span>
-              </button>
+            {property.marketStatus === 'recently_leased' || property.marketStatus === 'recently_sold' || property.marketStatus === 'under_escrow' ? (
+              <div className="space-y-3">
+                <button
+                  type="button"
+                  onClick={() => setIsEnquiryOpen(true)}
+                  className="w-full py-3.5 px-4 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 group tracking-wide"
+                >
+                  <Sparkles className="w-4 h-4 text-navy-deep group-hover:scale-110 transition-transform" />
+                  <span>Request Similar {neighbourhood.name} Homes</span>
+                </button>
 
-              <button
-                type="button"
-                onClick={handleOpenChat}
-                className="w-full py-3 px-4 bg-navy-surface hover:bg-navy-border text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 border border-navy-border shadow-sm"
-              >
-                <MessageSquare className="w-4 h-4 text-gold" />
-                <span>Chat Directly with Agent</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setIsInspectionOpen(true)}
+                  className="w-full py-3 px-4 bg-navy-surface hover:bg-navy-border text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 border border-navy-border shadow-sm"
+                >
+                  <Calendar className="w-4 h-4 text-gold" />
+                  <span>Join Estate Priority Waitlist</span>
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setIsEnquiryOpen(true)}
-                className="w-full py-2.5 px-4 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
-              >
-                <span>Submit Formal Written Enquiry</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={handleOpenChat}
+                  className="w-full py-2.5 px-4 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-gold" />
+                  <span>Chat with Concierge Desk</span>
+                </button>
 
-              <a
-                href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20VettedHomes.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 bg-emerald-950/40 hover:bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
-              >
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Direct WhatsApp Contact</span>
-              </a>
-            </div>
+                <a
+                  href={`https://wa.me/2348035550192?text=Hello%20VettedHomes%20Concierge,%20I%20noticed%20${encodeURIComponent(property.title)}%20in%20${encodeURIComponent(neighbourhood.name)}%20was%20recently%20closed/in%20escrow.%20Please%20match%20me%20with%20similar%20available%20unlisted%20homes%20in%20this%20budget.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 bg-emerald-950/40 hover:bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>WhatsApp Concierge Lead</span>
+                </a>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <button
+                  type="button"
+                  onClick={() => setIsInspectionOpen(true)}
+                  className="w-full py-3.5 px-4 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 group tracking-wide"
+                >
+                  <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  <span>Schedule Physical Inspection</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleOpenChat}
+                  className="w-full py-3 px-4 bg-navy-surface hover:bg-navy-border text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 border border-navy-border shadow-sm"
+                >
+                  <MessageSquare className="w-4 h-4 text-gold" />
+                  <span>Chat Directly with Broker</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsEnquiryOpen(true)}
+                  className="w-full py-2.5 px-4 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                >
+                  <span>Submit Private Allocation Enquiry</span>
+                </button>
+
+                <a
+                  href={`https://wa.me/2348035550192?text=Hello%20${encodeURIComponent(property.agent?.name || 'Agent')},%20I%20am%20inquiring%20about%20${encodeURIComponent(property.title)}%20on%20VettedHomes.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 bg-emerald-950/40 hover:bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Direct WhatsApp Contact</span>
+                </a>
+              </div>
+            )}
 
             {/* Security Guarantee Box */}
             <div className="p-3.5 bg-navy-surface rounded-2xl border border-navy-border text-xs text-estate-300 space-y-1">

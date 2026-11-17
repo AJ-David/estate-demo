@@ -80,13 +80,27 @@ export function InspectionModal({ isOpen, onClose, property }) {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleReset}
-            className="w-full max-w-sm py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-sm font-black rounded-xl transition shadow-gold tracking-wide"
-          >
-            Done
-          </button>
+          <div className="flex flex-col gap-2 max-w-sm mx-auto pt-2">
+            <a
+              href={`https://wa.me/2348035550192?text=${encodeURIComponent(
+                `Hello VettedHomes Concierge, I just booked an inspection (${confirmationCode}) for ${property.title} on ${preferredDate} at ${preferredTime}. Please confirm gate clearance.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2.5 px-4 bg-emerald-950/60 hover:bg-emerald-950/90 border border-emerald-500/50 text-emerald-300 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
+            >
+              <Phone className="w-4 h-4 text-emerald-400" />
+              <span>Confirm via WhatsApp Concierge</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={handleReset}
+              className="w-full py-2.5 bg-gold hover:bg-gold-light text-navy-deep text-sm font-black rounded-xl transition shadow-gold tracking-wide"
+            >
+              Done
+            </button>
+          </div>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">

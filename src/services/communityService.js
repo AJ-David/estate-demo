@@ -104,8 +104,11 @@ export async function fetchCommunityPosts({
   );
 
   // Combine DB posts + Local posts + Demo posts
+  const isCleanSlate = localStorage.getItem('vettedhomes_data_mode') === 'clean';
   let combined = [...dbPosts, ...localPosts];
-  if (combined.length === 0) {
+  if (isCleanSlate) {
+    // Pure production mode: only genuine user-created posts
+  } else if (combined.length === 0) {
     combined = DEMO_COMMUNITY_POSTS;
   } else {
     // Add demo posts that don't collide

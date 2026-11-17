@@ -20,6 +20,20 @@ export function AdminModerationPage() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState('');
+  const [dataMode, setDataMode] = useState(
+    localStorage.getItem('vettedhomes_data_mode') || 'showcase'
+  );
+
+  const toggleDataMode = (newMode) => {
+    setDataMode(newMode);
+    localStorage.setItem('vettedhomes_data_mode', newMode);
+    setNotification(
+      newMode === 'clean'
+        ? 'Platform switched to Clean Slate Mode: All sample inventory & discussions are now hidden.'
+        : 'Platform switched to Showcase Mode: Curated luxury inventory & discussions are now active.'
+    );
+    setTimeout(() => setNotification(''), 4500);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -71,6 +85,63 @@ export function AdminModerationPage() {
           <span>{notification}</span>
         </div>
       )}
+
+      {/* Platform Inventory & Community Data Mode Controller */}
+      <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse"></span>
+              <h2 className="text-base sm:text-lg font-black text-white font-display">
+                Platform Inventory & Community Data Mode
+              </h2>
+            </div>
+            <p className="text-xs text-estate-300 mt-1">
+              Toggle between Curated Showcase mode (for client presentations and lead generation) and Clean Slate mode (for 100% user-only production).
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 p-1.5 bg-navy-surface rounded-2xl border border-navy-border">
+            <button
+              type="button"
+              onClick={() => toggleDataMode('showcase')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                dataMode === 'showcase'
+                  ? 'bg-gold text-navy-deep font-black shadow-gold'
+                  : 'text-estate-300 hover:text-white'
+              }`}
+            >
+              Showcase Active Mode
+            </button>
+            <button
+              type="button"
+              onClick={() => toggleDataMode('clean')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                dataMode === 'clean'
+                  ? 'bg-crimson text-white font-black shadow-md'
+                  : 'text-estate-300 hover:text-white'
+              }`}
+            >
+              Clean Slate Mode (Pure User)
+            </button>
+          </div>
+        </div>
+
+        <div className="p-3.5 bg-navy-surface/80 rounded-2xl border border-gold/30 text-xs text-estate-300 flex items-start gap-2.5">
+          <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+          <span>
+            {dataMode === 'showcase' ? (
+              <>
+                <strong>Showcase Active Mode is currently enabled:</strong> 11 prime Nigerian enclaves, ₦58.4B+ curated properties (including recently leased/sold velocity badges), and authentic community forum topics are displayed to visitors.
+              </>
+            ) : (
+              <>
+                <strong>Clean Slate Mode is currently enabled:</strong> All sample listings and discussions are hidden. Only genuine properties and community posts created by real registered users will be visible.
+              </>
+            )}
+          </span>
+        </div>
+      </div>
 
       {/* Safety Policy Checklist */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
