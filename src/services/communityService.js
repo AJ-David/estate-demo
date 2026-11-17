@@ -438,22 +438,33 @@ export async function fetchModerationReports() {
 }
 
 // 7. Resolve Moderation Report (Dismiss, Redact, Takedown)
-export async function resolveModerationReport(reportId, action) {
+export async function resolveModerationReport(reportTarget, action, index) {
+  const targetId = typeof reportTarget === 'object'
+    ? (reportTarget?.id || reportTarget?.targetId || reportTarget?.target_id)
+    : reportTarget;
+
   const resolvedIds = JSON.parse(localStorage.getItem('vettedhomes_resolved_reports') || '[]');
-  if (!resolvedIds.includes(String(reportId))) {
-    resolvedIds.push(String(reportId));
+  if (targetId && !resolvedIds.includes(String(targetId))) {
+    resolvedIds.push(String(targetId));
     localStorage.setItem('vettedhomes_resolved_reports', JSON.stringify(resolvedIds));
   }
 
   const allReports = getStoredReports();
-  const updatedReports = allReports.filter(r => String(r.id) !== String(reportId));
+  const updatedReports = allReports.filter((r, i) => {
+    if (targetId && (r?.id || r?.targetId || r?.target_id)) {
+      const rId = r?.id || r?.targetId || r?.target_id;
+      if (String(rId) === String(targetId)) return false;
+    }
+    if (index !== undefined && i === index) return false;
+    return true;
+  });
   localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(updatedReports));
 
-  if (action === 'Takedown') {
+  if (action === 'Takedown' && targetId) {
     const localPosts = JSON.parse(
       localStorage.getItem('vettedhomes_custom_posts') || '[]'
     );
-    const updated = localPosts.filter(p => String(p.id) !== String(reportId));
+    const updated = localPosts.filter(p => String(p?.id) !== String(targetId));
     localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
   }
 

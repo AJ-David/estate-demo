@@ -66,19 +66,30 @@ export function AdminModerationPage() {
     return () => { isMounted = false; };
   }, [dataMode]);
 
-  const handleAction = async (reportId, action) => {
-    const idStr = String(reportId);
-    // Instant optimistic UI update
-    setReports(prev => prev.filter(r => String(r.id) !== idStr));
-    setNotification(`Moderation action executed: ${action} for report #${reportId}`);
+  const handleAction = async (reportItem, action, index) => {
+    const targetId = typeof reportItem === 'object'
+      ? (reportItem?.id || reportItem?.targetId || reportItem?.target_id)
+      : reportItem;
+
+    // Guaranteed instant removal: match by ID OR by array index
+    setReports(prev => prev.filter((r, i) => {
+      if (targetId && (r?.id || r?.targetId || r?.target_id)) {
+        const rId = r?.id || r?.targetId || r?.target_id;
+        if (String(rId) === String(targetId)) return false;
+      }
+      if (index !== undefined && i === index) return false;
+      return true;
+    }));
+
+    setNotification(`Moderation action executed: ${action}`);
 
     try {
-      await resolveModerationReport(reportId, action);
+      await resolveModerationReport(reportItem, action, index);
     } catch (err) {
       console.warn('Error resolving report:', err);
     }
 
-    setTimeout(() => setNotification(''), 4500);
+    setTimeout(() => setNotification(''), 4000);
   };
 
   const handleClearQueue = async () => {
@@ -272,81 +283,100 @@ export function AdminModerationPage() {
           </div>
         ) : (
           <div className="divide-y divide-navy-border">
-            {reports.map(report => (
-              <div key={report.id} className="p-5 sm:p-6 hover:bg-navy-surface/50 transition space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      report.severity === 'Critical'
-                        ? 'bg-rose-950/80 text-rose-300 border border-rose-500/30'
-                        : report.severity === 'High'
-                        ? 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
-                        : 'bg-navy-surface text-slate-200 border border-navy-border'
-                    }`}>
-                      {report.severity} Priority
-                    </span>
-                    <span className="text-xs text-slate-300">• {report.targetType}</span>
-                    <span className="text-xs text-slate-300">• {report.time}</span>
+            {reports.map((report, index) => {
+              const currentId = report?.id || report?.targetId || report?.target_id || `idx-${index}`;
+              return (
+                <div key={currentId} className="p-5 sm:p-6 hover:bg-navy-surface/50 transition space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        report.severity === 'Critical'
+                          ? 'bg-rose-950/80 text-rose-300 border border-rose-500/30'
+                          : report.severity === 'High'
+                          ? 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
+                          : 'bg-navy-surface text-slate-200 border border-navy-border'
+                      }`}>
+                        {report.severity || 'Medium'} Priority
+                      </span>
+                      <span className="text-xs text-slate-300">• {report.targetType || 'Community Post'}</span>
+                      <span className="text-xs text-slate-300">• {report.time || 'Recent'}</span>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-slate-300">
+                        Reported by: <strong className="text-gold">{report.reportedBy || 'Resident'}</strong>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAction(report, 'Dismiss', index);
+                        }}
+                        className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-navy-border transition cursor-pointer"
+                        title="Quick Dismiss"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs text-slate-300">
-                      Reported by: <strong className="text-gold">{report.reportedBy}</strong>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleAction(report.id, 'Dismiss')}
-                      className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-navy-border transition"
-                      title="Quick Dismiss"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
+                  <div>
+                    <h3 className="text-sm sm:text-base font-bold text-white font-display">{report.title}</h3>
+                    <p className="text-xs text-slate-300 mt-0.5">
+                      Violation Category: <strong className="text-gold">{report.reason}</strong>
+                    </p>
+                  </div>
+
+                  <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-slate-200 italic">
+                    "{report.snippet || report.details}"
+                  </div>
+
+                  {/* Moderation Actions */}
+                  <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
+                    <span className="text-slate-400 text-[11px]">Report ID: {currentId}</span>
+                    
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAction(report, 'Dismiss', index);
+                        }}
+                        className="px-3.5 py-2 bg-navy-surface hover:bg-navy-border text-slate-200 font-bold rounded-xl border border-navy-border transition cursor-pointer active:scale-95"
+                      >
+                        Dismiss (No Violation)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAction(report, 'Redact', index);
+                        }}
+                        className="px-3.5 py-2 bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+                      >
+                        <Edit3 className="w-3.5 h-3.5" />
+                        <span>Redact Personal Details</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAction(report, 'Takedown', index);
+                        }}
+                        className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Take Down Post</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-
-                <div>
-                  <h3 className="text-sm sm:text-base font-bold text-white font-display">{report.title}</h3>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    Violation Category: <strong className="text-gold">{report.reason}</strong>
-                  </p>
-                </div>
-
-                <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-slate-200 italic">
-                  "{report.snippet}"
-                </div>
-
-                {/* Moderation Actions */}
-                <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-                  <span className="text-slate-400 text-[11px]">Report ID: {report.id}</span>
-                  
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleAction(report.id, 'Dismiss')}
-                      className="px-3.5 py-2 bg-navy-surface hover:bg-navy-border text-slate-200 font-bold rounded-xl border border-navy-border transition"
-                    >
-                      Dismiss (No Violation)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleAction(report.id, 'Redact')}
-                      className="px-3.5 py-2 bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 font-bold rounded-xl transition flex items-center gap-1.5"
-                    >
-                      <Edit3 className="w-3.5 h-3.5" />
-                      <span>Redact Personal Details</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleAction(report.id, 'Takedown')}
-                      className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      <span>Take Down Post</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
