@@ -44,18 +44,18 @@ export function ProtectedRoute({ children, allowedRoles = null }) {
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
-              to="/auth?tab=login&role=admin&redirect=/admin"
+              to="/admin/login"
               className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep rounded-xl text-xs font-black transition flex items-center justify-center gap-2 shadow-gold"
             >
-              <span>Sign In with Admin Account</span>
+              <span>Sign In via Admin Gateway</span>
               <ArrowRight className="w-4 h-4 text-navy-deep" />
             </Link>
             <Link
-              to="/properties"
+              to="/dashboard/buyer"
               className="w-full sm:w-auto px-6 py-2.5 bg-navy-surface hover:bg-navy-border border border-navy-border text-estate-200 hover:text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
             >
               <Home className="w-4 h-4" />
-              <span>Back to Properties</span>
+              <span>Back to Member Dashboard</span>
             </Link>
           </div>
         </div>

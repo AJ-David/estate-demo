@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { SavedPropertiesProvider } from './context/SavedPropertiesContext';
 
@@ -41,18 +41,62 @@ export function App() {
             {/* Main Application Routes */}
             <main className="flex-1">
               <Routes>
-                {/* Public Discovery Routes */}
-                <Route path="/" element={<HomePage />} />
-                <Route path="/properties" element={<PropertiesPage />} />
-                <Route path="/properties/:id" element={<PropertyDetailPage />} />
-                <Route path="/neighbourhoods" element={<NeighbourhoodsPage />} />
-                <Route path="/neighbourhoods/:id" element={<NeighbourhoodDetailPage />} />
-                <Route path="/community" element={<CommunityFeedPage />} />
+                {/* Authentication Routes (Public Entryways) */}
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/login" element={<AuthPage />} />
                 <Route path="/signup" element={<AuthPage />} />
                 <Route path="/register" element={<AuthPage />} />
                 <Route path="/admin/login" element={<AdminLoginPage />} />
+
+                {/* Closed-Wall Platform Routes: Strict Sign-In Required to Access Anything */}
+                <Route 
+                  path="/" 
+                  element={
+                    <ProtectedRoute>
+                      <HomePage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/properties" 
+                  element={
+                    <ProtectedRoute>
+                      <PropertiesPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/properties/:id" 
+                  element={
+                    <ProtectedRoute>
+                      <PropertyDetailPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/neighbourhoods" 
+                  element={
+                    <ProtectedRoute>
+                      <NeighbourhoodsPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/neighbourhoods/:id" 
+                  element={
+                    <ProtectedRoute>
+                      <NeighbourhoodDetailPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/community" 
+                  element={
+                    <ProtectedRoute>
+                      <CommunityFeedPage />
+                    </ProtectedRoute>
+                  } 
+                />
 
                 {/* Protected User & Portal Routes */}
                 <Route 
@@ -109,8 +153,8 @@ export function App() {
                   } 
                 />
 
-                {/* Fallback */}
-                <Route path="*" element={<HomePage />} />
+                {/* Fallback: redirect any unknown or unauthenticated entry straight to /login */}
+                <Route path="*" element={<Navigate to="/login" replace />} />
               </Routes>
             </main>
 

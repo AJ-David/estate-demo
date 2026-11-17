@@ -166,11 +166,11 @@ export function AdminLoginPage() {
           {/* Footer Back Link */}
           <div className="pt-3 border-t border-navy-border text-center">
             <Link
-              to="/properties"
+              to="/login"
               className="inline-flex items-center gap-1.5 text-xs text-estate-400 hover:text-gold transition font-medium"
             >
               <Home className="w-3.5 h-3.5" />
-              <span>Return to Public Marketplace</span>
+              <span>Go to Member Sign In / Sign Up</span>
             </Link>
           </div>
 

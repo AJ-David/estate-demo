@@ -48,96 +48,107 @@ export function Navbar() {
             <BrandLogo size="md" variant="light" showTagline={true} />
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
-              <Link
-                to="/properties"
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  isActive('/properties') 
-                    ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                    : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                }`}
-              >
-                Explore Properties
-              </Link>
+            {isAuthenticated ? (
+              <nav className="hidden lg:flex items-center space-x-1">
+                <Link
+                  to="/properties"
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    isActive('/properties') 
+                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                  }`}
+                >
+                  Explore Properties
+                </Link>
 
-              <Link
-                to="/neighbourhoods"
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                  isActive('/neighbourhoods') 
-                    ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                    : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                }`}
-              >
-                Neighbourhoods
-              </Link>
+                <Link
+                  to="/neighbourhoods"
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    isActive('/neighbourhoods') 
+                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                  }`}
+                >
+                  Neighbourhoods
+                </Link>
 
-              <Link
-                to="/community"
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
-                  isActive('/community') 
-                    ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                    : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                }`}
-              >
-                <MessageSquareText className="w-4 h-4 text-gold" />
-                <span>Community</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-gold/20 text-gold-light border border-gold/30 px-1.5 py-0.5 rounded-full">
-                  Signature
+                <Link
+                  to="/community"
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+                    isActive('/community') 
+                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                  }`}
+                >
+                  <MessageSquareText className="w-4 h-4 text-gold" />
+                  <span>Community</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-gold/20 text-gold-light border border-gold/30 px-1.5 py-0.5 rounded-full">
+                    Signature
+                  </span>
+                </Link>
+
+                <Link
+                  to={
+                    activeRole === 'admin'
+                      ? "/admin"
+                      : activeRole === 'landlord_owner' || activeRole === 'agent'
+                      ? "/dashboard/landlord"
+                      : "/dashboard/buyer"
+                  }
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+                    location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/admin')
+                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 text-gold" />
+                  <span>Dashboard</span>
+                </Link>
+
+                <Link
+                  to="/#how-it-works"
+                  className="px-3.5 py-2 rounded-lg text-sm font-semibold text-white/90 hover:text-gold hover:bg-navy-surface transition-colors"
+                >
+                  How It Works
+                </Link>
+              </nav>
+            ) : (
+              <div className="hidden lg:flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-surface text-gold text-xs font-bold border border-gold/40">
+                  <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                  <span>Private Verified Real Estate Network</span>
                 </span>
-              </Link>
-
-              <Link
-                to={
-                  !isAuthenticated 
-                    ? "/login?redirect=/dashboard/buyer" 
-                    : activeRole === 'admin'
-                    ? "/admin"
-                    : activeRole === 'landlord_owner' || activeRole === 'agent'
-                    ? "/dashboard/landlord"
-                    : "/dashboard/buyer"
-                }
-                className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
-                  location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/admin')
-                    ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                    : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                }`}
-              >
-                <LayoutDashboard className="w-4 h-4 text-gold" />
-                <span>Dashboard</span>
-              </Link>
-
-              <Link
-                to="/#how-it-works"
-                className="px-3.5 py-2 rounded-lg text-sm font-semibold text-white/90 hover:text-gold hover:bg-navy-surface transition-colors"
-              >
-                How It Works
-              </Link>
-            </nav>
+              </div>
+            )}
 
             {/* Desktop Right Actions */}
             <div className="hidden lg:flex items-center space-x-3">
-              {/* Saved properties */}
-              <Link
-                to="/dashboard/saved"
-                className="relative p-2.5 rounded-full text-estate-300 hover:text-rose-400 hover:bg-navy-surface transition-colors"
-                title="Saved Properties"
-              >
-                <Heart className="w-5 h-5 text-estate-300 hover:text-rose-400" />
-                {savedCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-crimson text-white rounded-full text-[11px] font-bold flex items-center justify-center">
-                    {savedCount}
-                  </span>
-                )}
-              </Link>
+              {isAuthenticated && (
+                <>
+                  {/* Saved properties */}
+                  <Link
+                    to="/dashboard/saved"
+                    className="relative p-2.5 rounded-full text-estate-300 hover:text-rose-400 hover:bg-navy-surface transition-colors"
+                    title="Saved Properties"
+                  >
+                    <Heart className="w-5 h-5 text-estate-300 hover:text-rose-400" />
+                    {savedCount > 0 && (
+                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-crimson text-white rounded-full text-[11px] font-bold flex items-center justify-center">
+                        {savedCount}
+                      </span>
+                    )}
+                  </Link>
 
-              {/* List Property CTA */}
-              <Link
-                to={isAuthenticated ? "/dashboard/landlord" : "/auth?tab=register&role=landlord_owner"}
-                className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black text-navy-deep bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold rounded-xl shadow-gold transition"
-              >
-                <PlusCircle className="w-4 h-4 text-navy-deep" />
-                <span>Post Listing</span>
-              </Link>
+                  {/* List Property CTA */}
+                  <Link
+                    to="/dashboard/landlord"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black text-navy-deep bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold rounded-xl shadow-gold transition"
+                  >
+                    <PlusCircle className="w-4 h-4 text-navy-deep" />
+                    <span>Post Listing</span>
+                  </Link>
+                </>
+              )}
 
               {/* User Auth or Menu */}
               {isAuthenticated ? (
@@ -305,29 +316,29 @@ export function Navbar() {
         {mobileMenuOpen && (
           <div className="lg:hidden bg-navy-card border-b border-navy-border px-4 pt-2 pb-6 space-y-3">
             <nav className="space-y-1">
-              <Link
-                to="/properties"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
-              >
-                Explore Properties
-              </Link>
-              <Link
-                to="/neighbourhoods"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
-              >
-                Neighbourhood Directory
-              </Link>
-              <Link
-                to="/community"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-base font-bold text-gold bg-navy-surface border border-gold/40"
-              >
-                Neighbourhood Community (Discussions)
-              </Link>
               {isAuthenticated ? (
                 <>
+                  <Link
+                    to="/properties"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                  >
+                    Explore Properties
+                  </Link>
+                  <Link
+                    to="/neighbourhoods"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                  >
+                    Neighbourhood Directory
+                  </Link>
+                  <Link
+                    to="/community"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-base font-bold text-gold bg-navy-surface border border-gold/40"
+                  >
+                    Neighbourhood Community (Discussions)
+                  </Link>
                   <Link
                     to="/profile"
                     onClick={() => setMobileMenuOpen(false)}
@@ -368,21 +379,27 @@ export function Navbar() {
                   </button>
                 </>
               ) : (
-                <div className="pt-4 grid grid-cols-2 gap-2">
-                  <Link
-                    to="/login"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-center py-2.5 rounded-xl border border-navy-border text-sm font-bold text-white hover:text-gold hover:bg-navy-surface transition"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    to="/signup"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-center py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-sm font-black text-navy-deep shadow-gold"
-                  >
-                    Sign Up
-                  </Link>
+                <div className="pt-2 space-y-3">
+                  <div className="p-3 bg-navy-surface rounded-xl border border-gold/30 text-xs text-estate-300">
+                    <ShieldCheck className="w-4 h-4 text-gold mb-1" />
+                    Please sign in or create an account to access verified properties, districts, and your dashboard.
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      to="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-center py-2.5 rounded-xl border border-navy-border text-sm font-bold text-white hover:text-gold hover:bg-navy-surface transition"
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-center py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-sm font-black text-navy-deep shadow-gold"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
                 </div>
               )}
             </nav>

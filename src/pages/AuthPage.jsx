@@ -81,11 +81,14 @@ export function AuthPage() {
   // If already authenticated and not resetting password, redirect to appropriate portal
   useEffect(() => {
     if (isAuthenticated && activeTab !== 'reset' && !recoveryMode) {
-      if (redirectPath) {
+      if (redirectPath && redirectPath !== '/' && redirectPath !== '/login' && redirectPath !== '/signup') {
         navigate(redirectPath);
+      } else {
+        const dest = (selectedRole === 'landlord_owner' || selectedRole === 'agent') ? '/dashboard/landlord' : '/dashboard/buyer';
+        navigate(dest);
       }
     }
-  }, [isAuthenticated, redirectPath, activeTab, recoveryMode, navigate]);
+  }, [isAuthenticated, redirectPath, activeTab, recoveryMode, navigate, selectedRole]);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -103,10 +106,9 @@ export function AuthPage() {
     setLoading(false);
 
     if (res.success) {
-      const destination = redirectPath || (
-        isAdminEmail ? '/admin' :
-        (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer')
-      );
+      const isSpecificDeepLink = redirectPath && redirectPath !== '/' && redirectPath !== '/login' && redirectPath !== '/signup';
+      const defaultDashboard = (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer');
+      const destination = isSpecificDeepLink ? redirectPath : (isAdminEmail ? '/admin' : defaultDashboard);
       navigate(destination);
     } else {
       setError(res.error || 'Failed to sign in. Please verify your credentials.');
@@ -167,9 +169,11 @@ export function AuthPage() {
       if (res.requiresVerification) {
         setActiveTab('verify_email');
       } else {
-        setSuccessMessage('Account registered successfully! Welcome to VettedHomes.');
+        setSuccessMessage('Account registered successfully! Welcome to your VettedHomes dashboard.');
         setTimeout(() => {
-          const destination = redirectPath || (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer');
+          const isSpecificDeepLink = redirectPath && redirectPath !== '/' && redirectPath !== '/login' && redirectPath !== '/signup';
+          const defaultDashboard = (selectedRole === 'landlord_owner' || selectedRole === 'agent' ? '/dashboard/landlord' : '/dashboard/buyer');
+          const destination = isSpecificDeepLink ? redirectPath : defaultDashboard;
           navigate(destination);
         }, 1200);
       }
