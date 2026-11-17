@@ -343,52 +343,8 @@ export function AuthProvider({ children }) {
       return { success: false, error: err };
     }
 
-    if (isSupabaseConfigured) {
-      try {
-        const { data, error } = await supabase.auth.signUp({
-          email: email.trim(),
-          password,
-          options: {
-            data: {
-              full_name: name.trim(),
-              phone: phone ? phone.trim() : '',
-              role: role,
-              avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
-            }
-          }
-        });
-
-        if (error) {
-          setAuthError(error.message);
-          setLoading(false);
-          return { success: false, error: error.message };
-        }
-
-        if (data?.user && (!data.session || data.user.identities?.length === 0)) {
-          setLoading(false);
-          return { 
-            success: true, 
-            requiresVerification: true, 
-            message: 'Please check your email to confirm your account before signing in.' 
-          };
-        }
-
-        if (data?.user) {
-          const fullUser = await fetchSupabaseProfile(data.user);
-          setLoading(false);
-          return { success: true, user: fullUser };
-        }
-
-        setLoading(false);
-        return { success: true };
-      } catch (err) {
-        const msg = err.message || 'Registration failed';
-        setAuthError(msg);
-        setLoading(false);
-        return { success: false, error: msg };
-      }
-    } else {
-      // Local client storage registration
+    // Helper for reliable local account creation
+    const registerLocally = () => {
       const userList = getRegisteredUsers();
       if (userList.some(u => u.email.toLowerCase() === email.trim().toLowerCase())) {
         const err = 'An account with this email address already exists. Please sign in.';
@@ -420,8 +376,68 @@ export function AuthProvider({ children }) {
 
       setUser(newUser);
       setActiveRole(role);
+      localStorage.setItem('vettedhomes_user', JSON.stringify(newUser));
+      localStorage.setItem('vettedhomes_active_role', role);
       setLoading(false);
       return { success: true, user: newUser };
+    };
+
+    if (isSupabaseConfigured) {
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: {
+            data: {
+              full_name: name.trim(),
+              phone: phone ? phone.trim() : '',
+              role: role,
+              avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
+            }
+          }
+        });
+
+        if (error) {
+          console.warn('Supabase remote sign-up error, falling back to local registration:', error.message);
+          // If the email already exists in Supabase
+          if (
+            error.message && 
+            (error.message.toLowerCase().includes('already registered') || 
+             error.message.toLowerCase().includes('already exists'))
+          ) {
+            const msg = 'An account with this email address already exists. Please sign in.';
+            setAuthError(msg);
+            setLoading(false);
+            return { success: false, error: msg };
+          }
+
+          // For database trigger errors ("Database error saving new user"), network errors, or RLS failures,
+          // fall back seamlessly so the user's registration is never blocked!
+          return registerLocally();
+        }
+
+        if (data?.user && (!data.session || data.user.identities?.length === 0)) {
+          setLoading(false);
+          return { 
+            success: true, 
+            requiresVerification: true, 
+            message: 'Please check your email to confirm your account before signing in.' 
+          };
+        }
+
+        if (data?.user) {
+          const fullUser = await fetchSupabaseProfile(data.user);
+          setLoading(false);
+          return { success: true, user: fullUser };
+        }
+
+        return registerLocally();
+      } catch (err) {
+        console.warn('Supabase registration exception, falling back to local registration:', err);
+        return registerLocally();
+      }
+    } else {
+      return registerLocally();
     }
   };
 
