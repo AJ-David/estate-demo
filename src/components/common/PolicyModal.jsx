@@ -33,7 +33,7 @@ export function PolicyModal({ type, isOpen, onClose }) {
           <div className="space-y-2">
             <h4 className="text-sm font-bold text-white font-display">1. Information We Collect</h4>
             <p>
-              When you register, schedule inspections, or post listings, we collect your full name, email address (<strong className="text-white">fiyinjoba10@gmail.com</strong>), WhatsApp/phone number (<strong className="text-white">+234 802 146 4287</strong>), and role preferences (Tenant, Landlord, or Agent).
+              When you register, schedule inspections, or post listings, we collect your full name, email address, phone number, and role preferences (Tenant, Landlord, or Agent).
             </p>
           </div>
 
@@ -59,11 +59,8 @@ export function PolicyModal({ type, isOpen, onClose }) {
           </div>
 
           <div className="p-3 bg-navy-deep rounded-xl border border-navy-border flex items-center justify-between text-[11px]">
-            <span className="text-estate-400">Privacy queries & data access:</span>
-            <a href="mailto:fiyinjoba10@gmail.com" className="text-gold font-bold hover:underline flex items-center gap-1">
-              <Mail className="w-3.5 h-3.5" />
-              fiyinjoba10@gmail.com
-            </a>
+            <span className="text-estate-400">Data protection & privacy queries:</span>
+            <span className="text-gold font-semibold">Contact Trust & Safety Desk</span>
           </div>
         </div>
       )
@@ -112,7 +109,7 @@ export function PolicyModal({ type, isOpen, onClose }) {
 
           <div className="p-3 bg-navy-deep rounded-xl border border-navy-border flex items-center justify-between text-[11px]">
             <span className="text-estate-400">Legal inquiries:</span>
-            <span className="text-white font-mono">fiyinjoba10@gmail.com</span>
+            <span className="text-slate-200 font-semibold">VettedHomes Legal & Compliance Desk</span>
           </div>
         </div>
       )
@@ -155,19 +152,12 @@ export function PolicyModal({ type, isOpen, onClose }) {
             </p>
           </div>
 
-          <div className="p-3.5 bg-navy-surface rounded-2xl border border-gold/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-gold" />
-              <span>Fraud Hotline & WhatsApp: <strong className="text-white">+234 802 146 4287</strong></span>
+          <div className="p-3.5 bg-navy-surface rounded-2xl border border-navy-border flex items-start gap-3 text-xs text-slate-300">
+            <ShieldCheck className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-white block font-display">How to Report Suspicious Claims</strong>
+              <span>Use the in-app <strong>Report Listing</strong> or <strong>Report Post</strong> button directly on any suspicious item. Our Security & Moderation team audits reports within 24 hours.</span>
             </div>
-            <a 
-              href="https://wa.me/2348021464287?text=Hello%20VettedHomes,%20I%20want%20to%20report%20suspicious%20activity" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-3.5 py-1.5 bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black rounded-lg text-[11px] shadow-gold hover:brightness-110 transition"
-            >
-              Report on WhatsApp
-            </a>
           </div>
         </div>
       )
