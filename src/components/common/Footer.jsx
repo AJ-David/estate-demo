@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, Database, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MessageCircle } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
-import { DatabaseStatusModal } from './DatabaseStatusModal';
 import { useAuth } from '../../context/AuthContext';
 
 export function Footer() {
   const { user } = useAuth();
-  const [dbModalOpen, setDbModalOpen] = useState(false);
 
   return (
     <footer className="bg-navy-deep text-white border-t border-navy-border pt-16 pb-12">
@@ -172,34 +170,20 @@ export function Footer() {
           <span className="font-bold text-gold block mb-1">
             Institutional Transparency & Resident Data Protection Statement:
           </span>
-          VettedHomes Technologies Limited (RC: 1894201) operates in strict compliance with the Lagos State Real Estate Regulatory Authority (LASRERA) and the Nigeria Data Protection Act (NDPR). To safeguard resident privacy, private building coordinates are obfuscated on public map interfaces; verified physical gate codes are issued only upon confirmed, agent-authorized inspection bookings.
+          VettedHomes Technologies Limited operates in strict compliance with the Lagos State Real Estate Regulatory Authority (LASRERA) and the Nigeria Data Protection Act (NDPR). To safeguard resident privacy, private building coordinates are obfuscated on public map interfaces; verified physical gate codes are issued only upon confirmed, agent-authorized inspection bookings.
         </div>
 
         {/* Bottom bar */}
         <div className="pt-6 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} VettedHomes Technologies Ltd. RC 1894201. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} VettedHomes Technologies Ltd. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-6">
             <span className="hover:text-white cursor-pointer transition">Privacy Policy</span>
             <span className="hover:text-white cursor-pointer transition">Terms of Service</span>
             <span className="hover:text-white cursor-pointer transition">Anti-Scam & Advance Fee Policy</span>
-            <button
-              type="button"
-              onClick={() => setDbModalOpen(true)}
-              className="text-xs text-gold/80 hover:text-gold flex items-center gap-1.5 transition font-semibold"
-            >
-              <Database className="w-3.5 h-3.5 text-gold" />
-              <span>System Architecture</span>
-            </button>
           </div>
         </div>
 
       </div>
-
-      {/* Database Status Modal */}
-      <DatabaseStatusModal
-        isOpen={dbModalOpen}
-        onClose={() => setDbModalOpen(false)}
-      />
     </footer>
   );
 }
