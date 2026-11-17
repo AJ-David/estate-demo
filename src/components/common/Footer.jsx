@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, MapPin, MessageSquare, Mail, Phone, Database, Award, Shield } from 'lucide-react';
+import { Mail, Phone, Database, MessageCircle } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { DatabaseStatusModal } from './DatabaseStatusModal';
 import { useAuth } from '../../context/AuthContext';
@@ -24,37 +24,24 @@ export function Footer() {
             </p>
 
             {/* Contact Channels */}
-            <div className="pt-2 border-t border-navy-border/80 space-y-3">
+            <div className="pt-2 border-t border-navy-border/80">
               <div className="flex flex-wrap items-center gap-4 text-xs text-slate-300">
                 <a 
-                  href="tel:+23418884300"
-                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition"
+                  href="https://wa.me/2348021464287"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition font-medium"
                 >
-                  <Phone className="w-3.5 h-3.5 text-gold" />
-                  <span>+234 (0) 1 888 4300</span>
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>+234 802 146 4287 (Phone / WhatsApp)</span>
                 </a>
                 <a 
-                  href="mailto:concierge@vettedhomes.ng"
-                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition"
+                  href="mailto:fiyinjoba10@gmail.com"
+                  className="flex items-center gap-1.5 text-slate-300 hover:text-gold transition font-medium"
                 >
                   <Mail className="w-3.5 h-3.5 text-gold" />
-                  <span>concierge@vettedhomes.ng</span>
+                  <span>fiyinjoba10@gmail.com</span>
                 </a>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2 text-xs">
-                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-gold font-bold">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  LASRERA Certified
-                </span>
-                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-slate-200 font-bold">
-                  <Award className="w-3.5 h-3.5 text-gold" />
-                  REDAN Member
-                </span>
-                <span className="inline-flex items-center gap-1 bg-navy-surface px-2.5 py-1 rounded-lg border border-navy-border text-emerald-300 font-bold">
-                  <Shield className="w-3.5 h-3.5 text-emerald-400" />
-                  NDPR Compliant
-                </span>
               </div>
             </div>
           </div>
