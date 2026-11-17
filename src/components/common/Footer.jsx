@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { useAuth } from '../../context/AuthContext';
+import { PolicyModal } from './PolicyModal';
 
 export function Footer() {
   const { user } = useAuth();
+  const [activePolicy, setActivePolicy] = useState(null);
 
   return (
     <footer className="bg-navy-deep text-white border-t border-navy-border pt-16 pb-12">
@@ -177,13 +179,38 @@ export function Footer() {
         <div className="pt-6 border-t border-navy-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {new Date().getFullYear()} VettedHomes Technologies Ltd. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-6">
-            <span className="hover:text-white cursor-pointer transition">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer transition">Terms of Service</span>
-            <span className="hover:text-white cursor-pointer transition">Anti-Scam & Advance Fee Policy</span>
+            <button
+              type="button"
+              onClick={() => setActivePolicy('privacy')}
+              className="hover:text-gold transition font-medium"
+            >
+              Privacy Policy
+            </button>
+            <button
+              type="button"
+              onClick={() => setActivePolicy('terms')}
+              className="hover:text-gold transition font-medium"
+            >
+              Terms of Service
+            </button>
+            <button
+              type="button"
+              onClick={() => setActivePolicy('anti-scam')}
+              className="hover:text-gold transition font-medium text-amber-400/90 hover:text-amber-300"
+            >
+              Anti-Scam & Advance Fee Policy
+            </button>
           </div>
         </div>
 
       </div>
+
+      {/* Interactive Policy & Legal Modals */}
+      <PolicyModal
+        type={activePolicy}
+        isOpen={Boolean(activePolicy)}
+        onClose={() => setActivePolicy(null)}
+      />
     </footer>
   );
 }
