@@ -43,6 +43,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { DEMO_NEIGHBOURHOODS, PROPERTY_TYPES } from '../data/demoData';
 import { Modal } from '../components/common/Modal';
+import { ConfirmModal } from '../components/common/ConfirmModal';
 import { EditPropertyModal } from '../components/property/EditPropertyModal';
 import { 
   fetchProperties, 
@@ -90,6 +91,17 @@ export function LandlordAgentDashboardPage() {
   const [imageUrlInput, setImageUrlInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSeeding, setIsSeeding] = useState(false);
+  const [deleteListingId, setDeleteListingId] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [dialogConfig, setDialogConfig] = useState({
+    isOpen: false,
+    title: '',
+    subtitle: '',
+    message: '',
+    variant: 'info',
+    confirmText: 'OK',
+    showCancel: false
+  });
 
   // Load properties, inspections, and conversations
   const loadDashboardData = async () => {
@@ -196,7 +208,15 @@ export function LandlordAgentDashboardPage() {
       setNotification('Property listing created and published to VettedHomes marketplace!');
       setTimeout(() => setNotification(''), 4000);
     } catch (err) {
-      alert('Error creating listing: ' + err.message);
+      setDialogConfig({
+        isOpen: true,
+        title: 'Listing Creation Notice',
+        subtitle: 'Validation or Submission Error',
+        message: 'Could not create property listing: ' + (err.message || 'Please check form fields.'),
+        variant: 'danger',
+        confirmText: 'Understood',
+        showCancel: false
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -224,13 +244,19 @@ export function LandlordAgentDashboardPage() {
     setTimeout(() => setNotification(''), 3000);
   };
 
-  const handleDeleteListing = async (id) => {
-    if (window.confirm('Are you sure you want to remove this property listing?')) {
-      await deleteProperty(id, user);
-      setMyListings(prev => prev.filter(p => p.id !== id));
-      setNotification('Listing removed from marketplace.');
-      setTimeout(() => setNotification(''), 3000);
-    }
+  const handleDeleteListing = (id) => {
+    setDeleteListingId(id);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteListingId) return;
+    setIsDeleting(true);
+    await deleteProperty(deleteListingId, user);
+    setMyListings(prev => prev.filter(p => p.id !== deleteListingId));
+    setDeleteListingId(null);
+    setIsDeleting(false);
+    setNotification('Listing removed from marketplace.');
+    setTimeout(() => setNotification(''), 3000);
   };
 
   const handleSeedSupabase = async () => {
@@ -242,7 +268,15 @@ export function LandlordAgentDashboardPage() {
       loadListings();
       setTimeout(() => setNotification(''), 4000);
     } else {
-      alert('Sync note: ' + (res.error || 'Ensure you are signed in.'));
+      setDialogConfig({
+        isOpen: true,
+        title: 'Database Synchronization Note',
+        subtitle: 'Cloud Connection Status',
+        message: res.error || 'Ensure you are signed in to synchronize portfolio with cloud database.',
+        variant: 'warning',
+        confirmText: 'Understood',
+        showCancel: false
+      });
     }
   };
 
@@ -875,6 +909,33 @@ export function LandlordAgentDashboardPage() {
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
         conversation={activeConversation}
+      />
+
+      {/* DELETE CONFIRMATION INTERACTIVE POPUP MODAL */}
+      <ConfirmModal
+        isOpen={Boolean(deleteListingId)}
+        onClose={() => setDeleteListingId(null)}
+        onConfirm={handleConfirmDelete}
+        title="Remove Property Listing"
+        subtitle="Marketplace Removal Confirmation"
+        message="Are you sure you want to remove this property listing? This property will be immediately delisted from the VettedHomes public catalog."
+        confirmText="Yes, Remove Listing"
+        cancelText="Keep Listing"
+        variant="danger"
+        isConfirming={isDeleting}
+      />
+
+      {/* GENERAL INTERACTIVE POPUP DIALOG */}
+      <ConfirmModal
+        isOpen={dialogConfig.isOpen}
+        onClose={() => setDialogConfig(prev => ({ ...prev, isOpen: false }))}
+        onConfirm={() => setDialogConfig(prev => ({ ...prev, isOpen: false }))}
+        title={dialogConfig.title}
+        subtitle={dialogConfig.subtitle}
+        message={dialogConfig.message}
+        variant={dialogConfig.variant}
+        confirmText={dialogConfig.confirmText}
+        showCancel={dialogConfig.showCancel}
       />
 
     </div>

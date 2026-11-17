@@ -22,11 +22,13 @@ import {
   clearAllModerationReports,
   resetDemoModerationReports
 } from '../services/communityService';
+import { ConfirmModal } from '../components/common/ConfirmModal';
 
 export function AdminModerationPage() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notification, setNotification] = useState('');
+  const [isConfirmClearOpen, setIsConfirmClearOpen] = useState(false);
   const [dataMode, setDataMode] = useState(
     localStorage.getItem('vettedhomes_data_mode') || 'showcase'
   );
@@ -260,8 +262,8 @@ export function AdminModerationPage() {
             {reports.length > 0 && (
               <button
                 type="button"
-                onClick={handleClearQueue}
-                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-slate-300 hover:text-white rounded-xl border border-navy-border transition flex items-center gap-1.5"
+                onClick={() => setIsConfirmClearOpen(true)}
+                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-slate-300 hover:text-white rounded-xl border border-navy-border transition flex items-center gap-1.5 cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5 text-rose-400" />
                 <span>Clear All Reports</span>
@@ -375,6 +377,22 @@ export function AdminModerationPage() {
           </div>
         )}
       </div>
+
+      {/* CLEAR ALL REPORTS INTERACTIVE POPUP MODAL */}
+      <ConfirmModal
+        isOpen={isConfirmClearOpen}
+        onClose={() => setIsConfirmClearOpen(false)}
+        onConfirm={() => {
+          setIsConfirmClearOpen(false);
+          handleClearQueue();
+        }}
+        title="Clear Moderation Queue"
+        subtitle="Queue Purge Confirmation"
+        message="Are you sure you want to completely clear all pending moderation reports? All reported claims will be dismissed and marked as audited in the security vault."
+        confirmText="Yes, Clear All"
+        cancelText="Cancel"
+        variant="danger"
+      />
     </div>
   );
 }

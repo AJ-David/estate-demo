@@ -14,6 +14,7 @@ import {
   FileCheck,
   ArrowRight
 } from 'lucide-react';
+import { ConfirmModal } from '../components/common/ConfirmModal';
 
 export function ProfilePage() {
   const { user, activeRole, switchRole, addRole, updateProfile, updatePassword, isConfigured } = useAuth();
@@ -33,6 +34,12 @@ export function ProfilePage() {
   // Status message
   const [statusMsg, setStatusMsg] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
+  const [infoModal, setInfoModal] = useState({
+    isOpen: false,
+    title: '',
+    subtitle: '',
+    message: ''
+  });
 
   const handleUpdateDetails = async (e) => {
     e.preventDefault();
@@ -407,8 +414,13 @@ export function ProfilePage() {
             </p>
             <button
               type="button"
-              onClick={() => alert('Verification submission portal: Upload utility bill or estate receipt to request badge.')}
-              className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
+              onClick={() => setInfoModal({
+                isOpen: true,
+                title: 'Resident Verification Portal',
+                subtitle: 'Resident Credibility Verification',
+                message: 'To activate your Verified Resident badge, please upload a verifiable proof of residence (e.g. recent utility bill, estate security pass receipt, or tenancy agreement). Our verification desk audits submissions within 24 hours.'
+              })}
+              className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark hover:brightness-110 text-navy-deep text-xs font-bold rounded-xl shadow-gold transition cursor-pointer"
             >
               Request Resident Verification
             </button>
@@ -429,14 +441,32 @@ export function ProfilePage() {
             </p>
             <button
               type="button"
-              onClick={() => alert('Agent verification portal: Upload agency certification or title documents.')}
-              className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition"
+              onClick={() => setInfoModal({
+                isOpen: true,
+                title: 'Agent & Broker Verification Portal',
+                subtitle: 'Professional Licensing & Credentialing',
+                message: 'To activate your Certified Agent / Landlord badge, upload your corporate registration (CAC) or proof of property representation. Our legal compliance desk will verify your credentials within 24 hours.'
+              })}
+              className="px-4 py-2 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl shadow-gold transition cursor-pointer"
             >
               Request Agent Badge
             </button>
           </div>
         </div>
       )}
+
+      {/* INTERACTIVE VERIFICATION POPUP MODAL */}
+      <ConfirmModal
+        isOpen={infoModal.isOpen}
+        onClose={() => setInfoModal(prev => ({ ...prev, isOpen: false }))}
+        onConfirm={() => setInfoModal(prev => ({ ...prev, isOpen: false }))}
+        title={infoModal.title}
+        subtitle={infoModal.subtitle}
+        message={infoModal.message}
+        variant="info"
+        confirmText="Understood"
+        showCancel={false}
+      />
 
     </div>
   );

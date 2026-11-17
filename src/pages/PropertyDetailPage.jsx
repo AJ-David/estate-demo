@@ -34,6 +34,7 @@ import { EnquiryModal } from '../components/property/EnquiryModal';
 import { PropertyMapView } from '../components/property/PropertyMapView';
 import { PropertyReviewModal } from '../components/property/PropertyReviewModal';
 import { ConversationChatDrawer } from '../components/communication/ConversationChatDrawer';
+import { ConfirmModal } from '../components/common/ConfirmModal';
 import { fetchPropertyById } from '../services/propertyService';
 import { fetchPropertyReviews } from '../services/reviewService';
 import { startPropertyConversation } from '../services/messageService';
@@ -54,6 +55,7 @@ export function PropertyDetailPage() {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [activeConversation, setActiveConversation] = useState(null);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -155,13 +157,13 @@ export function PropertyDetailPage() {
             type="button"
             onClick={() => {
               if (navigator.share) {
-                navigator.share({ title: property.title, url: window.location.href });
+                navigator.share({ title: property.title, url: window.location.href }).catch(() => {});
               } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert('Property link copied to clipboard!');
+                setIsShareModalOpen(true);
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-navy-border text-xs font-semibold text-estate-200 hover:bg-navy-surface hover:text-white bg-navy-card transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-navy-border text-xs font-semibold text-estate-200 hover:bg-navy-surface hover:text-white bg-navy-card transition cursor-pointer"
           >
             <Share2 className="w-4 h-4" />
             <span>Share</span>
@@ -703,6 +705,19 @@ export function PropertyDetailPage() {
           setIsChatOpen(false);
           setIsInspectionOpen(true);
         }}
+      />
+
+      {/* SHARE CONFIRMATION INTERACTIVE POPUP MODAL */}
+      <ConfirmModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        onConfirm={() => setIsShareModalOpen(false)}
+        title="Share Verified Property"
+        subtitle="Marketplace Link Copied"
+        message="The direct link for this verified property listing has been copied to your clipboard. You can now paste and share it with prospective tenants, co-buyers, or family members."
+        variant="success"
+        confirmText="Done"
+        showCancel={false}
       />
 
     </div>
