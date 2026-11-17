@@ -95,6 +95,15 @@ export function App() {
                   } 
                 />
 
+                <Route 
+                  path="/admin" 
+                  element={
+                    <ProtectedRoute allowedRoles={['admin', 'agent', 'landlord_owner', 'buyer_tenant']}>
+                      <AdminModerationPage />
+                    </ProtectedRoute>
+                  } 
+                />
+
                 {/* Fallback */}
                 <Route path="*" element={<HomePage />} />
               </Routes>

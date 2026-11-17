@@ -160,6 +160,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/admin" className="hover:text-gold transition font-bold text-gold flex items-center gap-1.5">
+                  <span>Admin & Clean Slate Console</span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/dashboard/moderation" className="hover:text-gold transition">
                   Community Integrity Desk
                 </Link>
