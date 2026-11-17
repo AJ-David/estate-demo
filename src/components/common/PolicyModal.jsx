@@ -5,10 +5,6 @@ import {
   AlertTriangle, 
   FileText, 
   Lock, 
-  CheckCircle2, 
-  HelpCircle,
-  Phone,
-  Mail,
   Scale
 } from 'lucide-react';
 
@@ -58,10 +54,7 @@ export function PolicyModal({ type, isOpen, onClose }) {
             </p>
           </div>
 
-          <div className="p-3 bg-navy-deep rounded-xl border border-navy-border flex items-center justify-between text-[11px]">
-            <span className="text-estate-400">Data protection & privacy queries:</span>
-            <span className="text-gold font-semibold">Contact Trust & Safety Desk</span>
-          </div>
+
         </div>
       )
     },
@@ -107,10 +100,7 @@ export function PolicyModal({ type, isOpen, onClose }) {
             </p>
           </div>
 
-          <div className="p-3 bg-navy-deep rounded-xl border border-navy-border flex items-center justify-between text-[11px]">
-            <span className="text-estate-400">Legal inquiries:</span>
-            <span className="text-slate-200 font-semibold">VettedHomes Legal & Compliance Desk</span>
-          </div>
+
         </div>
       )
     },
