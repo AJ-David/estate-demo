@@ -364,69 +364,99 @@ export async function submitModerationReport({
   return { success: true, report: newReport };
 }
 
+const DEFAULT_MODERATION_REPORTS = [
+  {
+    id: 'rep-101',
+    targetType: 'Community Post',
+    title: 'Allegation naming specific landlord on Admiralty Way',
+    reportedBy: 'Anonymous Resident',
+    reason: 'Defamation / Naming Private Individuals',
+    snippet: 'Landlord at House 14 (Mr. Okafor) refuses to repair sewage leak...',
+    time: '45 mins ago',
+    severity: 'High',
+    status: 'Pending Review',
+    isSample: true
+  },
+  {
+    id: 'rep-102',
+    targetType: 'Community Post',
+    title: 'Unverified alarmist claim about street entrance barrier',
+    reportedBy: 'Kemi M.',
+    reason: 'Unsubstantiated / Alarmist Security Report',
+    snippet: 'Someone claimed the estate gates were breached without police report...',
+    time: '2 hours ago',
+    severity: 'Medium',
+    status: 'Pending Review',
+    isSample: true
+  },
+  {
+    id: 'rep-103',
+    targetType: 'Property Listing',
+    title: 'Suspicious inspection fee request before physical tour',
+    reportedBy: 'Tunde A.',
+    reason: 'Advance Fee Violation Policy',
+    snippet: 'Lister requested ₦10,000 inspection processing fee before visit...',
+    time: '5 hours ago',
+    severity: 'Critical',
+    status: 'Pending Review',
+    isSample: true
+  }
+];
+
+function getStoredReports() {
+  const raw = localStorage.getItem('vettedhomes_moderation_reports');
+  if (raw !== null) {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return [...DEFAULT_MODERATION_REPORTS];
+    }
+  }
+  // Initialize with defaults on very first launch
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
+  return [...DEFAULT_MODERATION_REPORTS];
+}
+
 // 6. Fetch Moderation Reports (for Admin Console)
 export async function fetchModerationReports() {
-  const defaultReports = [
-    {
-      id: 'rep-101',
-      targetType: 'Community Post',
-      title: 'Allegation naming specific landlord on Admiralty Way',
-      reportedBy: 'Anonymous Resident',
-      reason: 'Defamation / Naming Private Individuals',
-      snippet: 'Landlord at House 14 (Mr. Okafor) refuses to repair sewage leak...',
-      time: '45 mins ago',
-      severity: 'High',
-      status: 'Pending Review'
-    },
-    {
-      id: 'rep-102',
-      targetType: 'Community Post',
-      title: 'Unverified alarmist claim about street entrance barrier',
-      reportedBy: 'Kemi M.',
-      reason: 'Unsubstantiated / Alarmist Security Report',
-      snippet: 'Someone claimed the estate gates were breached without police report...',
-      time: '2 hours ago',
-      severity: 'Medium',
-      status: 'Pending Review'
-    },
-    {
-      id: 'rep-103',
-      targetType: 'Property Listing',
-      title: 'Suspicious inspection fee request before physical tour',
-      reportedBy: 'Tunde A.',
-      reason: 'Advance Fee Violation Policy',
-      snippet: 'Lister requested ₦10,000 inspection processing fee before visit...',
-      time: '5 hours ago',
-      severity: 'Critical',
-      status: 'Pending Review'
-    }
-  ];
+  const dataMode = localStorage.getItem('vettedhomes_data_mode') || 'showcase';
+  const allReports = getStoredReports();
 
-  const localReports = JSON.parse(
-    localStorage.getItem('vettedhomes_moderation_reports') ||
-    localStorage.getItem('estatelens_moderation_reports') ||
-    '[]'
-  );
-  return [...localReports, ...defaultReports];
+  if (dataMode === 'clean') {
+    // Hide all sample reports when clean slate mode is active
+    return allReports.filter(r => !r.isSample && !r.id.startsWith('rep-10'));
+  }
+
+  return allReports;
 }
 
 // 7. Resolve Moderation Report (Dismiss, Redact, Takedown)
 export async function resolveModerationReport(reportId, action) {
-  let reports = await fetchModerationReports();
-  reports = reports.filter(r => r.id !== reportId);
-  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(reports));
+  const allReports = getStoredReports();
+  const updatedReports = allReports.filter(r => r.id !== reportId);
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(updatedReports));
 
   if (action === 'Takedown') {
     // If it's a post, flag it as hidden in local store
     const localPosts = JSON.parse(
-      localStorage.getItem('vettedhomes_custom_posts') ||
-      localStorage.getItem('estatelens_custom_posts') ||
-      '[]'
+      localStorage.getItem('vettedhomes_custom_posts') || '[]'
     );
     const updated = localPosts.filter(p => p.id !== reportId);
     localStorage.setItem('vettedhomes_custom_posts', JSON.stringify(updated));
   }
 
   return { success: true };
+}
+
+// 8. Clear all moderation reports
+export async function clearAllModerationReports() {
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify([]));
+  return { success: true };
+}
+
+// 9. Reset to default demo reports
+export async function resetDemoModerationReports() {
+  localStorage.setItem('vettedhomes_moderation_reports', JSON.stringify(DEFAULT_MODERATION_REPORTS));
+  return { success: true, reports: DEFAULT_MODERATION_REPORTS };
 }
 

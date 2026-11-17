@@ -12,9 +12,15 @@ import {
   FileText,
   Loader2,
   Trash2,
-  Edit3
+  Edit3,
+  RotateCcw
 } from 'lucide-react';
-import { fetchModerationReports, resolveModerationReport } from '../services/communityService';
+import { 
+  fetchModerationReports, 
+  resolveModerationReport,
+  clearAllModerationReports,
+  resetDemoModerationReports
+} from '../services/communityService';
 
 export function AdminModerationPage() {
   const [reports, setReports] = useState([]);
@@ -24,9 +30,13 @@ export function AdminModerationPage() {
     localStorage.getItem('vettedhomes_data_mode') || 'showcase'
   );
 
-  const toggleDataMode = (newMode) => {
+  const toggleDataMode = async (newMode) => {
     setDataMode(newMode);
     localStorage.setItem('vettedhomes_data_mode', newMode);
+    setLoading(true);
+    const updated = await fetchModerationReports();
+    setReports(updated);
+    setLoading(false);
     setNotification(
       newMode === 'clean'
         ? 'Platform switched to Clean Slate Mode: All sample inventory & discussions are now hidden.'
@@ -54,6 +64,20 @@ export function AdminModerationPage() {
     setReports(prev => prev.filter(r => r.id !== reportId));
     setNotification(`Moderation action executed: ${action} for report #${reportId}`);
     setTimeout(() => setNotification(''), 4500);
+  };
+
+  const handleClearQueue = async () => {
+    await clearAllModerationReports();
+    setReports([]);
+    setNotification('Moderation queue has been completely cleared.');
+    setTimeout(() => setNotification(''), 4000);
+  };
+
+  const handleResetDemoReports = async () => {
+    const res = await resetDemoModerationReports();
+    setReports(res.reports);
+    setNotification('Sample moderation queue has been restored for testing.');
+    setTimeout(() => setNotification(''), 4000);
   };
 
   return (
@@ -178,11 +202,36 @@ export function AdminModerationPage() {
 
       {/* Reports Queue */}
       <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium overflow-hidden">
-        <div className="p-5 border-b border-navy-border flex items-center justify-between">
-          <h2 className="text-base font-bold text-white font-display">
-            Pending Moderation Queue ({reports.length})
-          </h2>
-          <span className="text-xs text-estate-400">Response SLA: &lt; 4 Hours</span>
+        <div className="p-5 border-b border-navy-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 className="text-base font-bold text-white font-display">
+              Pending Moderation Queue ({reports.length})
+            </h2>
+            <span className="text-xs text-estate-400">Response SLA: &lt; 4 Hours</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {reports.length > 0 && (
+              <button
+                type="button"
+                onClick={handleClearQueue}
+                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-slate-300 hover:text-white rounded-xl border border-navy-border transition flex items-center gap-1.5"
+              >
+                <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+                <span>Clear All Reports</span>
+              </button>
+            )}
+            {reports.length === 0 && dataMode === 'showcase' && (
+              <button
+                type="button"
+                onClick={handleResetDemoReports}
+                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-gold rounded-xl border border-gold/30 transition flex items-center gap-1.5"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Restore Sample Queue</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {loading ? (
