@@ -172,7 +172,7 @@ export function Footer() {
           <span className="font-bold text-gold block mb-1">
             Institutional Transparency & Resident Data Protection Statement:
           </span>
-          VettedHomes Technologies Limited operates in strict compliance with the Lagos State Real Estate Regulatory Authority (LASRERA) and the Nigeria Data Protection Act (NDPR). To safeguard resident privacy, private building coordinates are obfuscated on public map interfaces; verified physical gate codes are issued only upon confirmed, agent-authorized inspection bookings.
+          VettedHomes Technologies Limited operates in strict compliance with applicable real estate regulations and resident data privacy standards. To safeguard resident privacy, private building coordinates are obfuscated on public map interfaces; verified physical gate codes are issued only upon confirmed, agent-authorized inspection bookings.
         </div>
 
         {/* Bottom bar */}

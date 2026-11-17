@@ -15,10 +15,8 @@ import {
   Star,
   Activity,
   Award,
-  Shield,
   Clock,
-  TrendingUp,
-  FileCheck
+  TrendingUp
 } from 'lucide-react';
 import { DEMO_PROPERTIES, DEMO_NEIGHBOURHOODS, DEMO_COMMUNITY_POSTS, PROPERTY_TYPES } from '../data/demoData';
 import { fetchProperties } from '../services/propertyService';
@@ -75,7 +73,7 @@ export function HomePage() {
   // Live market activity pulse ticker items
   const liveActivities = [
     { text: 'Physical inspection completed & gate code verified in Banana Island', time: '14 mins ago', tag: 'Inspection' },
-    { text: 'New 4-Bedroom LASRERA-verified Sky Villa listed on Bourdillon, Ikoyi', time: '38 mins ago', tag: 'New Listing' },
+    { text: 'New 4-Bedroom verified Sky Villa listed on Bourdillon, Ikoyi', time: '38 mins ago', tag: 'New Listing' },
     { text: 'Verified resident published drainage clearance report on Admiralty Way', time: '1 hr ago', tag: 'Community' },
     { text: 'Tenancy agreement closed for diplomatic duplex in Maitama, Abuja', time: '2 hrs ago', tag: 'Lease Closed' },
     { text: 'Security desk checked in guest with Gate Pass #INS-892401 in Ikeja GRA', time: '3 hrs ago', tag: 'Gate Pass' }
@@ -525,44 +523,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 8. INSTITUTIONAL TRUST & REGULATORY ACCREDITATIONS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-navy-card/80 rounded-3xl p-6 sm:p-8 border border-navy-border shadow-premium">
-          <div className="text-center mb-6">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gold-light">
-              Compliance & Institutional Accreditations
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center">
-            <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border space-y-1">
-              <Shield className="w-6 h-6 text-gold mx-auto mb-1" />
-              <h5 className="text-xs font-bold text-white">LASRERA Registered</h5>
-              <p className="text-[10px] text-slate-400">Lagos State Real Estate Regulatory Authority • #LSR/2024/0084</p>
-            </div>
-
-            <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border space-y-1">
-              <Award className="w-6 h-6 text-gold mx-auto mb-1" />
-              <h5 className="text-xs font-bold text-white">REDAN Corporate Member</h5>
-              <p className="text-[10px] text-slate-400">Real Estate Developers Association of Nigeria • #RD-9821</p>
-            </div>
-
-            <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border space-y-1">
-              <FileCheck className="w-6 h-6 text-gold mx-auto mb-1" />
-              <h5 className="text-xs font-bold text-white">NITDA NDPR Certified</h5>
-              <p className="text-[10px] text-slate-400">Nigeria Data Protection Regulation Compliant Identity Vault</p>
-            </div>
-
-            <div className="p-4 bg-navy-surface rounded-2xl border border-navy-border space-y-1">
-              <ShieldCheck className="w-6 h-6 text-gold mx-auto mb-1" />
-              <h5 className="text-xs font-bold text-white">SCUML / EFCC Compliant</h5>
-              <p className="text-[10px] text-slate-400">Anti-Money Laundering Certified • Cert #SC-194021</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. CALL TO ACTION: LANDLORDS & AGENTS */}
+      {/* 8. CALL TO ACTION: LANDLORDS & AGENTS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-navy-card via-navy-deep to-navy-card rounded-3xl p-8 sm:p-12 border border-navy-border shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-white">
           <div className="space-y-3 max-w-xl">

@@ -368,7 +368,7 @@ export const DEMO_PROPERTIES = [
     availabilityStatus: 'Available for Sale',
     marketStatus: 'available',
     marketStatusLabel: 'Verified Exclusive Allocation',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-12',
     images: [
@@ -434,7 +434,7 @@ export const DEMO_PROPERTIES = [
     marketStatus: 'under_escrow',
     marketStatusLabel: 'Under Offer / In Escrow',
     escrowDate: 'Nov 2026',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-10',
     images: [
@@ -498,7 +498,7 @@ export const DEMO_PROPERTIES = [
     availabilityStatus: 'Available Immediately',
     marketStatus: 'available',
     marketStatusLabel: 'Verified Exclusive Allocation',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-08',
     images: [
@@ -563,7 +563,7 @@ export const DEMO_PROPERTIES = [
     marketStatus: 'recently_sold',
     marketStatusLabel: 'Recently Sold via VettedHomes',
     closedDate: 'Closed Oct 2026',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-10-28',
     images: [
@@ -628,7 +628,7 @@ export const DEMO_PROPERTIES = [
     availabilityStatus: 'Available Immediately',
     marketStatus: 'available',
     marketStatusLabel: 'Verified Exclusive Allocation',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: true,
     listingDate: '2026-11-09',
     images: [
@@ -691,7 +691,7 @@ export const DEMO_PROPERTIES = [
     marketStatus: 'under_escrow',
     marketStatusLabel: 'Under Offer / In Escrow',
     escrowDate: 'Nov 2026',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-06',
     images: [
@@ -753,7 +753,7 @@ export const DEMO_PROPERTIES = [
     availabilityStatus: 'Available for Sale',
     marketStatus: 'available',
     marketStatusLabel: 'Verified Exclusive Allocation',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-10-22',
     images: [
@@ -815,7 +815,7 @@ export const DEMO_PROPERTIES = [
     availabilityStatus: 'Available Immediately',
     marketStatus: 'available',
     marketStatusLabel: 'Verified Exclusive Allocation',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-04',
     images: [
@@ -879,7 +879,7 @@ export const DEMO_PROPERTIES = [
     marketStatus: 'recently_sold',
     marketStatusLabel: 'Recently Sold via VettedHomes',
     closedDate: 'Closed Nov 2026',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-01',
     images: [
@@ -942,7 +942,7 @@ export const DEMO_PROPERTIES = [
     marketStatus: 'recently_leased',
     marketStatusLabel: 'Recently Leased via VettedHomes',
     closedDate: 'Leased Nov 2026',
-    verificationStatus: 'VettedHomes Certified & LASRERA Verified',
+    verificationStatus: 'VettedHomes Verified',
     featured: false,
     listingDate: '2026-11-05',
     images: [

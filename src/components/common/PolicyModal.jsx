@@ -14,7 +14,7 @@ export function PolicyModal({ type, isOpen, onClose }) {
   const policies = {
     privacy: {
       title: 'Privacy Policy',
-      subtitle: 'Nigeria Data Protection Regulation (NDPR) & Resident Confidentiality',
+      subtitle: 'Data Protection & Resident Confidentiality Standards',
       icon: <Lock className="w-5 h-5 text-gold" />,
       content: (
         <div className="space-y-5 text-xs text-slate-300 leading-relaxed max-h-[65vh] overflow-y-auto pr-2">
