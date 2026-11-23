@@ -112,13 +112,13 @@ export function HomePage() {
           <div className="max-w-4xl mx-auto text-center space-y-6">
             
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 text-xs font-bold shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-900 text-xs font-bold">
               <ShieldCheck className="w-4 h-4 text-black" />
               <span>Nigeria's Premier Real Estate & Neighbourhood Intelligence Portal</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tight font-display leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-black tracking-tight font-display leading-[1.1]">
               Find Your Next Home. <br className="hidden sm:inline" />
               <span className="text-zinc-600 block sm:inline mt-1 sm:mt-0">
                 Know Your Next Neighbourhood.
@@ -132,7 +132,7 @@ export function HomePage() {
 
             {/* Search Box */}
             <div className="pt-2 max-w-3xl mx-auto">
-              <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-xl border border-zinc-200">
+              <div className="bg-white rounded-3xl p-4 sm:p-5 border border-zinc-200">
                 
                 {/* Search Mode Tabs */}
                 <div className="flex items-center justify-center sm:justify-start gap-1 mb-4 pb-3 border-b border-zinc-100">
@@ -147,7 +147,7 @@ export function HomePage() {
                       onClick={() => setTransactionType(tab.value)}
                       className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
                         transactionType === tab.value
-                          ? 'bg-black text-white shadow-xs'
+                          ? 'bg-black text-white'
                           : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                       }`}
                     >
@@ -196,7 +196,7 @@ export function HomePage() {
                   <div className="md:col-span-3 pt-2 md:pt-4">
                     <button
                       type="submit"
-                      className="w-full py-3 px-5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-all duration-200 flex items-center justify-center gap-2 group tracking-wide cursor-pointer"
+                      className="w-full py-3 px-5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center gap-2 group tracking-wide cursor-pointer"
                     >
                       <Search className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
                       <span>Search Intel</span>
@@ -207,7 +207,7 @@ export function HomePage() {
 
                 {/* Quick Neighbourhood Pills */}
                 <div className="mt-4 pt-3 border-t border-zinc-100 flex flex-wrap items-center gap-2 text-xs text-zinc-600">
-                  <span className="font-bold text-zinc-900">Prime Enclaves:</span>
+                  <span className="font-bold text-black">Prime Enclaves:</span>
                   {['Banana Island', 'Ikoyi', 'Victoria Island', 'Eko Atlantic', 'Maitama Abuja', 'Asokoro', 'Lekki Phase 1', 'Ikeja GRA'].map(loc => (
                     <button
                       key={loc}
@@ -233,48 +233,45 @@ export function HomePage() {
         
         {/* KPI Counter Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-5 rounded-3xl border border-zinc-200 shadow-sm text-center space-y-1">
+          <div className="bg-white p-5 rounded-3xl border border-zinc-200 text-center space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block">Vetted Property Value</span>
-            <p className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">₦58.4 Billion+</p>
-            <p className="text-[11px] text-emerald-700 font-semibold flex items-center justify-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5" /> 100% Title Checked
+            <p className="text-2xl sm:text-3xl font-black text-black font-display">₦58.4 Billion+</p>
+            <p className="text-[11px] text-zinc-700 font-semibold flex items-center justify-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-black" /> 100% Title Checked
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-3xl border border-zinc-200 shadow-sm text-center space-y-1">
+          <div className="bg-white p-5 rounded-3xl border border-zinc-200 text-center space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block">Verified Resident Reviews</span>
-            <p className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">4,850+</p>
+            <p className="text-2xl sm:text-3xl font-black text-black font-display">4,850+</p>
             <p className="text-[11px] text-zinc-700 font-semibold flex items-center justify-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-black" /> Zero Advance Fees
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-3xl border border-zinc-200 shadow-sm text-center space-y-1">
+          <div className="bg-white p-5 rounded-3xl border border-zinc-200 text-center space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block">Monitored Urban Districts</span>
-            <p className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">11 Prime Zones</p>
+            <p className="text-2xl sm:text-3xl font-black text-black font-display">11 Prime Zones</p>
             <p className="text-[11px] text-zinc-600 font-semibold flex items-center justify-center gap-1">
               <Activity className="w-3.5 h-3.5 text-black" /> Lagos & Abuja
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-3xl border border-zinc-200 shadow-sm text-center space-y-1">
+          <div className="bg-white p-5 rounded-3xl border border-zinc-200 text-center space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 block">Tenancy Integrity Record</span>
-            <p className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">99.6%</p>
-            <p className="text-[11px] text-emerald-700 font-semibold flex items-center justify-center gap-1">
-              <Award className="w-3.5 h-3.5" /> Dispute-Free Tenancies
+            <p className="text-2xl sm:text-3xl font-black text-black font-display">99.6%</p>
+            <p className="text-[11px] text-zinc-700 font-semibold flex items-center justify-center gap-1">
+              <Award className="w-3.5 h-3.5 text-black" /> Dispute-Free Tenancies
             </p>
           </div>
         </div>
 
         {/* Live Market Pulse Bar */}
-        <div className="bg-white rounded-2xl p-3.5 sm:p-4 border border-zinc-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
+        <div className="bg-white rounded-2xl p-3.5 sm:p-4 border border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 shrink-0">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-            <span className="font-bold text-zinc-900 uppercase tracking-wider text-[11px] flex items-center gap-1">
-              <Activity className="w-3.5 h-3.5 text-zinc-700" />
+            <span className="w-2 h-2 rounded-full bg-black"></span>
+            <span className="font-bold text-black uppercase tracking-wider text-[11px] flex items-center gap-1">
+              <Activity className="w-3.5 h-3.5 text-black" />
               Live Market Activity:
             </span>
           </div>
@@ -283,7 +280,7 @@ export function HomePage() {
             <div className="flex items-center gap-4 whitespace-nowrap">
               {liveActivities.map((act, idx) => (
                 <div key={idx} className="flex items-center gap-2 text-zinc-700">
-                  <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-900 font-bold text-[10px] border border-zinc-200">
+                  <span className="px-2 py-0.5 rounded-full bg-zinc-100 text-black font-bold text-[10px] border border-zinc-200">
                     {act.tag}
                   </span>
                   <span className="text-zinc-800">{act.text}</span>
@@ -302,10 +299,10 @@ export function HomePage() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">
-              <Building2 className="w-4 h-4 text-zinc-700" />
+              <Building2 className="w-4 h-4 text-black" />
               <span>Curated Listings</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">
+            <h2 className="text-2xl sm:text-3xl font-black text-black font-display">
               Featured Verified Properties
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 mt-1">
@@ -333,10 +330,10 @@ export function HomePage() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">
-              <Compass className="w-4 h-4 text-zinc-700" />
+              <Compass className="w-4 h-4 text-black" />
               <span>Neighbourhood Intelligence</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 font-display">
+            <h2 className="text-2xl sm:text-3xl font-black text-black font-display">
               Explore Key Communities
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 mt-1">
@@ -366,7 +363,7 @@ export function HomePage() {
             <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
               Transparent Decision Workflow
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 font-display mt-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-black font-display mt-1">
               How VettedHomes Works
             </h2>
             <p className="text-xs sm:text-sm text-zinc-600 mt-2">
@@ -375,11 +372,11 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-zinc-200 shadow-sm relative">
-              <span className="w-10 h-10 rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200 font-black flex items-center justify-center font-display mb-5 shadow-xs">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-zinc-200 relative">
+              <span className="w-10 h-10 rounded-xl bg-zinc-100 text-black border border-zinc-200 font-black flex items-center justify-center font-display mb-5">
                 01
               </span>
-              <h3 className="text-lg font-bold text-zinc-900 font-display mb-2">
+              <h3 className="text-lg font-bold text-black font-display mb-2">
                 Discover Verified Homes
               </h3>
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
@@ -387,14 +384,14 @@ export function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-zinc-400 shadow-md relative ring-1 ring-zinc-300">
-              <div className="absolute -top-3 right-6 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-xs">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-black relative">
+              <div className="absolute -top-3 right-6 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
                 Key Distinction
               </div>
-              <span className="w-10 h-10 rounded-xl bg-black text-white font-black flex items-center justify-center font-display mb-5 shadow-xs">
+              <span className="w-10 h-10 rounded-xl bg-black text-white font-black flex items-center justify-center font-display mb-5">
                 02
               </span>
-              <h3 className="text-lg font-bold text-zinc-900 font-display mb-2">
+              <h3 className="text-lg font-bold text-black font-display mb-2">
                 Know The Real Neighbourhood
               </h3>
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
@@ -402,11 +399,11 @@ export function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-zinc-200 shadow-sm relative">
-              <span className="w-10 h-10 rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200 font-black flex items-center justify-center font-display mb-5 shadow-xs">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-zinc-200 relative">
+              <span className="w-10 h-10 rounded-xl bg-zinc-100 text-black border border-zinc-200 font-black flex items-center justify-center font-display mb-5">
                 03
               </span>
-              <h3 className="text-lg font-bold text-zinc-900 font-display mb-2">
+              <h3 className="text-lg font-bold text-black font-display mb-2">
                 Schedule Safe Inspections
               </h3>
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
@@ -419,36 +416,36 @@ export function HomePage() {
 
       {/* 6. NEIGHBOURHOOD COMMUNITY PULSE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-zinc-950 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden border border-zinc-800">
+        <div className="bg-zinc-50 rounded-3xl p-6 sm:p-10 text-zinc-900 border border-zinc-200">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-5 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold shadow-xs">
-                <MessageSquareText className="w-3.5 h-3.5 text-white" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200 text-black text-xs font-bold">
+                <MessageSquareText className="w-3.5 h-3.5 text-black" />
                 <span>The Community Pulse</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-black font-display tracking-tight text-white leading-snug">
+              <h2 className="text-2xl sm:text-3xl font-black font-display tracking-tight text-black leading-snug">
                 Real Residents. <br />
                 Real Feedback. <br />
                 Zero Sales Fluff.
               </h2>
 
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
                 Ask questions before you sign. Compare internet latency, transformer stability, flood resilience, and landlord responsiveness from people living there.
               </p>
 
               <div className="pt-2 flex flex-col sm:flex-row gap-3">
                 <Link
                   to="/community"
-                  className="px-5 py-2.5 bg-white hover:bg-zinc-100 text-black text-xs sm:text-sm font-bold rounded-xl shadow-xs transition text-center"
+                  className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white text-xs sm:text-sm font-bold rounded-xl transition text-center"
                 >
                   Join Community Discussions
                 </Link>
                 <Link
                   to="/neighbourhoods"
-                  className="px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white text-xs sm:text-sm font-semibold rounded-xl transition text-center"
+                  className="px-5 py-2.5 bg-white hover:bg-zinc-100 border border-zinc-300 text-black text-xs sm:text-sm font-semibold rounded-xl transition text-center"
                 >
                   Browse Locations
                 </Link>
@@ -457,16 +454,16 @@ export function HomePage() {
 
             <div className="lg:col-span-7 space-y-4">
               {recentCommunityPosts.map(post => (
-                <div key={post.id} className="bg-zinc-900/90 text-white rounded-2xl p-5 shadow-sm border border-zinc-800">
+                <div key={post.id} className="bg-white text-zinc-900 rounded-2xl p-5 border border-zinc-200">
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="font-bold text-zinc-200 flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-white" />
+                    <span className="font-bold text-black flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-black" />
                       {post.author.name} ({post.author.badge})
                     </span>
-                    <span className="text-zinc-400 text-[11px]">{post.createdAt}</span>
+                    <span className="text-zinc-500 text-[11px]">{post.createdAt}</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white font-display mb-1">{post.title}</h4>
-                  <p className="text-xs text-zinc-300 line-clamp-2 leading-relaxed">{post.content}</p>
+                  <h4 className="text-sm font-bold text-black font-display mb-1">{post.title}</h4>
+                  <p className="text-xs text-zinc-600 line-clamp-2 leading-relaxed">{post.content}</p>
                 </div>
               ))}
             </div>
@@ -476,13 +473,13 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 7. VOICES OF THE COMMUNITY: EXECUTIVE CLIENT TESTIMONIALS */}
+      {/* 7. VOICES OF THE COMMUNITY: CLIENT TESTIMONIALS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
             Verified Resident & Landlord Endorsements
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 font-display mt-1">
+          <h2 className="text-2xl sm:text-3xl font-black text-black font-display mt-1">
             Voices of the Community
           </h2>
           <p className="text-xs sm:text-sm text-zinc-600 mt-2">
@@ -492,11 +489,11 @@ export function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, idx) => (
-            <div key={idx} className="p-6 bg-white rounded-3xl border border-zinc-200 shadow-sm flex flex-col justify-between space-y-4">
+            <div key={idx} className="p-6 bg-white rounded-3xl border border-zinc-200 flex flex-col justify-between space-y-4">
               <div className="space-y-3">
-                <div className="flex items-center gap-1 text-amber-500">
+                <div className="flex items-center gap-1 text-black">
                   {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                    <Star key={i} className="w-4 h-4 fill-black text-black" />
                   ))}
                 </div>
                 <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed italic">
@@ -507,7 +504,7 @@ export function HomePage() {
               <div className="pt-4 border-t border-zinc-100 flex items-center gap-3">
                 <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-1 ring-zinc-300" />
                 <div>
-                  <h4 className="text-xs font-bold text-zinc-900 font-display">{t.name}</h4>
+                  <h4 className="text-xs font-bold text-black font-display">{t.name}</h4>
                   <p className="text-[11px] text-zinc-600">{t.role}</p>
                   <p className="text-[10px] text-zinc-400">{t.district}</p>
                 </div>
@@ -519,15 +516,15 @@ export function HomePage() {
 
       {/* 8. CALL TO ACTION: LANDLORDS & AGENTS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-zinc-950 rounded-3xl p-8 sm:p-12 border border-zinc-800 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 text-white">
+        <div className="bg-zinc-50 rounded-3xl p-8 sm:p-12 border border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-8 text-zinc-900">
           <div className="space-y-3 max-w-xl">
-            <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
               Landlords & Certified Agents
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-white font-display">
+            <h3 className="text-2xl sm:text-3xl font-black text-black font-display">
               List Your Properties on Nigeria's Most Trusted Portal
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
               Reach qualified tenants and buyers who appreciate quality homes in great neighbourhoods. Benefit from verified agent badges and streamlined inspection scheduling.
             </p>
           </div>
@@ -535,13 +532,13 @@ export function HomePage() {
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <Link
               to="/auth?tab=register&role=landlord_owner"
-              className="px-6 py-3 bg-white hover:bg-zinc-100 text-black text-xs sm:text-sm font-bold rounded-xl shadow-xs transition text-center"
+              className="px-6 py-3 bg-black hover:bg-zinc-800 text-white text-xs sm:text-sm font-bold rounded-xl transition text-center"
             >
               Register as Landlord
             </Link>
             <Link
               to="/auth?tab=register&role=agent"
-              className="px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-xs transition text-center"
+              className="px-6 py-3 bg-white hover:bg-zinc-100 border border-zinc-300 text-black text-xs sm:text-sm font-bold rounded-xl transition text-center"
             >
               Register as Agent
             </Link>

@@ -6,7 +6,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
   const { metrics } = neighbourhood;
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-400 hover:shadow-lg transition-all duration-300 flex flex-col text-zinc-900">
+    <div className="group bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-black transition-colors duration-200 flex flex-col text-zinc-900">
       {/* Image & Header */}
       <div className="relative h-48 overflow-hidden">
         <img
@@ -18,7 +18,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
         
         {/* Livability Score Badge */}
-        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-xl shadow-xs border border-zinc-200 text-center">
+        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-zinc-200 text-center">
           <span className="block text-[10px] uppercase font-bold text-zinc-500">Livability</span>
           <span className="text-base font-extrabold text-zinc-900 font-display">
             {neighbourhood.livabilityScore}<span className="text-xs text-zinc-400 font-normal">/10</span>
@@ -55,7 +55,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
 
           <div>
             <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-500 mb-0.5">
-              <Zap className="w-3 h-3 text-amber-600" />
+              <Zap className="w-3 h-3 text-zinc-700" />
               <span>Electricity</span>
             </div>
             <p className="text-xs font-bold text-zinc-900">{metrics.electricity.score}/10</p>
@@ -63,7 +63,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
 
           <div>
             <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-500 mb-0.5">
-              <Droplet className="w-3 h-3 text-sky-600" />
+              <Droplet className="w-3 h-3 text-zinc-700" />
               <span>Water</span>
             </div>
             <p className="text-xs font-bold text-zinc-900">{metrics.water.score}/10</p>
@@ -96,7 +96,7 @@ export function NeighbourhoodCard({ neighbourhood }) {
           </Link>
           <Link
             to={`/neighbourhoods/${neighbourhood.id}`}
-            className="inline-flex items-center gap-1 px-3.5 py-1.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition-colors shadow-xs"
+            className="inline-flex items-center gap-1 px-3.5 py-1.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition-colors"
           >
             Explore Area
             <ArrowRight className="w-3 h-3" />

@@ -10,16 +10,16 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
   }[size] || 'px-2.5 py-1 text-xs';
 
   const variantClasses = {
-    default: 'bg-zinc-100 text-zinc-800 border border-zinc-200 font-medium',
+    default: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-medium',
     primary: 'bg-black text-white font-semibold',
-    emerald: 'bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold',
-    verified: 'bg-black text-white font-bold shadow-xs tracking-wide',
+    emerald: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
+    verified: 'bg-black text-white font-bold tracking-wide',
     rent: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
     sale: 'bg-black text-white font-bold',
     shortlet: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
-    warning: 'bg-amber-50 text-amber-800 border border-amber-200 font-semibold',
-    danger: 'bg-rose-50 text-rose-700 border border-rose-200 font-semibold',
-  }[variant] || 'bg-zinc-100 text-zinc-800 border border-zinc-200';
+    warning: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
+    danger: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
+  }[variant] || 'bg-zinc-100 text-zinc-900 border border-zinc-200';
 
   return (
     <span className={`${baseClasses} ${sizeClasses} ${variantClasses} ${className}`}>

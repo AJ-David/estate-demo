@@ -242,7 +242,7 @@ export function AuthPage() {
         </div>
 
         {/* Auth Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200 shadow-xl text-zinc-900">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200 text-zinc-900">
           
           {/* Tab Switcher (Visible on login and register) */}
           {(activeTab === 'login' || activeTab === 'register') && (
@@ -251,7 +251,7 @@ export function AuthPage() {
                 type="button"
                 onClick={() => { setActiveTab('login'); setError(''); setSuccessMessage(''); }}
                 className={`py-2 rounded-xl transition cursor-pointer ${
-                  activeTab === 'login' ? 'bg-black text-white font-bold shadow-xs' : 'text-zinc-600 hover:text-black'
+                  activeTab === 'login' ? 'bg-black text-white font-bold' : 'text-zinc-600 hover:text-black'
                 }`}
               >
                 Sign In
@@ -260,7 +260,7 @@ export function AuthPage() {
                 type="button"
                 onClick={() => { setActiveTab('register'); setError(''); setSuccessMessage(''); }}
                 className={`py-2 rounded-xl transition cursor-pointer ${
-                  activeTab === 'register' ? 'bg-black text-white font-bold shadow-xs' : 'text-zinc-600 hover:text-black'
+                  activeTab === 'register' ? 'bg-black text-white font-bold' : 'text-zinc-600 hover:text-black'
                 }`}
               >
                 Create Account
@@ -382,7 +382,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 cursor-pointer"
+                className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Authenticating...' : 'Sign In to Dashboard'}
                 {!loading && <ArrowRight className="w-4 h-4 text-white" />}
@@ -540,7 +540,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 cursor-pointer"
+                className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Creating Account & Loading Dashboard...' : 'Complete Registration & Enter Dashboard'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
@@ -591,7 +591,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl shadow-xs transition disabled:opacity-70 cursor-pointer"
+                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Sending link...' : 'Send Password Reset Link'}
               </button>
@@ -636,7 +636,7 @@ export function AuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl shadow-xs transition disabled:opacity-70 cursor-pointer"
+                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition disabled:opacity-70 cursor-pointer"
               >
                 {loading ? 'Updating Password...' : 'Save & Update Password'}
               </button>
@@ -663,7 +663,7 @@ export function AuthPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('login')}
-                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl shadow-xs transition cursor-pointer"
+                className="w-full py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition cursor-pointer"
               >
                 Proceed to Sign In
               </button>

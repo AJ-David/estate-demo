@@ -28,7 +28,7 @@ export function Modal({ isOpen, onClose, title, subtitle, children, maxWidth = '
 
       {/* Modal Dialog */}
       <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-        <div className={`relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-zinc-200`}>
+        <div className={`relative transform overflow-hidden rounded-3xl bg-white text-left transition-all sm:my-8 w-full ${maxWidth} border border-zinc-200`}>
           {/* Header */}
           <div className="flex items-start justify-between border-b border-zinc-200 px-6 py-5 bg-zinc-50">
             <div>

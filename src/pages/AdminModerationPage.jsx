@@ -131,56 +131,56 @@ export function AdminModerationPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-navy-card text-white rounded-3xl shadow-premium border border-navy-border">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-white text-zinc-900 rounded-3xl border border-zinc-200">
         <div>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-gold" />
-            <h1 className="text-xl sm:text-2xl font-black font-display text-white">
+            <ShieldCheck className="w-6 h-6 text-black" />
+            <h1 className="text-xl sm:text-2xl font-black font-display text-black">
               Trust, Safety & Moderation Console
             </h1>
           </div>
-          <p className="text-xs text-estate-400 mt-1">
+          <p className="text-xs text-zinc-500 mt-1">
             Audit reported community claims, filter unverified security allegations, and enforce anti-defamation & privacy policies.
           </p>
         </div>
 
         <div className="flex items-center gap-3 text-xs">
-          <span className="bg-navy-surface px-3.5 py-2 rounded-xl border border-gold/40 font-bold text-gold">
+          <span className="bg-zinc-100 px-3.5 py-2 rounded-xl border border-zinc-200 font-bold text-black">
             Pending Queue: {reports.length} Items
           </span>
         </div>
       </div>
 
       {notification && (
-        <div className="p-4 bg-navy-surface border border-emerald-500/40 text-emerald-300 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-4 bg-zinc-50 border border-zinc-200 text-black rounded-2xl flex items-center gap-2 text-xs font-semibold animate-fadeIn">
+          <CheckCircle2 className="w-4 h-4 text-black shrink-0" />
           <span>{notification}</span>
         </div>
       )}
 
       {/* Platform Inventory & Community Data Mode Controller */}
-      <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-6 space-y-4">
+      <div className="bg-white rounded-3xl border border-zinc-200 p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse"></span>
-              <h2 className="text-base sm:text-lg font-black text-white font-display">
+              <span className="w-2.5 h-2.5 rounded-full bg-black"></span>
+              <h2 className="text-base sm:text-lg font-black text-black font-display">
                 Platform Inventory & Community Data Mode
               </h2>
             </div>
-            <p className="text-xs text-estate-300 mt-1">
+            <p className="text-xs text-zinc-500 mt-1">
               Toggle between Curated Showcase mode (for client presentations and lead generation) and Clean Slate mode (for 100% user-only production).
             </p>
           </div>
 
-          <div className="flex items-center gap-2 p-1.5 bg-navy-surface rounded-2xl border border-navy-border">
+          <div className="flex items-center gap-2 p-1.5 bg-zinc-100 rounded-2xl border border-zinc-200">
             <button
               type="button"
               onClick={() => toggleDataMode('showcase')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
                 dataMode === 'showcase'
-                  ? 'bg-gold text-navy-deep font-black shadow-gold'
-                  : 'text-estate-300 hover:text-white'
+                  ? 'bg-black text-white font-bold'
+                  : 'text-zinc-600 hover:text-black'
               }`}
             >
               Showcase Active Mode
@@ -188,10 +188,10 @@ export function AdminModerationPage() {
             <button
               type="button"
               onClick={() => toggleDataMode('clean')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
                 dataMode === 'clean'
-                  ? 'bg-crimson text-white font-black shadow-md'
-                  : 'text-estate-300 hover:text-white'
+                  ? 'bg-black text-white font-bold'
+                  : 'text-zinc-600 hover:text-black'
               }`}
             >
               Clean Slate Mode (Pure User)
@@ -199,8 +199,8 @@ export function AdminModerationPage() {
           </div>
         </div>
 
-        <div className="p-3.5 bg-navy-surface/80 rounded-2xl border border-gold/30 text-xs text-estate-300 flex items-start gap-2.5">
-          <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+        <div className="p-3.5 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs text-zinc-700 flex items-start gap-2.5">
+          <CheckCircle2 className="w-4 h-4 text-black shrink-0 mt-0.5" />
           <span>
             {dataMode === 'showcase' ? (
               <>
@@ -217,45 +217,45 @@ export function AdminModerationPage() {
 
       {/* Safety Policy Checklist */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
-          <span className="font-bold text-white flex items-center gap-1.5">
-            <ShieldAlert className="w-4 h-4 text-rose-400" />
+        <div className="p-4 bg-white rounded-3xl border border-zinc-200 text-xs space-y-1">
+          <span className="font-bold text-black flex items-center gap-1.5">
+            <ShieldAlert className="w-4 h-4 text-black" />
             Anti-Doxxing & Privacy Rule
           </span>
-          <p className="text-estate-400 text-[11px] leading-relaxed">
+          <p className="text-zinc-500 text-[11px] leading-relaxed">
             Immediately redact or remove posts containing private house numbers, names of private occupants, or private phone numbers.
           </p>
         </div>
 
-        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
-          <span className="font-bold text-white flex items-center gap-1.5">
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
+        <div className="p-4 bg-white rounded-3xl border border-zinc-200 text-xs space-y-1">
+          <span className="font-bold text-black flex items-center gap-1.5">
+            <AlertTriangle className="w-4 h-4 text-black" />
             Security Allegation Labeling
           </span>
-          <p className="text-estate-400 text-[11px] leading-relaxed">
+          <p className="text-zinc-500 text-[11px] leading-relaxed">
             Never label an entire neighbourhood or property as dangerous based on single unverified posts. Apply the cautionary badge.
           </p>
         </div>
 
-        <div className="p-4 bg-navy-card rounded-3xl border border-navy-border shadow-premium text-xs space-y-1">
-          <span className="font-bold text-white flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-gold" />
+        <div className="p-4 bg-white rounded-3xl border border-zinc-200 text-xs space-y-1">
+          <span className="font-bold text-black flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-black" />
             Zero Advance Inspection Fees
           </span>
-          <p className="text-estate-400 text-[11px] leading-relaxed">
+          <p className="text-zinc-500 text-[11px] leading-relaxed">
             Any agent or landlord charging money before physical tours is immediately suspended pending license review.
           </p>
         </div>
       </div>
 
       {/* Reports Queue */}
-      <div className="bg-navy-card rounded-3xl border border-navy-border shadow-premium overflow-hidden">
-        <div className="p-5 border-b border-navy-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white rounded-3xl border border-zinc-200 overflow-hidden">
+        <div className="p-5 border-b border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 className="text-base font-bold text-white font-display">
+            <h2 className="text-base font-bold text-black font-display">
               Pending Moderation Queue ({reports.length})
             </h2>
-            <span className="text-xs text-estate-400">Response SLA: &lt; 4 Hours</span>
+            <span className="text-xs text-zinc-500">Response SLA: &lt; 4 Hours</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -263,9 +263,9 @@ export function AdminModerationPage() {
               <button
                 type="button"
                 onClick={() => setIsConfirmClearOpen(true)}
-                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-slate-300 hover:text-white rounded-xl border border-navy-border transition flex items-center gap-1.5 cursor-pointer"
+                className="px-3 py-1.5 bg-white hover:bg-zinc-100 text-xs font-semibold text-black rounded-xl border border-zinc-300 transition flex items-center gap-1.5 cursor-pointer"
               >
-                <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+                <Trash2 className="w-3.5 h-3.5 text-black" />
                 <span>Clear All Reports</span>
               </button>
             )}
@@ -273,9 +273,9 @@ export function AdminModerationPage() {
               <button
                 type="button"
                 onClick={handleResetDemoReports}
-                className="px-3 py-1.5 bg-navy-surface hover:bg-navy-border text-xs font-semibold text-gold rounded-xl border border-gold/30 transition flex items-center gap-1.5"
+                className="px-3 py-1.5 bg-white hover:bg-zinc-100 text-xs font-semibold text-black rounded-xl border border-zinc-300 transition flex items-center gap-1.5 cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5 text-black" />
                 <span>Restore Sample Queue</span>
               </button>
             )}
@@ -284,45 +284,39 @@ export function AdminModerationPage() {
 
         {loading ? (
           <div className="py-20 text-center space-y-3">
-            <Loader2 className="w-8 h-8 text-gold animate-spin mx-auto" />
-            <p className="text-xs text-slate-200 font-semibold">Loading flagged reports queue...</p>
+            <Loader2 className="w-8 h-8 text-black animate-spin mx-auto" />
+            <p className="text-xs text-zinc-700 font-semibold">Loading flagged reports queue...</p>
           </div>
         ) : reports.length === 0 ? (
           <div className="py-16 text-center space-y-2">
-            <CheckCircle2 className="w-12 h-12 text-gold mx-auto" />
-            <p className="text-sm font-bold text-white">Moderation Queue is Clean</p>
-            <p className="text-xs text-slate-300">All community reports have been audited and acted upon.</p>
+            <CheckCircle2 className="w-12 h-12 text-black mx-auto" />
+            <p className="text-sm font-bold text-black">Moderation Queue is Clean</p>
+            <p className="text-xs text-zinc-500">All community reports have been audited and acted upon.</p>
           </div>
         ) : (
-          <div className="divide-y divide-navy-border">
+          <div className="divide-y divide-zinc-200">
             {reports.map((report, index) => {
               const currentId = report?.id || report?.targetId || report?.target_id || `idx-${index}`;
               const uniqueKey = `${currentId}-${index}`;
               return (
-                <div key={uniqueKey} className="p-5 sm:p-6 hover:bg-navy-surface/50 transition space-y-3">
+                <div key={uniqueKey} className="p-5 sm:p-6 hover:bg-zinc-50 transition space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                        report.severity === 'Critical'
-                          ? 'bg-rose-950/80 text-rose-300 border border-rose-500/30'
-                          : report.severity === 'High'
-                          ? 'bg-amber-950/80 text-amber-300 border border-amber-500/30'
-                          : 'bg-navy-surface text-slate-200 border border-navy-border'
-                      }`}>
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-zinc-100 text-black border border-zinc-300">
                         {report.severity || 'Medium'} Priority
                       </span>
-                      <span className="text-xs text-slate-300">• {report.targetType || 'Community Post'}</span>
-                      <span className="text-xs text-slate-300">• {report.time || 'Recent'}</span>
+                      <span className="text-xs text-zinc-600">• {report.targetType || 'Community Post'}</span>
+                      <span className="text-xs text-zinc-500">• {report.time || 'Recent'}</span>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-slate-300">
-                        Reported by: <strong className="text-gold">{report.reportedBy || 'Resident'}</strong>
+                      <span className="text-xs text-zinc-600">
+                        Reported by: <strong className="text-black font-bold">{report.reportedBy || 'Resident'}</strong>
                       </span>
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Dismiss', index)}
-                        className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-navy-border transition cursor-pointer"
+                        className="p-1 rounded-lg text-zinc-400 hover:text-black hover:bg-zinc-100 transition cursor-pointer"
                         title="Quick Dismiss"
                       >
                         <X className="w-4 h-4" />
@@ -331,32 +325,32 @@ export function AdminModerationPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-white font-display">{report.title}</h3>
-                    <p className="text-xs text-slate-300 mt-0.5">
-                      Violation Category: <strong className="text-gold">{report.reason}</strong>
+                    <h3 className="text-sm sm:text-base font-bold text-black font-display">{report.title}</h3>
+                    <p className="text-xs text-zinc-600 mt-0.5">
+                      Violation Category: <strong className="text-black font-bold">{report.reason}</strong>
                     </p>
                   </div>
 
-                  <div className="p-3 bg-navy-surface rounded-2xl border border-navy-border text-xs text-slate-200 italic">
+                  <div className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs text-zinc-700 italic">
                     "{report.snippet || report.details}"
                   </div>
 
                   {/* Moderation Actions */}
                   <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-                    <span className="text-slate-400 text-[11px]">Report ID: {currentId}</span>
+                    <span className="text-zinc-500 text-[11px]">Report ID: {currentId}</span>
                     
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Dismiss', index)}
-                        className="px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold rounded-xl border border-zinc-300 transition cursor-pointer active:scale-95"
+                        className="px-3.5 py-2 bg-white hover:bg-zinc-100 text-black font-semibold rounded-xl border border-zinc-300 transition cursor-pointer active:scale-95"
                       >
                         Dismiss (No Violation)
                       </button>
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Redact', index)}
-                        className="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+                        className="px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-black font-semibold rounded-xl border border-zinc-300 transition flex items-center gap-1.5 cursor-pointer active:scale-95"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
                         <span>Redact Personal Details</span>
@@ -364,7 +358,7 @@ export function AdminModerationPage() {
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Takedown', index)}
-                        className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+                        className="px-3.5 py-2 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer active:scale-95"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         <span>Take Down Post</span>

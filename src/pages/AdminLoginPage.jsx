@@ -71,103 +71,103 @@ export function AdminLoginPage() {
         {/* Brand Header */}
         <div className="text-center space-y-2">
           <div className="flex justify-center">
-            <BrandLogo size="lg" variant="light" showTagline={false} />
+            <BrandLogo size="lg" variant="dark" showTagline={false} />
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-surface text-gold text-xs font-bold border border-gold/40">
-            <ShieldCheck className="w-4 h-4 text-gold" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-black text-xs font-bold border border-zinc-200">
+            <ShieldCheck className="w-4 h-4 text-black" />
             <span>Executive Admin Gateway</span>
           </div>
         </div>
 
         {/* Admin Card */}
-        <div className="bg-navy-card rounded-3xl p-6 sm:p-8 border border-gold/40 shadow-2xl text-white space-y-5">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200 text-zinc-900 space-y-5">
           
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-black text-white font-display">
+            <h2 className="text-xl sm:text-2xl font-black text-black font-display">
               System Administrator Sign In
             </h2>
-            <p className="text-xs text-estate-300 leading-relaxed">
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Restricted portal for the platform owner to manage inventory, moderation desk, and Clean Slate toggle.
             </p>
           </div>
 
           {/* Feedback error */}
           {error && (
-            <div className="p-3 bg-rose-950/50 border border-rose-500/40 rounded-xl flex items-center gap-2 text-xs text-rose-300 animate-fadeIn">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+            <div className="p-3 bg-zinc-100 border border-zinc-300 rounded-xl flex items-center gap-2 text-xs text-black animate-fadeIn">
+              <AlertCircle className="w-4 h-4 shrink-0 text-black" />
               <span>{error}</span>
             </div>
           )}
 
           <form onSubmit={handleAdminLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-white mb-1">
+              <label className="block text-xs font-bold text-black mb-1">
                 Administrator Email Address
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@vettedhomes.ng"
-                  className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
+                  className="w-full pl-9 pr-3 py-2.5 border border-zinc-300 rounded-xl text-xs bg-white text-black placeholder-zinc-400 focus:outline-black"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-white mb-1">
+              <label className="block text-xs font-bold text-black mb-1">
                 Master Administrator Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-9 pr-3 py-2.5 border border-navy-border rounded-xl text-xs bg-navy-surface text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none"
+                  className="w-full pl-9 pr-3 py-2.5 border border-zinc-300 rounded-xl text-xs bg-white text-black placeholder-zinc-400 focus:outline-black"
                 />
               </div>
             </div>
 
             {/* Quick Helper Credentials */}
-            <div className="p-3 bg-navy-surface/80 rounded-2xl border border-navy-border text-xs space-y-1.5">
+            <div className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs space-y-1.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-gold uppercase tracking-wider">Default Master Credentials</span>
+                <span className="text-[11px] font-bold text-black uppercase tracking-wider">Default Master Credentials</span>
                 <button
                   type="button"
                   onClick={handleFillCredentials}
-                  className="text-[10px] text-gold hover:underline font-bold"
+                  className="text-[10px] text-black hover:underline font-bold cursor-pointer"
                 >
                   Auto-Fill
                 </button>
               </div>
-              <div className="text-[11px] font-mono text-estate-300 space-y-0.5">
-                <div>Email: <strong className="text-white">admin@vettedhomes.ng</strong></div>
-                <div>Pass: <strong className="text-white">AdminMaster2026!</strong></div>
+              <div className="text-[11px] font-mono text-zinc-600 space-y-0.5">
+                <div>Email: <strong className="text-black">admin@vettedhomes.ng</strong></div>
+                <div>Pass: <strong className="text-black">AdminMaster2026!</strong></div>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep rounded-xl text-xs sm:text-sm font-black shadow-gold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 tracking-wide"
+              className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 tracking-wide cursor-pointer"
             >
-              <KeyRound className="w-4 h-4 text-navy-deep" />
+              <KeyRound className="w-4 h-4 text-white" />
               <span>{loading ? 'Authenticating Admin...' : 'Enter Admin Console'}</span>
-              {!loading && <ArrowRight className="w-4 h-4 text-navy-deep" />}
+              {!loading && <ArrowRight className="w-4 h-4 text-white" />}
             </button>
           </form>
 
           {/* Footer Back Link */}
-          <div className="pt-3 border-t border-navy-border text-center">
+          <div className="pt-3 border-t border-zinc-200 text-center">
             <Link
               to="/login"
-              className="inline-flex items-center gap-1.5 text-xs text-estate-400 hover:text-gold transition font-medium"
+              className="inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-black transition font-medium"
             >
               <Home className="w-3.5 h-3.5" />
               <span>Go to Member Sign In / Sign Up</span>

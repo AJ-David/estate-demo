@@ -46,7 +46,7 @@ export function BrandLogo({
 
   const markElement = (
     <div 
-      className={`${currentSize.mark} flex items-center justify-center shrink-0 shadow-xs transition-transform duration-300 group-hover:scale-105 bg-black text-white rounded-xl`}
+      className={`${currentSize.mark} flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105 bg-black text-white rounded-xl`}
     >
       <svg 
         width={currentSize.iconSize} 

@@ -168,7 +168,7 @@ export function Footer() {
         </div>
 
         {/* Safety & Compliance Banner */}
-        <div className="rounded-2xl bg-white p-4 sm:p-5 border border-zinc-200 text-xs text-zinc-600 mb-8 leading-relaxed shadow-xs">
+        <div className="rounded-2xl bg-white p-4 sm:p-5 border border-zinc-200 text-xs text-zinc-600 mb-8 leading-relaxed">
           <span className="font-bold text-zinc-900 block mb-1">
             Institutional Transparency & Resident Data Protection Statement:
           </span>

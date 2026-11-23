@@ -32,7 +32,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-xs transition-all">
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-zinc-200 transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
@@ -46,7 +46,7 @@ export function Navbar() {
                   to="/"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/') 
-                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300' 
                       : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
@@ -57,7 +57,7 @@ export function Navbar() {
                   to="/properties"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/properties') 
-                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300' 
                       : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
@@ -68,7 +68,7 @@ export function Navbar() {
                   to="/community"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/community') 
-                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300' 
                       : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
@@ -105,7 +105,7 @@ export function Navbar() {
                   {/* List Property CTA */}
                   <Link
                     to="/dashboard/landlord"
-                    className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl shadow-xs transition"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl transition"
                   >
                     <PlusCircle className="w-4 h-4 text-white" />
                     <span>Post Listing</span>
@@ -139,7 +139,7 @@ export function Navbar() {
                   {/* Dropdown Menu */}
                   {userDropdownOpen && (
                     <div 
-                      className="absolute right-0 mt-2 w-64 rounded-2xl bg-white shadow-xl border border-zinc-200 py-2 z-50 text-zinc-900"
+                      className="absolute right-0 mt-2 w-64 rounded-2xl bg-white border border-zinc-300 py-2 z-50 text-zinc-900"
                       onMouseLeave={() => setUserDropdownOpen(false)}
                     >
                       <div className="px-4 py-3 border-b border-zinc-100 bg-zinc-50/80">
@@ -239,7 +239,7 @@ export function Navbar() {
                   </Link>
                   <Link
                     to="/signup"
-                    className="px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl shadow-xs transition"
+                    className="px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl transition"
                   >
                     Sign Up
                   </Link>
@@ -357,7 +357,7 @@ export function Navbar() {
                     <Link
                       to="/signup"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-center py-2.5 rounded-xl bg-black text-sm font-bold text-white shadow-xs"
+                      className="text-center py-2.5 rounded-xl bg-black text-sm font-bold text-white"
                     >
                       Sign Up
                     </Link>

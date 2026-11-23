@@ -36,7 +36,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
 
   return (
     <div 
-      className={`group bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-400 hover:shadow-lg transition-all duration-300 flex text-zinc-900 ${
+      className={`group bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-black transition-colors duration-200 flex text-zinc-900 ${
         isListLayout ? 'flex-col md:flex-row' : 'flex-col'
       }`}
     >
@@ -52,24 +52,24 @@ export function PropertyCard({ property, layout = 'grid' }) {
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center z-10 max-w-[75%]">
           {getTransactionBadge()}
-          <span className="bg-white/90 backdrop-blur-xs text-zinc-900 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-200 shadow-xs">
+          <span className="bg-white/90 backdrop-blur-xs text-black text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-200">
             {property.category}
           </span>
           {property.marketStatus === 'recently_leased' && (
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-xs flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+            <span className="bg-zinc-100 text-black text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-300 flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-black" />
               <span>{property.marketStatusLabel || 'Recently Leased'}</span>
             </span>
           )}
           {property.marketStatus === 'recently_sold' && (
-            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-xs flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+            <span className="bg-zinc-100 text-black text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-300 flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-black" />
               <span>{property.marketStatusLabel || 'Recently Sold'}</span>
             </span>
           )}
           {property.marketStatus === 'under_escrow' && (
-            <span className="bg-amber-50 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-200 shadow-xs flex items-center gap-1">
-              <Clock className="w-3 h-3 text-amber-700" />
+            <span className="bg-zinc-100 text-black text-[10px] font-bold px-2 py-0.5 rounded-full border border-zinc-300 flex items-center gap-1">
+              <Clock className="w-3 h-3 text-black" />
               <span>Under Escrow</span>
             </span>
           )}
@@ -83,10 +83,10 @@ export function PropertyCard({ property, layout = 'grid' }) {
             e.stopPropagation();
             toggleSave(property.id);
           }}
-          className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 z-10 cursor-pointer ${
+          className={`absolute top-3 right-3 p-2 rounded-full transition-colors duration-200 z-10 cursor-pointer ${
             saved 
-              ? 'bg-rose-600 text-white shadow-md' 
-              : 'bg-white/90 hover:bg-white text-zinc-600 hover:text-rose-600 backdrop-blur-xs border border-zinc-200 shadow-xs'
+              ? 'bg-black text-white' 
+              : 'bg-white/90 hover:bg-white text-zinc-600 hover:text-black backdrop-blur-xs border border-zinc-200'
           }`}
           title={saved ? 'Remove from saved' : 'Save property'}
           aria-label="Save property"
@@ -97,7 +97,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
         {/* Verification Strip */}
         <div className="absolute bottom-3 left-3 z-10">
           {property.verificationStatus && (
-            <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-xs text-zinc-900 text-[11px] font-bold px-2.5 py-1 rounded-full border border-zinc-200 shadow-xs">
+            <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-xs text-black text-[11px] font-bold px-2.5 py-1 rounded-full border border-zinc-200">
               <ShieldCheck className="w-3.5 h-3.5 text-black" />
               <span>{property.verificationStatus}</span>
             </div>

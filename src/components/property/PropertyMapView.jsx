@@ -43,23 +43,23 @@ const createPriceIcon = (price, isSelected = false) => {
     className: 'custom-leaflet-marker',
     html: `
       <div style="
-        background-color: ${isSelected ? '#C5A059' : '#0A0C10'};
-        color: ${isSelected ? '#050608' : '#FFFFFF'};
+        background-color: ${isSelected ? '#000000' : '#FFFFFF'};
+        color: ${isSelected ? '#FFFFFF' : '#000000'};
         padding: 5px 11px;
         border-radius: 9999px;
-        font-weight: 900;
+        font-weight: 800;
         font-size: 11px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.5), ${isSelected ? '0 0 12px rgba(197, 160, 89, 0.6)' : 'none'};
-        border: 2px solid ${isSelected ? '#FFFFFF' : '#C5A059'};
+        box-shadow: none;
+        border: 1px solid #000000;
         white-space: nowrap;
-        transform: translate(-50%, -50%) ${isSelected ? 'scale(1.15)' : 'scale(1)'};
+        transform: translate(-50%, -50%) ${isSelected ? 'scale(1.1)' : 'scale(1)'};
         display: flex;
         align-items: center;
         gap: 5px;
         cursor: pointer;
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       ">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:${isSelected ? '#050608' : '#DFC37F'};"></span>
+        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:${isSelected ? '#FFFFFF' : '#000000'};"></span>
         <span>${formatted}</span>
       </div>
     `,
@@ -262,9 +262,9 @@ export function PropertyMapView({
                 center={coords}
                 radius={260}
                 pathOptions={{
-                  color: isSelected ? '#C5A059' : '#C5A059',
-                  fillColor: isSelected ? '#DFC37F' : '#0A0C10',
-                  fillOpacity: isSelected ? 0.25 : 0.08,
+                  color: isSelected ? '#000000' : '#71717A',
+                  fillColor: isSelected ? '#000000' : '#A1A1AA',
+                  fillOpacity: isSelected ? 0.15 : 0.05,
                   weight: isSelected ? 2 : 1,
                   dashArray: isSelected ? 'none' : '4, 4'
                 }}
@@ -287,17 +287,17 @@ export function PropertyMapView({
                       alt={property.title}
                       className="w-full h-28 object-cover rounded-xl mb-2"
                     />
-                    <div className="flex items-center gap-1 text-[10px] text-gold font-bold mb-1">
+                    <div className="flex items-center gap-1 text-[10px] text-zinc-900 font-bold mb-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>{property.verificationStatus}</span>
                     </div>
-                    <h4 className="text-xs font-bold text-white line-clamp-1 mb-1 font-display">
+                    <h4 className="text-xs font-bold text-black line-clamp-1 mb-1 font-display">
                       {property.title}
                     </h4>
-                    <p className="text-sm font-black text-gold mb-2">
+                    <p className="text-sm font-black text-black mb-2">
                       {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
                     </p>
-                    <div className="flex items-center gap-3 text-xs text-estate-400 mb-3">
+                    <div className="flex items-center gap-3 text-xs text-zinc-600 mb-3">
                       <span className="flex items-center gap-1">
                         <Bed className="w-3.5 h-3.5" /> {property.bedrooms} Beds
                       </span>
@@ -307,7 +307,7 @@ export function PropertyMapView({
                     </div>
                     <Link
                       to={`/properties/${property.id}`}
-                      className="block text-center w-full py-2 px-3 bg-gold hover:bg-gold-light text-navy-deep text-xs font-bold rounded-xl transition shadow-gold"
+                      className="block text-center w-full py-2 px-3 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition cursor-pointer"
                     >
                       View Details & Security Intel
                     </Link>
@@ -323,9 +323,9 @@ export function PropertyMapView({
       <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         
         {/* Quick jump pills */}
-        <div className="flex items-center gap-1.5 p-1.5 bg-navy-card/95 backdrop-blur-md rounded-2xl border border-navy-border shadow-xl overflow-x-auto max-w-full pointer-events-auto">
-          <div className="flex items-center gap-1 px-2 text-xs font-bold text-gold border-r border-navy-border mr-1">
-            <Compass className="w-3.5 h-3.5 text-gold" />
+        <div className="flex items-center gap-1.5 p-1.5 bg-white/95 backdrop-blur-md rounded-2xl border border-zinc-200 overflow-x-auto max-w-full pointer-events-auto">
+          <div className="flex items-center gap-1 px-2 text-xs font-bold text-black border-r border-zinc-200 mr-1">
+            <Compass className="w-3.5 h-3.5 text-black" />
             <span className="hidden sm:inline">District:</span>
           </div>
           {NEIGHBOURHOOD_CENTERS.map(item => (
@@ -333,10 +333,10 @@ export function PropertyMapView({
               key={item.id}
               type="button"
               onClick={() => handleNeighbourhoodChange(item)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap cursor-pointer ${
                 selectedNeighbourhood === item.id
-                  ? 'bg-gradient-to-r from-gold to-gold-light text-navy-deep font-black shadow-gold'
-                  : 'text-estate-300 hover:text-gold hover:bg-navy-surface'
+                  ? 'bg-black text-white font-bold'
+                  : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
               }`}
             >
               {item.name}
@@ -345,25 +345,25 @@ export function PropertyMapView({
         </div>
 
         {/* Privacy rule badge */}
-        <div className="hidden lg:flex items-center gap-2 bg-navy-card/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-navy-border text-xs shadow-md pointer-events-auto text-estate-200">
-          <EyeOff className="w-3.5 h-3.5 text-gold shrink-0" />
+        <div className="hidden lg:flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-zinc-200 text-xs pointer-events-auto text-zinc-700">
+          <EyeOff className="w-3.5 h-3.5 text-black shrink-0" />
           <span className="text-[11px]">
-            <strong className="text-gold">Privacy Protected:</strong> Coordinates released upon confirmed booking.
+            <strong className="text-black">Privacy Protected:</strong> Coordinates released upon confirmed booking.
           </span>
         </div>
       </div>
 
       {/* OVERLAY 2: Bottom-Left Facility Filter Control */}
-      <div className="absolute bottom-4 left-4 z-10 bg-navy-card/95 backdrop-blur-md p-2.5 rounded-2xl border border-navy-border shadow-xl pointer-events-auto max-w-xs text-xs space-y-2 text-estate-200">
-        <div className="flex items-center justify-between border-b border-navy-border pb-1.5">
-          <span className="font-bold text-white flex items-center gap-1 text-[11px] uppercase tracking-wider">
-            <Layers className="w-3.5 h-3.5 text-gold" />
+      <div className="absolute bottom-4 left-4 z-10 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-zinc-200 pointer-events-auto max-w-xs text-xs space-y-2 text-zinc-700">
+        <div className="flex items-center justify-between border-b border-zinc-200 pb-1.5">
+          <span className="font-bold text-black flex items-center gap-1 text-[11px] uppercase tracking-wider">
+            <Layers className="w-3.5 h-3.5 text-black" />
             Nearby Facilities
           </span>
           <button
             type="button"
             onClick={() => setShowFacilitiesLayer(!showFacilitiesLayer)}
-            className="text-[10px] font-bold text-gold hover:underline"
+            className="text-[10px] font-bold text-black hover:underline cursor-pointer"
           >
             {showFacilitiesLayer ? 'Hide All' : 'Show All'}
           </button>
@@ -374,8 +374,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Healthcare')}
-              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
-                visibleFacilities.Healthcare ? 'bg-rose-950/80 text-rose-300 border-rose-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border cursor-pointer ${
+                visibleFacilities.Healthcare ? 'bg-black text-white border-black' : 'text-zinc-600 bg-zinc-100 border-zinc-200 hover:text-black'
               }`}
             >
               <span>🏥</span>
@@ -384,8 +384,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Education')}
-              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
-                visibleFacilities.Education ? 'bg-sky-950/80 text-sky-300 border-sky-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border cursor-pointer ${
+                visibleFacilities.Education ? 'bg-black text-white border-black' : 'text-zinc-600 bg-zinc-100 border-zinc-200 hover:text-black'
               }`}
             >
               <span>🏫</span>
@@ -394,8 +394,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Shopping')}
-              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
-                visibleFacilities.Shopping ? 'bg-amber-950/80 text-amber-300 border-amber-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border cursor-pointer ${
+                visibleFacilities.Shopping ? 'bg-black text-white border-black' : 'text-zinc-600 bg-zinc-100 border-zinc-200 hover:text-black'
               }`}
             >
               <span>🛒</span>
@@ -404,8 +404,8 @@ export function PropertyMapView({
             <button
               type="button"
               onClick={() => toggleFacilityType('Transit')}
-              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border ${
-                visibleFacilities.Transit ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/50 shadow-xs' : 'text-slate-300 bg-navy-surface border-navy-border hover:text-white'
+              className={`px-2.5 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition text-left border cursor-pointer ${
+                visibleFacilities.Transit ? 'bg-black text-white border-black' : 'text-zinc-600 bg-zinc-100 border-zinc-200 hover:text-black'
               }`}
             >
               <span>🚌</span>
@@ -417,15 +417,15 @@ export function PropertyMapView({
 
       {/* OVERLAY 3: Floating Active Property Preview Card */}
       {activeProperty && (
-        <div className="absolute bottom-4 right-4 z-10 w-80 bg-navy-card/95 backdrop-blur-md rounded-3xl p-4 border border-navy-border shadow-2xl animate-fadeIn pointer-events-auto text-white">
+        <div className="absolute bottom-4 right-4 z-10 w-80 bg-white/95 backdrop-blur-md rounded-3xl p-4 border border-zinc-200 animate-fadeIn pointer-events-auto text-zinc-900">
           <div className="flex items-center justify-between mb-2">
-            <span className="bg-navy-surface text-gold border border-gold/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+            <span className="bg-zinc-100 text-black border border-zinc-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
               {activeProperty.category}
             </span>
             <button
               type="button"
               onClick={() => setActiveProperty(null)}
-              className="p-1 hover:bg-navy-surface rounded-full text-estate-400 hover:text-white transition"
+              className="p-1 hover:bg-zinc-100 rounded-full text-zinc-500 hover:text-black transition cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -437,31 +437,31 @@ export function PropertyMapView({
               alt={activeProperty.title}
               className="w-full h-32 object-cover rounded-2xl"
             />
-            <div className="absolute bottom-2 left-2 bg-navy-deep/90 text-gold-light text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm border border-gold/20">
+            <div className="absolute bottom-2 left-2 bg-black/80 text-white text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-sm">
               {activeProperty.furnishingStatus}
             </div>
           </div>
 
-          <p className="text-base font-black text-white font-display">
+          <p className="text-base font-black text-black font-display">
             {formatPriceDisplay(activeProperty.price, activeProperty.pricePeriod, activeProperty.transactionType)}
           </p>
-          <h4 className="text-xs font-bold text-estate-100 line-clamp-1 mt-0.5">
+          <h4 className="text-xs font-bold text-zinc-900 line-clamp-1 mt-0.5">
             {activeProperty.title}
           </h4>
-          <p className="text-[11px] text-estate-400 mb-3">
+          <p className="text-[11px] text-zinc-500 mb-3">
             {activeProperty.location.neighbourhoodName}, {activeProperty.location.city}
           </p>
 
-          <div className="flex items-center justify-between pt-2 border-t border-navy-border">
+          <div className="flex items-center justify-between pt-2 border-t border-zinc-200">
             <Link
               to={`/neighbourhoods/${activeProperty.location.neighbourhoodId}`}
-              className="text-xs text-gold font-semibold hover:underline"
+              className="text-xs text-black font-semibold hover:underline"
             >
               District Intel
             </Link>
             <Link
               to={`/properties/${activeProperty.id}`}
-              className="inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-gold to-gold-light text-navy-deep text-xs font-black rounded-xl hover:shadow-gold transition shadow-xs"
+              className="inline-flex items-center gap-1 px-3 py-1.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition cursor-pointer"
             >
               <span>Explore Home</span>
               <ArrowRight className="w-3 h-3" />

@@ -642,15 +642,15 @@ export function LandlordAgentDashboardPage() {
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={performanceData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#232938" />
-                  <XAxis dataKey="day" stroke="#94A3B8" fontSize={12} tickLine={false} />
-                  <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E4E4E7" />
+                  <XAxis dataKey="day" stroke="#71717A" fontSize={12} tickLine={false} />
+                  <YAxis stroke="#71717A" fontSize={12} tickLine={false} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#12151F', borderRadius: '12px', border: '1px solid #D4AF37', color: '#fff', fontSize: '12px', boxShadow: '0 0 15px rgba(212, 175, 55, 0.25)' }}
-                    itemStyle={{ color: '#DFC37F' }}
+                    contentStyle={{ backgroundColor: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E4E7', color: '#000000', fontSize: '12px', boxShadow: 'none' }}
+                    itemStyle={{ color: '#000000' }}
                   />
-                  <Bar dataKey="views" name="Listing Views" fill="#D4AF37" radius={[6, 6, 0, 0]} />
-                  <Bar dataKey="enquiries" name="Enquiries" fill="#10B981" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="views" name="Listing Views" fill="#000000" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="enquiries" name="Enquiries" fill="#71717A" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

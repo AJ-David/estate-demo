@@ -2,34 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================================
+   PURE MINIMALIST FLAT BLACK & WHITE DESIGN SYSTEM
+   Zero drop shadows, zero gold glows, zero colored drop-shadows.
+   Clean flat architectural surfaces with crisp hairline borders.
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #FFFFFF;
-    color: #18181B;
+    color: #000000;
   }
   body {
     background-color: #FFFFFF !important;
-    color: #18181B !important;
+    color: #000000 !important;
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     letter-spacing: -0.02em;
-    color: #09090B !important;
+    color: #000000 !important;
   }
   p {
-    color: #52525B;
+    color: #3F3F46;
   }
 }
 
-/* =========================================================================
-   CLEAN MODERN ARCHITECTURAL LIGHT PALETTE (WHITE BACKGROUND & BLACK TYPOGRAPHY)
-   Zero artificial AI glow, crisp contrast, human-designed luxury aesthetic.
-   ========================================================================= */
-
-/* Primary Headings & Dark Elements -> Crisp Pure Black */
+/* Primary Headings & Dark Elements -> Pure Black */
 .text-navy,
 .text-estate-950,
 .text-estate-900,
@@ -43,10 +55,10 @@
 .text-zinc-900,
 .text-zinc-800,
 .text-black {
-  color: #09090B !important;
+  color: #000000 !important;
 }
 
-/* High-Emphasis Text, Subheadings & Strong Labels -> Dark Charcoal Slate */
+/* Subheadings & Emphasized Labels -> Dark Zinc */
 .text-estate-700,
 .text-estate-600,
 .text-gray-700,
@@ -57,10 +69,10 @@
 .text-neutral-600,
 .text-zinc-700,
 .text-zinc-600 {
-  color: #27272A !important;
+  color: #18181B !important;
 }
 
-/* Body Text, Subtitles, Descriptions, Metadata & Paragraphs -> Neutral Slate Body */
+/* Body Text, Subtitles, Descriptions, Metadata -> Readable Charcoal */
 .text-estate-500,
 .text-estate-400,
 .text-estate-300,
@@ -70,75 +82,50 @@
 .text-gray-500,
 .text-gray-400,
 .text-gray-300,
-.text-gray-200,
-.text-gray-100,
-.text-gray-50,
 .text-slate-500,
 .text-slate-400,
 .text-slate-300,
-.text-slate-200,
-.text-slate-100,
-.text-slate-50,
 .text-neutral-500,
 .text-neutral-400,
 .text-neutral-300,
-.text-neutral-200,
-.text-neutral-100,
-.text-neutral-50,
 .text-zinc-500,
 .text-zinc-400 {
   color: #52525B !important;
 }
 
-/* Replaced Gold Accent Text -> Crisp Charcoal / Black */
+/* Neutralize Gold & Amber to Crisp Black */
 .text-gold,
 .text-gold-light,
-.text-gold-dark {
-  color: #09090B !important;
-}
-
-/* Colored Accents High Contrast on Clean White */
-.text-emerald-900,
-.text-emerald-800,
-.text-emerald-700,
-.text-emerald-600 {
-  color: #047857 !important;
-}
-.text-emerald-500,
-.text-emerald-400,
-.text-emerald-300 {
-  color: #059669 !important;
-}
-
-.text-amber-900,
-.text-amber-800,
-.text-amber-700,
-.text-amber-600 {
-  color: #92400E !important;
-}
+.text-gold-dark,
 .text-amber-500,
-.text-amber-400 {
-  color: #B45309 !important;
+.text-amber-600,
+.text-amber-700,
+.text-amber-800,
+.text-amber-900 {
+  color: #000000 !important;
 }
 
-.text-rose-900,
-.text-rose-800,
-.text-rose-700,
-.text-red-900,
-.text-red-800,
-.text-red-700,
-.text-rose-600,
-.text-rose-500,
-.text-rose-400,
-.text-rose-300 {
-  color: #DC2626 !important;
+.fill-gold,
+.fill-amber-500,
+.fill-amber-400 {
+  fill: #000000 !important;
 }
 
-/* Transform all card containers into crisp white surfaces with subtle clean borders */
+.border-gold,
+[class*="border-gold"] {
+  border-color: #E4E4E7 !important;
+}
+
+[class*="ring-gold"] {
+  --tw-ring-color: #000000 !important;
+}
+
+/* Transform all card containers into crisp white surfaces with flat hairline borders */
 .bg-white,
 .bg-navy-card {
   background-color: #FFFFFF !important;
-  color: #09090B;
+  color: #000000;
+  box-shadow: none !important;
 }
 
 /* Primary Canvas and Page Sections -> Clean White */
@@ -146,10 +133,11 @@
 .bg-navy-deep,
 .bg-sand-warm {
   background-color: #FFFFFF !important;
-  color: #09090B;
+  color: #000000;
+  box-shadow: none !important;
 }
 
-/* Subtle Alternate Section Backgrounds */
+/* Alternate Section Backgrounds */
 .bg-sand-50,
 .bg-sand-100,
 .bg-estate-50,
@@ -162,9 +150,10 @@
 .bg-neutral-100,
 .bg-zinc-50 {
   background-color: #FAFAFA !important;
+  box-shadow: none !important;
 }
 
-/* Surface hovers, pills, and nested chips */
+/* Hover, pills, and nested chips */
 .bg-sand-200,
 .bg-estate-200,
 .bg-gray-200,
@@ -172,44 +161,36 @@
 .bg-zinc-100,
 .bg-navy-surface {
   background-color: #F4F4F5 !important;
+  box-shadow: none !important;
 }
 
-/* Alert, Pill & Badge Light Surfaces */
+/* Clean Flat Monochrome Badges */
 .bg-emerald-50,
 .bg-emerald-100,
 .bg-emerald-950,
 .bg-emerald-950\/70,
 .bg-emerald-950\/80,
-.bg-emerald-950\/95 {
-  background-color: #ECFDF5 !important;
-  border-color: #A7F3D0 !important;
-  color: #047857 !important;
-}
-
+.bg-emerald-950\/95,
 .bg-amber-50,
 .bg-amber-100,
 .bg-amber-950,
 .bg-amber-950\/40,
 .bg-amber-950\/60,
 .bg-amber-950\/70,
-.bg-amber-950\/80 {
-  background-color: #FFFBEB !important;
-  border-color: #FDE68A !important;
-  color: #92400E !important;
-}
-
+.bg-amber-950\/80,
 .bg-rose-50,
 .bg-red-50,
 .bg-rose-950,
 .bg-rose-950\/40,
 .bg-rose-950\/80,
 .bg-crimson-dark\/70 {
-  background-color: #FEF2F2 !important;
-  border-color: #FECACA !important;
-  color: #DC2626 !important;
+  background-color: #F4F4F5 !important;
+  border-color: #E4E4E7 !important;
+  color: #000000 !important;
+  box-shadow: none !important;
 }
 
-/* Clean, modern borders */
+/* Flat Crisp Hairline Borders */
 .border-navy-border,
 .border-estate-100,
 .border-estate-200,
@@ -230,12 +211,13 @@
   border-color: #E4E4E7 !important;
 }
 
-/* Primary Action Buttons & CTAs (Crisp Black with White Text) */
+/* Action Buttons & CTAs -> Solid Flat Black (No shadows, no gradients) */
 .bg-gold,
 [class*="from-gold"][class*="to-gold"] {
-  background-color: #09090B !important;
+  background-color: #000000 !important;
   background-image: none !important;
   color: #FFFFFF !important;
+  box-shadow: none !important;
 }
 .bg-gold *,
 [class*="from-gold"][class*="to-gold"] * {
@@ -245,23 +227,25 @@
 [class*="from-gold"][class*="to-gold"]:hover {
   background-color: #27272A !important;
   background-image: none !important;
+  box-shadow: none !important;
 }
 
-/* Interactive form inputs & selectors */
+/* Interactive form inputs & selectors (Flat with clean outline) */
 input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
   background-color: #FFFFFF !important;
-  color: #09090B !important;
+  color: #000000 !important;
   border: 1px solid #D4D4D8 !important;
+  box-shadow: none !important;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #09090B !important;
-  box-shadow: 0 0 0 1px #09090B !important;
-  outline: none !important;
+  border-color: #000000 !important;
+  outline: 1px solid #000000 !important;
+  box-shadow: none !important;
 }
 
 input::placeholder,
@@ -269,30 +253,31 @@ textarea::placeholder {
   color: #A1A1AA !important;
 }
 
-/* Custom scrollbar */
+/* Custom flat scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAFAFA;
+  background: #FFFFFF;
 }
 ::-webkit-scrollbar-thumb {
   background: #D4D4D8;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A1A1AA;
+  background: #71717A;
 }
 
-/* Leaflet maps: Crisp Clean Daylight Architectural View */
+/* Leaflet maps: Flat Crisp Clean Daylight View */
 .leaflet-container {
   width: 100%;
   height: 100%;
   border-radius: 0.75rem;
   z-index: 10;
-  background-color: #F8FAFC !important;
+  background-color: #FFFFFF !important;
   border: 1px solid #E4E4E7;
+  box-shadow: none !important;
 }
 
 .custom-map-pin {
@@ -303,12 +288,13 @@ textarea::placeholder {
 
 .leaflet-popup-content-wrapper {
   background-color: #FFFFFF !important;
-  color: #09090B !important;
-  border: 1px solid #E4E4E7 !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-  border-radius: 1rem !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+  border-radius: 0.75rem !important;
 }
 
 .leaflet-popup-tip {
   background-color: #FFFFFF !important;
+  box-shadow: none !important;
 }
