@@ -44,12 +44,23 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
-            {/* Logo */}
-            <BrandLogo size="md" variant="light" showTagline={true} />
+            {/* Logo (Icon only, no text) */}
+            <BrandLogo size="md" variant="icon-only" />
 
             {/* Desktop Navigation */}
             {isAuthenticated ? (
               <nav className="hidden lg:flex items-center space-x-1">
+                <Link
+                  to="/"
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    isActive('/') 
+                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
+                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                  }`}
+                >
+                  Home
+                </Link>
+
                 <Link
                   to="/properties"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
@@ -58,58 +69,18 @@ export function Navbar() {
                       : 'text-white/90 hover:text-gold hover:bg-navy-surface'
                   }`}
                 >
-                  Explore Properties
-                </Link>
-
-                <Link
-                  to="/neighbourhoods"
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    isActive('/neighbourhoods') 
-                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                  }`}
-                >
-                  Neighbourhoods
+                  Properties
                 </Link>
 
                 <Link
                   to="/community"
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/community') 
                       ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
                       : 'text-white/90 hover:text-gold hover:bg-navy-surface'
                   }`}
                 >
-                  <MessageSquareText className="w-4 h-4 text-gold" />
-                  <span>Community</span>
-                  <span className="text-[10px] font-bold uppercase tracking-wider bg-gold/20 text-gold-light border border-gold/30 px-1.5 py-0.5 rounded-full">
-                    Signature
-                  </span>
-                </Link>
-
-                <Link
-                  to={
-                    activeRole === 'admin'
-                      ? "/admin"
-                      : activeRole === 'landlord_owner' || activeRole === 'agent'
-                      ? "/dashboard/landlord"
-                      : "/dashboard/buyer"
-                  }
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1.5 ${
-                    location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/admin')
-                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
-                  }`}
-                >
-                  <LayoutDashboard className="w-4 h-4 text-gold" />
-                  <span>Dashboard</span>
-                </Link>
-
-                <Link
-                  to="/#how-it-works"
-                  className="px-3.5 py-2 rounded-lg text-sm font-semibold text-white/90 hover:text-gold hover:bg-navy-surface transition-colors"
-                >
-                  How It Works
+                  Community
                 </Link>
               </nav>
             ) : (
@@ -156,22 +127,21 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-xl border border-navy-border bg-navy-card hover:border-gold/40 transition"
+                    className="flex items-center gap-1.5 p-1 rounded-full border border-navy-border bg-navy-card hover:border-gold/40 transition cursor-pointer"
+                    aria-label="User account menu"
                   >
-                    <img
-                      src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'}
-                      alt={user.name}
-                      className="w-8 h-8 rounded-lg object-cover ring-1 ring-gold/40"
-                    />
-                    <div className="text-left">
-                      <p className="text-xs font-bold text-white leading-tight truncate max-w-[110px]">
-                        {user.name?.split(' ')[0]}
-                      </p>
-                      <p className="text-[10px] text-gold font-semibold leading-tight">
-                        {roleLabels[activeRole] || 'Member'}
-                      </p>
-                    </div>
-                    <ChevronDown className="w-3.5 h-3.5 text-estate-400" />
+                    {user?.avatar ? (
+                      <img
+                        src={user.avatar}
+                        alt={user.name || 'User'}
+                        className="w-8 h-8 rounded-full object-cover ring-1 ring-gold/40"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-navy-surface flex items-center justify-center text-gold border border-gold/30">
+                        <User className="w-4 h-4" />
+                      </div>
+                    )}
+                    <ChevronDown className="w-3.5 h-3.5 text-estate-400 mr-1" />
                   </button>
 
                   {/* Dropdown Menu */}
@@ -319,25 +289,25 @@ export function Navbar() {
               {isAuthenticated ? (
                 <>
                   <Link
+                    to="/"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                  >
+                    Home
+                  </Link>
+                  <Link
                     to="/properties"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
                   >
-                    Explore Properties
-                  </Link>
-                  <Link
-                    to="/neighbourhoods"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
-                  >
-                    Neighbourhood Directory
+                    Properties
                   </Link>
                   <Link
                     to="/community"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-bold text-gold bg-navy-surface border border-gold/40"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
                   >
-                    Neighbourhood Community (Discussions)
+                    Community
                   </Link>
                   <Link
                     to="/profile"
@@ -366,16 +336,16 @@ export function Navbar() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="block px-3 py-2.5 rounded-lg text-base font-semibold text-gold hover:bg-navy-surface transition flex items-center justify-between"
                     >
-                      <span>Admin & Clean Slate Console</span>
+                      <span>Admin Console</span>
                       <ShieldCheck className="w-4 h-4 text-gold" />
                     </Link>
                   )}
                   <button
                     type="button"
                     onClick={() => { logout(); setMobileMenuOpen(false); }}
-                    className="w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold text-rose-400 hover:bg-navy-surface transition"
+                    className="w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold text-rose-400 hover:bg-navy-surface transition cursor-pointer"
                   >
-                    Sign Out ({user?.name})
+                    Sign Out
                   </button>
                 </>
               ) : (
