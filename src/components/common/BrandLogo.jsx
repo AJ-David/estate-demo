@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /**
- * VettedHomes Signature Brand Logo
+ * VettedHomes Architectural Brand Logo
  * 
  * Features an architectural roofline fused with an authoritative vetting shield
  * and an optical precision verification core.
@@ -42,16 +42,11 @@ export function BrandLogo({
   };
 
   const currentSize = sizeMap[size] || sizeMap.md;
-  const isLight = variant === 'light';
   const isIconOnly = variant === 'icon-only';
 
   const markElement = (
     <div 
-      className={`${currentSize.mark} flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:scale-105 ${
-        isLight 
-          ? 'bg-navy-surface border border-navy-border text-gold-light' 
-          : 'bg-navy text-gold border border-navy-border'
-      }`}
+      className={`${currentSize.mark} flex items-center justify-center shrink-0 shadow-xs transition-transform duration-300 group-hover:scale-105 bg-black text-white rounded-xl`}
     >
       <svg 
         width={currentSize.iconSize} 
@@ -64,14 +59,14 @@ export function BrandLogo({
         {/* House / Shield Gable Structure */}
         <path 
           d="M16 4L5 12V25C5 26.1046 5.89543 27 7 27H25C26.1046 27 27 26.1046 27 25V12L16 4Z" 
-          fill={isLight ? '#11141C' : '#050608'} 
-          stroke={isLight ? '#283042' : '#191E2B'} 
+          fill="#18181B" 
+          stroke="#27272A" 
           strokeWidth="1.2"
         />
-        {/* Dynamic Sovereign Gold Roofline */}
+        {/* Dynamic White Architectural Roofline */}
         <path 
           d="M3.5 13.5L16 4L28.5 13.5" 
-          stroke="#C5A059" 
+          stroke="#FFFFFF" 
           strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round"
@@ -81,13 +76,13 @@ export function BrandLogo({
           cx="16" 
           cy="18" 
           r="5.5" 
-          fill={isLight ? '#050608' : '#0A0C10'} 
-          stroke="#C5A059" 
+          fill="#000000" 
+          stroke="#FFFFFF" 
           strokeWidth="1.6"
         />
         <path 
           d="M13.8 18L15.3 19.5L18.5 16.5" 
-          stroke="#C5A059" 
+          stroke="#FFFFFF" 
           strokeWidth="1.8" 
           strokeLinecap="round" 
           strokeLinejoin="round"
@@ -113,13 +108,13 @@ export function BrandLogo({
       {markElement}
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5 leading-none">
-          <span className={`${currentSize.title} font-black tracking-tight font-display text-white`}>
-            Vetted<span className="text-gold-light">Homes</span>
+          <span className={`${currentSize.title} font-black tracking-tight font-display text-zinc-900`}>
+            Vetted<span className="text-zinc-600">Homes</span>
           </span>
-          <span className="inline-block w-2 h-2 rounded-full bg-gold"></span>
+          <span className="inline-block w-2 h-2 rounded-full bg-black"></span>
         </div>
         {showTagline && (
-          <p className={`${currentSize.tagline} uppercase font-bold tracking-widest mt-1 text-estate-400 font-sans`}>
+          <p className={`${currentSize.tagline} uppercase font-bold tracking-widest mt-1 text-zinc-500 font-sans`}>
             Verified Properties & Intel
           </p>
         )}
@@ -137,4 +132,3 @@ export function BrandLogo({
 }
 
 export default BrandLogo;
-

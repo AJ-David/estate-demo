@@ -349,14 +349,14 @@ export function AdminModerationPage() {
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Dismiss', index)}
-                        className="px-3.5 py-2 bg-navy-surface hover:bg-navy-border text-slate-200 font-bold rounded-xl border border-navy-border transition cursor-pointer active:scale-95"
+                        className="px-3.5 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold rounded-xl border border-zinc-300 transition cursor-pointer active:scale-95"
                       >
                         Dismiss (No Violation)
                       </button>
                       <button
                         type="button"
                         onClick={() => handleAction(report, 'Redact', index)}
-                        className="px-3.5 py-2 bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+                        className="px-3.5 py-2 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer active:scale-95"
                       >
                         <Edit3 className="w-3.5 h-3.5" />
                         <span>Redact Personal Details</span>

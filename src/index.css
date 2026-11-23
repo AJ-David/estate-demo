@@ -6,30 +6,30 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: #06070B;
-    color: #CBD5E1;
+    background-color: #FFFFFF;
+    color: #18181B;
   }
   body {
-    background-color: #06070B !important;
-    color: #CBD5E1 !important;
+    background-color: #FFFFFF !important;
+    color: #18181B !important;
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     letter-spacing: -0.02em;
-    color: #FFFFFF !important;
+    color: #09090B !important;
   }
   p {
-    color: #CBD5E1;
+    color: #52525B;
   }
 }
 
 /* =========================================================================
-   SOVEREIGN SYNDICATE & DARK LUXURY REAL ESTATE GLOBAL STYLES
-   Ensures 100% full-page darkness, razor-sharp text contrast, and ZERO invisible text.
+   CLEAN MODERN ARCHITECTURAL LIGHT PALETTE (WHITE BACKGROUND & BLACK TYPOGRAPHY)
+   Zero artificial AI glow, crisp contrast, human-designed luxury aesthetic.
    ========================================================================= */
 
-/* Primary Headings & Dark Elements -> Crisp Pure Brilliant White */
+/* Primary Headings & Dark Elements -> Crisp Pure Black */
 .text-navy,
 .text-estate-950,
 .text-estate-900,
@@ -43,60 +43,82 @@
 .text-zinc-900,
 .text-zinc-800,
 .text-black {
-  color: #FFFFFF !important;
+  color: #09090B !important;
 }
 
-/* High-Emphasis Text, Accents, Key Labels -> Brilliant Ice Silver */
+/* High-Emphasis Text, Subheadings & Strong Labels -> Dark Charcoal Slate */
 .text-estate-700,
 .text-estate-600,
-.text-estate-200,
-.text-estate-100,
 .text-gray-700,
 .text-gray-600,
-.text-gray-200,
-.text-gray-100,
 .text-slate-700,
 .text-slate-600,
-.text-slate-200,
-.text-slate-100,
 .text-neutral-700,
 .text-neutral-600,
-.text-neutral-200,
-.text-neutral-100 {
-  color: #E2E8F0 !important;
+.text-zinc-700,
+.text-zinc-600 {
+  color: #27272A !important;
 }
 
-/* Body Text, Subtitles, Descriptions, Metadata & Paragraphs -> Crisp Light Platinum (Never Dark Blue/Gray) */
+/* Body Text, Subtitles, Descriptions, Metadata & Paragraphs -> Neutral Slate Body */
 .text-estate-500,
 .text-estate-400,
 .text-estate-300,
+.text-estate-200,
+.text-estate-100,
 .text-estate-50,
 .text-gray-500,
 .text-gray-400,
 .text-gray-300,
+.text-gray-200,
+.text-gray-100,
 .text-gray-50,
 .text-slate-500,
 .text-slate-400,
 .text-slate-300,
+.text-slate-200,
+.text-slate-100,
 .text-slate-50,
 .text-neutral-500,
 .text-neutral-400,
 .text-neutral-300,
-.text-neutral-50 {
-  color: #CBD5E1 !important;
+.text-neutral-200,
+.text-neutral-100,
+.text-neutral-50,
+.text-zinc-500,
+.text-zinc-400 {
+  color: #52525B !important;
 }
 
-/* Colored Accents High Contrast on Dark */
+/* Replaced Gold Accent Text -> Crisp Charcoal / Black */
+.text-gold,
+.text-gold-light,
+.text-gold-dark {
+  color: #09090B !important;
+}
+
+/* Colored Accents High Contrast on Clean White */
 .text-emerald-900,
 .text-emerald-800,
-.text-emerald-700 {
-  color: #6EE7B7 !important; /* Bright Mint Emerald */
+.text-emerald-700,
+.text-emerald-600 {
+  color: #047857 !important;
+}
+.text-emerald-500,
+.text-emerald-400,
+.text-emerald-300 {
+  color: #059669 !important;
 }
 
 .text-amber-900,
 .text-amber-800,
-.text-amber-700 {
-  color: #FCD34D !important; /* Bright Amber Gold */
+.text-amber-700,
+.text-amber-600 {
+  color: #92400E !important;
+}
+.text-amber-500,
+.text-amber-400 {
+  color: #B45309 !important;
 }
 
 .text-rose-900,
@@ -104,21 +126,30 @@
 .text-rose-700,
 .text-red-900,
 .text-red-800,
-.text-red-700 {
-  color: #FCA5A5 !important; /* Crisp Rose Coral */
+.text-red-700,
+.text-rose-600,
+.text-rose-500,
+.text-rose-400,
+.text-rose-300 {
+  color: #DC2626 !important;
 }
 
-/* Transform all light card containers into smoky obsidian private lounge surfaces */
-.bg-white {
-  background-color: #12151F !important;
-  color: #F1F5F9;
+/* Transform all card containers into crisp white surfaces with subtle clean borders */
+.bg-white,
+.bg-navy-card {
+  background-color: #FFFFFF !important;
+  color: #09090B;
 }
 
-/* Transform all light sand/gray backgrounds into deep obsidian */
+/* Primary Canvas and Page Sections -> Clean White */
+.bg-navy,
+.bg-navy-deep,
 .bg-sand-warm {
-  background-color: #06070B !important;
+  background-color: #FFFFFF !important;
+  color: #09090B;
 }
 
+/* Subtle Alternate Section Backgrounds */
 .bg-sand-50,
 .bg-sand-100,
 .bg-estate-50,
@@ -128,37 +159,58 @@
 .bg-slate-50,
 .bg-slate-100,
 .bg-neutral-50,
-.bg-neutral-100 {
-  background-color: #0E121A !important;
+.bg-neutral-100,
+.bg-zinc-50 {
+  background-color: #FAFAFA !important;
 }
 
+/* Surface hovers, pills, and nested chips */
 .bg-sand-200,
 .bg-estate-200,
 .bg-gray-200,
-.bg-slate-200 {
-  background-color: #1A212E !important;
+.bg-slate-200,
+.bg-zinc-100,
+.bg-navy-surface {
+  background-color: #F4F4F5 !important;
 }
 
-/* Alert, Pill & Badge Dark Surfaces */
+/* Alert, Pill & Badge Light Surfaces */
 .bg-emerald-50,
-.bg-emerald-100 {
-  background-color: #08241A !important;
-  border-color: #16533B !important;
+.bg-emerald-100,
+.bg-emerald-950,
+.bg-emerald-950\/70,
+.bg-emerald-950\/80,
+.bg-emerald-950\/95 {
+  background-color: #ECFDF5 !important;
+  border-color: #A7F3D0 !important;
+  color: #047857 !important;
 }
 
 .bg-amber-50,
-.bg-amber-100 {
-  background-color: #261908 !important;
-  border-color: #5C3D12 !important;
+.bg-amber-100,
+.bg-amber-950,
+.bg-amber-950\/40,
+.bg-amber-950\/60,
+.bg-amber-950\/70,
+.bg-amber-950\/80 {
+  background-color: #FFFBEB !important;
+  border-color: #FDE68A !important;
+  color: #92400E !important;
 }
 
 .bg-rose-50,
-.bg-red-50 {
-  background-color: #2B0D11 !important;
-  border-color: #5C1D24 !important;
+.bg-red-50,
+.bg-rose-950,
+.bg-rose-950\/40,
+.bg-rose-950\/80,
+.bg-crimson-dark\/70 {
+  background-color: #FEF2F2 !important;
+  border-color: #FECACA !important;
+  color: #DC2626 !important;
 }
 
-/* Borders across all cards and sections */
+/* Clean, modern borders */
+.border-navy-border,
 .border-estate-100,
 .border-estate-200,
 .border-sand-200,
@@ -166,33 +218,55 @@
 .border-gray-200,
 .border-slate-100,
 .border-slate-200,
+.border-zinc-100,
+.border-zinc-200,
 .border-estate-200\/80,
 .border-estate-200\/90,
 .border-estate-200\/60,
 .border-sand-200\/80,
-.border-sand-200\/90 {
-  border-color: #232938 !important;
+.border-sand-200\/90,
+.border-navy-border\/80,
+.border-navy-border\/60 {
+  border-color: #E4E4E7 !important;
+}
+
+/* Primary Action Buttons & CTAs (Crisp Black with White Text) */
+.bg-gold,
+[class*="from-gold"][class*="to-gold"] {
+  background-color: #09090B !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+}
+.bg-gold *,
+[class*="from-gold"][class*="to-gold"] * {
+  color: #FFFFFF !important;
+}
+.bg-gold:hover,
+[class*="from-gold"][class*="to-gold"]:hover {
+  background-color: #27272A !important;
+  background-image: none !important;
 }
 
 /* Interactive form inputs & selectors */
 input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
-  background-color: #0A0D14 !important;
-  color: #FFFFFF !important;
-  border-color: #252C3D !important;
+  background-color: #FFFFFF !important;
+  color: #09090B !important;
+  border: 1px solid #D4D4D8 !important;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #D4AF37 !important;
-  box-shadow: 0 0 0 1px #D4AF37 !important;
+  border-color: #09090B !important;
+  box-shadow: 0 0 0 1px #09090B !important;
+  outline: none !important;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #64748B !important;
+  color: #A1A1AA !important;
 }
 
 /* Custom scrollbar */
@@ -201,28 +275,24 @@ textarea::placeholder {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #06070B;
+  background: #FAFAFA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #252C3D;
+  background: #D4D4D8;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #A1A1AA;
 }
 
-/* Leaflet maps: Dark Syndicate Night-Vision Exploration Mode */
-.leaflet-tile {
-  filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(100%);
-}
-
+/* Leaflet maps: Crisp Clean Daylight Architectural View */
 .leaflet-container {
   width: 100%;
   height: 100%;
   border-radius: 0.75rem;
   z-index: 10;
-  background-color: #06070B !important;
-  border: 1px solid #232938;
+  background-color: #F8FAFC !important;
+  border: 1px solid #E4E4E7;
 }
 
 .custom-map-pin {
@@ -232,13 +302,13 @@ textarea::placeholder {
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: #12151F !important;
-  color: #FFFFFF !important;
-  border: 1px solid #D4AF37 !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.2) !important;
+  background-color: #FFFFFF !important;
+  color: #09090B !important;
+  border: 1px solid #E4E4E7 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   border-radius: 1rem !important;
 }
 
 .leaflet-popup-tip {
-  background-color: #12151F !important;
+  background-color: #FFFFFF !important;
 }

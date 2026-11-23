@@ -8,7 +8,6 @@ import {
   Maximize2, 
   ShieldCheck, 
   CheckCircle2, 
-  Sparkles,
   Clock,
   ArrowRight
 } from 'lucide-react';
@@ -37,7 +36,7 @@ export function PropertyCard({ property, layout = 'grid' }) {
 
   return (
     <div 
-      className={`group bg-navy-card rounded-2xl overflow-hidden border border-navy-border hover:border-gold/50 hover:shadow-gold transition-all duration-300 flex text-white ${
+      className={`group bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-400 hover:shadow-lg transition-all duration-300 flex text-zinc-900 ${
         isListLayout ? 'flex-col md:flex-row' : 'flex-col'
       }`}
     >
@@ -53,31 +52,25 @@ export function PropertyCard({ property, layout = 'grid' }) {
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center z-10 max-w-[75%]">
           {getTransactionBadge()}
-          <span className="bg-navy-deep/90 backdrop-blur-xs text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-navy-border">
+          <span className="bg-white/90 backdrop-blur-xs text-zinc-900 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-zinc-200 shadow-xs">
             {property.category}
           </span>
           {property.marketStatus === 'recently_leased' && (
-            <span className="bg-emerald-950/95 backdrop-blur-xs text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/60 shadow-sm flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-xs flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-700" />
               <span>{property.marketStatusLabel || 'Recently Leased'}</span>
             </span>
           )}
           {property.marketStatus === 'recently_sold' && (
-            <span className="bg-emerald-950/95 backdrop-blur-xs text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/60 shadow-sm flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            <span className="bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200 shadow-xs flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-emerald-700" />
               <span>{property.marketStatusLabel || 'Recently Sold'}</span>
             </span>
           )}
           {property.marketStatus === 'under_escrow' && (
-            <span className="bg-amber-950/95 backdrop-blur-xs text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-500/60 shadow-sm flex items-center gap-1">
-              <Clock className="w-3 h-3 text-amber-400" />
+            <span className="bg-amber-50 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-200 shadow-xs flex items-center gap-1">
+              <Clock className="w-3 h-3 text-amber-700" />
               <span>Under Escrow</span>
-            </span>
-          )}
-          {(!property.marketStatus || property.marketStatus === 'available') && (
-            <span className="bg-navy-deep/90 backdrop-blur-xs text-gold-light text-[10px] font-bold px-2 py-0.5 rounded-full border border-gold/40 shadow-sm flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-gold" />
-              <span>Exclusive</span>
             </span>
           )}
         </div>
@@ -90,10 +83,10 @@ export function PropertyCard({ property, layout = 'grid' }) {
             e.stopPropagation();
             toggleSave(property.id);
           }}
-          className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 z-10 ${
+          className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 z-10 cursor-pointer ${
             saved 
-              ? 'bg-crimson text-white shadow-md' 
-              : 'bg-navy-deep/80 hover:bg-navy text-estate-300 hover:text-rose-400 backdrop-blur-xs border border-navy-border'
+              ? 'bg-rose-600 text-white shadow-md' 
+              : 'bg-white/90 hover:bg-white text-zinc-600 hover:text-rose-600 backdrop-blur-xs border border-zinc-200 shadow-xs'
           }`}
           title={saved ? 'Remove from saved' : 'Save property'}
           aria-label="Save property"
@@ -104,8 +97,8 @@ export function PropertyCard({ property, layout = 'grid' }) {
         {/* Verification Strip */}
         <div className="absolute bottom-3 left-3 z-10">
           {property.verificationStatus && (
-            <div className="inline-flex items-center gap-1.5 bg-navy-deep/90 backdrop-blur-xs text-gold-light text-[11px] font-bold px-2.5 py-1 rounded-full border border-gold/30 shadow-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+            <div className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-xs text-zinc-900 text-[11px] font-bold px-2.5 py-1 rounded-full border border-zinc-200 shadow-xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-black" />
               <span>{property.verificationStatus}</span>
             </div>
           )}
@@ -118,42 +111,42 @@ export function PropertyCard({ property, layout = 'grid' }) {
           {/* Price */}
           <div className="flex items-baseline justify-between mb-2">
             <div>
-              <p className="text-xl lg:text-2xl font-black text-white font-display tracking-tight">
+              <p className="text-xl lg:text-2xl font-black text-zinc-900 font-display tracking-tight">
                 {formatPriceDisplay(property.price, property.pricePeriod, property.transactionType)}
               </p>
             </div>
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-bold text-white group-hover:text-gold transition-colors line-clamp-1 mb-1 font-display">
+          <h3 className="text-base font-bold text-zinc-900 hover:text-black transition-colors line-clamp-1 mb-1 font-display">
             <Link to={`/properties/${property.id}`}>
               {property.title}
             </Link>
           </h3>
 
           {/* Location */}
-          <div className="flex items-center gap-1.5 text-xs text-estate-400 mb-4">
-            <MapPin className="w-3.5 h-3.5 text-gold shrink-0" />
+          <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-4">
+            <MapPin className="w-3.5 h-3.5 text-zinc-700 shrink-0" />
             <span className="truncate">{property.location.neighbourhoodName}, {property.location.city}</span>
           </div>
 
           {/* Key Specs */}
-          <div className="flex items-center gap-4 py-3 border-y border-navy-border text-xs text-estate-300">
+          <div className="flex items-center gap-4 py-3 border-y border-zinc-200 text-xs text-zinc-600">
             <div className="flex items-center gap-1.5" title={`${property.bedrooms} Bedrooms`}>
-              <Bed className="w-4 h-4 text-estate-400" />
-              <span className="font-semibold text-white">{property.bedrooms}</span>
-              <span className="text-estate-400">Beds</span>
+              <Bed className="w-4 h-4 text-zinc-500" />
+              <span className="font-semibold text-zinc-900">{property.bedrooms}</span>
+              <span className="text-zinc-500">Beds</span>
             </div>
             <div className="flex items-center gap-1.5" title={`${property.bathrooms} Bathrooms`}>
-              <Bath className="w-4 h-4 text-estate-400" />
-              <span className="font-semibold text-white">{property.bathrooms}</span>
-              <span className="text-estate-400">Baths</span>
+              <Bath className="w-4 h-4 text-zinc-500" />
+              <span className="font-semibold text-zinc-900">{property.bathrooms}</span>
+              <span className="text-zinc-500">Baths</span>
             </div>
             {property.sizeSqm && (
               <div className="flex items-center gap-1.5" title={`${property.sizeSqm} square meters`}>
-                <Maximize2 className="w-3.5 h-3.5 text-estate-400" />
-                <span className="font-semibold text-white">{property.sizeSqm}</span>
-                <span className="text-estate-400">m²</span>
+                <Maximize2 className="w-3.5 h-3.5 text-zinc-500" />
+                <span className="font-semibold text-zinc-900">{property.sizeSqm}</span>
+                <span className="text-zinc-500">m²</span>
               </div>
             )}
           </div>
@@ -164,17 +157,17 @@ export function PropertyCard({ property, layout = 'grid' }) {
           {property.neighbourhoodSnapshot && (
             <Link
               to={`/neighbourhoods/${property.neighbourhoodSnapshot.id}`}
-              className="inline-flex items-center justify-between w-full bg-navy-surface hover:bg-navy-surface/80 border border-navy-border rounded-xl px-3 py-2 text-xs transition group/intel"
+              className="inline-flex items-center justify-between w-full bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 rounded-xl px-3 py-2 text-xs transition group/intel"
             >
               <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-5 h-5 rounded-md bg-gold/20 text-gold-light border border-gold/30 font-bold text-[10px]">
+                <span className="flex items-center justify-center w-5 h-5 rounded-md bg-black text-white font-bold text-[10px]">
                   {property.neighbourhoodSnapshot.score}
                 </span>
-                <span className="text-white font-medium">
+                <span className="text-zinc-900 font-medium">
                   {property.neighbourhoodSnapshot.name} Livability
                 </span>
               </div>
-              <span className="text-gold font-bold flex items-center gap-1 group-hover/intel:translate-x-0.5 transition-transform">
+              <span className="text-black font-bold flex items-center gap-1 group-hover/intel:translate-x-0.5 transition-transform">
                 Read Intel
                 <ArrowRight className="w-3 h-3" />
               </span>
@@ -182,12 +175,12 @@ export function PropertyCard({ property, layout = 'grid' }) {
           )}
 
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-[11px] text-estate-400">
-              Listed by: <strong className="text-white">{property.agent.name.split(' ')[0]}</strong>
+            <span className="text-[11px] text-zinc-500">
+              Listed by: <strong className="text-zinc-900">{property.agent?.name?.split(' ')[0] || 'Verified Agent'}</strong>
             </span>
             <Link
               to={`/properties/${property.id}`}
-              className="text-xs font-bold text-gold hover:text-gold-light inline-flex items-center gap-1"
+              className="text-xs font-bold text-black hover:underline inline-flex items-center gap-1"
             >
               View Property
               <ArrowRight className="w-3.5 h-3.5" />
@@ -199,4 +192,4 @@ export function PropertyCard({ property, layout = 'grid' }) {
     </div>
   );
 }
-
+export default PropertyCard;

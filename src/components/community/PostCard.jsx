@@ -3,7 +3,6 @@ import {
   ThumbsUp, 
   ThumbsDown, 
   MessageSquare, 
-  ShieldAlert, 
   ShieldCheck, 
   Share2, 
   Flag, 
@@ -98,11 +97,11 @@ export function PostCard({ post, onReport }) {
   };
 
   return (
-    <article className="bg-navy-card rounded-3xl border border-navy-border shadow-premium p-5 sm:p-6 mb-4 hover:border-gold/40 transition-all">
+    <article className="bg-white rounded-3xl border border-zinc-200 shadow-sm p-5 sm:p-6 mb-4 hover:border-zinc-400 transition-all text-zinc-900">
       {/* Pinned strip */}
       {post.pinned && (
-        <div className="flex items-center gap-1.5 text-xs font-bold text-gold bg-navy-surface px-3 py-1 rounded-full w-fit mb-3 border border-gold/30">
-          <Pin className="w-3.5 h-3.5 rotate-45" />
+        <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 bg-zinc-100 px-3 py-1 rounded-full w-fit mb-3 border border-zinc-200">
+          <Pin className="w-3.5 h-3.5 rotate-45 text-black" />
           <span>Pinned Neighbourhood Announcement</span>
         </div>
       )}
@@ -113,23 +112,23 @@ export function PostCard({ post, onReport }) {
           <img
             src={post.author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}
             alt={post.author?.name}
-            className="w-10 h-10 rounded-2xl object-cover ring-2 ring-gold/30"
+            className="w-10 h-10 rounded-2xl object-cover ring-2 ring-zinc-200"
           />
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-white font-display">
+              <span className="text-sm font-bold text-zinc-900 font-display">
                 {post.author?.name || 'Local Resident'}
               </span>
               {post.verifiedResident && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">
-                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <ShieldCheck className="w-3 h-3 text-emerald-600" />
                   Verified Resident
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-2 text-xs text-slate-300 mt-0.5">
+            <div className="flex items-center gap-2 text-xs text-zinc-500 mt-0.5">
               <span className="flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-gold" />
+                <MapPin className="w-3 h-3 text-zinc-600" />
                 {post.neighbourhoodName}
               </span>
               <span>•</span>
@@ -145,19 +144,19 @@ export function PostCard({ post, onReport }) {
       </div>
 
       {/* Post Title */}
-      <h3 className="text-base sm:text-lg font-bold text-white font-display mb-2 leading-snug">
+      <h3 className="text-base sm:text-lg font-bold text-zinc-900 font-display mb-2 leading-snug">
         {post.title}
       </h3>
 
       {/* Post Content */}
-      <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-4 whitespace-pre-line">
+      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed mb-4 whitespace-pre-line">
         {post.content}
       </p>
 
       {/* Security Disclaimer Notice if category is security */}
       {post.category?.toUpperCase() === 'SECURITY' && (
-        <div className="flex items-start gap-2.5 p-3 bg-amber-950/40 rounded-2xl border border-amber-500/30 text-xs text-amber-200 mb-4">
-          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2.5 p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 mb-4">
+          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
           <span>
             <strong>Community Observation:</strong> This post reflects an individual resident report. In accordance with safety policies, emergency or urgent security concerns should be reported directly to local estate gate controllers and emergency services.
           </span>
@@ -170,7 +169,7 @@ export function PostCard({ post, onReport }) {
           {post.tags.map(tag => (
             <span
               key={tag}
-              className="text-[11px] font-semibold text-gold-light bg-navy-surface border border-navy-border px-2.5 py-0.5 rounded-lg"
+              className="text-[11px] font-semibold text-zinc-700 bg-zinc-100 border border-zinc-200 px-2.5 py-0.5 rounded-lg"
             >
               #{tag}
             </span>
@@ -179,16 +178,16 @@ export function PostCard({ post, onReport }) {
       )}
 
       {/* Action Footer: Upvote, Downvote, Comments, Share, Report */}
-      <div className="pt-3 border-t border-navy-border flex items-center justify-between text-xs">
+      <div className="pt-3 border-t border-zinc-200 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
           {/* Upvote */}
           <button
             type="button"
             onClick={() => handleVote('up')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition cursor-pointer ${
               userVote === 'up'
-                ? 'bg-emerald text-white border-emerald font-bold shadow-xs'
-                : 'bg-navy-surface text-slate-200 border-navy-border hover:bg-navy-border hover:text-white'
+                ? 'bg-emerald-600 text-white border-emerald-600 font-bold shadow-xs'
+                : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100 hover:text-black'
             }`}
           >
             <ThumbsUp className="w-3.5 h-3.5" />
@@ -199,10 +198,10 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={() => handleVote('down')}
-            className={`p-1.5 rounded-xl border transition ${
+            className={`p-1.5 rounded-xl border transition cursor-pointer ${
               userVote === 'down'
-                ? 'bg-gold text-navy-deep border-gold font-bold'
-                : 'bg-navy-surface text-slate-400 border-navy-border hover:bg-navy-border hover:text-white'
+                ? 'bg-black text-white border-black font-bold'
+                : 'bg-zinc-50 text-zinc-500 border-zinc-200 hover:bg-zinc-100 hover:text-black'
             }`}
             title="Mark as unhelpful"
           >
@@ -213,7 +212,7 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={() => setShowComments(!showComments)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-navy-surface transition border border-transparent hover:border-navy-border"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-zinc-600 hover:text-black hover:bg-zinc-100 transition border border-transparent hover:border-zinc-200 cursor-pointer"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             <span>{comments.length} Comments</span>
@@ -226,10 +225,10 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={handleShare}
-            className="flex items-center gap-1 text-estate-400 hover:text-gold transition"
+            className="flex items-center gap-1 text-zinc-500 hover:text-black transition cursor-pointer"
             title="Copy share link"
           >
-            {copiedLink ? <Check className="w-3.5 h-3.5 text-gold" /> : <Share2 className="w-3.5 h-3.5" />}
+            {copiedLink ? <Check className="w-3.5 h-3.5 text-black" /> : <Share2 className="w-3.5 h-3.5" />}
             <span className="hidden sm:inline">{copiedLink ? 'Copied' : 'Share'}</span>
           </button>
 
@@ -237,7 +236,7 @@ export function PostCard({ post, onReport }) {
           <button
             type="button"
             onClick={() => onReport && onReport(post)}
-            className="flex items-center gap-1 text-estate-400 hover:text-rose-400 transition"
+            className="flex items-center gap-1 text-zinc-500 hover:text-rose-600 transition cursor-pointer"
             title="Report inappropriate content"
           >
             <Flag className="w-3.5 h-3.5" />
@@ -248,22 +247,22 @@ export function PostCard({ post, onReport }) {
 
       {/* Expandable Comments Section */}
       {showComments && (
-        <div className="mt-4 pt-4 border-t border-navy-border space-y-3 animate-fadeIn">
+        <div className="mt-4 pt-4 border-t border-zinc-200 space-y-3 animate-fadeIn">
           {comments.length === 0 ? (
-            <p className="text-xs text-slate-400 italic py-2">No comments yet. Share your experience or reply below.</p>
+            <p className="text-xs text-zinc-500 italic py-2">No comments yet. Share your experience or reply below.</p>
           ) : (
             comments.map(c => (
-              <div key={c.id} className="bg-navy-surface p-3 rounded-2xl border border-navy-border text-xs space-y-1">
+              <div key={c.id} className="bg-zinc-50 p-3 rounded-2xl border border-zinc-200 text-xs space-y-1">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-white">{c.author}</span>
-                    <span className="text-[10px] bg-navy-card text-gold px-2 py-0.5 rounded-full border border-gold/30">
+                    <span className="font-bold text-zinc-900">{c.author}</span>
+                    <span className="text-[10px] bg-white text-zinc-700 px-2 py-0.5 rounded-full border border-zinc-200">
                       {c.badge || 'Resident'}
                     </span>
                   </div>
-                  <span className="text-slate-400 text-[10px]">{c.createdAt}</span>
+                  <span className="text-zinc-400 text-[10px]">{c.createdAt}</span>
                 </div>
-                <p className="text-slate-200 leading-relaxed">{c.content}</p>
+                <p className="text-zinc-700 leading-relaxed">{c.content}</p>
               </div>
             ))
           )}
@@ -275,11 +274,11 @@ export function PostCard({ post, onReport }) {
               placeholder="Add your respectful reply or clarification..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              className="flex-1 px-3.5 py-2 border border-navy-border rounded-xl text-xs text-white placeholder-slate-400 focus:ring-1 focus:ring-gold outline-none bg-navy-surface"
+              className="flex-1 px-3.5 py-2 border border-zinc-200 rounded-xl text-xs text-zinc-900 placeholder-zinc-400 focus:ring-1 focus:ring-black outline-none bg-white"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-gradient-to-r from-gold to-gold-dark text-navy-deep text-xs font-bold rounded-xl hover:brightness-110 transition flex items-center gap-1 shadow-gold"
+              className="px-4 py-2 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition flex items-center gap-1 shadow-xs cursor-pointer"
             >
               <Send className="w-3 h-3" />
               <span>Reply</span>
@@ -290,3 +289,4 @@ export function PostCard({ post, onReport }) {
     </article>
   );
 }
+export default PostCard;

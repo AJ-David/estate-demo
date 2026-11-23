@@ -10,16 +10,16 @@ export function Badge({ children, variant = 'default', size = 'sm', className = 
   }[size] || 'px-2.5 py-1 text-xs';
 
   const variantClasses = {
-    default: 'bg-navy-surface text-slate-200 border border-navy-border font-medium',
-    primary: 'bg-navy-card text-gold-light border border-gold/40 shadow-gold font-semibold',
-    emerald: 'bg-emerald-950/70 text-emerald-300 border border-emerald-500/40 font-semibold',
-    verified: 'bg-gradient-to-r from-gold to-gold-dark text-navy-deep font-black shadow-gold tracking-wide',
-    rent: 'bg-navy-surface text-gold-light border border-gold/40 font-semibold',
-    sale: 'bg-gold-500/20 text-gold-300 border border-gold/50 font-bold',
-    shortlet: 'bg-navy-surface text-gold border border-gold/30 font-semibold',
-    warning: 'bg-amber-950/70 text-amber-300 border border-amber-500/40 font-semibold',
-    danger: 'bg-crimson-dark/70 text-rose-300 border border-crimson/50 font-semibold',
-  }[variant] || 'bg-navy-surface text-slate-200 border border-navy-border';
+    default: 'bg-zinc-100 text-zinc-800 border border-zinc-200 font-medium',
+    primary: 'bg-black text-white font-semibold',
+    emerald: 'bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold',
+    verified: 'bg-black text-white font-bold shadow-xs tracking-wide',
+    rent: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
+    sale: 'bg-black text-white font-bold',
+    shortlet: 'bg-zinc-100 text-zinc-900 border border-zinc-200 font-semibold',
+    warning: 'bg-amber-50 text-amber-800 border border-amber-200 font-semibold',
+    danger: 'bg-rose-50 text-rose-700 border border-rose-200 font-semibold',
+  }[variant] || 'bg-zinc-100 text-zinc-800 border border-zinc-200';
 
   return (
     <span className={`${baseClasses} ${sizeClasses} ${variantClasses} ${className}`}>

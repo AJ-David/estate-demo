@@ -24,27 +24,19 @@ import { BrandLogo } from './BrandLogo';
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const { user, isAuthenticated, activeRole, switchRole, logout, isConfigured } = useAuth();
+  const { user, isAuthenticated, activeRole, switchRole, logout } = useAuth();
   const { savedCount } = useSavedProperties();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
 
-  const roleLabels = {
-    buyer_tenant: 'Tenant / Buyer View',
-    landlord_owner: 'Landlord View',
-    agent: 'Agent View',
-    admin: 'Admin Console'
-  };
-
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-navy/95 backdrop-blur-md border-b border-navy-border shadow-lg transition-all">
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-zinc-200 shadow-xs transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
-            {/* Logo (Icon only, no text) */}
+            {/* Logo (Icon only, clean architectural roofline) */}
             <BrandLogo size="md" variant="icon-only" />
 
             {/* Desktop Navigation */}
@@ -54,8 +46,8 @@ export function Navbar() {
                   to="/"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/') 
-                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
                   Home
@@ -65,8 +57,8 @@ export function Navbar() {
                   to="/properties"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/properties') 
-                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
                   Properties
@@ -76,8 +68,8 @@ export function Navbar() {
                   to="/community"
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     isActive('/community') 
-                      ? 'bg-navy-surface text-gold font-bold border border-gold/40 shadow-xs' 
-                      : 'text-white/90 hover:text-gold hover:bg-navy-surface'
+                      ? 'bg-zinc-100 text-black font-bold border border-zinc-300 shadow-xs' 
+                      : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
                   }`}
                 >
                   Community
@@ -85,8 +77,8 @@ export function Navbar() {
               </nav>
             ) : (
               <div className="hidden lg:flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-surface text-gold text-xs font-bold border border-gold/40">
-                  <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 text-zinc-900 text-xs font-bold border border-zinc-200">
+                  <ShieldCheck className="w-3.5 h-3.5 text-zinc-900" />
                   <span>Private Verified Real Estate Network</span>
                 </span>
               </div>
@@ -99,12 +91,12 @@ export function Navbar() {
                   {/* Saved properties */}
                   <Link
                     to="/dashboard/saved"
-                    className="relative p-2.5 rounded-full text-estate-300 hover:text-rose-400 hover:bg-navy-surface transition-colors"
+                    className="relative p-2.5 rounded-full text-zinc-600 hover:text-rose-600 hover:bg-zinc-100 transition-colors"
                     title="Saved Properties"
                   >
-                    <Heart className="w-5 h-5 text-estate-300 hover:text-rose-400" />
+                    <Heart className="w-5 h-5 text-zinc-600 hover:text-rose-600" />
                     {savedCount > 0 && (
-                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-crimson text-white rounded-full text-[11px] font-bold flex items-center justify-center">
+                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-600 text-white rounded-full text-[11px] font-bold flex items-center justify-center">
                         {savedCount}
                       </span>
                     )}
@@ -113,9 +105,9 @@ export function Navbar() {
                   {/* List Property CTA */}
                   <Link
                     to="/dashboard/landlord"
-                    className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black text-navy-deep bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold rounded-xl shadow-gold transition"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl shadow-xs transition"
                   >
-                    <PlusCircle className="w-4 h-4 text-navy-deep" />
+                    <PlusCircle className="w-4 h-4 text-white" />
                     <span>Post Listing</span>
                   </Link>
                 </>
@@ -127,37 +119,37 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-1.5 p-1 rounded-full border border-navy-border bg-navy-card hover:border-gold/40 transition cursor-pointer"
+                    className="flex items-center gap-1.5 p-1 rounded-full border border-zinc-200 bg-white hover:border-zinc-400 transition cursor-pointer"
                     aria-label="User account menu"
                   >
                     {user?.avatar ? (
                       <img
                         src={user.avatar}
                         alt={user.name || 'User'}
-                        className="w-8 h-8 rounded-full object-cover ring-1 ring-gold/40"
+                        className="w-8 h-8 rounded-full object-cover ring-1 ring-zinc-300"
                       />
                     ) : (
-                      <div className="w-8 h-8 rounded-full bg-navy-surface flex items-center justify-center text-gold border border-gold/30">
+                      <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-800 border border-zinc-200">
                         <User className="w-4 h-4" />
                       </div>
                     )}
-                    <ChevronDown className="w-3.5 h-3.5 text-estate-400 mr-1" />
+                    <ChevronDown className="w-3.5 h-3.5 text-zinc-500 mr-1" />
                   </button>
 
                   {/* Dropdown Menu */}
                   {userDropdownOpen && (
                     <div 
-                      className="absolute right-0 mt-2 w-64 rounded-2xl bg-navy-card shadow-2xl border border-navy-border py-2 z-50 text-white"
+                      className="absolute right-0 mt-2 w-64 rounded-2xl bg-white shadow-xl border border-zinc-200 py-2 z-50 text-zinc-900"
                       onMouseLeave={() => setUserDropdownOpen(false)}
                     >
-                      <div className="px-4 py-3 border-b border-navy-border bg-navy-deep/60">
-                        <p className="text-xs text-estate-400">Signed in as</p>
-                        <p className="text-sm font-bold text-white truncate">{user.name}</p>
-                        <p className="text-xs text-estate-400 truncate">{user.email}</p>
+                      <div className="px-4 py-3 border-b border-zinc-100 bg-zinc-50/80">
+                        <p className="text-xs text-zinc-500">Signed in as</p>
+                        <p className="text-sm font-bold text-zinc-900 truncate">{user.name}</p>
+                        <p className="text-xs text-zinc-500 truncate">{user.email}</p>
                         
                         {/* Role switcher */}
-                        <div className="mt-3 pt-2 border-t border-navy-border">
-                          <p className="text-[10px] uppercase tracking-wider font-semibold text-estate-400 mb-1.5">
+                        <div className="mt-3 pt-2 border-t border-zinc-200">
+                          <p className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500 mb-1.5">
                             Switch Active Workspace:
                           </p>
                           <div className="grid grid-cols-2 gap-1.5 text-xs">
@@ -166,8 +158,8 @@ export function Navbar() {
                               onClick={() => { switchRole('buyer_tenant'); setUserDropdownOpen(false); }}
                               className={`px-2 py-1.5 rounded-lg text-left text-xs font-semibold transition ${
                                 activeRole === 'buyer_tenant' 
-                                  ? 'bg-gold text-navy-deep font-bold' 
-                                  : 'bg-navy-surface text-slate-200 hover:text-white'
+                                  ? 'bg-black text-white font-bold' 
+                                  : 'bg-zinc-100 text-zinc-700 hover:text-black'
                               }`}
                             >
                               Tenant/Buyer
@@ -177,8 +169,8 @@ export function Navbar() {
                               onClick={() => { switchRole('landlord_owner'); setUserDropdownOpen(false); }}
                               className={`px-2 py-1.5 rounded-lg text-left text-xs font-semibold transition ${
                                 activeRole === 'landlord_owner' 
-                                  ? 'bg-gold text-navy-deep font-bold' 
-                                  : 'bg-navy-surface text-slate-200 hover:text-white'
+                                  ? 'bg-black text-white font-bold' 
+                                  : 'bg-zinc-100 text-zinc-700 hover:text-black'
                               }`}
                             >
                               Landlord
@@ -191,44 +183,44 @@ export function Navbar() {
                         <Link
                           to="/profile"
                           onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-white/90 transition font-medium"
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-zinc-50 hover:text-black text-zinc-700 transition font-medium"
                         >
-                          <Settings className="w-4 h-4 text-gold" />
+                          <Settings className="w-4 h-4 text-zinc-500" />
                           Profile & Roles
                         </Link>
                         <Link
                           to="/dashboard/buyer"
                           onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-white/90 transition font-medium"
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-zinc-50 hover:text-black text-zinc-700 transition font-medium"
                         >
-                          <LayoutDashboard className="w-4 h-4 text-gold" />
+                          <LayoutDashboard className="w-4 h-4 text-zinc-500" />
                           Buyer / Tenant Dashboard
                         </Link>
                         <Link
                           to="/dashboard/landlord"
                           onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-white/90 transition font-medium"
+                          className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-zinc-50 hover:text-black text-zinc-700 transition font-medium"
                         >
-                          <Building2 className="w-4 h-4 text-gold" />
+                          <Building2 className="w-4 h-4 text-zinc-500" />
                           Landlord & Agent Suite
                         </Link>
                         {user?.roles?.includes('admin') && (
                           <Link
                             to="/admin"
                             onClick={() => setUserDropdownOpen(false)}
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-navy-surface hover:text-gold text-gold font-bold transition"
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm hover:bg-zinc-50 text-zinc-900 font-bold transition"
                           >
-                            <ShieldCheck className="w-4 h-4 text-gold" />
-                            Admin & Clean Slate Console
+                            <ShieldCheck className="w-4 h-4 text-black" />
+                            Admin Console
                           </Link>
                         )}
                       </div>
 
-                      <div className="border-t border-navy-border pt-1">
+                      <div className="border-t border-zinc-100 pt-1">
                         <button
                           type="button"
                           onClick={() => { logout(); setUserDropdownOpen(false); }}
-                          className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-rose-400 hover:bg-navy-surface hover:text-rose-300 transition font-medium"
+                          className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 transition font-medium cursor-pointer"
                         >
                           <LogOut className="w-4 h-4" />
                           Sign Out
@@ -241,13 +233,13 @@ export function Navbar() {
                 <div className="flex items-center space-x-2">
                   <Link
                     to="/login"
-                    className="px-4 py-2 text-xs font-bold text-white hover:text-gold hover:bg-navy-surface rounded-xl transition border border-navy-border"
+                    className="px-4 py-2 text-xs font-bold text-zinc-800 hover:bg-zinc-100 rounded-xl transition border border-zinc-200"
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/signup"
-                    className="px-4 py-2 text-xs font-black text-navy-deep bg-gradient-to-r from-gold to-gold-light hover:from-gold-light hover:to-gold rounded-xl shadow-gold transition"
+                    className="px-4 py-2 text-xs font-bold text-white bg-black hover:bg-zinc-800 rounded-xl shadow-xs transition"
                   >
                     Sign Up
                   </Link>
@@ -259,12 +251,12 @@ export function Navbar() {
             <div className="flex items-center space-x-3 lg:hidden">
               <Link
                 to="/dashboard/saved"
-                className="relative p-2 text-slate-300 hover:text-rose-400"
+                className="relative p-2 text-zinc-600 hover:text-rose-600"
                 aria-label="Saved properties"
               >
                 <Heart className="w-5 h-5" />
                 {savedCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-crimson text-white rounded-full text-[10px] font-bold flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-600 text-white rounded-full text-[10px] font-bold flex items-center justify-center">
                     {savedCount}
                   </span>
                 )}
@@ -272,10 +264,10 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg text-white hover:text-gold hover:bg-navy-surface focus:outline-none"
+                className="p-2 rounded-lg text-zinc-800 hover:bg-zinc-100 focus:outline-none"
                 aria-label="Open menu"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6 text-gold" /> : <Menu className="w-6 h-6 text-white" />}
+                {mobileMenuOpen ? <X className="w-6 h-6 text-black" /> : <Menu className="w-6 h-6 text-zinc-800" />}
               </button>
             </div>
 
@@ -284,49 +276,49 @@ export function Navbar() {
 
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-navy-card border-b border-navy-border px-4 pt-2 pb-6 space-y-3">
+          <div className="lg:hidden bg-white border-b border-zinc-200 px-4 pt-2 pb-6 space-y-3">
             <nav className="space-y-1">
               {isAuthenticated ? (
                 <>
                   <Link
                     to="/"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Home
                   </Link>
                   <Link
                     to="/properties"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Properties
                   </Link>
                   <Link
                     to="/community"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Community
                   </Link>
                   <Link
                     to="/profile"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Profile & Roles
                   </Link>
                   <Link
                     to="/dashboard/buyer"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Buyer & Tenant Dashboard
                   </Link>
                   <Link
                     to="/dashboard/landlord"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-white hover:bg-navy-surface hover:text-gold transition"
+                    className="block px-3 py-2.5 rounded-lg text-base font-semibold text-zinc-800 hover:bg-zinc-100 transition"
                   >
                     Landlord & Agent Suite
                   </Link>
@@ -334,38 +326,38 @@ export function Navbar() {
                     <Link
                       to="/admin"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block px-3 py-2.5 rounded-lg text-base font-semibold text-gold hover:bg-navy-surface transition flex items-center justify-between"
+                      className="block px-3 py-2.5 rounded-lg text-base font-semibold text-black hover:bg-zinc-100 transition flex items-center justify-between"
                     >
                       <span>Admin Console</span>
-                      <ShieldCheck className="w-4 h-4 text-gold" />
+                      <ShieldCheck className="w-4 h-4 text-black" />
                     </Link>
                   )}
                   <button
                     type="button"
                     onClick={() => { logout(); setMobileMenuOpen(false); }}
-                    className="w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold text-rose-400 hover:bg-navy-surface transition cursor-pointer"
+                    className="w-full text-left px-3 py-2.5 rounded-lg text-base font-semibold text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                   >
                     Sign Out
                   </button>
                 </>
               ) : (
                 <div className="pt-2 space-y-3">
-                  <div className="p-3 bg-navy-surface rounded-xl border border-gold/30 text-xs text-estate-300">
-                    <ShieldCheck className="w-4 h-4 text-gold mb-1" />
+                  <div className="p-3 bg-zinc-50 rounded-xl border border-zinc-200 text-xs text-zinc-600">
+                    <ShieldCheck className="w-4 h-4 text-zinc-900 mb-1" />
                     Please sign in or create an account to access verified properties, districts, and your dashboard.
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <Link
                       to="/login"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-center py-2.5 rounded-xl border border-navy-border text-sm font-bold text-white hover:text-gold hover:bg-navy-surface transition"
+                      className="text-center py-2.5 rounded-xl border border-zinc-200 text-sm font-bold text-zinc-800 hover:bg-zinc-100 transition"
                     >
                       Sign In
                     </Link>
                     <Link
                       to="/signup"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-center py-2.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-sm font-black text-navy-deep shadow-gold"
+                      className="text-center py-2.5 rounded-xl bg-black text-sm font-bold text-white shadow-xs"
                     >
                       Sign Up
                     </Link>

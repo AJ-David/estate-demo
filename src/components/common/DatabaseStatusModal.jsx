@@ -45,17 +45,17 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
         {/* Status Card */}
         <div className={`p-4 rounded-2xl border flex items-start gap-3 text-xs ${
           isConfigured 
-            ? 'bg-navy-surface border-emerald-500/40 text-emerald-300' 
-            : 'bg-navy-surface border-gold/40 text-gold-light'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
+            : 'bg-zinc-50 border-zinc-200 text-zinc-900'
         }`}>
-          <div className="p-2 rounded-xl bg-navy-card shadow-xs shrink-0 border border-navy-border">
-            <Database className={`w-5 h-5 ${isConfigured ? 'text-emerald-400' : 'text-gold'}`} />
+          <div className="p-2 rounded-xl bg-white shadow-xs shrink-0 border border-zinc-200">
+            <Database className={`w-5 h-5 ${isConfigured ? 'text-emerald-600' : 'text-black'}`} />
           </div>
           <div>
-            <h4 className="font-bold text-sm text-white">
+            <h4 className="font-bold text-sm text-zinc-900">
               {isConfigured ? 'Live Enterprise Supabase Cluster Connected' : 'Autonomous Client Data Engine (Active)'}
             </h4>
-            <p className="mt-0.5 leading-relaxed text-slate-300">
+            <p className="mt-0.5 leading-relaxed text-zinc-600">
               {isConfigured 
                 ? 'Production PostgreSQL cluster active with multi-role row-level security policies enforced.'
                 : 'Operating with high-performance local client storage engine. Ready for cloud cluster synchronization via environment variables (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY).'
@@ -66,42 +66,42 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
 
         {/* Database Tables Overview */}
         <div>
-          <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <Layers className="w-4 h-4 text-gold" />
+          <h4 className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Layers className="w-4 h-4 text-black" />
             <span>Configured Tables with Row Level Security (RLS)</span>
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1">
             {tablesList.map(t => (
-              <div key={t.name} className="p-2.5 bg-navy-surface rounded-xl border border-navy-border text-xs">
+              <div key={t.name} className="p-2.5 bg-zinc-50 rounded-xl border border-zinc-200 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono font-bold text-gold">{t.name}</span>
-                  <span className="text-[10px] bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 font-semibold px-1.5 py-0.5 rounded">
+                  <span className="font-mono font-bold text-zinc-900">{t.name}</span>
+                  <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold px-1.5 py-0.5 rounded">
                     RLS Enabled
                   </span>
                 </div>
-                <p className="text-[11px] text-estate-400 mt-0.5">{t.desc}</p>
+                <p className="text-[11px] text-zinc-500 mt-0.5">{t.desc}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Setup Instructions */}
-        <div className="bg-navy-surface p-4 rounded-2xl border border-navy-border text-xs space-y-2">
+        <div className="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 text-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-white">Quick Supabase Setup:</span>
+            <span className="font-bold text-zinc-900">Quick Supabase Setup:</span>
             <button
               type="button"
               onClick={copyEnvSnippet}
-              className="text-gold hover:text-gold-light font-bold flex items-center gap-1"
+              className="text-black hover:underline font-bold flex items-center gap-1 cursor-pointer"
             >
               <Copy className="w-3.5 h-3.5" />
               <span>{copied ? 'Copied Snippet!' : 'Copy .env variables'}</span>
             </button>
           </div>
-          <ol className="list-decimal pl-4 space-y-1 text-slate-300 text-[11px] leading-relaxed">
-            <li>Create a new project on <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-gold font-semibold hover:underline">supabase.com</a>.</li>
-            <li>In the Supabase SQL Editor, run the script provided in <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">supabase/schema.sql</code> and <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">supabase/seed.sql</code>.</li>
-            <li>Copy your Project URL and Anon Public Key from Project Settings &gt; API into your local <code className="bg-navy-surface text-gold px-1 py-0.5 rounded font-mono border border-navy-border">.env</code> file.</li>
+          <ol className="list-decimal pl-4 space-y-1 text-zinc-600 text-[11px] leading-relaxed">
+            <li>Create a new project on <a href="https://supabase.com" target="_blank" rel="noreferrer" className="text-black font-semibold hover:underline">supabase.com</a>.</li>
+            <li>In the Supabase SQL Editor, run the script provided in <code className="bg-zinc-100 text-black px-1 py-0.5 rounded font-mono border border-zinc-200">supabase/schema.sql</code> and <code className="bg-zinc-100 text-black px-1 py-0.5 rounded font-mono border border-zinc-200">supabase/seed.sql</code>.</li>
+            <li>Copy your Project URL and Anon Public Key from Project Settings &gt; API into your local <code className="bg-zinc-100 text-black px-1 py-0.5 rounded font-mono border border-zinc-200">.env</code> file.</li>
           </ol>
         </div>
 
@@ -109,7 +109,7 @@ export function DatabaseStatusModal({ isOpen, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-navy-deep text-xs font-black rounded-xl shadow-gold transition tracking-wide"
+            className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white text-xs font-bold rounded-xl shadow-xs transition tracking-wide cursor-pointer"
           >
             Close Overview
           </button>

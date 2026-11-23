@@ -8,92 +8,92 @@ export default {
     extend: {
       borderColor: {
         estate: {
-          50: '#12151F',
-          100: '#181E2C',
-          200: '#262F43',  // Dark Gunmetal/Slate Border
-          300: '#333F58',
+          50: '#F4F4F5',
+          100: '#E4E4E7',
+          200: '#E4E4E7',  // Clean subtle border
+          300: '#D4D4D8',
         }
       },
       backgroundColor: {
         estate: {
-          50: '#080A0E',   // Pitch Obsidian
-          100: '#0F131C',  // Dark Gunmetal
+          50: '#FAFAFA',   // Light subtle surface
+          100: '#F4F4F5',  // Neutral surface
         }
       },
       colors: {
-        // Sovereign Platinum & Silver Spectrum for crisp, high-contrast typography on dark themes
+        // High-contrast clean monochrome & slate spectrum for crisp typography
         estate: {
-          50: '#94A3B8',
-          100: '#F1F5F9',  // Near-White
-          200: '#E2E8F0',  // Brilliant Ice Silver
-          300: '#CBD5E1',  // Crisp Light Platinum Body
-          400: '#94A3B8',  // Cool Platinum Muted (High Contrast Secondary)
-          500: '#E2E8F0',  // Brilliant Ice Silver
-          600: '#F1F5F9',  // Near-White
-          700: '#F8FAFC',  // Brilliant Ice White
-          800: '#FFFFFF',  // Pure Crisp White
-          900: '#FFFFFF',  // Pure Crisp White
-          950: '#FFFFFF',  // Pure Crisp White
+          50: '#FAFAFA',
+          100: '#F4F4F5',
+          200: '#E4E4E7',
+          300: '#D4D4D8',
+          400: '#A1A1AA',
+          500: '#71717A',  // Secondary/muted text
+          600: '#52525B',  // Clean body text
+          700: '#3F3F46',  // Dark body text
+          800: '#27272A',  // Subheadings
+          900: '#18181B',  // Headings
+          950: '#09090B',  // Crisp black
         },
-        // The Sovereign Syndicate Canvas
+        // The Clean Modern Canvas
         navy: {
-          DEFAULT: '#0A0C10',  // Pure Midnight Obsidian
-          deep: '#06070B',     // Absolute Pitch Black
-          card: '#12151F',     // Smoky Obsidian Lounge Card
-          surface: '#181E2C',  // Polished Gunmetal Slate
-          border: '#262F43',   // Muted Brass / Gunmetal Border
+          DEFAULT: '#FFFFFF',  // Pure White Canvas
+          deep: '#FAFAFA',     // Soft Off-White Background
+          card: '#FFFFFF',     // Clean White Card
+          surface: '#F4F4F5',  // Light Neutral Gray Surface / Hover
+          border: '#E4E4E7',   // Crisp Modern Border
         },
-        // 18K Burnished Gold & Brass (Elite Real Estate & Sovereign Authority)
+        // Modern Architectural Black & Charcoal Accent (Replaces AI gold/brass)
         gold: {
-          DEFAULT: '#C5A059',
-          light: '#DFC37F',
-          dark: '#9A7831',
-          soft: '#19150B',
-          border: '#D4AF37',
-          50: '#16130B',
-          100: '#261F10',
-          200: '#3D3016',
-          300: '#695121',
-          400: '#DFC37F',
-          500: '#C5A059',
-          600: '#E2C37E',
-          700: '#F0D89B',
-          800: '#F7E7BE',
-          900: '#FCF3DC',
-          950: '#FFFDF7',
+          DEFAULT: '#09090B',  // Crisp Black Primary
+          light: '#27272A',   // Charcoal Accent
+          dark: '#000000',    // Pure Black
+          soft: '#F4F4F5',    // Soft Neutral
+          border: '#E4E4E7',  // Subtle Border
+          50: '#FAFAFA',
+          100: '#F4F4F5',
+          200: '#E4E4E7',
+          300: '#D4D4D8',
+          400: '#A1A1AA',
+          500: '#71717A',
+          600: '#52525B',
+          700: '#3F3F46',
+          800: '#27272A',
+          900: '#18181B',
+          950: '#09090B',
         },
-        // Sovereign Emerald & Mint Glow (Dark mode verified & trust metrics)
+        // Verification & Trust Green (Refined, authentic emerald)
         emerald: {
-          DEFAULT: '#10B981',     // Sovereign Mint Emerald
-          light: '#34D399',       // Bright Mint
-          dark: '#059669',        // Deep Green
-          soft: '#071F15',        // Midnight Pine
-          border: '#10B981',      // Mint Glow
-          50: '#061C14',          // Deep Forest Night
-          100: '#0B291E',
-          200: '#123D2D',
-          300: '#1C5B43',
-          400: '#2BB07F',
+          DEFAULT: '#059669',     // Rich Emerald
+          light: '#10B981',       // Mint
+          dark: '#047857',        // Deep Forest Green
+          soft: '#ECFDF5',        // Soft Mint Surface
+          border: '#A7F3D0',      // Mint Border
+          50: '#ECFDF5',
+          100: '#D1FAE5',
+          200: '#A7F3D0',
+          300: '#6EE7B7',
+          400: '#34D399',
           500: '#10B981',
-          600: '#34D399',
-          700: '#6EE7B7',         // Bright Mint Glow
-          800: '#A7F3D0',         // Ultra-bright High Contrast
-          900: '#D1FAE5',         // Pure Icy Mint White
+          600: '#059669',
+          700: '#047857',
+          800: '#065F46',
+          900: '#064E3B',
         },
-        // High-Stakes Oxblood & Crimson Red
+        // Alerts & Destructive
         crimson: {
           DEFAULT: '#EF4444',
-          dark: '#3F0C10',
+          dark: '#B91C1C',
           light: '#F87171',
-          soft: '#25080A',
-          border: '#EF4444',
+          soft: '#FEF2F2',
+          border: '#FECACA',
         },
-        // Dark Obsidian Marble & Sand Surfaces
+        // Clean Warm Neutral Surfaces
         sand: {
-          50: '#0E121A',
-          100: '#131823',
-          200: '#1E2536',
-          warm: '#06070B',
+          50: '#FAFAFA',
+          100: '#F4F4F5',
+          200: '#E4E4E7',
+          warm: '#FFFFFF',
         }
       },
       fontFamily: {
@@ -101,11 +101,11 @@ export default {
         display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'subtle': '0 2px 10px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4)',
-        'premium': '0 12px 36px -6px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(0, 0, 0, 0.5)',
-        'gold': '0 0 20px rgba(197, 160, 89, 0.25)',
-        'gold-lg': '0 10px 30px -5px rgba(197, 160, 89, 0.35)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.65)',
+        'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+        'premium': '0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',
+        'gold': '0 1px 3px 0 rgba(0, 0, 0, 0.08)',
+        'gold-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        'glass': '0 8px 30px rgba(0, 0, 0, 0.05)',
       }
     },
   },
